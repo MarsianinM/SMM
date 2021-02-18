@@ -3,11 +3,12 @@
 namespace App\Concerns\Models;
 
 use App\Models\Role;
+use Exception;
 
 trait HasRoles
 {
     /**
-     * Assign a specific role to a user.
+     * Assign a specific role.
      *
      * @param  string  $name
      */
@@ -19,7 +20,7 @@ trait HasRoles
     }
 
     /**
-     * Revoke a specific role from a user.
+     * Revoke a specific role.
      *
      * @param  string  $name
      */
@@ -35,17 +36,42 @@ trait HasRoles
      */
     public function roles()
     {
-        return $this->morphToMany(Role::class, 'roleable');
+        return $this->morphToMany(Role::class, 'roleable')->withPivot('is_active');
     }
 
     /**
-     * Check if the user has the given role.
+     * Set active role.
      *
-     * @param  string  $role
-     * @return mixed
+     * @param  string  $name
+     * @throws \Exception
      */
-    public function hasRole(string $role)
+    public function setActiveRole(string $name)
     {
-        return $this->roles()->where('name', $role)->exists();
+        $role = $this->roles()->firstWhere(compact('name'));
+        if (is_null($role)) {
+            throw new Exception("The role '$name' is not assigned to this user, or does not exist");
+        }
+
+        $this->roles()->newPivotStatement()->whereRoleableId($this->id)->update(['is_active' => false]);
+        $this->roles()->updateExistingPivot($role, ['is_active' => true]);
+    }
+
+    /**
+     * Get user's current active role.
+     */
+    public function activeRole()
+    {
+        return $this->roles()->wherePivot('is_active', true)->firstOrFail();
+    }
+
+    /**
+     * Check if the current role is equal to the given one.
+     *
+     * @param  string  $name
+     * @return bool
+     */
+    public function activeRoleIs(string $name)
+    {
+        return $this->activeRole()->name === $name;
     }
 }

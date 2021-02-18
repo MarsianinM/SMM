@@ -3,14 +3,14 @@
 use App\Http\Controllers\BlackListController;
 use App\Http\Controllers\Consumers\UserController;
 use App\Http\Controllers\Customers\WishlistController;
-use App\Http\Controllers\Finances\PaymentController;
-use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\RuleController;
+use App\Http\Controllers\ShowBalance;
+use App\Http\Controllers\ShowFinance;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\SupportMessageController;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +40,9 @@ Route::group(['middleware' => 'verified'], function () {
         return redirect()->route(request()->user()->getHomePageRoute());
     })->name('home');
 
+    Route::get('balance', ShowBalance::class)->name('balance.index');
+    Route::get('finance', ShowFinance::class)->name('finance.index');
+
     Route::post('support/message/{support}', [SupportMessageController::class, 'message'])->name('support.message');
     Route::resource('support', SupportController::class);
 
@@ -48,14 +51,4 @@ Route::group(['middleware' => 'verified'], function () {
     Route::resource('users', UserController::class);
 
     Route::resource('blacklist', BlackListController::class);
-    Route::resource('wishlist', WishlistController::class);
-    Route::resource('payment', PaymentController::class);
 });
-
-//Route::group(['prefix' => 'panel', 'as' => 'admin.'], function () {
-//    Route::resource('support', \App\Http\Controllers\Admin\SupportController::class);
-//    Route::post('support/message/{support}', [SupportMessageController::class, 'message'])->name('support.message');
-//
-//    Route::post('message/message/{message}', [\App\Http\Controllers\Admin\MessageController::class, 'message'])->name('message.message');
-//    Route::resource('messages', \App\Http\Controllers\Admin\MessageController::class);
-//});

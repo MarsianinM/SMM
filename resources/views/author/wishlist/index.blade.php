@@ -6,8 +6,7 @@
         <div class="container">
 
             <div class="d-flex justify-content-between mb-3">
-                <h1 class="h4">Список проектов</h1>
-                <a href="{{ route('projects.create') }}" class="btn btn-sm btn-primary d-inline-block">Создать проект</a>
+                <h1 class="h4">Избранные</h1>
             </div>
 
             <div class="row">
@@ -25,30 +24,21 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td><a href="{{ route('projects.show', ['project' => 1]) }}">Создать темы на вопроснике</a></td>
-                                <td>7.00</td>
-                                <td>30 минут</td>
+                                <td><a href="#">Комментарии на женский блог</a></td>
+                                <td>12.00</td>
+                                <td>50 минут</td>
                                 <td>0/5</td>
                                 <td class="d-none d-md-table-cell">
-                                    03 Сен 2020
+                                    02 Сен 2020
                                 </td>
                             </tr>
                             <tr>
-                                <td><a href="{{ route('projects.show', ['project' => 2]) }}">Написать ком коммменты</a></td>
+                                <td><a href="#">Написать ком коммменты</a></td>
                                 <td>5.00</td>
                                 <td>20 минут</td>
                                 <td>0/2</td>
                                 <td class="d-none d-md-table-cell">
                                     04 Сен 2020
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="{{ route('projects.show', ['project' => 3]) }}">Несколько комментариев для статьи</a></td>
-                                <td>9.00</td>
-                                <td>40 минут</td>
-                                <td>0/2</td>
-                                <td class="d-none d-md-table-cell">
-                                    10 Сен 2020
                                 </td>
                             </tr>
                             </tbody>

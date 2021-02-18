@@ -50,7 +50,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected static function booted()
     {
         static::created(function (User $user) {
-            $user->assignRole(config('auth.defaults.role'));
+            $user->assignRole('client');
+            $user->assignRole('author');
+            $user->setActiveRole('client');
         });
     }
 
@@ -62,11 +64,11 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getHomePageRoute()
     {
-        if ($this->hasRole('client')) {
+        if ($this->activeRoleIs('client')) {
             return 'client.home';
-        } elseif ($this->hasRole('author')) {
+        } elseif ($this->activeRoleIs('author')) {
             return 'author.home';
-        } elseif ($this->hasRole('admin')) {
+        } elseif ($this->activeRoleIs('admin')) {
             return 'admin.home';
         }
 
@@ -78,6 +80,25 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function projects()
     {
-        return $this->hasMany(Project::class, $this->hasRole('client') ? 'client_id' : 'author_id');
+        return $this->hasMany(Project::class, $this->activeRoleIs('client') ? 'client_id' : 'author_id');
+    }
+
+    /**
+     * Get user's balance by the given currency.
+     *
+     * @param $currency
+     * @return mixed
+     */
+    public function getBalanceByCurrency($currency)
+    {
+        return number_format($this->balances()->whereCurrency($currency)->sum('amount'), 2);
+    }
+
+    /**
+     * Get the balances for the user.
+     */
+    public function balances()
+    {
+        return $this->hasMany(Balance::class);
     }
 }

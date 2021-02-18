@@ -16,7 +16,7 @@ class CreateRoleablesTable extends Migration
         Schema::create('roleables', function (Blueprint $table) {
             $table->unsignedBigInteger('role_id');
             $table->morphs('roleable');
-            $table->timestamps();
+            $table->boolean('is_active')->default(false);
         });
     }
 

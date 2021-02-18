@@ -12,7 +12,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'SMM.UA') }}
@@ -23,13 +23,46 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav ml-auto">
                         @auth
                         <li class="nav-item">
-                            <a href="{{ route('support.index') }}" class="nav-link">{{ __('support.name') }}</a>
+                            <a href="{{ route('support.index') }}" class="nav-link">
+                                <span style="margin-right: 7px;">
+                                    <img src="{{ asset('img/support.png') }}" alt="support">
+                                </span>
+                                {{ __('support.name') }}
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('messages.index') }}" class="nav-link">{{ __('messages.name') }}</a>
+                        <li class="nav-item ml-5">
+                            <a href="{{ route('messages.index') }}" class="nav-link">
+                                <span style="margin-right: 7px;">
+                                    <img src="{{ asset('img/message.png') }}" alt="message">
+                                </span>
+                                {{ __('messages.name') }}
+                            </a>
+                        </li>
+                        <li class="nav-item ml-5 dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ route('balance.index') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2">
+                                    <img src="{{ asset('img/rub.png') }}" alt="rub">
+                                </span>
+                                {{ Auth::user()->getBalanceByCurrency('RUB') }}
+                            </a>
+
+                            <div class="dropdown-menu bg-dark dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-white-50" href="{{ route('balance.index') }}">
+                                    <span style="margin-left: 2px; margin-right: 10px;">
+                                        <img src="{{ asset('img/rub.png') }}" alt="rub">
+                                    </span>
+                                    {{ Auth::user()->getBalanceByCurrency('RUB') }}
+                                </a>
+                                <a class="dropdown-item text-white-50" href="{{ route('balance.index') }}">
+                                    <span style="margin-right: 7px;">
+                                        <img src="{{ asset('img/usd.png') }}" alt="usd">
+                                    </span>
+                                    {{ Auth::user()->getBalanceByCurrency('USD') }}
+                                </a>
+                            </div>
                         </li>
                         @endauth
                         @guest
@@ -69,25 +102,27 @@
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu bg-dark dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @role('client')
-                                        <a class="dropdown-item" href="{{ route('client.projects.index') }}">
+                                        <a class="dropdown-item text-white-50" href="{{ route('client.projects.index') }}">
                                             Мои проекты
                                         </a>
                                     @endrole
-                                    <a class="dropdown-item" href="{{ route('wishlist.index') }}">
+                                    @role('author')
+                                    <a class="dropdown-item text-white-50" href="{{ route('author.wishlist.index') }}">
                                         Избранные
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('blacklist.index') }}">
+                                    @endrole
+                                    <a class="dropdown-item text-white-50" href="{{ route('blacklist.index') }}">
                                         Черный список
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('payment.index') }}">
+                                    <a class="dropdown-item text-white-50" href="{{ route('finance.index') }}">
                                         Финансы
                                     </a>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item text-white-50" href="#">
                                         Настройки
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item text-white-50" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         Выйти
