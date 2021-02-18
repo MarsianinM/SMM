@@ -17,18 +17,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RoleSeeder::class);
 
-        User::create([
-            'name' => 'Заказчик',
-            'email' => 'client@smm.ua',
-            'password' => Hash::make('11111111'),
-            'email_verified_at' => now(),
-        ]);
-
-        User::create([
-            'name' => 'Автор',
-            'email' => 'author@smm.ua',
-            'password' => Hash::make('11111111'),
-            'email_verified_at' => now(),
-        ]);
+//        User::create([
+//            'name' => 'Тест',
+//            'email' => 'testaccount@smm.ua',
+//            'password' => Hash::make('11111111'),
+//            'email_verified_at' => now(),
+//        ]);
     }
 }

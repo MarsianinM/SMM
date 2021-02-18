@@ -9,6 +9,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\RuleController;
+use App\Http\Controllers\SetRole;
 use App\Http\Controllers\ShowBalance;
 use App\Http\Controllers\ShowFinance;
 use App\Http\Controllers\SupportController;
@@ -42,6 +43,7 @@ Route::group(['middleware' => 'verified'], function () {
 
     Route::get('balance', ShowBalance::class)->name('balance.index');
     Route::get('finance', ShowFinance::class)->name('finance.index');
+    Route::post('set-role', SetRole::class)->name('set-role');
 
     Route::post('support/message/{support}', [SupportMessageController::class, 'message'])->name('support.message');
     Route::resource('support', SupportController::class);

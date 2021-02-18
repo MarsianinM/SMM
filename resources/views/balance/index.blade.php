@@ -29,7 +29,7 @@
                                         <td>{{ $balance->amount }}</td>
                                         <td>{{ $balance->currency }}</td>
                                         <td>{{ $balance->transaction_id }}</td>
-                                        <td>{{ $balance->reated_at }}</td>
+                                        <td>{{ $balance->created_at->format('d.m.Y H:i:s') }}</td>
                                     </tr>
                                 @empty
                                     <tr class="text-center">

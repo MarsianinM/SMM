@@ -98,20 +98,35 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu bg-dark dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <div class="dropdown-item text-white-50">
+                                        <button style="border: none; @role('client')background-color: #4fa12c;color:white;@endrole width: 90px;" onclick="event.preventDefault();
+                                                     document.getElementById('set-client-form').submit();">Заказчик</button>
+                                        <button style="border: none; @role('author')background-color: #4fa12c;color:white;@endrole width: 90px;" onclick="event.preventDefault();
+                                                     document.getElementById('set-author-form').submit();">Автор</button>
+
+                                        <form id="set-client-form" action="{{ route('set-role') }}" method="POST" class="d-none">
+                                            @csrf
+                                            <input type="hidden" name="role" value="client">
+                                        </form>
+                                        <form id="set-author-form" action="{{ route('set-role') }}" method="POST" class="d-none">
+                                            @csrf
+                                            <input type="hidden" name="role" value="author">
+                                        </form>
+                                    </div>
                                     @role('client')
                                         <a class="dropdown-item text-white-50" href="{{ route('client.projects.index') }}">
                                             Мои проекты
                                         </a>
                                     @endrole
                                     @role('author')
-                                    <a class="dropdown-item text-white-50" href="{{ route('author.wishlist.index') }}">
-                                        Избранные
-                                    </a>
+                                        <a class="dropdown-item text-white-50" href="{{ route('author.wishlist.index') }}">
+                                            Избранные
+                                        </a>
                                     @endrole
                                     <a class="dropdown-item text-white-50" href="{{ route('blacklist.index') }}">
                                         Черный список
