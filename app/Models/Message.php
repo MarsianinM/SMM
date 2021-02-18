@@ -6,13 +6,19 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @mixin IdeHelperMessage
+ */
 class Message extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'message', 'sender_id', 'receiver_id', 'parent_id', 'read'
-    ];
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
 
     public function user()
     {

@@ -17,9 +17,15 @@ class CreateSupportsTable extends Migration
             $table->id();
             $table->string('theme')->nullable();
             $table->text('message');
-            $table->foreignId('sender_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->foreignId('receiver_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->foreignId('parent_id')->nullable()->constrained('supports')->nullOnDelete();
+            $table->foreignId('sender_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
+            $table->foreignId('receiver_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
+            $table->foreignId('parent_id')
+                ->constrained('supports')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }
