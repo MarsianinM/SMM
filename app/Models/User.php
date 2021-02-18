@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Concerns\Models\HasRoles;
+use Exception;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -51,5 +52,24 @@ class User extends Authenticatable implements MustVerifyEmail
         static::created(function (User $user) {
             $user->assignRole(config('auth.defaults.role'));
         });
+    }
+
+    /**
+     * Get user's primary home route.
+     *
+     * @return string
+     * @throws \Exception
+     */
+    public function getHomePageRoute()
+    {
+        if ($this->hasRole('client')) {
+            return 'client.home';
+        } elseif ($this->hasRole('author')) {
+            return 'author.home';
+        } elseif ($this->hasRole('admin')) {
+            return 'admin.home';
+        }
+
+        throw new Exception('No primary home route found.');
     }
 }

@@ -50,11 +50,13 @@ class RouteServiceProvider extends ServiceProvider
             Route::prefix('client')
                 ->middleware(['web', 'verified', 'role:client'])
                 ->namespace($this->namespace)
+                ->name('client.')
                 ->group(base_path('routes/client.php'));
 
             Route::prefix('author')
                 ->middleware(['web', 'verified', 'role:author'])
                 ->namespace($this->namespace)
+                ->name('author.')
                 ->group(base_path('routes/author.php'));
         });
     }
