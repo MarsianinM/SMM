@@ -1,12 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "smm/smm",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": [
-        "framework",
-        "laravel"
-    ],
-    "license": "MIT",
+    "license": "proprietary",
     "require": {
         "php": "^7.3|^8.0",
         "fideloper/proxy": "^4.4",
@@ -14,8 +9,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.2",
-        "santigarcor/laratrust": "^6.3"
+        "laravel/ui": "^3.2"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.9",

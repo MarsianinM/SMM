@@ -6,20 +6,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * App\Models\Rule
- *
- * @property int $id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static Builder|Rule newModelQuery()
- * @method static Builder|Rule newQuery()
- * @method static Builder|Rule query()
- * @method static Builder|Rule whereCreatedAt($value)
- * @method static Builder|Rule whereId($value)
- * @method static Builder|Rule whereUpdatedAt($value)
- * @mixin \Eloquent
- */
 class Rule extends Model
 {
     use HasFactory;

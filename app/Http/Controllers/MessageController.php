@@ -14,7 +14,7 @@ class MessageController extends Controller
 {
     public function index(): View
     {
-        $messages = Message::where(function($builder) {
+        $messages = Message::where(function ($builder) {
             return $builder->where('sender_id', Auth::id())
                 ->orWhere('receiver_id', Auth::id());
         })->where('parent_id', null)
@@ -54,7 +54,7 @@ class MessageController extends Controller
         ]);
     }
 
-    public function message(Request$request, Message $message): RedirectResponse
+    public function message(Request $request, Message $message): RedirectResponse
     {
         $request['parent_id'] = $message->id;
         $request['sender_id'] = Auth::id();
