@@ -1,13 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-
     <main class="content">
         <div class="container">
 
             <div class="d-flex justify-content-between mb-3">
-                <h1 class="h4">Список проектов</h1>
-                <a href="{{ route('projects.create') }}" class="btn btn-sm btn-primary d-inline-block">Создать проект</a>
+                <h1 class="h4">Мои проекты</h1>
+                <a href="{{ route('client.projects.create') }}" class="btn btn-sm btn-primary d-inline-block">Создать проект</a>
             </div>
 
             <div class="row">
@@ -25,7 +24,7 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td>Создать темы на вопроснике</td>
+                                <td><a href="{{ route('client.projects.show', 1) }}">Создать темы на вопроснике</a></td>
                                 <td>7.00</td>
                                 <td>30 минут</td>
                                 <td>0/5</td>
@@ -34,7 +33,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Написать ком коммменты</td>
+                                <td><a href="{{ route('client.projects.show', 2) }}">Написать ком коммменты</a></td>
                                 <td>5.00</td>
                                 <td>20 минут</td>
                                 <td>0/2</td>
@@ -43,7 +42,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Несколько комментариев для статьи</td>
+                                <td><a href="{{ route('client.projects.show', 3) }}">Несколько комментариев для статьи</a></td>
                                 <td>9.00</td>
                                 <td>40 минут</td>
                                 <td>0/2</td>

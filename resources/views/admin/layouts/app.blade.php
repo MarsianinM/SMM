@@ -76,9 +76,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('customers.projects.index') }}">
-                                        Мои проекты
-                                    </a>
+                                    @role('client')
+                                        <a class="dropdown-item" href="{{ route('client.projects.index') }}">
+                                            Мои проекты
+                                        </a>
+                                    @endrole
                                     <a class="dropdown-item" href="{{ route('wishlist.index') }}">
                                         Избранные
                                     </a>

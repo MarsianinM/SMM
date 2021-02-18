@@ -31,12 +31,6 @@
                         <li class="nav-item">
                             <a href="{{ route('messages.index') }}" class="nav-link">{{ __('messages.name') }}</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('projects.index') }}" class="nav-link">{{ __('projects.name') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('users.index') }}" class="nav-link">{{ __('users.name') }}</a>
-                        </li>
                         @endauth
                         @guest
                         <li class="nav-item">
@@ -76,9 +70,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('customers.projects.index') }}">
-                                        Мои проекты
-                                    </a>
+                                    @role('client')
+                                        <a class="dropdown-item" href="{{ route('client.projects.index') }}">
+                                            Мои проекты
+                                        </a>
+                                    @endrole
                                     <a class="dropdown-item" href="{{ route('wishlist.index') }}">
                                         Избранные
                                     </a>

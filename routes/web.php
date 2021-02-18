@@ -35,28 +35,23 @@ Route::resource('prices', PriceController::class);
 
 Auth::routes(['verify' => true]);
 
-Route::middleware('verified')->get('home', function () {
-    return redirect()->route(request()->user()->getHomePageRoute());
+Route::group(['middleware' => 'verified'], function () {
+    Route::get('home', function () {
+        return redirect()->route(request()->user()->getHomePageRoute());
+    })->name('home');
+
+    Route::post('support/message/{support}', [SupportMessageController::class, 'message'])->name('support.message');
+    Route::resource('support', SupportController::class);
+
+    Route::post('message/message/{message}', [MessageController::class, 'message'])->name('message.message');
+    Route::resource('messages', MessageController::class);
+    Route::resource('users', UserController::class);
+
+    Route::resource('blacklist', BlackListController::class);
+    Route::resource('wishlist', WishlistController::class);
+    Route::resource('payment', PaymentController::class);
 });
 
-//Route::group(['middleware' => 'verified'], function () {
-//    Route::post('support/message/{support}', [SupportMessageController::class, 'message'])->name('support.message');
-//    Route::resource('support', SupportController::class);
-//
-//    Route::post('message/message/{message}', [MessageController::class, 'message'])->name('message.message');
-//    Route::resource('messages', MessageController::class);
-//
-//    Route::resource('projects', ProjectController::class);
-//    Route::resource('users', UserController::class);
-//
-//    Route::group(['prefix' => 'customers', 'as' => 'customers.'], function () {
-//       Route::resource('projects', \App\Http\Controllers\Customers\ProjectController::class);
-//    });
-//    Route::resource('blacklist', BlackListController::class);
-//    Route::resource('wishlist', WishlistController::class);
-//    Route::resource('payment', PaymentController::class);
-//});
-//
 //Route::group(['prefix' => 'panel', 'as' => 'admin.'], function () {
 //    Route::resource('support', \App\Http\Controllers\Admin\SupportController::class);
 //    Route::post('support/message/{support}', [SupportMessageController::class, 'message'])->name('support.message');

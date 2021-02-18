@@ -11,10 +11,10 @@ class ShowHomePage extends Controller
      * Handle the incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function __invoke(Request $request)
     {
-        return 'Author home page';
+        return view('author.home');
     }
 }

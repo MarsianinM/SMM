@@ -72,4 +72,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
         throw new Exception('No primary home route found.');
     }
+
+    /**
+     * Get the projects for the user.
+     */
+    public function projects()
+    {
+        return $this->hasMany(Project::class, $this->hasRole('client') ? 'client_id' : 'author_id');
+    }
 }
