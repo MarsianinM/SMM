@@ -32,7 +32,7 @@ trait HasRoles
     }
 
     /**
-     * The roles that belong to the user.
+     * The roles that belong to the entity.
      */
     public function roles()
     {
@@ -57,7 +57,7 @@ trait HasRoles
     }
 
     /**
-     * Get user's current active role.
+     * Get entity's current active role.
      */
     public function activeRole()
     {
@@ -73,5 +73,16 @@ trait HasRoles
     public function activeRoleIs(string $name)
     {
         return $this->activeRole()->name === $name;
+    }
+
+    /**
+     * Check if the entity has the given role.
+     *
+     * @param  string  $name
+     * @return mixed
+     */
+    public function hasRole(string $name)
+    {
+        return $this->roles()->whereName($name)->exists();
     }
 }

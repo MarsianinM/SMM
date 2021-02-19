@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\CheckIfAdmin;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -58,6 +59,12 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->name('author.')
                 ->group(base_path('routes/author.php'));
+
+            Route::prefix('admin')
+                ->middleware(['web', 'verified', CheckIfAdmin::class])
+                ->namespace($this->namespace)
+                ->name('admin.')
+                ->group(base_path('routes/admin.php'));
         });
     }
 
