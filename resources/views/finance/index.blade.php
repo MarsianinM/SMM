@@ -31,7 +31,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-6 d-flex justify-content-center align-items-center">
+                                <div class="col-6 d-flex justify-content-end align-items-center">
                                     <button class="btn btn-lg btn-success">Пополнить</button>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-6 d-flex justify-content-center align-items-center">
+                                <div class="col-6 d-flex justify-content-end align-items-center">
                                     <button class="btn btn-lg btn-success">Вывести</button>
                                 </div>
                             </div>
