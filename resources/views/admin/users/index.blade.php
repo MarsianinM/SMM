@@ -2,19 +2,19 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header"><i class="fa fa-align-justify"></i> Пользователи</div>
+        <div class="card-header"><i class="fa fa-align-justify"></i> @lang('users.admin_name')</div>
         <div class="card-body">
             <table class="table table-responsive-sm table-striped">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Имя</th>
-                    <th>Почта</th>
-                    <th>Баланс</th>
-                    <th>Активная роль</th>
-                    <th>Администратор?</th>
-                    <th>Почта подтверждена?</th>
-                    <th>Дата регистрации</th>
+                    <th>@lang('users.th_id')</th>
+                    <th>@lang('users.th_name')</th>
+                    <th>@lang('users.th_email')</th>
+                    <th>@lang('users.th_balance')</th>
+                    <th>@lang('users.th_active_role')</th>
+                    <th>@lang('users.th_has_admin')</th>
+                    <th>@lang('users.th_email_verified_at')</th>
+                    <th>@lang('users.th_email_verified_at')</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,23 +29,23 @@
                         <td>{{ $user->activeRole()->name }}</td>
                         <td>
                             @if($user->hasRole('admin'))
-                                <span class="badge badge-success">Да</span>
+                                <span class="badge badge-success">@lang('users.yes')</span>
                             @else
-                                <span class="badge badge-danger">Нет</span>
+                                <span class="badge badge-danger">@lang('users.no')</span>
                             @endif
                         </td>
                         <td>
                             @if(is_null($user->email_verified_at))
-                                <span class="badge badge-danger">Не подтверждена</span>
+                                <span class="badge badge-danger">@lang('users.email_verified_no')</span>
                             @else
-                                <span class="badge badge-success">Подтверждена</span>
+                                <span class="badge badge-success">@lang('users.email_verified_yes')</span>
                             @endif
                         </td>
                         <td>{{ $user->created_at->format('d.m.Y H:i') }}</td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="text-center">Данные отсутствуют.</td>
+                        <td colspan="5" class="text-center">@lang('users.list_error')</td>
                     </tr>
                 @endforelse
                 </tbody>
