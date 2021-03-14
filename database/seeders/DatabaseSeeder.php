@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,14 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(RoleSeeder::class);
-        $this->call(SettingSeeder::class);
+        /*$this->call(RoleSeeder::class);
+        $this->call(SettingSeeder::class);*/
 
-//        User::create([
-//            'name' => 'Тест',
-//            'email' => 'testaccount@smm.ua',
-//            'password' => Hash::make('11111111'),
-//            'email_verified_at' => now(),
-//        ]);
+       /* User::create([
+            'name' => 'Тест',
+            'email' => 'testaccount@smm.ua',
+            'password' => \Hash::make('11111111'),
+            'email_verified_at' => now(),
+        ]);*/
     }
 }
