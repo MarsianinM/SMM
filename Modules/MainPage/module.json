@@ -1,0 +1,13 @@
+{
+    "name": "MainPage",
+    "alias": "mainpage",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\MainPage\\Providers\\MainPageServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

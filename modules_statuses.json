@@ -1,0 +1,8 @@
+{
+    "AdminIndex": true,
+    "Admin": true,
+    "Blog": true,
+    "AdminHome": true,
+    "Users": true,
+    "MainPage": true
+}

@@ -3,6 +3,7 @@
 namespace App\Concerns\Models;
 
 use App\Models\Role;
+use Cache;
 use Exception;
 
 trait HasRoles
@@ -10,7 +11,7 @@ trait HasRoles
     /**
      * Assign a specific role.
      *
-     * @param  string  $name
+     * @param string $name
      */
     public function assignRole(string $name)
     {
@@ -22,7 +23,7 @@ trait HasRoles
     /**
      * Revoke a specific role.
      *
-     * @param  string  $name
+     * @param string $name
      */
     public function revokeRole(string $name)
     {
@@ -42,7 +43,7 @@ trait HasRoles
     /**
      * Set active role.
      *
-     * @param  string  $name
+     * @param string $name
      * @throws \Exception
      */
     public function setActiveRole(string $name)
@@ -51,7 +52,6 @@ trait HasRoles
         if (is_null($role)) {
             throw new Exception("The role '$name' is not assigned to this user, or does not exist");
         }
-
         $this->roles()->newPivotStatement()->whereRoleableId($this->id)->update(['is_active' => false]);
         $this->roles()->updateExistingPivot($role, ['is_active' => true]);
     }
@@ -61,13 +61,20 @@ trait HasRoles
      */
     public function activeRole()
     {
-        return $this->roles()->wherePivot('is_active', true)->firstOrFail();
+        return Cache::remember(auth()->user()->id.'_roles_is_active', 3600, function () {
+            return $this->roles()->wherePivot('is_active', true)->firstOrFail();
+        });
     }
 
+    public function activeRoleFromAdmin()
+    {
+        return $this->roles()->wherePivot('is_active', true)->firstOrFail();
+
+    }
     /**
      * Check if the current role is equal to the given one.
      *
-     * @param  string  $name
+     * @param string $name
      * @return bool
      */
     public function activeRoleIs(string $name)
@@ -78,7 +85,7 @@ trait HasRoles
     /**
      * Check if the entity has the given role.
      *
-     * @param  string  $name
+     * @param string $name
      * @return mixed
      */
     public function hasRole(string $name)

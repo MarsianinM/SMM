@@ -17,9 +17,8 @@ class SetRole extends Controller
         $validated = $request->validate([
             'role' => 'required|in:client,author',
         ]);
-
         $request->user()->setActiveRole($validated['role']);
-
+        \Cache::forget(auth()->user()->id.'_roles_is_active');
         return redirect()->route('home');
     }
 }
