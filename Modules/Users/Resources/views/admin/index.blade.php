@@ -2,7 +2,16 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header"><i class="fa fa-align-justify"></i> @lang('users::users.name')</div>
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6"><h2><i class="fa fa-align-justify cil-user"></i> @lang('users::users.name')</h2></div>
+                <div class="col-6 text-right">
+                    <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
+                        <i class="fa fa-align-justify cil-user-plus"></i> @lang('users::users.add_user')
+                    </a>
+                </div>
+            </div>
+        </div>
         <div class="card-body">
             <table class="table table-responsive-sm table-striped">
                 <thead>
@@ -52,7 +61,8 @@
                                 <form id="form_show-id_{{ $user->id }}" action="{{ route('admin.users.hidden', ['user' => $user->id]) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
-                                    <input type="hidden" value="{{$user->active}}" name="action" />
+                                    <input type="hidden" value="{{$user->active}}" name="active" />
+                                    <input type="submit" id="sendButton" style="display: none;" />
                                 </form>
                             </div>
                             <div class="btn-group" role="group" aria-label="Basic example">
@@ -100,10 +110,13 @@
         });
         //# sourceMappingURL=tooltips.js.map
 
-        $(document).on('shange','.c-switch-input',function(){
-            let chek = $(this).val();
-            $(this).parents('label').next('form').find('input[name="action"]').val(chek)
-            alert(chek);
+        $(document).on('change','.c-switch-input',function(){
+            let chek = 'off';
+            if($(this).is(':checked')){
+                chek = 'on';
+            }
+            $(this).parents('label').next('form').find('input[name="active"]').val(chek);
+            $(this).parents('label').next('form').find("#sendButton").click();
         });
     </script>
 @endsection

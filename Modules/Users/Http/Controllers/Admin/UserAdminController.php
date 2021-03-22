@@ -48,7 +48,7 @@ class UserAdminController extends Controller
     public function store(UserCreateRequest $request)
     {
         $user = $this->rep->store($request->all());
-        return redirect()->route('admin.user.edit',$user->id);
+        return redirect()->route('admin.users.edit',$user->id);
     }
 
     /**
@@ -62,13 +62,9 @@ class UserAdminController extends Controller
         return view('users::show');
     }
 
-    public function hidden(User $user, $active)
+    public function hidden(User $user, Request $request)
     {
-        if(!empty($data['active'])){
-            $data['active'] = $data['active'] == 'on' ? '1' : '0';
-        }else{
-            $data['active'] = '0';
-        }
+        $this->rep->update($user, $request->all());
         return redirect()->back();
     }
     /**

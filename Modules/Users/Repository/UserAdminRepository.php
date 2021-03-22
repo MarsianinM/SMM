@@ -19,16 +19,17 @@ class UserAdminRepository
      */
     public function store(array $data)
     {
-        if(!empty($data['active']) & $data['active'] == 'on'){
-            $data['active'] = 1;
+        if(!empty($data['active'])){
+            $data['active'] = $data['active'] == 'on' ? '1' : '0';
         }else{
-            $data['active'] = 0;
+            $data['active'] = '0';
         }
-        if(!empty($data['email_valid']) & $data['email_valid'] == 'on'){
-            $data['email_verified_at'] = now();
+        if(!empty($data['email_verified_at'])){
+            $data['email_verified_at'] = $data['email_verified_at'] == 'on' ? now() : NULL;
         }else{
             $data['email_verified_at'] = NULL;
         }
+
 
         $user = User::create(Arr::except($data, 'image'));
         if (Arr::get($data, 'image') instanceof UploadedFile) {
@@ -53,6 +54,11 @@ class UserAdminRepository
             $data['active'] = $data['active'] == 'on' ? '1' : '0';
         }else{
             $data['active'] = '0';
+        }
+        if(!empty($data['email_verified_at'])){
+            $data['email_verified_at'] = $data['email_verified_at'] == 'on' ? now() : NULL;
+        }else{
+            $data['email_verified_at'] = NULL;
         }
 
         $user->update(Arr::except($data, 'image'));
