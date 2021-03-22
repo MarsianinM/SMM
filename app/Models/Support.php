@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\Support
  *
- * @mixin IdeHelperSupport
  * @property int $id
  * @property string|null $theme
  * @property string $message
@@ -30,6 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Support whereSenderId($value)
  * @method static Builder|Support whereTheme($value)
  * @method static Builder|Support whereUpdatedAt($value)
+ * @mixin IdeHelperSupport
  */
 class Support extends Model
 {

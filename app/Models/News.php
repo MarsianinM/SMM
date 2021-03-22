@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\News
  *
- * @mixin IdeHelperNews
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -20,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|News whereCreatedAt($value)
  * @method static Builder|News whereId($value)
  * @method static Builder|News whereUpdatedAt($value)
+ * @mixin IdeHelperNews
  */
 class News extends Model
 {

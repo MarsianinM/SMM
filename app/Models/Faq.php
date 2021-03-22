@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\Faq
  *
- * @mixin IdeHelperFaq
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -20,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Faq whereCreatedAt($value)
  * @method static Builder|Faq whereId($value)
  * @method static Builder|Faq whereUpdatedAt($value)
+ * @mixin IdeHelperFaq
  */
 class Faq extends Model
 {

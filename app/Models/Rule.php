@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\Rule
  *
- * @mixin IdeHelperRule
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -20,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Rule whereCreatedAt($value)
  * @method static Builder|Rule whereId($value)
  * @method static Builder|Rule whereUpdatedAt($value)
+ * @mixin IdeHelperRule
  */
 class Rule extends Model
 {

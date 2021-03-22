@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\Price
  *
- * @mixin IdeHelperPrice
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -20,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Price whereCreatedAt($value)
  * @method static Builder|Price whereId($value)
  * @method static Builder|Price whereUpdatedAt($value)
+ * @mixin IdeHelperPrice
  */
 class Price extends Model
 {

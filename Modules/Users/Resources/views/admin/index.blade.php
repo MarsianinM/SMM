@@ -49,9 +49,10 @@
                                     <span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                 </label>
 
-                                <form id="form_show-id_{{ $user->id }}" action="{{ route('admin.users.hidden', ['user' => $user->id, 'active' => $user->active]) }}" method="POST">
+                                <form id="form_show-id_{{ $user->id }}" action="{{ route('admin.users.hidden', ['user' => $user->id]) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
+                                    <input type="hidden" value="{{$user->active}}" name="action" />
                                 </form>
                             </div>
                             <div class="btn-group" role="group" aria-label="Basic example">
@@ -98,5 +99,11 @@
             new coreui.Tooltip(element);
         });
         //# sourceMappingURL=tooltips.js.map
+
+        $(document).on('shange','.c-switch-input',function(){
+            let chek = $(this).val();
+            $(this).parents('label').next('form').find('input[name="action"]').val(chek)
+            alert(chek);
+        });
     </script>
 @endsection

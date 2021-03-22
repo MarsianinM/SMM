@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\Message
  *
- * @mixin IdeHelperMessage
  * @property int $id
  * @property string $message
  * @property int $sender_id
@@ -30,6 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Message whereReceiverId($value)
  * @method static Builder|Message whereSenderId($value)
  * @method static Builder|Message whereUpdatedAt($value)
+ * @mixin IdeHelperMessage
  */
 class Message extends Model
 {
