@@ -29,15 +29,13 @@ class UserAdminRepository
         }else{
             $data['email_verified_at'] = NULL;
         }
-
-
         $user = User::create(Arr::except($data, 'image'));
         if (Arr::get($data, 'image') instanceof UploadedFile) {
             $user->addMedia($data['image'])
                 ->sanitizingFileName(function($fileName) {
                     return strtolower(Str::slug($fileName));
                 })
-                ->toMediaCollection('advertisements');
+                ->toMediaCollection('user_icon');
         }
         return $user;
     }
@@ -63,12 +61,11 @@ class UserAdminRepository
 
         $user->update(Arr::except($data, 'image'));
         if (Arr::get($data, 'image') instanceof UploadedFile) {
-            // $name_image = 'advertisements_' . time();
             $user->clearMediaCollection('user_icon');
             $user->addMedia($data['image'])
-                /*->usingFileName(function($fileName) {
+                ->usingFileName(function($fileName) {
                     return (string)strtolower(Str::slug($fileName));
-                })*/
+                })
                 ->toMediaCollection('user_icon');
         }
         return $user;

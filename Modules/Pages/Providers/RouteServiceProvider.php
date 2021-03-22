@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Users\Providers;
+namespace Modules\Pages\Providers;
 
 use App\Http\Middleware\CheckIfAdmin;
 use Illuminate\Support\Facades\Route;
@@ -13,7 +13,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $moduleNamespace = 'Modules\Users\Http\Controllers';
+    protected $moduleNamespace = 'Modules\Pages\Http\Controllers';
 
     /**
      * Called before routes are registered.
@@ -52,11 +52,10 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware(['web', 'verified', CheckIfAdmin::class])
             ->namespace($this->namespace)
             ->name('admin.')
-            ->group(module_path('Users', '/Routes/admin.php'));
-
+            ->group(module_path('Pages', '/Routes/admin.php'));
         Route::middleware('web')
             ->namespace($this->moduleNamespace)
-            ->group(module_path('Users', '/Routes/web.php'));
+            ->group(module_path('Pages', '/Routes/web.php'));
     }
 
     /**
@@ -71,6 +70,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->moduleNamespace)
-            ->group(module_path('Users', '/Routes/api.php'));
+            ->group(module_path('Pages', '/Routes/api.php'));
     }
 }

@@ -1,11 +1,12 @@
 <?php
 
-namespace Modules\Users\Database\Seeders;
+namespace Modules\Pages\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Pages\Entities\Page;
 
-class UsersDatabaseSeeder extends Seeder
+class PagesDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,5 +16,8 @@ class UsersDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
+
+        Page::factory()->times(30)->create();
+        // $this->call(         );
     }
 }

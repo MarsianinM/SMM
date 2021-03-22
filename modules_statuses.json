@@ -4,5 +4,8 @@
     "Blog": true,
     "AdminHome": true,
     "Users": true,
-    "MainPage": true
+    "MainPage": true,
+    "Pages": true,
+    "User": true,
+    "Auth": true
 }
