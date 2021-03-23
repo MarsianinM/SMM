@@ -5,22 +5,22 @@
 
         <div class="card-body">
             <div class="card">
-                <div class="card-header"><i class="fa fa-align-justify"></i> @lang('users::users.title_add')</div>
+                <div class="card-header"><i class="fa fa-align-justify"></i> @lang('pages::pages.title_add')</div>
                 <div class="card-body">
                     <form id="quickForm" action="{{ route('admin.page.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="name">Название</label>
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Введите название" value="{{ old('name') }}">
-                                @error('name')
+                                <label for="name">@lang('pages::pages.enter_title')</label>
+                                <input type="text" name="title" class="form-control" id="title" placeholder="@lang('pages::pages.enter_title')" value="{{ old('title') }}">
+                                @error('title')
                                 <small class="text-red">{{ $message }}</small>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="parent_id">Выбрать родительскую страницу</label>
+                                <label for="parent_id">@lang('pages::pages.enter_parent')</label>
                                 <select name="parent_id" class="form-control" >
-                                    <option value="0">-Выбрать страницу</option>
+                                    <option value="0">-@lang('pages::pages.enter_parent')</option>
                                     @if(collect($allPages)->count())
                                         @foreach($allPages as $key => $page)
                                             <option value="{{ $page->id }}">{{ $page->id }} - {{ $page->title }}</option>
@@ -34,8 +34,8 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="image">@lang('app.enter_image')</label>
-                                        <input type="file" name="image" class="form-control" id="image" placeholder="Изображения">
+                                        <label for="image">@lang('pages::pages.enter_image')</label>
+                                        <input type="file" name="image" class="form-control" id="image" placeholder="@lang('pages::pages.enter_image')">
                                         @error('image')
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror
@@ -43,31 +43,32 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="name">@lang('app.enter_alt_image')</label>
-                                        <input type="text" name="alt_img" class="form-control" id="alt_img" placeholder="Введите название" value="{{ old('alt_img') }}">
+                                        <label for="name">@lang('pages::pages.enter_alt_image')</label>
+                                        <input type="text" name="alt_img" class="form-control" id="alt_img" placeholder="@lang('pages::pages.enter_alt_image')" value="{{ old('alt_img') }}">
                                         @error('alt_img')
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">@lang('app.enter_alt_image')</label>
-                                        <input type="text" name="title_img" class="form-control" id="title_img" placeholder="Введите название" value="{{ old('title_img') }}">
+                                        <label for="name">@lang('pages::pages.enter_title_image')</label>
+                                        <input type="text" name="title_img" class="form-control" id="title_img" placeholder="@lang('pages::pages.enter_title_image')" value="{{ old('title_img') }}">
                                         @error('title_img')
                                         <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
+                                {{-- 'title','slug','quote','content','active','parent_id','seo_title','seo_description','seo_keywords',--}}
                             </div>
                             <div class="form-group">
-                                <label for="quote">Краткое описание</label>
-                                <textarea name="quote" class="form-control" id="quote" rows="4" placeholder="Краткое описание">{{ old('quote') }}</textarea>
+                                <label for="quote">@lang('pages::pages.enter_quote')</label>
+                                <textarea name="quote" class="form-control" id="quote" rows="4" placeholder="@lang('pages::pages.enter_quote')">{{ old('quote') }}</textarea>
                                 @error('quote')
                                 <small class="text-red">{{ $message }}</small>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="content">Описание</label>
-                                <textarea name="content" class="form-control summernote" id="content" rows="8" placeholder="Описание">{{ old('content') }}</textarea>
+                                <label for="content">@lang('pages::pages.enter_content')</label>
+                                <textarea name="content" class="form-control summernote" id="content" rows="8" placeholder="@lang('pages::pages.enter_content')">{{ old('content') }}</textarea>
                                 @error('content')
                                 <small class="text-red">{{ $message }}</small>
                                 @enderror
@@ -76,22 +77,22 @@
                         <!-- /.card-body -->
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="seo_title">SEO Заголовок</label>
-                                <input type="text" name="seo_title" class="form-control" id="seo_title" placeholder="Краткое описание" value="{{ old('seo_title') }}">
+                                <label for="seo_title">@lang('pages::pages.enter_seo_title')</label>
+                                <input type="text" name="seo_title" class="form-control" id="seo_title" placeholder="@lang('pages::pages.enter_seo_title')" value="{{ old('seo_title') }}">
                                 @error('seo_title')
                                 <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="seo_description">SEO Описание</label>
-                                <textarea name="seo_description" class="form-control" id="seo_description" rows="6" placeholder="Описание">{{ old('seo_description') }}</textarea>
+                                <label for="seo_description">@lang('pages::pages.enter_seo_description')</label>
+                                <textarea name="seo_description" class="form-control" id="seo_description" rows="6" placeholder="@lang('pages::pages.enter_seo_description')">{{ old('seo_description') }}</textarea>
                                 @error('seo_description')
                                 <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="seo_keywords">SEO Ключевые слова</label>
-                                <textarea name="seo_keywords" class="form-control" id="seo_keywords" rows="6" placeholder="Описание">{{ old('seo_keywords') }}</textarea>
+                                <label for="seo_keywords">@lang('pages::pages.enter_seo_keywords')</label>
+                                <textarea name="seo_keywords" class="form-control" id="seo_keywords" rows="6" placeholder="@lang('pages::pages.enter_seo_keywords')">{{ old('seo_keywords') }}</textarea>
                                 @error('seo_keywords')
                                 <small class="text-danger">{{ $message }}</small>
                                 @enderror
