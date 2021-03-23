@@ -9,7 +9,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Modules\Pages\Entities\Page;
 
-class PageRepository
+class PageAdminRepository
 {
 
     /**
