@@ -28,8 +28,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', IndexController::class);
-
-Route::resource('news', NewsController::class);
+/*
+Route::resource('news', NewsController::class);*/
 Route::resource('faqs', FaqController::class);
 Route::resource('rules', RuleController::class);
 Route::resource('prices', PriceController::class);
