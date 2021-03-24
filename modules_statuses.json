@@ -7,5 +7,6 @@
     "MainPage": true,
     "Pages": true,
     "User": true,
-    "Auth": true
+    "Auth": true,
+    "News": true
 }
