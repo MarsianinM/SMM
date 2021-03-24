@@ -11,6 +11,19 @@
                         @csrf
                         @method('PATCH')
                         <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-md-12 col-form-label" for="active-input">@lang('pages::pages.enter_active')</label>
+                                <div class="col-md-12">
+                                    <div>
+                                        <label class="c-switch c-switch-label c-switch-opposite-primary"
+                                               data-toggle="tooltip" data-html="true"
+                                               data-original-title="@lang('pages::pages.action_off_on', ['Id' => $page->name])">
+                                            <input id="active-input" class="c-switch-input" name="active" type="checkbox" {{ ($page->active == 1 ? 'checked' : '')  }}>
+                                            <span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="name">@lang('pages::pages.enter_title')</label>
                                 <input type="text" name="title" class="form-control" id="title" placeholder="@lang('pages::pages.enter_title')" value="{{ old('title') ?? $page->title }}">

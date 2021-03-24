@@ -51,16 +51,52 @@ class PageAdminRepository
         }else{
             $data['active'] = '0';
         }
-        $data['slug'] = Str::slug($data['title']);
+
+        $this->activeOnOff($page, $data['active']);
+
+        if(!empty($data['title'])){
+            $data['slug'] = Str::slug($data['title']);
+        }
         $page->update(Arr::except($data, 'image'));
         if (Arr::get($data, 'image') instanceof UploadedFile) {
             $page->clearMediaCollection('pages');
             $page->addMedia($data['image'])
-               /* ->usingFileName(function($fileName) {
-                    return (string)strtolower(Str::slug($fileName));
-                })*/
+                /* ->usingFileName(function($fileName) {
+                     return (string)strtolower(Str::slug($fileName));
+                 })*/
                 ->toMediaCollection('pages');
         }
         return $page;
+    }
+
+    protected function activeOnOff(Page $page, $active){
+
+        $childs = Page::where('parent_id','=',$page->id)->where('active', '!=', $active)->get();
+
+        if(count($childs)){
+            foreach ($childs as $child){
+                $child->active = $active;
+                $this->activeOnOff($child, $active);
+            }
+        };
+        if(!empty($data['active'])){
+            $data['active'] = $data['active'] == 'on' ? '1' : '0';
+        }else{
+            $data['active'] = '0';
+        }
+        $page->update($data);
+    }
+
+
+    public function childDelete(Page $page)
+    {
+        $childs = Page::where('parent_id','=',$page->id)->get();
+
+        if(count($childs)){
+            foreach ($childs as $child){
+                $this->childDelete($child);
+            }
+        };
+        $page->delete();
     }
 }

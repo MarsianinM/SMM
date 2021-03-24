@@ -18,7 +18,7 @@ class CreatePagesTable extends Migration
             $table->text('title');
             $table->string('slug');
             $table->text('quote')->nullable();
-            $table->text('content');
+            $table->longText('content');
             $table->enum('active', [0,1])->default(1);
             $table->unsignedBigInteger('parent_id')->default('0');
             $table->string('alt_img')->nullable();

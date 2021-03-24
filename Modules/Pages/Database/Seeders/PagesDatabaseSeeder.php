@@ -16,6 +16,6 @@ class PagesDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        Page::factory()->times(70)->create();
+        Page::factory()->times(5)->create();
     }
 }

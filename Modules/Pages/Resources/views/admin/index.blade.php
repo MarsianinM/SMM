@@ -4,10 +4,10 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-6"><h2><i class="fa fa-align-justify cil-user"></i> @lang('pages::pages.name')</h2></div>
+                <div class="col-6"><h2><i class="fa fa-align-justify cil-library"></i> @lang('pages::pages.name')</h2></div>
                 <div class="col-6 text-right">
                     <a href="{{ route('admin.page.create') }}" class="btn btn-primary">
-                        <i class="fa fa-align-justify cil-user-plus"></i> @lang('pages::pages.add_user')
+                        <i class="fa fa-align-justify cil-library-add"></i> @lang('pages::pages.add_user')
                     </a>
                 </div>
             </div>
@@ -29,7 +29,11 @@
                     <tr>
                         <td>{{ $page->id }}</td>
                         <td>{{ $page->title }}</td>
-                        <td>image</td>
+                        <td>
+                            <div class="py-2">
+                                <img src="{{ $page->getFirstMediaUrl('pages', 'thumb') }}" alt="{{ $page->alt_img }}" title="{{ $page->title_img }}">
+                            </div>
+                        </td>
                         <td>{{ $page->quote }}</td>
                         <td>{{ $page->parent_id }}</td>
                         <td>

@@ -27,7 +27,7 @@ class PageController extends Controller
      */
     public function index(): Renderable
     {
-        $pages = Page::orderBy('parent_id', 'asc')->with('child')->get();
+        $pages = Page::orderBy('id', 'desc')->with('child')->get();
         return view('pages::admin.index',compact('pages'));
     }
 
@@ -37,7 +37,7 @@ class PageController extends Controller
      */
     public function create(): Renderable
     {
-        $allPages  = Page::orderBy('parent_id', 'asc')->get();
+        $allPages  = Page::orderBy('id', 'asc')->get();
         return view('pages::admin.create',compact('allPages'));
     }
 
@@ -70,7 +70,7 @@ class PageController extends Controller
      */
     public function edit(Page $page): Renderable
     {
-        $allPages  = Page::orderBy('parent_id', 'asc')->get();
+        $allPages  = Page::orderBy('id', 'asc')->where('id', '!=',$page->id)->get();
         return view('pages::admin.edit',compact('page','allPages'));
     }
 
@@ -102,7 +102,7 @@ class PageController extends Controller
      */
     public function destroy(Page $page): RedirectResponse
     {
-        $page->delete();
+        $this->rep->childDelete($page);
         return redirect()->back();
     }
 }

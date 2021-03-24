@@ -31,7 +31,7 @@
         </li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="{{ route('admin.page.index') }}">
-                <i class="c-icon c-sidebar-nav-icon c-icon-1xl cil-text-square"></i>
+                <i class="c-icon c-sidebar-nav-icon c-icon-1xl cil-library"></i>
                 Страници
             </a>
         </li>

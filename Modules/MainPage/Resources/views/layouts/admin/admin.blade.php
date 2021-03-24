@@ -6,9 +6,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Admin — {{ $websiteTitle }} </title>
 
-    <script src="{{ asset("assets/js/coreui.bundle.min.js") }}" defer></script>
-    <!--[if IE]><!-->
-    <script src="{{ asset("assets/js/svgxuse.min.js") }}"></script>
     <!--<![endif]-->
     <link rel="stylesheet" href="{{ asset("assets/css/free.min.css") }}">
     <link rel="stylesheet" href="{{ asset("assets/css/coreui.min.css") }}">
@@ -77,6 +74,11 @@
             </footer>
         </div>
     </div>
+
+
+    <script src="{{ asset("assets/js/coreui.bundle.min.js") }}"></script>
+    <!--[if IE]><!-->
+    <script src="{{ asset("assets/js/svgxuse.min.js") }}"></script>
     <script>
         tinymce.init({
             selector:'textarea.summernote',
