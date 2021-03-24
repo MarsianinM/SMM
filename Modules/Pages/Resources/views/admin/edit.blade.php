@@ -5,95 +5,108 @@
 
         <div class="card-body">
             <div class="card">
-                <div class="card-header"><i class="fa fa-align-justify"></i> @lang('users::users.title_edit', ['Name' => $user->name])</div>
+                <div class="card-header"><i class="fa fa-align-justify"></i> @lang('pages::pages.title_edit',['Id' => $page->id])</div>
                 <div class="card-body">
-                    <form class="form-horizontal" id="users_update" action="{{ route('admin.users.update', $user->id) }}" method="post" enctype="multipart/form-data">
+                    <form id="quickForm" action="{{ route('admin.page.update', $page->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label">@lang('users::users.name_user')</label>
-                            <div class="col-md-9">
-                                <p class="form-control-static">{{ $user->name }}</p>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="name">@lang('pages::pages.enter_title')</label>
+                                <input type="text" name="title" class="form-control" id="title" placeholder="@lang('pages::pages.enter_title')" value="{{ old('title') ?? $page->title }}">
+                                @error('title')
+                                <small class="text-red">{{ $message }}</small>
+                                @enderror
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="text-input">@lang('users::users.enter_name')</label>
-                            <div class="col-md-9">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <svg class="c-icon">
-                                                <use xlink:href="{{ asset("assets/brand/free.svg#cil-user") }}"></use>
-                                            </svg>
-                                        </span>
+                            <div class="form-group">
+                                <label for="parent_id">@lang('pages::pages.enter_parent')</label>
+                                <select name="parent_id" class="form-control" >
+                                    <option value="0">-@lang('pages::pages.enter_parent')</option>
+                                    @if(collect($allPages)->count())
+                                        @foreach($allPages as $key => $pag)
+                                            <option @if($pag->id == $page->parent_id) selected @endif value="{{ $pag->id }}">{{ $pag->id }} - {{ $pag->title }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                                @error('parent_id')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="image">@lang('pages::pages.enter_image')</label>
+                                        <input type="file" name="image" class="form-control" id="image" placeholder="@lang('pages::pages.enter_image')">
+                                        @error('image')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                        <div class="py-2">
+                                            <img src="{{ $page->getFirstMediaUrl('pages', 'thumb') }}" alt="">
+                                        </div>
                                     </div>
-                                    <input class="form-control" id="input-name" type="text" name="name"
-                                           placeholder="@lang('users::users.enter_name')"
-                                           value="{{ old('name') ?? $user->name }}"
-                                           autocomplete="username">
-                                </div>{{--
-                                <span class="help-block">This is a help text</span>--}}
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="email-input">@lang('users::users.enter_email')</label>
-
-                            <div class="col-md-9">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <svg class="c-icon">
-                                                <use xlink:href="{{ asset("assets/brand/free.svg#cil-envelope-open") }}"></use>
-                                            </svg>
-                                        </span>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">@lang('pages::pages.enter_alt_image')</label>
+                                        <input type="text" name="alt_img" class="form-control" id="alt_img" placeholder="@lang('pages::pages.enter_alt_image')" value="{{ old('alt_img') ?? $page->alt_img }}">
+                                        @error('alt_img')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
-                                    <input class="form-control" id="input-name" type="text" name="email"
-                                           placeholder="@lang('users::users.enter_email')"
-                                           value="{{ old('email') ?? $user->email }}"
-                                           autocomplete="email">
+                                    <div class="form-group">
+                                        <label for="name">@lang('pages::pages.enter_title_image')</label>
+                                        <input type="text" name="title_img" class="form-control" id="title_img" placeholder="@lang('pages::pages.enter_title_image')" value="{{ old('title_img') ?? $page->title_img }}">
+                                        @error('title_img')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
                                 </div>
+                                {{-- 'title','slug','quote','content','active','parent_id','seo_title','seo_description','seo_keywords',--}}
+                            </div>
+                            <div class="form-group">
+                                <label for="quote">@lang('pages::pages.enter_quote')</label>
+                                <textarea name="quote" class="form-control" id="quote" rows="4" placeholder="@lang('pages::pages.enter_quote')">{{ old('quote') ?? $page->quote }}</textarea>
+                                @error('quote')
+                                <small class="text-red">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="content">@lang('pages::pages.enter_content')</label>
+                                <textarea name="content" class="form-control summernote" id="content" rows="8" placeholder="@lang('pages::pages.enter_content')">{{ old('content') ?? $page->content }}</textarea>
+                                @error('content')
+                                <small class="text-red">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="active-input">@lang('users::users.enter_active')</label>
-                            <div class="col-md-9">
-                                <div>
-                                    <label class="c-switch c-switch-label c-switch-opposite-primary"
-                                           data-toggle="tooltip" data-html="true"
-                                           data-original-title="@lang('users::users.action_off_on', ['Name' => $user->name])">
-                                        <input id="active-input" class="c-switch-input" name="active" type="checkbox" {{ ($user->active == 1 ? 'checked' : '')  }}>
-                                        <span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                    </label>
-                                </div>
+                        <!-- /.card-body -->
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="seo_title">@lang('pages::pages.enter_seo_title')</label>
+                                <input type="text" name="seo_title" class="form-control" id="seo_title" placeholder="@lang('pages::pages.enter_seo_title')" value="{{ old('seo_title') ?? $page->seo_title }}">
+                                @error('seo_title')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="email_valid-input">@lang('users::users.enter_email_valid')</label>
-                            <div class="col-md-9">
-                                <div>
-                                    <label class="c-switch c-switch-label c-switch-opposite-primary"
-                                           data-toggle="tooltip" data-html="true"
-                                           data-original-title="@lang('users::users.action_off_on', ['Name' => $user->name])">
-                                        <input id="email_valid-input" class="c-switch-input" name="email_verified_at" type="checkbox" {{ ($user->email_verified_at ? 'checked' : '')  }}>
-                                        <span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                    </label>
-                                </div>
+                            <div class="form-group">
+                                <label for="seo_description">@lang('pages::pages.enter_seo_description')</label>
+                                <textarea name="seo_description" class="form-control" id="seo_description" rows="6" placeholder="@lang('pages::pages.enter_seo_description')">{{ old('seo_description') ?? $page->seo_description }}</textarea>
+                                @error('seo_description')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 col-form-label" for="image-input">@lang('users::users.enter_image')</label>
-                            <div class="col-md-9">
-                                <input id="image-input" type="file" name="image">
-                                <div class="py-2">
-                                    <img src="{{ $user->getFirstMediaUrl('user_icon', 'thumb') }}" alt="">
-                                </div>
+                            <div class="form-group">
+                                <label for="seo_keywords">@lang('pages::pages.enter_seo_keywords')</label>
+                                <textarea name="seo_keywords" class="form-control" id="seo_keywords" rows="6" placeholder="@lang('pages::pages.enter_seo_keywords')">{{ old('seo_keywords') ?? $page->seo_keywords }}</textarea>
+                                @error('seo_keywords')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
                     </form>
+
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-sm btn-primary" form="users_update" type="submit">@lang('users::users.submit_edit')</button>
+                    <button class="btn btn-sm btn-primary" form="quickForm" type="submit">@lang('pages::pages.submit_edit')</button>
                 </div>
             </div>
         </div>
@@ -102,17 +115,6 @@
 @section('js')
     <script>
         /* global coreui */
-
-        /**
-         * --------------------------------------------------------------------------
-         * CoreUI Free Boostrap Admin Template (v3.2.0): tooltips.js
-         * Licensed under MIT (https://coreui.io/license)
-         * --------------------------------------------------------------------------
-         */
-        document.querySelectorAll('[data-toggle="tooltip"]').forEach(function (element) {
-            // eslint-disable-next-line no-new
-            new coreui.Tooltip(element);
-        });
         //# sourceMappingURL=tooltips.js.map
     </script>
 @endsection

@@ -21,6 +21,8 @@ class CreatePagesTable extends Migration
             $table->text('content');
             $table->enum('active', [0,1])->default(1);
             $table->unsignedBigInteger('parent_id')->default('0');
+            $table->string('alt_img')->nullable();
+            $table->string('title_img')->nullable();
             $table->string('seo_title')->nullable();
             $table->text('seo_description')->nullable();
             $table->text('seo_keywords')->nullable();

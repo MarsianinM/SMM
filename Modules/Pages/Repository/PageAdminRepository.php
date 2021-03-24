@@ -24,12 +24,13 @@ class PageAdminRepository
         }else{
             $data['active'] = '0';
         }
+        $data['slug'] = Str::slug($data['title']);
         $page = Page::create(Arr::except($data, 'image'));
         if (Arr::get($data, 'image') instanceof UploadedFile) {
             $page->addMedia($data['image'])
-                ->sanitizingFileName(function($fileName) {
+                /*->sanitizingFileName(function($fileName) {
                     return strtolower(Str::slug($fileName));
-                })
+                })*/
                 ->toMediaCollection('pages');
         }
         return $page;
@@ -50,13 +51,14 @@ class PageAdminRepository
         }else{
             $data['active'] = '0';
         }
+        $data['slug'] = Str::slug($data['title']);
         $page->update(Arr::except($data, 'image'));
         if (Arr::get($data, 'image') instanceof UploadedFile) {
             $page->clearMediaCollection('pages');
             $page->addMedia($data['image'])
-                ->usingFileName(function($fileName) {
+               /* ->usingFileName(function($fileName) {
                     return (string)strtolower(Str::slug($fileName));
-                })
+                })*/
                 ->toMediaCollection('pages');
         }
         return $page;

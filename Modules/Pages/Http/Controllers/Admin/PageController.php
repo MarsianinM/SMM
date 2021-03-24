@@ -70,7 +70,8 @@ class PageController extends Controller
      */
     public function edit(Page $page): Renderable
     {
-        return view('pages::admin.edit',compact('page'));
+        $allPages  = Page::orderBy('parent_id', 'asc')->get();
+        return view('pages::admin.edit',compact('page','allPages'));
     }
 
     /**

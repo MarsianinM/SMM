@@ -29,6 +29,8 @@ class PageFactory extends Factory
             'active' => '1',
             'parent_id' => rand(0, 12),
             'seo_title' => Str::random(20),
+            'alt_img' => $name,
+            'title_img' => $name,
             'seo_description' => Str::random(20),
             'seo_keywords' => Str::random(20),
         ];
