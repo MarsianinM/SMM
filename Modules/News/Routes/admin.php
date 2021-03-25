@@ -5,7 +5,7 @@ use Modules\News\Http\Controllers\Admin\PostsController;
 use Modules\News\Http\Controllers\Admin\CategoriesController;
 
 Route::prefix('news')->group(function() {
-    Route::get('/', [NewsController::class, 'index'])->name('index');
+    Route::get('/', [NewsController::class, 'index'])->name('news.index');
 
     Route::resources([
         'post' => PostsController::class,

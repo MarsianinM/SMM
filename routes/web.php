@@ -35,7 +35,7 @@ Route::resource('rules', RuleController::class);
 Route::resource('prices', PriceController::class);
 
 Auth::routes(['verify' => true]);
-
+Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
 Route::group(['middleware' => 'verified'], function () {
     Route::get('home', function () {
         return redirect()->route(request()->user()->getHomePageRoute());
@@ -53,4 +53,5 @@ Route::group(['middleware' => 'verified'], function () {
     Route::resource('users', UserController::class);
 
     Route::resource('blacklist', BlackListController::class);
+});
 });

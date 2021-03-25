@@ -52,12 +52,14 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->moduleNamespace)
             ->group(module_path('MainPage', '/Routes/web.php'));*/
 
+        Route::group(['prefix' => \LaravelLocalization::setLocale()], function() {
+            Route::prefix('admin')
+                ->middleware(['web', 'verified', CheckIfAdmin::class])
+                ->namespace($this->namespace)
+                ->name('admin.')
+                ->group(module_path('MainPage', '/Routes/admin.php'));
+        });
 
-        Route::prefix('admin')
-            ->middleware(['web', 'verified', CheckIfAdmin::class])
-            ->namespace($this->namespace)
-            ->name('admin.')
-            ->group(module_path('MainPage', '/Routes/admin.php'));
 
     }
 

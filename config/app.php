@@ -231,6 +231,8 @@ return [
 
         /**  */
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        /**  */
+        'LaravelLocalization' => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
     ],
 
 ];

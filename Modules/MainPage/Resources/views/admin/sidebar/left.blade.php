@@ -35,6 +35,13 @@
                 Страници
             </a>
         </li>
+
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="{{ route('admin.news.index') }}">
+                <i class="c-icon c-sidebar-nav-icon c-icon-1xl cil-library"></i>
+                @lang('mainpage::sidebar.news_link')
+            </a>
+        </li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="{{ route('admin.users.index') }}">
                 <svg class="c-sidebar-nav-icon" id="cil-calculator" viewBox="0 0 512 512">

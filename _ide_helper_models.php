@@ -14,7 +14,6 @@ namespace App\Models{
 /**
  * App\Models\Blacklist
  *
- * @mixin IdeHelperBlacklist
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -25,6 +24,7 @@ namespace App\Models{
  * @method static Builder|Blacklist whereCreatedAt($value)
  * @method static Builder|Blacklist whereId($value)
  * @method static Builder|Blacklist whereUpdatedAt($value)
+ * @mixin IdeHelperBlacklist
  */
 	class IdeHelperBlacklist extends \Eloquent {}
 }
@@ -33,7 +33,6 @@ namespace App\Models{
 /**
  * App\Models\Faq
  *
- * @mixin IdeHelperFaq
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -44,6 +43,7 @@ namespace App\Models{
  * @method static Builder|Faq whereCreatedAt($value)
  * @method static Builder|Faq whereId($value)
  * @method static Builder|Faq whereUpdatedAt($value)
+ * @mixin IdeHelperFaq
  */
 	class IdeHelperFaq extends \Eloquent {}
 }
@@ -52,7 +52,6 @@ namespace App\Models{
 /**
  * App\Models\Message
  *
- * @mixin IdeHelperMessage
  * @property int $id
  * @property string $message
  * @property int $sender_id
@@ -73,6 +72,7 @@ namespace App\Models{
  * @method static Builder|Message whereReceiverId($value)
  * @method static Builder|Message whereSenderId($value)
  * @method static Builder|Message whereUpdatedAt($value)
+ * @mixin IdeHelperMessage
  * @property-read \App\Models\User $user
  */
 	class IdeHelperMessage extends \Eloquent {}
@@ -82,7 +82,6 @@ namespace App\Models{
 /**
  * App\Models\News
  *
- * @mixin IdeHelperNews
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -93,6 +92,27 @@ namespace App\Models{
  * @method static Builder|News whereCreatedAt($value)
  * @method static Builder|News whereId($value)
  * @method static Builder|News whereUpdatedAt($value)
+ * @mixin IdeHelperNews
+ * @property string $title
+ * @property string $slug
+ * @property string|null $quote
+ * @property string $content
+ * @property string $active
+ * @property string|null $alt_img
+ * @property string|null $title_img
+ * @property string|null $seo_title
+ * @property string|null $seo_description
+ * @property string|null $seo_keywords
+ * @method static Builder|News whereActive($value)
+ * @method static Builder|News whereAltImg($value)
+ * @method static Builder|News whereContent($value)
+ * @method static Builder|News whereQuote($value)
+ * @method static Builder|News whereSeoDescription($value)
+ * @method static Builder|News whereSeoKeywords($value)
+ * @method static Builder|News whereSeoTitle($value)
+ * @method static Builder|News whereSlug($value)
+ * @method static Builder|News whereTitle($value)
+ * @method static Builder|News whereTitleImg($value)
  */
 	class IdeHelperNews extends \Eloquent {}
 }
@@ -101,7 +121,6 @@ namespace App\Models{
 /**
  * App\Models\Price
  *
- * @mixin IdeHelperPrice
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -112,6 +131,7 @@ namespace App\Models{
  * @method static Builder|Price whereCreatedAt($value)
  * @method static Builder|Price whereId($value)
  * @method static Builder|Price whereUpdatedAt($value)
+ * @mixin IdeHelperPrice
  */
 	class IdeHelperPrice extends \Eloquent {}
 }
@@ -120,7 +140,6 @@ namespace App\Models{
 /**
  * App\Models\Rule
  *
- * @mixin IdeHelperRule
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -131,6 +150,7 @@ namespace App\Models{
  * @method static Builder|Rule whereCreatedAt($value)
  * @method static Builder|Rule whereId($value)
  * @method static Builder|Rule whereUpdatedAt($value)
+ * @mixin IdeHelperRule
  */
 	class IdeHelperRule extends \Eloquent {}
 }
@@ -139,7 +159,6 @@ namespace App\Models{
 /**
  * App\Models\Support
  *
- * @mixin IdeHelperSupport
  * @property int $id
  * @property string|null $theme
  * @property string $message
@@ -160,6 +179,7 @@ namespace App\Models{
  * @method static Builder|Support whereSenderId($value)
  * @method static Builder|Support whereTheme($value)
  * @method static Builder|Support whereUpdatedAt($value)
+ * @mixin IdeHelperSupport
  */
 	class IdeHelperSupport extends \Eloquent {}
 }
@@ -177,6 +197,7 @@ namespace App\Models{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $active
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Balance[] $balances
  * @property-read int|null $balances_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
@@ -187,6 +208,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
