@@ -36,22 +36,22 @@ Route::resource('prices', PriceController::class);
 
 Auth::routes(['verify' => true]);
 Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
-Route::group(['middleware' => 'verified'], function () {
-    Route::get('home', function () {
-        return redirect()->route(request()->user()->getHomePageRoute());
-    })->name('home');
+    Route::group(['middleware' => 'verified'], function () {
+        Route::get('home', function () {
+            return redirect()->route(request()->user()->getHomePageRoute());
+        })->name('home');
 
-    Route::get('balance', ShowBalance::class)->name('balance.index');
-    Route::get('finance', ShowFinance::class)->name('finance.index');
-    Route::post('set-role', SetRole::class)->name('set-role');
+        Route::get('balance', ShowBalance::class)->name('balance.index');
+        Route::get('finance', ShowFinance::class)->name('finance.index');
+        Route::post('set-role', SetRole::class)->name('set-role');
 
-    Route::post('support/message/{support}', [SupportMessageController::class, 'message'])->name('support.message');
-    Route::resource('support', SupportController::class);
+        Route::post('support/message/{support}', [SupportMessageController::class, 'message'])->name('support.message');
+        Route::resource('support', SupportController::class);
 
-    Route::post('message/message/{message}', [MessageController::class, 'message'])->name('message.message');
-    Route::resource('messages', MessageController::class);
-    Route::resource('users', UserController::class);
+        Route::post('message/message/{message}', [MessageController::class, 'message'])->name('message.message');
+        Route::resource('messages', MessageController::class);
+        Route::resource('users', UserController::class);
 
-    Route::resource('blacklist', BlackListController::class);
-});
+        Route::resource('blacklist', BlackListController::class);
+    });
 });

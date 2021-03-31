@@ -42,34 +42,33 @@
                 @lang('mainpage::sidebar.news_link')
             </a>
         </li>
+
+        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+            <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="{{ asset('img/icons/free.svg#cil-puzzle') }}"></use>
+                </svg> @lang('mainpage::sidebar.project')
+            </a>
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" href="{{ route('admin.project.index') }}">
+                        <span class="c-sidebar-nav-icon"></span> @lang('mainpage::sidebar.project_list')</a>
+                </li>
+            </ul>
+        </li>
+
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="{{ route('admin.users.index') }}">
-                <svg class="c-sidebar-nav-icon" id="cil-calculator" viewBox="0 0 512 512">
-                    <path fill="var(--ci-primary-color, currentColor)"
-                          d="M472,40H40A24.028,24.028,0,0,0,16,64V448a24.028,24.028,0,0,0,24,24H472a24.028,24.028,0,0,0,24-24V64A24.028,24.028,0,0,0,472,40Zm-8,400H48V72H464Z"
-                          class="ci-primary"></path>
-                    <polygon fill="var(--ci-primary-color, currentColor)"
-                             points="152 240 184 240 184 200 224 200 224 168 184 168 184 128 152 128 152 168 112 168 112 200 152 200 152 240"
-                             class="ci-primary"></polygon>
-                    <polygon fill="var(--ci-primary-color, currentColor)"
-                             points="196.284 285.089 168 313.373 139.716 285.089 117.089 307.716 145.373 336 117.089 364.284 139.716 386.911 168 358.627 196.284 386.911 218.911 364.284 190.627 336 218.911 307.716 196.284 285.089"
-                             class="ci-primary"></polygon>
-                    <rect width="112" height="32" x="288" y="168" fill="var(--ci-primary-color, currentColor)"
-                          class="ci-primary"></rect>
-                    <rect width="112" height="32" x="288" y="288" fill="var(--ci-primary-color, currentColor)"
-                          class="ci-primary"></rect>
-                    <rect width="112" height="32" x="288" y="352" fill="var(--ci-primary-color, currentColor)"
-                          class="ci-primary"></rect>
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="{{ asset('img/icons/free.svg#cil-calculator') }}"></use>
                 </svg>
                 Пользователи
             </a>
         </li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="{{ route('admin.settings.index') }}">
-                <svg class="c-sidebar-nav-icon" id="cil-pencil" viewBox="0 0 512 512">
-                    <path fill="var(--ci-primary-color, currentColor)"
-                          d="M29.663,482.25l.087.087a24.847,24.847,0,0,0,17.612,7.342,25.178,25.178,0,0,0,8.1-1.345l142.006-48.172,272.5-272.5A88.832,88.832,0,0,0,344.334,42.039l-272.5,272.5L23.666,456.541A24.844,24.844,0,0,0,29.663,482.25Zm337.3-417.584a56.832,56.832,0,0,1,80.371,80.373L411.5,180.873,331.127,100.5ZM99.744,331.884,308.5,123.127,388.873,203.5,180.116,412.256,58.482,453.518Z"
-                          class="ci-primary"></path>
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="{{ asset('img/icons/free.svg#cil-pencil') }}"></use>
                 </svg>
                 Настройки
             </a>

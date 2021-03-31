@@ -8,5 +8,6 @@
     "Pages": true,
     "User": true,
     "Auth": true,
-    "News": true
+    "News": true,
+    "Project": true
 }
