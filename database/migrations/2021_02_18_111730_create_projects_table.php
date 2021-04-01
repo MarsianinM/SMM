@@ -14,7 +14,7 @@ class CreateProjectsTable extends Migration
     public function up()
     {
         Schema::create('projects', function (Blueprint $table) {
-            $table->id();
+           /* $table->id();
             $table->timestamps();
 
             $table->foreignId('client_id')
@@ -23,7 +23,7 @@ class CreateProjectsTable extends Migration
             $table->foreignId('author_id')
                 ->nullable()
                 ->constrained('users')
-                ->nullOnDelete();
+                ->nullOnDelete();*/
         });
     }
 

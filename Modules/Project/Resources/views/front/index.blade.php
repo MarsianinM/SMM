@@ -12,6 +12,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        @if(count($projects))
                         <table class="table">
                             <thead>
                             <tr>
@@ -52,6 +53,11 @@
                             </tr>
                             </tbody>
                         </table>
+                        @else
+                            <p>
+                                @lang('project::client.error_not_found_project')
+                            </p>
+                        @endif
                     </div>
                 </div>
             </div>

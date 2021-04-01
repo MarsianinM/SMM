@@ -44,7 +44,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         'email_verified_at' => 'datetime',
     ];
 
-    protected $fillable = [
+    protected array $fillable = [
         'name','email','email_verified_at','password','remember_token','created_at','updated_at','active'
     ];
 

@@ -20,13 +20,16 @@ Route::prefix('client')
     ->group(function() {
     Route::prefix('projects')->group(function() {
         Route::get('/', [ClientProjectController::class,'index'])->name('projects.index');
-        Route::get('/show', [ClientProjectController::class,'index'])->name('projects.show');
+        Route::get('/show/{project}', [ClientProjectController::class,'index'])->name('projects.show');
+        Route::get('/edit/{project}', [ClientProjectController::class,'index'])->name('projects.edit');
         Route::get('/create', [ClientProjectController::class,'create'])->name('projects.create');
+        Route::post('/storage', [ClientProjectController::class,'create'])->name('projects.storage');
+        Route::patch('/update/{project}', [ClientProjectController::class,'create'])->name('projects.update');
     });
 
 });
-
+/*
 Route::get('/', function () {
     return redirect()->route('client.home');
 });
-Route::get('home', \App\Http\Controllers\Client\ShowHomePage::class)->name('home');
+Route::get('home', \App\Http\Controllers\Client\ShowHomePage::class)->name('home');*/

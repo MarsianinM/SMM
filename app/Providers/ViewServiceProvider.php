@@ -56,6 +56,9 @@ class ViewServiceProvider extends ServiceProvider
                                     return Setting::firstWhere('key', 'title')->value;
                                 })
             );
+            Blade::if('role', function ($value) {
+                return auth()->check() && auth()->user()->activeRoleIs($value);
+            });
         });
     }
 }

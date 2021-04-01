@@ -13,6 +13,7 @@ class CreateProjectsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('projects');
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->text('title');
@@ -28,6 +29,15 @@ class CreateProjectsTable extends Migration
             $table->enum('status',['bay_off','active','on_moderation','off','off_admins'])->default('on_moderation');
             $table->boolean('archive')->default(0);
             $table->boolean('pro')->default(0);
+
+            $table->foreignId('client_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
+            $table->foreignId('author_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
             $table->timestamps();
         });
     }

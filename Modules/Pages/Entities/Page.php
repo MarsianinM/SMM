@@ -12,7 +12,7 @@ class Page extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-    protected $fillable = [
+    protected array $fillable = [
         'title','slug','quote','content','active','parent_id','seo_title','seo_description','seo_keywords',
     ];
     protected static function newFactory()
