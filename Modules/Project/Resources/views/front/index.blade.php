@@ -24,8 +24,9 @@
                             </tr>
                             </thead>
                             <tbody>
+                           @foreach($projects as $project)
                             <tr>
-                                <td><a href="{{ route('client.projects.show', 1) }}">Создать темы на вопроснике</a></td>
+                                <td><a href="{{ route('client.projects.show', $project->id) }}">{{ $project->title }}</a></td>
                                 <td>7.00</td>
                                 <td>30 минут</td>
                                 <td>0/5</td>
@@ -33,30 +34,15 @@
                                     03 Сен 2020
                                 </td>
                             </tr>
-                            <tr>
-                                <td><a href="{{ route('client.projects.show', 2) }}">Написать ком коммменты</a></td>
-                                <td>5.00</td>
-                                <td>20 минут</td>
-                                <td>0/2</td>
-                                <td class="d-none d-md-table-cell">
-                                    04 Сен 2020
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="{{ route('client.projects.show', 3) }}">Несколько комментариев для статьи</a></td>
-                                <td>9.00</td>
-                                <td>40 минут</td>
-                                <td>0/2</td>
-                                <td class="d-none d-md-table-cell">
-                                    10 Сен 2020
-                                </td>
-                            </tr>
+                           @endforeach
                             </tbody>
                         </table>
                         @else
-                            <p>
-                                @lang('project::client.error_not_found_project')
-                            </p>
+                            <div class="p-2">
+                                <p>
+                                    @lang('project::client.error_not_found_project')
+                                </p>
+                            </div>
                         @endif
                     </div>
                 </div>
