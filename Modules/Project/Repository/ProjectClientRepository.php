@@ -18,6 +18,7 @@ class ProjectClientRepository
      */
     public function store(array $data): Project
     {
+        $data['client_id'] = auth()->user()->id;
         $page = Project::create(Arr::except($data, 'image'));
         if (Arr::get($data, 'image') instanceof UploadedFile) {
             $page->addMedia($data['image'])

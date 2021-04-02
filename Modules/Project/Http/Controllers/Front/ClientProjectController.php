@@ -27,7 +27,7 @@ class ClientProjectController extends Controller
      */
     public function index(): Renderable
     {
-        $projects = Project::whereStatus('active')->where('client_id',auth()->user()->id)->with('author')->paginate('30');
+        $projects = Project::/*whereStatus('active')->*/where('client_id',auth()->user()->id)/*->with('client')*/->paginate('30');
 
         return view('project::front.index',[
             //'projects' => Project::whereStatus('active')->where('client_id',auth()->user()->id)->with('author')->paginate('30')
@@ -51,8 +51,9 @@ class ClientProjectController extends Controller
      */
     public function store(ClientProjectRequest $request): RedirectResponse
     {
+
         $page = $this->rep->store($request->all());
-        return redirect()->route('admin.page.edit',$page->id);
+        return redirect()->route('client.projects.edit',$page->id);
     }
 
     /**

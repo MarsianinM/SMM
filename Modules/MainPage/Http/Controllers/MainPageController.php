@@ -5,6 +5,7 @@ namespace Modules\MainPage\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Project\Entities\Project;
 
 class MainPageController extends Controller
 {
@@ -14,7 +15,9 @@ class MainPageController extends Controller
      */
     public function index()
     {
-        return view('mainpage::index');
+        return view('mainpage::index',[
+            'projects' => Project::whereStatus('active')/*->where('client_id',auth()->user()->id)->with('client')*/->paginate('5')
+        ]);
     }
 
     /**

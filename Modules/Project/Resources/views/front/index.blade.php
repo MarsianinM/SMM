@@ -1,6 +1,11 @@
 @extends('mainpage::layouts.front.app')
 
 @section('content')
+    <style>
+        .pagination-wrapper svg, .hidden{
+            display: none;
+        }
+    </style>
     <main class="content">
         <div class="container">
 
@@ -31,12 +36,15 @@
                                 <td>30 минут</td>
                                 <td>0/5</td>
                                 <td class="d-none d-md-table-cell">
-                                    03 Сен 2020
+                                    {{ $project->date_start }}
                                 </td>
                             </tr>
                            @endforeach
                             </tbody>
                         </table>
+                        <div class="pagination-wrapper mb-5">
+                            {{ $projects->links() }}
+                        </div>
                         @else
                             <div class="p-2">
                                 <p>
