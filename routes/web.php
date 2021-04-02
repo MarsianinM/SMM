@@ -27,7 +27,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', IndexController::class);
+
+//Route::get('/', [\Modules\MainPage\Http\Controllers\MainPageController::class,'index'])->name('index');
+/*Route::get('/', IndexController::class);*/
 /*
 Route::resource('news', NewsController::class);*/
 Route::resource('faqs', FaqController::class);

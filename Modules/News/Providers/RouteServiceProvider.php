@@ -53,6 +53,7 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->name('admin.')
             ->group(module_path('News', '/Routes/admin.php'));
+
         Route::middleware('web')
             ->namespace($this->moduleNamespace)
             ->group(module_path('News', '/Routes/web.php'));
