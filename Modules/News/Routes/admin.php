@@ -1,17 +1,10 @@
 <?php
 
 use Modules\News\Http\Controllers\Admin\NewsController;
-use Modules\News\Http\Controllers\Admin\PostsController;
-use Modules\News\Http\Controllers\Admin\CategoriesController;
 
-Route::prefix('news')->group(function() {
-    Route::get('/', [NewsController::class, 'index'])->name('news.index');
 
-    Route::resources([
-        'post' => PostsController::class,
-        'category' => CategoriesController::class,
-    ]);
+Route::resources([
+    'news' => NewsController::class,
+]);
 
-});
-
-//Route::patch('hidden/{page}', [PageController::class,'hidden'])->name('news.hidden');
+Route::patch('hidden/{news}', [NewsController::class,'hidden'])->name('news.hidden');

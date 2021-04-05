@@ -12,6 +12,34 @@
 
 namespace App\Models{
 /**
+ * App\Models\Balance
+ *
+ * @mixin IdeHelperBalance
+ * @property int $id
+ * @property string $operation
+ * @property string $amount
+ * @property string $currency
+ * @property string $transaction_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $user_id
+ * @method static Builder|Balance newModelQuery()
+ * @method static Builder|Balance newQuery()
+ * @method static Builder|Balance query()
+ * @method static Builder|Balance whereAmount($value)
+ * @method static Builder|Balance whereCreatedAt($value)
+ * @method static Builder|Balance whereCurrency($value)
+ * @method static Builder|Balance whereId($value)
+ * @method static Builder|Balance whereOperation($value)
+ * @method static Builder|Balance whereTransactionId($value)
+ * @method static Builder|Balance whereUpdatedAt($value)
+ * @method static Builder|Balance whereUserId($value)
+ */
+	class IdeHelperBalance extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Blacklist
  *
  * @property int $id
@@ -73,7 +101,6 @@ namespace App\Models{
  * @method static Builder|Message whereSenderId($value)
  * @method static Builder|Message whereUpdatedAt($value)
  * @mixin IdeHelperMessage
- * @property-read \App\Models\User $user
  */
 	class IdeHelperMessage extends \Eloquent {}
 }
@@ -93,26 +120,6 @@ namespace App\Models{
  * @method static Builder|News whereId($value)
  * @method static Builder|News whereUpdatedAt($value)
  * @mixin IdeHelperNews
- * @property string $title
- * @property string $slug
- * @property string|null $quote
- * @property string $content
- * @property string $active
- * @property string|null $alt_img
- * @property string|null $title_img
- * @property string|null $seo_title
- * @property string|null $seo_description
- * @property string|null $seo_keywords
- * @method static Builder|News whereActive($value)
- * @method static Builder|News whereAltImg($value)
- * @method static Builder|News whereContent($value)
- * @method static Builder|News whereQuote($value)
- * @method static Builder|News whereSeoDescription($value)
- * @method static Builder|News whereSeoKeywords($value)
- * @method static Builder|News whereSeoTitle($value)
- * @method static Builder|News whereSlug($value)
- * @method static Builder|News whereTitle($value)
- * @method static Builder|News whereTitleImg($value)
  */
 	class IdeHelperNews extends \Eloquent {}
 }
@@ -138,6 +145,48 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Project
+ *
+ * @mixin IdeHelperProject
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $client_id
+ * @property int|null $author_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereAuthorId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
+ */
+	class IdeHelperProject extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Role
+ *
+ * @mixin IdeHelperRole
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Role newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Role newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Role query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Role whereUpdatedAt($value)
+ */
+	class IdeHelperRole extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Rule
  *
  * @property int $id
@@ -153,6 +202,30 @@ namespace App\Models{
  * @mixin IdeHelperRule
  */
 	class IdeHelperRule extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Setting
+ *
+ * @mixin IdeHelperSetting
+ * @property int $id
+ * @property string $key
+ * @property string $value
+ * @property string $type
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereValue($value)
+ */
+	class IdeHelperSetting extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -182,42 +255,5 @@ namespace App\Models{
  * @mixin IdeHelperSupport
  */
 	class IdeHelperSupport extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\User
- *
- * @mixin IdeHelperUser
- * @property int $id
- * @property string $name
- * @property string $email
- * @property \Illuminate\Support\Carbon|null $email_verified_at
- * @property string $password
- * @property string|null $remember_token
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string $active
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Balance[] $balances
- * @property-read int|null $balances_count
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
- * @property-read int|null $notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Role[] $roles
- * @property-read int|null $roles_count
- * @method static \Database\Factories\UserFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User query()
- * @method static \Illuminate\Database\Eloquent\Builder|User whereActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
- */
-	class IdeHelperUser extends \Eloquent implements \Illuminate\Contracts\Auth\MustVerifyEmail {}
 }
 

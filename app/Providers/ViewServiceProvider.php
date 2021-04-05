@@ -24,6 +24,7 @@ use App\Models\Testimonial;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -51,11 +52,12 @@ class ViewServiceProvider extends ServiceProvider
         });
 
         View::composer('*', function (\Illuminate\Contracts\View\View $view) {
-            $view->with(
-                'websiteTitle', \Cache::remember('websiteTitle', 3600, function () {
-                                    return Setting::firstWhere('key', 'title')->value;
-                                })
-            );
+            $view->with('websiteTitle', \Cache::remember('websiteTitle', 3600, function () {
+                return Setting::firstWhere('key', 'title')->value;
+            }));
+            $view->with('array_localization', \Cache::remember('array_localization', 3600, function () {
+                return LaravelLocalization::getSupportedLocales();
+            }));
             Blade::if('role', function ($value) {
                 return auth()->check() && auth()->user()->activeRoleIs($value);
             });

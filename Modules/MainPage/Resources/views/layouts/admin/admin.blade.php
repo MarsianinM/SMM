@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset("assets/css/free.min.css") }}">
     <link rel="stylesheet" href="{{ asset("assets/css/coreui.min.css") }}">
 
-    <script src="https://cdn.tiny.cloud/1/xb93s6r7fpeaoabkwsovvh1ktdlwx8lq1six9lrvr7ymjd7q/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/{{env('YOUR_TINY_API_KEY')}}/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
 </head>
 <body class="c-app">

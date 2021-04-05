@@ -12,7 +12,9 @@ ___
 ___
 [Laravel-medialibrary](https://spatie.be/docs/laravel-medialibrary/v9/introduction)
 ___
-
+[Laravel-medialibrary](https://spatie.be/docs/laravel-medialibrary/v9/introduction)
+___
+[Laravel Localization](https://github.com/mcamara/laravel-localization)
 
 ##Модули приложения
 ###MainPage - одуль главной страници

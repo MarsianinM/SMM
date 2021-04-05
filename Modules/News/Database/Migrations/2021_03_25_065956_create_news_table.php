@@ -15,12 +15,20 @@ class CreateNewsTable extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
-            $table->text('title');
             $table->string('slug');
+            $table->integer('sort_order')->default(0);
+            $table->enum('active', [0,1])->default(1);
+            $table->timestamps();
+        });
+        Schema::create('new_description', function (Blueprint $table) {
+            $table->id();$table->foreignId('new_id')
+                ->constrained('news')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->text('lang_key');
+            $table->text('title');
             $table->text('quote')->nullable();
             $table->longText('content');
-            $table->enum('active', [0,1])->default(1);
-            //$table->unsignedBigInteger('category_id')->default('0');
             $table->string('alt_img')->nullable();
             $table->string('title_img')->nullable();
             $table->string('seo_title')->nullable();
@@ -28,6 +36,7 @@ class CreateNewsTable extends Migration
             $table->text('seo_keywords')->nullable();
             $table->timestamps();
         });
+
     }
 
     /**
@@ -38,5 +47,6 @@ class CreateNewsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('news');
+        Schema::dropIfExists('new_description');
     }
 }

@@ -5,16 +5,28 @@ namespace Modules\News\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\News\Entities\News;
+use Modules\News\Http\Requests\CreateNewsRequest;
+use Modules\News\Repository\NewsAdminRepository;
 
 class NewsController extends Controller
 {
+    private NewsAdminRepository $rep;
+
+    public function __construct(NewsAdminRepository $rep)
+    {
+        $this->rep = $rep;
+    }
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
     public function index()
     {
-        return view('news::index');
+        $news = News::with('newsDescription')->paginate(10);
+        return view('news::admin.index',[
+            'news' => $news
+        ]);
     }
 
     /**
@@ -23,17 +35,18 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('news::create');
+        return view('news::admin.create');
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
+     * @param CreateNewsRequest $request
      * @return Renderable
      */
-    public function store(Request $request)
+    public function store(CreateNewsRequest $request)
     {
-        //
+        $news = $this->rep->store($request->all());
+        return redirect()->route('admin.news.edit',$news->id);
     }
 
     /**

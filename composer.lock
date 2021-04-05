@@ -2963,16 +2963,16 @@
         },
         {
             "name": "spatie/laravel-medialibrary",
-            "version": "9.5.0",
+            "version": "9.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-medialibrary.git",
-                "reference": "89d1d2e5b4b53137819cc18a166f43edaeaf7e52"
+                "reference": "4c3e8ec7523ddc9360b5ecb58e90c7f0ceb35d8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/89d1d2e5b4b53137819cc18a166f43edaeaf7e52",
-                "reference": "89d1d2e5b4b53137819cc18a166f43edaeaf7e52",
+                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/4c3e8ec7523ddc9360b5ecb58e90c7f0ceb35d8f",
+                "reference": "4c3e8ec7523ddc9360b5ecb58e90c7f0ceb35d8f",
                 "shasum": ""
             },
             "require": {
@@ -3051,7 +3051,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-medialibrary/issues",
-                "source": "https://github.com/spatie/laravel-medialibrary/tree/9.5.0"
+                "source": "https://github.com/spatie/laravel-medialibrary/tree/9.5.1"
             },
             "funding": [
                 {
@@ -3063,7 +3063,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-29T21:40:29+00:00"
+            "time": "2021-04-05T08:14:07+00:00"
         },
         {
             "name": "spatie/temporary-directory",
@@ -5713,16 +5713,16 @@
         },
         {
             "name": "barryvdh/laravel-ide-helper",
-            "version": "v2.9.2",
+            "version": "v2.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-                "reference": "c8ebf563a003e41becf9cfe30a7ff69e15e45c23"
+                "reference": "2f61602e7a7f88ad29b0f71355b4bb71396e923b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/c8ebf563a003e41becf9cfe30a7ff69e15e45c23",
-                "reference": "c8ebf563a003e41becf9cfe30a7ff69e15e45c23",
+                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/2f61602e7a7f88ad29b0f71355b4bb71396e923b",
+                "reference": "2f61602e7a7f88ad29b0f71355b4bb71396e923b",
                 "shasum": ""
             },
             "require": {
@@ -5791,7 +5791,7 @@
             ],
             "support": {
                 "issues": "https://github.com/barryvdh/laravel-ide-helper/issues",
-                "source": "https://github.com/barryvdh/laravel-ide-helper/tree/v2.9.2"
+                "source": "https://github.com/barryvdh/laravel-ide-helper/tree/v2.9.3"
             },
             "funding": [
                 {
@@ -5799,7 +5799,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-01T18:56:14+00:00"
+            "time": "2021-04-02T14:32:13+00:00"
         },
         {
             "name": "barryvdh/reflection-docblock",
