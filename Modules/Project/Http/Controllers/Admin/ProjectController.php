@@ -3,19 +3,28 @@
 namespace Modules\Project\Http\Controllers\Admin;
 
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Project\Entities\Project;
+use Modules\Project\Repository\ProjectAdminRepository;
 
 class ProjectController extends Controller
 {
+    private ProjectAdminRepository $rep;
+
+    public function __construct(ProjectAdminRepository $rep)
+    {
+        $this->rep = $rep;
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
     public function index()
     {
-        $projects = Project::with('client')->paginate('30');
+        $projects = Project::with('client')->paginate('5');
 
         return view('project::admin.index',[
             'projects' => $projects

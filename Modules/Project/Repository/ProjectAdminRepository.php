@@ -17,54 +17,41 @@ class ProjectAdminRepository
      */
     public function store(array $data): Project
     {
-        if(!empty($data['active'])){
-            $data['active'] = $data['active'] == 'on' ? '1' : '0';
-        }else{
-            $data['active'] = '0';
-        }
         $data['slug'] = Str::slug($data['title']);
-        $Project = Project::create(Arr::except($data, 'image'));
+        $project = Project::create(Arr::except($data, 'image'));
         if (Arr::get($data, 'image') instanceof UploadedFile) {
-            $Project->addMedia($data['image'])
+            $project->addMedia($data['image'])
                 /*->sanitizingFileName(function($fileName) {
                     return strtolower(Str::slug($fileName));
                 })*/
                 ->toMediaCollection('projects');
         }
-        return $Project;
+        return $project;
     }
 
     /**
      * Update the resource.
-     * @param Project $Project
+     * @param Project $project
      * @param $data
      * @return Project
      * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist
      * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig
      */
-    public function update(Project $Project, $data): Project
+    public function update(Project $project, $data): Project
     {
-        if(!empty($data['active'])){
-            $data['active'] = $data['active'] == 'on' ? '1' : '0';
-        }else{
-            $data['active'] = '0';
-        }
-
-        $this->activeOnOff($Project, $data['active']);
-
         if(!empty($data['title'])){
             $data['slug'] = Str::slug($data['title']);
         }
-        $Project->update(Arr::except($data, 'image'));
+        $project->update(Arr::except($data, 'image'));
         if (Arr::get($data, 'image') instanceof UploadedFile) {
-            $Project->clearMediaCollection('projects');
-            $Project->addMedia($data['image'])
+            $project->clearMediaCollection('projects');
+            $project->addMedia($data['image'])
                 /* ->usingFileName(function($fileName) {
                      return (string)strtolower(Str::slug($fileName));
                  })*/
                 ->toMediaCollection('projects');
         }
-        return $Project;
+        return $project;
     }
 
 }

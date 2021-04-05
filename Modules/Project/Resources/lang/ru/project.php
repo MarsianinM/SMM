@@ -4,6 +4,7 @@ return [
     'name' => 'Проекты',
     'th_id' => 'ID',
     'th_title' => 'Название проекта',
+    'th_client' => 'Клиент',
     'th_description' => 'Описание',
     'th_date_start_and_finish' => 'Старт и финишь проекта',
     'th_rate' => 'Тариф',

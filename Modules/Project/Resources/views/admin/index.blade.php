@@ -18,6 +18,7 @@
                 <tr>
                     <th>@lang('project::project.th_id')</th>
                     <th>@lang('project::project.th_title')</th>
+                    <th>@lang('project::project.th_client')</th>
                     <th>@lang('project::project.th_description')</th>
                     <th>@lang('project::project.th_date_start_and_finish')</th>
                     <th>@lang('project::project.th_rate')</th>
@@ -29,27 +30,13 @@
                     <tr>
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->title }}</td>
+                        <td>{{ $item->client_name }}</td>
                         <td>
                             {!! $item->small_description !!}
                         </td>
                         <td>{!! $item->date_start_and_finish  !!}</td>
                         <td>Tarif</td>
                         <td>
-                            <div>
-                                <label class="c-switch c-switch-label c-switch-opposite-primary"
-                                       data-toggle="tooltip" data-html="true"
-                                       data-original-title="@lang('project::project.action_off_on', ['Id' => $item->id])">
-                                    <input class="c-switch-input" type="checkbox" {{ ($item->active == 1 ? 'checked' : '')  }}>
-                                    <span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                </label>
-
-                                <form id="form_show-id_{{ $item->id }}" action="{{ route('admin.page.hidden', ['page' => $item->id]) }}" method="POST">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" value="{{$item->active}}" name="active" />
-                                    <input type="submit" id="sendButton" style="display: none;" />
-                                </form>
-                            </div>
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <a href="{{ route('admin.page.edit', $item->id) }}" class="btn btn-secondary btn-success"
                                    data-toggle="tooltip" data-html="true"
@@ -76,6 +63,10 @@
                 @endforelse
                 </tbody>
             </table>
+
+            <div class="pagination-wrapper mb-5">
+                {{ $projects->links('mainpage::admin.pagination.theme_admin') }}
+            </div>
         </div>
     </div>
 @endsection

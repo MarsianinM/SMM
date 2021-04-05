@@ -31,9 +31,9 @@ class Project extends Model implements HasMedia
     /**
      * Get the projects for the user.
      */
-    public function client(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function client(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasMany(User::class, 'id','client_id');
+        return $this->belongsTo(User::class, 'client_id','id');
         //return $this->hasMany(Project::class, $this->activeRoleIs('client') ? 'client_id' : 'author_id');
     }
 
@@ -49,12 +49,19 @@ class Project extends Model implements HasMedia
     {
         return trans('project::project.admin_ot').' '.Carbon::parse($this->date_start)->format('d-m-Y h:i').' <br> '.trans('project::project.admin_do').' '.Carbon::parse($this->date_finish)->format('d-m-Y h:i');
     }
+
     public function getSmallDescriptionAttribute()
     {
         $description = mb_substr($this->description, 0, 200);
         if(strlen($this->description) > 200) $description .= ' ...';
 
         return $description;
+    }
+
+    public function getClientNameAttribute()
+    {
+
+        return $this->client->name;
     }
 
     public function registerMediaConversions(Media $media = null): void
