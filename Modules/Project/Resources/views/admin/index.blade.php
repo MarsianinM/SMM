@@ -4,10 +4,10 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-6"><h2><i class="fa fa-align-justify cil-library"></i> @lang('pages::pages.name')</h2></div>
+                <div class="col-6"><h2><i class="fa fa-align-justify cil-library"></i> @lang('project::project.name')</h2></div>
                 <div class="col-6 text-right">
                     <a href="{{ route('admin.page.create') }}" class="btn btn-primary">
-                        <i class="fa fa-align-justify cil-library-add"></i> @lang('pages::pages.add_user')
+                        <i class="fa fa-align-justify cil-library-add"></i> @lang('project::project.add_user')
                     </a>
                 </div>
             </div>
@@ -16,55 +16,53 @@
             <table class="table table-responsive-sm table-striped">
                 <thead>
                 <tr>
-                    <th>@lang('pages::pages.th_id')</th>
-                    <th>@lang('pages::pages.th_title')</th>
-                    <th>@lang('pages::pages.th_image')</th>
-                    <th>@lang('pages::pages.th_quote')</th>
-                    <th>@lang('pages::pages.th_parent')</th>
-                    <th>@lang('pages::pages.th_action')</th>
+                    <th>@lang('project::project.th_id')</th>
+                    <th>@lang('project::project.th_title')</th>
+                    <th>@lang('project::project.th_description')</th>
+                    <th>@lang('project::project.th_date_start_and_finish')</th>
+                    <th>@lang('project::project.th_rate')</th>
+                    <th>@lang('project::project.th_action')</th>
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($pages as $page)
+                @forelse($projects as $item)
                     <tr>
-                        <td>{{ $page->id }}</td>
-                        <td>{{ $page->title }}</td>
+                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->title }}</td>
                         <td>
-                            <div class="py-2">
-                                <img src="{{ $page->getFirstMediaUrl('pages', 'thumb') }}" alt="{{ $page->alt_img }}" title="{{ $page->title_img }}">
-                            </div>
+                            {!! $item->small_description !!}
                         </td>
-                        <td>{{ $page->quote }}</td>
-                        <td>{{ $page->parent_id }}</td>
+                        <td>{!! $item->date_start_and_finish  !!}</td>
+                        <td>Tarif</td>
                         <td>
                             <div>
                                 <label class="c-switch c-switch-label c-switch-opposite-primary"
                                        data-toggle="tooltip" data-html="true"
-                                       data-original-title="@lang('pages::pages.action_off_on', ['Id' => $page->id])">
-                                    <input class="c-switch-input" type="checkbox" {{ ($page->active == 1 ? 'checked' : '')  }}>
+                                       data-original-title="@lang('project::project.action_off_on', ['Id' => $item->id])">
+                                    <input class="c-switch-input" type="checkbox" {{ ($item->active == 1 ? 'checked' : '')  }}>
                                     <span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                 </label>
 
-                                <form id="form_show-id_{{ $page->id }}" action="{{ route('admin.page.hidden', ['page' => $page->id]) }}" method="POST">
+                                <form id="form_show-id_{{ $item->id }}" action="{{ route('admin.page.hidden', ['page' => $item->id]) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
-                                    <input type="hidden" value="{{$page->active}}" name="active" />
+                                    <input type="hidden" value="{{$item->active}}" name="active" />
                                     <input type="submit" id="sendButton" style="display: none;" />
                                 </form>
                             </div>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{ route('admin.page.edit', $page->id) }}" class="btn btn-secondary btn-success"
+                                <a href="{{ route('admin.page.edit', $item->id) }}" class="btn btn-secondary btn-success"
                                    data-toggle="tooltip" data-html="true"
-                                   data-original-title="@lang('pages::pages.action_edit', ['Id' => $page->id])">
+                                   data-original-title="@lang('project::project.action_edit', ['Id' => $item->id])">
                                     <i class="c-icon c-icon-1xl cil-pen"></i>
                                 </a>
-                                <button form="form-id_{{ $page->id }}" class="btn btn-secondary btn-danger"
+                                <button form="form-id_{{ $item->id }}" class="btn btn-secondary btn-danger"
                                         type="submit"
                                         data-toggle="tooltip" data-html="true"
-                                        data-original-title="@lang('pages::pages.action_delete', ['Id' => $page->id])">
+                                        data-original-title="@lang('project::project.action_delete', ['Id' => $item->id])">
                                     <i class="c-icon c-icon-1xl cil-delete"></i>
                                 </button>
-                                <form id="form-id_{{ $page->id }}" action="{{ route('admin.page.destroy', ['page' => $page->id]) }}" method="POST">
+                                <form id="form-id_{{ $item->id }}" action="{{ route('admin.page.destroy', ['page' => $item->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                 </form>

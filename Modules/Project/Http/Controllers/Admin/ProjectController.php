@@ -5,6 +5,7 @@ namespace Modules\Project\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Project\Entities\Project;
 
 class ProjectController extends Controller
 {
@@ -14,7 +15,11 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('project::index');
+        $projects = Project::with('client')->paginate('30');
+
+        return view('project::admin.index',[
+            'projects' => $projects
+        ]);
     }
 
     /**
