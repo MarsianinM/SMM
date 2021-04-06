@@ -29,6 +29,11 @@ class News extends Model implements HasMedia
         return $this->hasMany(NewDescription::class, 'new_id', 'id');
     }
 
+    public function getContentAttribute()
+    {
+        return collect($this->newsDescription)->keyBy('lang_key');
+    }
+
     /*protected static function newFactory()
     {
         return \Modules\News\Database\factories\NewFactory::new();

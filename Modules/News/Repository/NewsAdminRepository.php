@@ -7,6 +7,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Modules\News\Entities\NewDescription;
 use Modules\News\Entities\News;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class NewsAdminRepository
 {
@@ -14,6 +16,7 @@ class NewsAdminRepository
     /**
      * Store the resource.
      * @param array $data
+     * @return mixed
      */
     public function store(array $data)
     {
@@ -39,20 +42,13 @@ class NewsAdminRepository
      * @param News $news
      * @param $data
      * @return News
-     * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist
-     * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
     public function update(News $news, $data): News
     {
-        if(!empty($data['active'])){
-            $data['active'] = $data['active'] == 'on' ? '1' : '0';
-        }else{
-            $data['active'] = '0';
-        }
+        $data['slug'] = Str::slug($data['slug']);
 
-        if(!empty($data['title'])){
-            $data['slug'] = Str::slug($data['title']);
-        }
         $news->update(Arr::except($data, 'image'));
         if (Arr::get($data, 'image') instanceof UploadedFile) {
             $news->clearMediaCollection('news');
@@ -62,6 +58,11 @@ class NewsAdminRepository
                  })*/
                 ->toMediaCollection('news');
         }
+
+        foreach ($data['newsDescription'] as $item){
+            $news->newsDescription()->update($item);
+        }
+
         return $news;
     }
 }

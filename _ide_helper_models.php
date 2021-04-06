@@ -120,6 +120,26 @@ namespace App\Models{
  * @method static Builder|News whereId($value)
  * @method static Builder|News whereUpdatedAt($value)
  * @mixin IdeHelperNews
+ * @property string $title
+ * @property string $slug
+ * @property string|null $quote
+ * @property string $content
+ * @property string $active
+ * @property string|null $alt_img
+ * @property string|null $title_img
+ * @property string|null $seo_title
+ * @property string|null $seo_description
+ * @property string|null $seo_keywords
+ * @method static Builder|News whereActive($value)
+ * @method static Builder|News whereAltImg($value)
+ * @method static Builder|News whereContent($value)
+ * @method static Builder|News whereQuote($value)
+ * @method static Builder|News whereSeoDescription($value)
+ * @method static Builder|News whereSeoKeywords($value)
+ * @method static Builder|News whereSeoTitle($value)
+ * @method static Builder|News whereSlug($value)
+ * @method static Builder|News whereTitle($value)
+ * @method static Builder|News whereTitleImg($value)
  */
 	class IdeHelperNews extends \Eloquent {}
 }
@@ -149,18 +169,44 @@ namespace App\Models{
  *
  * @mixin IdeHelperProject
  * @property int $id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $title
+ * @property string|null $link
+ * @property int $moderation_comments
+ * @property int $small_comments
+ * @property int $screenshot
+ * @property int $user_pro
+ * @property string $description
+ * @property string|null $date_start
+ * @property string|null $date_finish
+ * @property string|null $page_link
+ * @property string $status
+ * @property int $archive
+ * @property int $pro
  * @property int $client_id
  * @property int|null $author_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereArchive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereAuthorId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereClientId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereDateFinish($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereDateStart($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereModerationComments($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project wherePageLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project wherePro($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereScreenshot($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereSmallComments($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereUserPro($value)
  */
 	class IdeHelperProject extends \Eloquent {}
 }

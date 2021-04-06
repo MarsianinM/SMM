@@ -43,7 +43,7 @@
                                     <span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
                                 </label>
 
-                                <form id="form_show-id_{{ $item->id }}" action="{{ route('admin.page.hidden', ['page' => $item->id]) }}" method="POST">
+                                <form id="form_show-id_{{ $item->id }}" action="{{ route('admin.news.hidden', ['news' => $item->id]) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <input type="hidden" value="{{$item->active}}" name="active" />
@@ -51,7 +51,7 @@
                                 </form>
                             </div>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                               <a href="{{ route('admin.page.edit', $item->id) }}" class="btn btn-secondary btn-success"
+                               <a href="{{ route('admin.news.edit', $item->id) }}" class="btn btn-secondary btn-success"
                                        data-toggle="tooltip" data-html="true"
                                        data-original-title="@lang('news::news.action_edit', ['Id' => $item->id])">
                                    <i class="c-icon c-icon-1xl cil-pen"></i>
@@ -62,7 +62,7 @@
                                         data-original-title="@lang('news::news.action_delete', ['Id' => $item->id])">
                                     <i class="c-icon c-icon-1xl cil-delete"></i>
                                 </button>
-                                <form id="form-id_{{ $item->id }}" action="{{ route('admin.page.destroy', ['page' => $item->id]) }}" method="POST">
+                                <form id="form-id_{{ $item->id }}" action="{{ route('admin.news.destroy', ['news' => $item->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                 </form>

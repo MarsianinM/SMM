@@ -13,6 +13,7 @@ class CreateNewsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('news');
         Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->string('slug');

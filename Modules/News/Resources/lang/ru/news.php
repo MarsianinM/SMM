@@ -15,6 +15,8 @@ return [
     'active_off' => 'Отключить новость',
     'active_on' => 'Активировать новость',
     'add_user' => 'Создать новость',
+    'delete' => 'Новость :ID удалена',
+    'delete_error' => 'Произошла ошибка при удалении',
 
     //TITLE
     'title_edit' => 'Редактирование новость - <b>№ :Id</b>',
@@ -29,6 +31,7 @@ return [
     'enter_title_image' => 'Добавить описание к картинке (title)',
     'enter_quote' => 'Краткое описание',
     'enter_content' => 'Полное описание',
+    'enter_slug' => 'ЧПУ новости',
     'enter_seo_title' => 'SEO Заголовок',
     'enter_seo_description' => 'SEO Описание',
     'enter_seo_keywords' => 'SEO Ключевые слова',
