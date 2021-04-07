@@ -20,7 +20,10 @@
                     <ul class="nav nav-tabs" role="tablist">
                         @foreach($array_localization as $localeCode => $properties)
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#{{$localeCode}}" role="tab" aria-controls="home" aria-selected="true">{{ $properties['native'] }}</a>
+                                <a class="nav-link
+                                @if($localeCode == config('app.locale'))
+                                     active
+                                @endif" data-toggle="tab" href="#{{$localeCode}}" role="tab" aria-controls="home" aria-selected="true">{{ $properties['native'] }}</a>
                             </li>
                         @endforeach
                     </ul>
