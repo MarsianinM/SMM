@@ -6,7 +6,9 @@ return [
     'th_image' => 'Изображение',
     'th_quote' => 'Урывок',
     'th_parent' => 'Родитель',
+    'th_create_date' => 'Дата создания',
     'th_action' => 'Управление',
+
     //ACTION
     'action_edit' => 'Редактирование новость № :Id',
     'action_delete' => 'Удалить новость № :Id',

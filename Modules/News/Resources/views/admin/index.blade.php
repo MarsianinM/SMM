@@ -20,6 +20,7 @@
                     <th>@lang('news::news.th_title')</th>
                     <th>@lang('news::news.th_image')</th>
                     <th>@lang('news::news.th_quote')</th>
+                    <th>@lang('news::news.th_create_date')</th>
                     <th>@lang('news::news.th_action')</th>
                 </tr>
                 </thead>
@@ -27,29 +28,15 @@
                 @forelse($news as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
-                        <td>{{ $item->title }}</td>
+                        <td class="title">{{ $item->content_current_lang->title }}</td>
                         <td>
                             <div class="py-2">
                                 <img src="{{ $item->getFirstMediaUrl('news', 'thumb') }}" alt="{{ $item->alt_img }}" title="{{ $item->title_img }}">
                             </div>
                         </td>
-                        <td>{{ $item->quote }}</td>
+                        <td class="quote">{{ $item->content_current_lang->quote }}</td>
+                        <td>{{ $item->created_date }}</td>
                         <td>
-                            <div>
-                                <label class="c-switch c-switch-label c-switch-opposite-primary"
-                                       data-toggle="tooltip" data-html="true"
-                                       data-original-title="@lang('news::news.action_off_on', ['Id' => $item->id])">
-                                    <input class="c-switch-input" type="checkbox" {{ ($item->active == 1 ? 'checked' : '')  }}>
-                                    <span class="c-switch-slider" data-checked="On" data-unchecked="Off"></span>
-                                </label>
-
-                                <form id="form_show-id_{{ $item->id }}" action="{{ route('admin.news.hidden', ['news' => $item->id]) }}" method="POST">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" value="{{$item->active}}" name="active" />
-                                    <input type="submit" id="sendButton" style="display: none;" />
-                                </form>
-                            </div>
                             <div class="btn-group" role="group" aria-label="Basic example">
                                <a href="{{ route('admin.news.edit', $item->id) }}" class="btn btn-secondary btn-success"
                                        data-toggle="tooltip" data-html="true"

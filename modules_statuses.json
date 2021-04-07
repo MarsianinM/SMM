@@ -9,5 +9,6 @@
     "User": true,
     "Auth": true,
     "News": true,
-    "Project": true
+    "Project": true,
+    "Rates": true
 }

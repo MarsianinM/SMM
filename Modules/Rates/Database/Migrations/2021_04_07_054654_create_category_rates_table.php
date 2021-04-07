@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNewsTable extends Migration
+class CreateCategoryRatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,32 +13,28 @@ class CreateNewsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('news');
-        Schema::create('news', function (Blueprint $table) {
+        Schema::dropIfExists('category_rates');
+        Schema::create('category_rates', function (Blueprint $table) {
             $table->id();
             $table->string('slug');
             $table->integer('sort_order')->default(0);
             $table->enum('active', [0,1])->default(1);
             $table->timestamps();
         });
-        Schema::create('new_description', function (Blueprint $table) {
+        Schema::create('category_rate_description', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('new_id')
-                ->constrained('news')
+            $table->foreignId('category_id')
+                ->constrained('category_rates')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->text('lang_key');
             $table->text('title');
-            $table->text('quote')->nullable();
             $table->longText('content');
-            $table->string('alt_img')->nullable();
-            $table->string('title_img')->nullable();
             $table->string('seo_title')->nullable();
             $table->text('seo_description')->nullable();
             $table->text('seo_keywords')->nullable();
             $table->timestamps();
         });
-
     }
 
     /**
@@ -48,7 +44,6 @@ class CreateNewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news');
-        Schema::dropIfExists('new_description');
+        Schema::dropIfExists('category_rates');
     }
 }

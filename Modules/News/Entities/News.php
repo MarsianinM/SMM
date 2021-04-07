@@ -2,6 +2,7 @@
 
 namespace Modules\News\Entities;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -21,6 +22,7 @@ class News extends Model implements HasMedia
         'id', 'slug', 'sort_order', 'active'
     ];
 
+
     /**
      * @return HasMany
      */
@@ -29,9 +31,19 @@ class News extends Model implements HasMedia
         return $this->hasMany(NewDescription::class, 'new_id', 'id');
     }
 
-    public function getContentAttribute()
+    public function getContentAttribute(): \Illuminate\Support\Collection
     {
         return collect($this->newsDescription)->keyBy('lang_key');
+    }
+
+    public function getContentCurrentLangAttribute()
+    {
+        $content = collect($this->newsDescription)->keyBy('lang_key');
+        return $content[config('app.locale')];
+    }
+    public function getCreatedDateAttribute(): string
+    {
+        return Carbon::parse($this->created_at)->format('d.m.Y H:i');
     }
 
     /*protected static function newFactory()
