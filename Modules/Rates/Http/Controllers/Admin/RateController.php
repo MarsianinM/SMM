@@ -14,7 +14,7 @@ class RateController extends Controller
      */
     public function index()
     {
-        return view('rates::index');
+        return view('rates::admin.index');
     }
 
     /**
