@@ -2,6 +2,7 @@
 
 namespace Modules\Rates\Entities;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -19,7 +20,9 @@ class CategoryRate extends Model
     /**
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [
+        '',
+    ];
 
     /*protected static function newFactory()
     {
@@ -32,6 +35,16 @@ class CategoryRate extends Model
     public function categoryDescription(): HasMany
     {
         return $this->hasMany(CategoryRateDecriptions::class, 'category_id', 'id');
+    }
+
+    public function getContentAttribute(): \Illuminate\Support\Collection
+    {
+        return collect($this->categoryDescription)->keyBy('lang_key');
+    }
+    public function getContentCurrentLangAttribute()
+    {
+        $content = collect($this->categoryDescription)->keyBy('lang_key');
+        return $content[config('app.locale')];
     }
 
 }

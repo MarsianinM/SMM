@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-6"><h2><i class="fa fa-align-justify cil-library"></i> @lang('rates::category.name')</h2></div>
                 <div class="col-6 text-right">
-                    <a href="{{ route('admin.news.create') }}" class="btn btn-primary">
+                    <a href="{{ route('admin.category.create') }}" class="btn btn-primary">
                         <i class="fa fa-align-justify cil-library-add"></i> @lang('rates::category.title_add')
                     </a>
                 </div>
@@ -23,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($category as $item)
+                @forelse($categories as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
                         <td class="title">{{ $item->content_current_lang->title }}</td>

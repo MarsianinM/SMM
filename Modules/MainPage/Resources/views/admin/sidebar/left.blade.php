@@ -26,13 +26,13 @@
                           d="M297.222,335.1l69.2-144.173-28.85-13.848L268.389,321.214A64.141,64.141,0,1,0,297.222,335.1ZM256,416a32,32,0,1,1,32-32A32.036,32.036,0,0,1,256,416Z"
                           class="ci-primary"></path>
                 </svg>
-                Главная
+                @lang('mainpage::sidebar.main')
             </a>
         </li>
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="{{ route('admin.page.index') }}">
                 <i class="c-icon c-sidebar-nav-icon c-icon-1xl cil-library"></i>
-                Страници
+                @lang('mainpage::sidebar.pages')
             </a>
         </li>
 
@@ -53,6 +53,32 @@
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link" href="{{ route('admin.project.index') }}">
                         <span class="c-sidebar-nav-icon"></span> @lang('mainpage::sidebar.project_list')</a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+            <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="{{ asset('img/icons/free.svg#cil-puzzle') }}"></use>
+                </svg> @lang('mainpage::sidebar.rates')
+            </a>
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" href="{{ route('admin.category.index') }}">
+                        <span class="c-sidebar-nav-icon"></span> @lang('mainpage::sidebar.rates_category_list')</a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" href="{{ route('admin.category.create') }}">
+                        <span class="c-sidebar-nav-icon"></span> @lang('mainpage::sidebar.rates_category_add')</a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" href="{{ route('admin.rates.index') }}">
+                        <span class="c-sidebar-nav-icon"></span> @lang('mainpage::sidebar.rates_list')</a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" href="{{ route('admin.rates.create') }}">
+                        <span class="c-sidebar-nav-icon"></span> @lang('mainpage::sidebar.rates_add')</a>
                 </li>
             </ul>
         </li>

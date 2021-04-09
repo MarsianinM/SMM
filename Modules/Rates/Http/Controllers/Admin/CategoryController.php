@@ -5,6 +5,7 @@ namespace Modules\Rates\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Rates\Entities\CategoryRate;
 
 class CategoryController extends Controller
 {
@@ -12,18 +13,19 @@ class CategoryController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index(): Renderable
     {
-        return view('rates::index');
+        $categories = CategoryRate::with('categoryDescription')->paginate(10);
+        return view('rates::admin.category.index',compact('categories'));
     }
 
     /**
      * Show the form for creating a new resource.
      * @return Renderable
      */
-    public function create()
+    public function create(): Renderable
     {
-        return view('rates::create');
+        return view('rates::admin.category.create');
     }
 
     /**
@@ -31,29 +33,29 @@ class CategoryController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request)
+    public function store(Request $request): Renderable
     {
         //
     }
 
     /**
      * Show the specified resource.
-     * @param int $id
+     * @param CategoryRate $categoryRate
      * @return Renderable
      */
-    public function show($id)
+    public function show(CategoryRate $categoryRate): Renderable
     {
-        return view('rates::show');
+        return view('rates::admin.category.show', compact('categoryRate'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     * @param int $id
+     * @param CategoryRate $categoryRate
      * @return Renderable
      */
-    public function edit($id)
+    public function edit(CategoryRate $categoryRate)
     {
-        return view('rates::edit');
+        return view('rates::admin.category.edit', compact('categoryRate'));
     }
 
     /**
