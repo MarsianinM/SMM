@@ -32,14 +32,16 @@ class CategoryRate extends Model
         return $this->hasMany(CategoryRateDecriptions::class, 'category_id', 'id');
     }
 
-    public function getContentAttribute(): \Illuminate\Support\Collection
-    {
-        return collect($this->categoryDescription)->keyBy('lang_key');
-    }
-
     public function children()
     {
         return $this->hasMany(self::class, 'parent_id', 'id');
+    }
+    /**
+     * @return HasMany
+     */
+    public function rates(): HasMany
+    {
+        return $this->hasMany(Rate::class, 'category_id', 'id');
     }
     public function getCreatedDateAttribute(): string
     {
@@ -49,6 +51,11 @@ class CategoryRate extends Model
     {
         $content = collect($this->categoryDescription)->keyBy('lang_key');
         return $content[config('app.locale')];
+    }
+
+    public function getContentAttribute(): \Illuminate\Support\Collection
+    {
+        return collect($this->categoryDescription)->keyBy('lang_key');
     }
 
 }
