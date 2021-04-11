@@ -60,7 +60,14 @@ class NewsAdminRepository
         }
 
         foreach ($data['newsDescription'] as $item){
-            $news->newsDescription()->update($item);
+            /*$news->newsDescription()->update($item);*/
+            $news_description = NewDescription::where('lang_key',$item['lang_key'])->where('new_id', $news->id)->first();
+             if(!$news_description){
+                 $item['new_id'] = $news->id;
+                 app(NewDescription::class)->create($item)->save();
+             }else{
+                 $news_description->update($item);
+             }
         }
 
         return $news;

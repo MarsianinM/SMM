@@ -12,8 +12,10 @@ class CategoryRateDecriptions extends Model
 
     protected $table = 'category_rate_description';
 
-    protected $fillable = [];
-
+    protected $fillable = [
+        'id', 'category_id', 'lang_key', 'title', 'content',
+        'seo_title', 'seo_description', 'seo_keywords'
+    ];
 
     /**
      * @return BelongsTo

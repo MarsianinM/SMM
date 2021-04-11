@@ -21,13 +21,8 @@ class CategoryRate extends Model
      * @var array
      */
     protected $fillable = [
-        '',
+        'id', 'slug', 'sort_order', 'active', 'parent_id',
     ];
-
-    /*protected static function newFactory()
-    {
-        return \Modules\Rates\Database\factories\CategoryRateFactory::new();
-    }*/
 
     /**
      * @return HasMany
@@ -40,6 +35,15 @@ class CategoryRate extends Model
     public function getContentAttribute(): \Illuminate\Support\Collection
     {
         return collect($this->categoryDescription)->keyBy('lang_key');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent_id', 'id');
+    }
+    public function getCreatedDateAttribute(): string
+    {
+        return Carbon::parse($this->created_at)->format('d.m.Y H:i');
     }
     public function getContentCurrentLangAttribute()
     {

@@ -96,7 +96,8 @@ class NewsController extends Controller
      * @throws Exception
      */
     public function destroy(News $news): RedirectResponse
-    {   $id = $news->id;
+    {
+        $id = $news->id;
         try {
             $news->delete();
         } catch (Exception $e) {

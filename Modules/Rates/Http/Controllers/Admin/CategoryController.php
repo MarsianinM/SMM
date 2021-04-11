@@ -3,12 +3,27 @@
 namespace Modules\Rates\Http\Controllers\Admin;
 
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Rates\Entities\CategoryRate;
+use Modules\Rates\Http\Requests\CategoryCreateRequest;
+use Modules\Rates\Http\Requests\CategoryEditRequest;
+use Modules\Rates\Repository\CategoryRepository;
 
 class CategoryController extends Controller
 {
+
+    private CategoryRepository $rep;
+
+    /**
+     * CategoryController constructor.
+     * @param CategoryRepository $rep
+     */
+    public function __construct(CategoryRepository $rep)
+    {
+        $this->rep = $rep;
+    }
     /**
      * Display a listing of the resource.
      * @return Renderable
@@ -25,17 +40,20 @@ class CategoryController extends Controller
      */
     public function create(): Renderable
     {
-        return view('rates::admin.category.create');
+        $categories     = $this->rep->getCategoriesAll();
+        $delimetr       = '';
+        return view('rates::admin.category.create', compact('categories','delimetr'));
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
+     * @param CategoryCreateRequest $request
+     * @return RedirectResponse
      */
-    public function store(Request $request): Renderable
+    public function store(CategoryCreateRequest $request): RedirectResponse
     {
-        //
+        $categoryRate = $this->rep->store($request->all());
+        return redirect()->route('admin.category.edit',$categoryRate->id);
     }
 
     /**
@@ -53,29 +71,41 @@ class CategoryController extends Controller
      * @param CategoryRate $categoryRate
      * @return Renderable
      */
-    public function edit(CategoryRate $categoryRate)
+    public function edit($category): Renderable
     {
-        return view('rates::admin.category.edit', compact('categoryRate'));
+        $categoryRate   = CategoryRate::with('categoryDescription')->findOrFail($category);
+        $categories     = $this->rep->getCategoriesAll($category);
+        $delimetr       = '';
+        return view('rates::admin.category.edit', compact('categoryRate','categories','delimetr'));
     }
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
+     * @param CategoryEditRequest $request
+     * @param $category
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(CategoryEditRequest $request, $category): RedirectResponse
     {
-        //
+        $this->rep->update(CategoryRate::with('categoryDescription')->findOrFail($category), $request->all());
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     * @param $category
      * @return Renderable
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy($category)
     {
-        //
+        $categoryRate = CategoryRate::with('categoryDescription')->findOrFail($category);
+        $id = $categoryRate->id;
+        try {
+            $categoryRate->delete();
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(trans('news::news.delete_error'));
+        }
+        return redirect()->back()->with(['success' => trans('news::news.delete', ['ID' => $id])]);
     }
 }

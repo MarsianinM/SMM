@@ -30,4 +30,12 @@ return [
     'enter_seo_description' => 'SEO Описание',
     'enter_seo_keywords'    => 'SEO Ключевые слова',
     'enter_sort_order'      => 'Сортировка',
+    'enter_tree_select'     => 'Выберите родительскую категорию',
+
+    //submit
+    'submit_add' => 'Создать',
+    'submit_edit' => 'Сохранить',
+
+    //error
+    'list_error' => 'Данные отсутствуют.',
 ];

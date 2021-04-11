@@ -29,7 +29,10 @@
                     </ul>
                     <div class="tab-content">
                         @foreach($array_localization as $localeCode => $properties)
-                            <div class="tab-pane active" id="{{$localeCode}}" role="tabpanel">
+                            <div class="tab-pane
+                                @if($localeCode == config('app.locale'))
+                                active
+                                @endif" id="{{$localeCode}}" id="{{$localeCode}}" role="tabpanel">
                                 <input type="hidden" value="{{$localeCode}}" name="newsDescription[{{$localeCode}}][lang_key]">
                                 <div class="card">
                                     <div class="card-body">
