@@ -3,18 +3,36 @@
 namespace Modules\Rates\Http\Controllers\Admin;
 
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Rates\Entities\CategoryRate;
+use Modules\Rates\Entities\Rate;
+use Modules\Rates\Http\Requests\CreateRateRequest;
+use Modules\Rates\Repository\CategoryRepository;
+use Modules\Rates\Repository\RateRepository;
 
 class RateController extends Controller
 {
+    private RateRepository $rep;
+
+    /**
+     * CategoryController constructor.
+     * @param RateRepository $rep
+     */
+    public function __construct(RateRepository $rep)
+    {
+        $this->rep = $rep;
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
     public function index()
     {
-        return view('rates::admin.index');
+        $rates = Rate::with(['rateDescription','categoryRate'])->paginate(10);
+        return view('rates::admin.rate.index',compact('rates'));
     }
 
     /**
@@ -23,37 +41,42 @@ class RateController extends Controller
      */
     public function create()
     {
-        return view('rates::create');
+        $categories     = (new CategoryRepository())->getCategoriesAll();
+        $delimetr       = '';
+        return view('rates::admin.rate.create', compact('categories','delimetr'));
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
+     * @param CreateRateRequest $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreateRateRequest $request): RedirectResponse
     {
-        //
+        $rate = $this->rep->store($request->all());
+        return redirect()->route('admin.rate.edit',$rate->id);
     }
 
     /**
      * Show the specified resource.
-     * @param int $id
+     * @param Rate $rate
      * @return Renderable
      */
-    public function show($id)
+    public function show(Rate $rate)
     {
-        return view('rates::show');
+        return view('rates::admin.rate.show');
     }
 
     /**
      * Show the form for editing the specified resource.
-     * @param int $id
+     * @param Rate $rate
      * @return Renderable
      */
-    public function edit($id)
+    public function edit(Rate $rate)
     {
-        return view('rates::edit');
+        $categories     = (new CategoryRepository())->getCategoriesAll();
+        $delimetr       = '';
+        return view('rates::admin.rate.edit', compact('rate','categories','delimetr'));
     }
 
     /**

@@ -12,7 +12,9 @@ class Rate extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'price_min', 'price_max', 'sort_order', 'active', 'category_id',
+    ];
 
     /*protected static function newFactory()
     {
@@ -21,7 +23,7 @@ class Rate extends Model
 
     public function categoryRate(): BelongsTo
     {
-        return $this->belongsTo(CategoryRate::class, 'category_id', 'id');
+        return $this->belongsTo(CategoryRate::class, 'category_id', 'id')->with('categoryDescription');
     }
 
     /**
@@ -36,7 +38,7 @@ class Rate extends Model
     {
         return Carbon::parse($this->created_at)->format('d.m.Y H:i');
     }
-    public function getContentCurrentLangAttribute()
+    public function getContentCurrentLangRateAttribute()
     {
         $content = collect($this->rateDescription)->keyBy('lang_key');
         return $content[config('app.locale')];
@@ -45,6 +47,21 @@ class Rate extends Model
     public function getContentAttribute(): \Illuminate\Support\Collection
     {
         return collect($this->rateDescription)->keyBy('lang_key');
+    }
+
+    public function getCategoryTitleAttribute()
+    {
+        $category = collect($this->categoryRate->categoryDescription)->keyBy('lang_key');
+        return $category[config('app.locale')]->title;
+    }
+    public function getMinMaxPriceAdminAttribute()
+    {
+        $price = '';
+        if($this->price_min){
+            $price =  $this->price_min.' - ';
+        }
+        $price .=  $this->price_max ?? '0';
+        return $price;
     }
 
 }

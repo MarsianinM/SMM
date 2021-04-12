@@ -11,7 +11,11 @@ class RateDescription extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $table = 'rate_description';
+
+    protected $fillable = [
+        'rate_id', 'lang_key', 'title', 'description', 'help_text',
+    ];
 
    /* protected static function newFactory()
     {

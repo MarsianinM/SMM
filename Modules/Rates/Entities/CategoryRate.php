@@ -50,7 +50,8 @@ class CategoryRate extends Model
     public function getContentCurrentLangAttribute()
     {
         $content = collect($this->categoryDescription)->keyBy('lang_key');
-        return $content[config('app.locale')];
+
+        return $content[config('app.locale')] ?? '';
     }
 
     public function getContentAttribute(): \Illuminate\Support\Collection
