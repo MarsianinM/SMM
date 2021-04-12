@@ -14,8 +14,8 @@ class ChangeRatesTable extends Migration
     public function up()
     {
         Schema::table('rates', function (Blueprint $table) {
-            $table->integer('price_min')->nullable()->change();
-            $table->integer('price_max')->nullable()->change();
+            $table->decimal('price_min',8,2)->nullable()->change();
+            $table->decimal('price_max',8,2)->nullable()->change();
         });
     }
 
@@ -26,6 +26,9 @@ class ChangeRatesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('rates', function (Blueprint $table) {
+            $table->integer('price_min')->change();
+            $table->integer('price_max')->change();
+        });
     }
 }

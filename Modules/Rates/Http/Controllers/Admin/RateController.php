@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Modules\Rates\Entities\CategoryRate;
 use Modules\Rates\Entities\Rate;
 use Modules\Rates\Http\Requests\CreateRateRequest;
+use Modules\Rates\Http\Requests\EditRateRequest;
 use Modules\Rates\Repository\CategoryRepository;
 use Modules\Rates\Repository\RateRepository;
 
@@ -81,13 +82,14 @@ class RateController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
+     * @param EditRateRequest $request
+     * @param Rate $rate
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(EditRateRequest $request, Rate $rate)
     {
-        //
+        $this->rep->update($rate, $request->all());
+        return redirect()->back();
     }
 
     /**

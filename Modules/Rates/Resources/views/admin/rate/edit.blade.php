@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <form id="quickForm" action="{{ route('admin.rates.update', ['rates' => $rate->id]) }}" method="POST" enctype="multipart/form-data" class="row">
+        <form id="quickForm" action="{{ route('admin.rates.update', ['rate' => $rate->id]) }}" method="POST" enctype="multipart/form-data" class="row">
             @csrf
             @method('PUT')
             <div class="col-md-8 mb-4">
@@ -100,8 +100,6 @@
                                         <option value="0">@lang('rates::category.enter_tree_select')</option>
                                         @include('rates::admin.select.category_tree',['categories' => $categories, 'delimetr' => $delimetr])
                                     </select>
-                                    @dd($rate->categoryRate)
-                                    {{ $rate->categoryRate }}
                                 </div>
                             @endif
                             <div class="col-lg-12">

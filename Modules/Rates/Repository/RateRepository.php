@@ -36,7 +36,7 @@ class RateRepository
         foreach ($data['rateDescription'] as $item){
             $rateDescription = RateDescription::where('lang_key',$item['lang_key'])->where('rate_id', $rate->id)->first();
             if(!$rateDescription){
-                $item['category_id'] = $rate->id;
+                $item['rate_id'] = $rate->id;
                 app(RateDescription::class)->create($item)->save();
             }else{
                 $rateDescription->update($item);

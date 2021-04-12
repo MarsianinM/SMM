@@ -60,7 +60,11 @@ class Rate extends Model
         if($this->price_min){
             $price =  $this->price_min.' - ';
         }
-        $price .=  $this->price_max ?? '0';
+        if($this->price_max > (float)$this->price_min){
+            $price .=  $this->price_max;
+        }else{
+            $price .=  $this->price_min ?? '0';
+        }
         return $price;
     }
 
