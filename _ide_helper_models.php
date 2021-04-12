@@ -120,26 +120,12 @@ namespace App\Models{
  * @method static Builder|News whereId($value)
  * @method static Builder|News whereUpdatedAt($value)
  * @mixin IdeHelperNews
- * @property string $title
  * @property string $slug
- * @property string|null $quote
- * @property string $content
+ * @property int $sort_order
  * @property string $active
- * @property string|null $alt_img
- * @property string|null $title_img
- * @property string|null $seo_title
- * @property string|null $seo_description
- * @property string|null $seo_keywords
  * @method static Builder|News whereActive($value)
- * @method static Builder|News whereAltImg($value)
- * @method static Builder|News whereContent($value)
- * @method static Builder|News whereQuote($value)
- * @method static Builder|News whereSeoDescription($value)
- * @method static Builder|News whereSeoKeywords($value)
- * @method static Builder|News whereSeoTitle($value)
  * @method static Builder|News whereSlug($value)
- * @method static Builder|News whereTitle($value)
- * @method static Builder|News whereTitleImg($value)
+ * @method static Builder|News whereSortOrder($value)
  */
 	class IdeHelperNews extends \Eloquent {}
 }

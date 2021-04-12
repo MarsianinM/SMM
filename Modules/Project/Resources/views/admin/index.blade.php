@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-responsive-sm table-striped">
+            <table class="table table-responsive-sm table-striped" id="project">
                 <thead>
                 <tr>
                     <th>@lang('project::project.th_id')</th>
@@ -25,7 +25,7 @@
                     <th>@lang('project::project.th_action')</th>
                 </tr>
                 </thead>
-                <tbody>
+               {{-- <tbody>
                 @forelse($projects as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
@@ -61,16 +61,36 @@
                         <td colspan="5" class="text-center">@lang('pages.list_error')</td>
                     </tr>
                 @endforelse
-                </tbody>
+                </tbody>--}}
             </table>
 
-            <div class="pagination-wrapper mb-5">
+            {{--<div class="pagination-wrapper mb-5">
                 {{ $projects->links('mainpage::admin.pagination.theme_admin') }}
-            </div>
+            </div>--}}
         </div>
     </div>
 @endsection
 @section('js')
+
+    <script>
+        $(function() {
+            $('#project').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{!! route('admin.project.anyData') !!}',
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'title', name: 'title' },
+                    { data: 'client_name', name: 'client_name' },
+                    { data: 'small_description', name: 'small_description' },
+                    { data: 'updated_at', name: 'updated_at' },
+                    { data: 'updated_at', name: 'updated_at' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
+        });
+    </script>
+
     <script>
         /* global coreui */
 
@@ -83,16 +103,6 @@
         document.querySelectorAll('[data-toggle="tooltip"]').forEach(function (element) {
             // eslint-disable-next-line no-new
             new coreui.Tooltip(element);
-        });
-        //# sourceMappingURL=tooltips.js.map
-
-        $(document).on('change','.c-switch-input',function(){
-            let chek = 'off';
-            if($(this).is(':checked')){
-                chek = 'on';
-            }
-            $(this).parents('label').next('form').find('input[name="active"]').val(chek);
-            $(this).parents('label').next('form').find("#sendButton").click();
         });
     </script>
 @endsection

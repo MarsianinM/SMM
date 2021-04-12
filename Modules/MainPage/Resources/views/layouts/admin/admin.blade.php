@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="{{ asset("assets/css/free.min.css") }}">
     <link rel="stylesheet" href="{{ asset("assets/css/coreui.min.css") }}">
 
+    <!-- Bootstrap CSS -->{{--
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">--}}
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+
     <script src="https://cdn.tiny.cloud/1/{{env('YOUR_TINY_API_KEY')}}/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
 </head>
@@ -144,6 +148,12 @@
         });
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- App scripts -->
     @yield('js')
 </body>
 </html>

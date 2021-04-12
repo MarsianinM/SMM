@@ -177,6 +177,7 @@ return [
         App\Providers\ViewServiceProvider::class,
         /** **/
         Barryvdh\Debugbar\ServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
     ],
 
     /*
@@ -232,6 +233,7 @@ return [
         /**  */
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         /**  */
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'LaravelLocalization' => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
     ],
 
