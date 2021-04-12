@@ -55,7 +55,7 @@ class RateController extends Controller
     public function store(CreateRateRequest $request): RedirectResponse
     {
         $rate = $this->rep->store($request->all());
-        return redirect()->route('admin.rate.edit',$rate->id);
+        return redirect()->route('admin.rates.edit',$rate->id);
     }
 
     /**

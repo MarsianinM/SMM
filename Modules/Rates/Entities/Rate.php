@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Project\Entities\Project;
 
 class Rate extends Model
 {
@@ -32,6 +33,13 @@ class Rate extends Model
     public function rateDescription(): HasMany
     {
         return $this->hasMany(RateDescription::class, 'rate_id', 'id');
+    }
+    /**
+     * @return HasMany
+     */
+    public function project(): HasMany
+    {
+        return $this->hasMany(Project::class, 'rate_id', 'id');
     }
 
     public function getCreatedDateAttribute(): string

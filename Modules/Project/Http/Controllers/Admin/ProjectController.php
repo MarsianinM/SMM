@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Project\Entities\Project;
 use Modules\Project\Repository\ProjectAdminRepository;
+use Modules\Rates\Entities\Rate;
+use Modules\Users\Entities\User;
 
 class ProjectController extends Controller
 {
@@ -24,11 +26,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('client')->paginate('5');
-
-        return view('project::admin.index',[
-            'projects' => $projects
-        ]);
+        return view('project::admin.index');
     }
     /**
      * Process datatables ajax request.
@@ -37,7 +35,9 @@ class ProjectController extends Controller
      */
     public function anyData()
     {
-        $model = Project::with('client');
+        $model = Project::with(['client','rate','rate.rateDescription' =>  function ($query) {
+            $query->where('lang_key', \LaravelLocalization::getCurrentLocale());
+        }])->select('projects.*');
 
         return \DataTables::eloquent($model)
             ->addColumn('client_name', function (Project $project) {
@@ -45,6 +45,9 @@ class ProjectController extends Controller
             })
             ->addColumn('small_description', function (Project $project) {
                 return $project->small_description;
+            })
+            ->addColumn('rate', function (Project $project) {
+                return $project->rate->content_current_lang_rate->title;
             })
             ->editColumn('updated_at', function (Project $project) {
                 return $project->date_start_and_finish;
@@ -78,6 +81,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        $rates = Rate::with('rateDescription')->get();
+        $users = User::where('active','1')->get();
         return view('project::create');
     }
 

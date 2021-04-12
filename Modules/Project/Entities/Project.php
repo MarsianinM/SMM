@@ -5,6 +5,8 @@ namespace Modules\Project\Entities;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Rates\Entities\Rate;
 use Modules\Users\Entities\User;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -27,7 +29,6 @@ class Project extends Model implements HasMedia
         return \Modules\Project\Database\factories\ProjectFactory::new();
     }
 
-
     /**
      * Get the projects for the user.
      */
@@ -45,22 +46,34 @@ class Project extends Model implements HasMedia
         return $this->hasMany(User::class, 'author_id');
     }
 
-    public function getDateStartAndFinishAttribute()
+    /**
+     * Get the projects for the user.
+     */
+    public function rate(): BelongsTo
+    {
+        return $this->belongsTo(Rate::class, 'rate_id','id');
+    }
+
+    /**
+     * @return string
+     */
+    public function getDateStartAndFinishAttribute(): string
     {
         return trans('project::project.admin_ot').' '.Carbon::parse($this->date_start)->format('d-m-Y h:i').' <br> '.trans('project::project.admin_do').' '.Carbon::parse($this->date_finish)->format('d-m-Y h:i');
     }
 
-    public function getSmallDescriptionAttribute()
+    /**
+     * @return string
+     */
+    public function getSmallDescriptionAttribute(): string
     {
         $description = mb_substr($this->description, 0, 200);
         if(strlen($this->description) > 200) $description .= ' ...';
-
         return $description;
     }
 
     public function getClientNameAttribute()
     {
-
         return $this->client->name;
     }
 
