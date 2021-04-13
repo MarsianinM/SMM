@@ -10,5 +10,6 @@
     "Auth": true,
     "News": true,
     "Project": true,
-    "Rates": true
+    "Rates": true,
+    "Subjects": true
 }
