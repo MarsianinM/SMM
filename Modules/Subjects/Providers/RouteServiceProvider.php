@@ -2,6 +2,7 @@
 
 namespace Modules\Subjects\Providers;
 
+use App\Http\Middleware\CheckIfAdmin;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -61,6 +62,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
+        Route::prefix('admin')
+            ->middleware(['web', 'verified', CheckIfAdmin::class])
+            ->namespace($this->namespace)
+            ->name('admin.')
+            ->group(module_path('Subjects', '/Routes/admin.php'));
+
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->moduleNamespace)
