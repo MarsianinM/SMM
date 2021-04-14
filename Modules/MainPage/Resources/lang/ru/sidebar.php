@@ -7,6 +7,8 @@ return [
     'project'                   => 'Проекты',
     'project_list'              => 'Все проекты',
     'rates'                     => 'Тарифы',
+    'subject'                   => 'Тематика',
+    'subject_list'              => 'Список тематик',
     'rates_list'                => 'Все тарифы',
     'rates_add'                 => 'Создать тарифы',
     'rates_category_list'       => 'Все категории',

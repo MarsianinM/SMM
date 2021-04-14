@@ -54,9 +54,51 @@
                     <a class="c-sidebar-nav-link" href="{{ route('admin.project.index') }}">
                         <span class="c-sidebar-nav-icon"></span> @lang('mainpage::sidebar.project_list')</a>
                 </li>
+                <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+                    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                        {{--<svg class="c-sidebar-nav-icon">
+                            <use xlink:href="{{ asset('img/icons/free.svg#cil-puzzle') }}"></use>
+                        </svg> --}}@lang('mainpage::sidebar.rates')
+                    </a>
+                    <ul class="c-sidebar-nav-dropdown-items">
+                        <li class="c-sidebar-nav-item">
+                            <a class="c-sidebar-nav-link" href="{{ route('admin.category.index') }}">
+                                <span class="c-sidebar-nav-icon"></span> @lang('mainpage::sidebar.rates_category_list')</a>
+                        </li>
+                        {{--<li class="c-sidebar-nav-item">
+                            <a class="c-sidebar-nav-link" href="{{ route('admin.category.create') }}">
+                                <span class="c-sidebar-nav-icon"></span> @lang('mainpage::sidebar.rates_category_add')</a>
+                        </li>--}}
+                        <li class="c-sidebar-nav-item">
+                            <a class="c-sidebar-nav-link" href="{{ route('admin.rates.index') }}">
+                                <span class="c-sidebar-nav-icon"></span> @lang('mainpage::sidebar.rates_list')</a>
+                        </li>
+                        {{--<li class="c-sidebar-nav-item">
+                            <a class="c-sidebar-nav-link" href="{{ route('admin.rates.create') }}">
+                                <span class="c-sidebar-nav-icon"></span> @lang('mainpage::sidebar.rates_add')</a>
+                        </li>--}}
+                    </ul>
+                </li>
+                <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+                    <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                        {{--<svg class="c-sidebar-nav-icon">
+                            <use xlink:href="{{ asset('img/icons/free.svg#cil-puzzle') }}"></use>
+                        </svg> --}}@lang('mainpage::sidebar.subject')
+                    </a>
+                    <ul class="c-sidebar-nav-dropdown-items">
+                        <li class="c-sidebar-nav-item">
+                            <a class="c-sidebar-nav-link" href="{{ route('admin.subject.index') }}">
+                                <span class="c-sidebar-nav-icon"></span> @lang('mainpage::sidebar.subject_list')</a>
+                        </li>
+                        {{--<li class="c-sidebar-nav-item">
+                            <a class="c-sidebar-nav-link" href="{{ route('admin.rates.create') }}">
+                                <span class="c-sidebar-nav-icon"></span> @lang('mainpage::sidebar.rates_add')</a>
+                        </li>--}}
+                    </ul>
+                </li>
             </ul>
         </li>
-
+{{--
         <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
             <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
                 <svg class="c-sidebar-nav-icon">
@@ -81,7 +123,7 @@
                         <span class="c-sidebar-nav-icon"></span> @lang('mainpage::sidebar.rates_add')</a>
                 </li>
             </ul>
-        </li>
+        </li>--}}
 
         <li class="c-sidebar-nav-item">
             <a class="c-sidebar-nav-link" href="{{ route('admin.users.index') }}">

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Rates\Entities\Rate;
+use Modules\Subjects\Entities\Subject;
 use Modules\Users\Entities\User;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -21,7 +22,8 @@ class Project extends Model implements HasMedia
      */
     protected $fillable = [
         'title', 'link', 'moderation_comments', 'small_comments', 'screenshot', 'user_pro', 'description', 'date_start',
-        'date_finish', 'page_link', 'status', 'archive', 'pro', 'client_id', 'author_id', 'created_at', 'updated_at',
+        'date_finish', 'page_link', 'status', 'archive', 'pro', 'client_id', 'author_id', 'created_at', 'updated_at', 'subject_id',
+        'rate_id',
     ];
 
     protected static function newFactory()
@@ -47,11 +49,19 @@ class Project extends Model implements HasMedia
     }
 
     /**
-     * Get the projects for the user.
+     * Get the projects for the Rates.
      */
     public function rate(): BelongsTo
     {
         return $this->belongsTo(Rate::class, 'rate_id','id');
+    }
+
+    /**
+     * Get the projects for the user.
+     */
+    public function subject(): BelongsTo
+    {
+        return $this->belongsTo(Subject::class, 'subject_id','id');
     }
 
     /**

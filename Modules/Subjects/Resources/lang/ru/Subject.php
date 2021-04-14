@@ -5,12 +5,15 @@ return [
     'th_title'                  => 'Название темы',
     'th_create'                 => 'Тема создана',
     'th_action'                 => 'Управление',
+    'th_create_date'            => 'Дата изминения',
     //ACTION
     'action_edit'               => 'Редактирование темы № :Id',
     'action_delete'             => 'Удалить тему № :Id',
     'action_off_on'             => 'Отключить тему № :Id',
     'action_off_on_add'         => 'Активировать тему',
     'add'                       => 'Создать тему',
+    'active_off'                => 'Отключить тему',
+    'active_on'                 => 'Активировать тему',
 
     //TITLE
     'title_edit'                => 'Редактирование темы - <b>№ :Id</b>',

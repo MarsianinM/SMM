@@ -4,69 +4,49 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-6"><h2><i class="fa fa-align-justify cil-library"></i> @lang('news::news.name')</h2></div>
+                <div class="col-6"><h2><i class="fa fa-align-justify cil-library"></i> @lang('subjects::subject.name')</h2></div>
                 <div class="col-6 text-right">
-                    <a href="{{ route('admin.news.create') }}" class="btn btn-primary">
-                        <i class="fa fa-align-justify cil-library-add"></i> @lang('news::news.title_add')
+                    <a href="{{ route('admin.subject.create') }}" class="btn btn-primary">
+                        <i class="fa fa-align-justify cil-library-add"></i> @lang('subjects::subject.title_add')
                     </a>
                 </div>
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-responsive-sm table-striped">
+            <table id="subject" class="table table-responsive-sm table-striped display responsive" width="100%">
                 <thead>
                 <tr>
-                    <th>@lang('news::news.th_id')</th>
-                    <th>@lang('news::news.th_title')</th>
-                    <th>@lang('news::news.th_image')</th>
-                    <th>@lang('news::news.th_quote')</th>
-                    <th>@lang('news::news.th_create_date')</th>
-                    <th>@lang('news::news.th_action')</th>
+                    <th>@lang('subjects::subject.th_id')</th>
+                    <th>@lang('subjects::subject.th_title')</th>
+                    <th>@lang('subjects::subject.th_create_date')</th>
+                    <th>@lang('subjects::subject.th_action')</th>
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($news as $item)
-                    <tr>
-                        <td>{{ $item->id }}</td>
-                        <td class="title">{{ $item->content_current_lang->title }}</td>
-                        <td>
-                            <div class="py-2">
-                                <img src="{{ $item->getFirstMediaUrl('news', 'thumb') }}" alt="{{ $item->alt_img }}" title="{{ $item->title_img }}">
-                            </div>
-                        </td>
-                        <td class="quote">{{ $item->content_current_lang->quote }}</td>
-                        <td>{{ $item->created_date }}</td>
-                        <td>
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                               <a href="{{ route('admin.news.edit', $item->id) }}" class="btn btn-secondary btn-success"
-                                       data-toggle="tooltip" data-html="true"
-                                       data-original-title="@lang('news::news.action_edit', ['Id' => $item->id])">
-                                   <i class="c-icon c-icon-1xl cil-pen"></i>
-                               </a>
-                                <button form="form-id_{{ $item->id }}" class="btn btn-secondary btn-danger"
-                                        type="submit"
-                                        data-toggle="tooltip" data-html="true"
-                                        data-original-title="@lang('news::news.action_delete', ['Id' => $item->id])">
-                                    <i class="c-icon c-icon-1xl cil-delete"></i>
-                                </button>
-                                <form id="form-id_{{ $item->id }}" action="{{ route('admin.news.destroy', ['news' => $item->id]) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="5" class="text-center">@lang('news::news.list_error')</td>
-                    </tr>
-                @endforelse
+
                 </tbody>
             </table>
         </div>
     </div>
 @endsection
 @section('js')
+
+    <script>
+        $(function() {
+            $('#subject').DataTable({
+                processing: true,
+                serverSide: true,
+                responsive: true,
+                ajax: '{!! route('admin.subject.anyData') !!}',
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'title', name: 'title' },
+                    { data: 'updated_at', name: 'updated_at' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
+        });
+    </script>
     <script>
         /* global coreui */
 
@@ -83,9 +63,9 @@
         //# sourceMappingURL=tooltips.js.map
 
         $(document).on('change','.c-switch-input',function(){
-            let chek = 'off';
+            let chek = '0';
             if($(this).is(':checked')){
-                chek = 'on';
+                chek = '1';
             }
             $(this).parents('label').next('form').find('input[name="active"]').val(chek);
             $(this).parents('label').next('form').find("#sendButton").click();
