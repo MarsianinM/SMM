@@ -11,5 +11,6 @@
     "News": true,
     "Project": true,
     "Rates": true,
-    "Subjects": true
+    "Subjects": true,
+    "Settings": true
 }

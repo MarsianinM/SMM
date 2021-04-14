@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Modules\Project\Entities\Project;
 use Modules\Project\Repository\ProjectAdminRepository;
 use Modules\Rates\Entities\Rate;
+use Modules\Subjects\Entities\Subject;
 use Modules\Users\Entities\User;
 
 class ProjectController extends Controller
@@ -24,10 +25,11 @@ class ProjectController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index(): Renderable
     {
         return view('project::admin.index');
     }
+
     /**
      * Process datatables ajax request.
      *
@@ -81,9 +83,15 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $rates = Rate::with('rateDescription')->get();
+        $rates = Rate::where('active','1')->with('rateDescription')->get();
         $users = User::where('active','1')->get();
-        return view('project::create');
+        $subjects = Subject::where('active','1')->get();
+        dd(__FILE__,__METHOD__,'LINE: '.__LINE__,$users,$rates,$subjects);
+        return view('project::create',[
+            'rates'         => Rate::where('active','1')->with('rateDescription')->get(),
+            'users'         => User::where('active','1')->get(),
+            'subjects'      => Subject::where('active','1')->get(),
+        ]);
     }
 
     /**
@@ -94,16 +102,6 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('project::show');
     }
 
     /**
