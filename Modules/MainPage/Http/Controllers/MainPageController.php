@@ -15,7 +15,7 @@ class MainPageController extends Controller
      */
     public function index()
     {
-        return view('mainpage::index',[
+        return view('mainpage::front.index',[
             'projects' => Project::whereStatus('active')/*->where('client_id',auth()->user()->id)->with('client')*/->paginate('5')
         ]);
     }

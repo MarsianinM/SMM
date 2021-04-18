@@ -10,8 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [\Modules\MainPage\Http\Controllers\MainPageController::class,'index'])->name('mainpage.index');
 
-Route::prefix('mainpage')->group(function() {
-    Route::get('/', 'MainPageController@index');
-});
+use Modules\MainPage\Http\Controllers\MainPageController;
+
+Route::get('/', [MainPageController::class,'index'])->name('mainpage.index');
+

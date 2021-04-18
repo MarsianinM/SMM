@@ -1,0 +1,589 @@
+/* @import "vars";
+
+
+/*==========  Desktop First  ==========*/
+// ≥1200px
+@include media-breakpoint-down(lg) {
+  /* .community__right {
+    max-width: 300px;
+  }
+	.container,
+  .header-container {
+    width: 968px;
+    padding: 0 15px;
+  }
+  .personal-dropdown {
+    transform: inherit;
+    right: 50%;
+    margin-right: -129px;
+    top: 85px;
+  }
+  .project-buttons {
+    display: block;
+  }
+  .poject-btn-second {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+  .project-info {
+    padding-left: 0;
+  }
+  .card-info:after,
+  .card-tarif:after,
+  .card-limit:after,
+  .card-actions:after {
+    display: none;
+  }
+  .widgets-body {
+    display: none;
+  }
+  .card{
+    margin-left: 0;
+  } */
+}
+
+// ≥992px
+@include media-breakpoint-down(md) {
+  /* .inner__community{
+    flex-direction: column-reverse;
+  }
+  .community__right{
+    margin-bottom: 40px;
+    max-width: 100%;
+  }
+  .community__left{
+    max-width: 100%;
+  }
+  .desc__project__item{
+    display: none;
+  }
+  .project__top{
+    flex-wrap: wrap;
+  }
+  .project__top__menu{
+    flex-wrap: wrap;
+  }
+  .project__top2{
+    flex-wrap: wrap;
+  }
+  .project__top3{
+    flex-wrap: wrap;
+  }
+  .control__input{
+    margin-bottom: 10px;
+  }
+  .project__top__menu li{
+    margin-bottom: 10px;
+  }
+  .flex__top3{
+    margin-bottom: 10px;
+  }
+  .project__item{
+    flex-direction: column;
+    align-items: center;
+  }
+  .project__item .data__project{
+    padding: 20px 0;
+    max-width: 330px;
+    width: 100%;
+    border-right: none;
+    border-bottom: 2px solid #dbdbdb;
+  }
+  .project__item .describe__project{
+    padding: 20px 0;
+    max-width: 330px;
+    width: 100%;
+    border-right: none;
+    border-bottom: 2px solid #dbdbdb;
+  }
+  .project__item .tariph__project{
+    padding: 20px 0;
+    max-width: 330px;
+    width: 100%;
+    border-right: none;
+    border-bottom: 2px solid #dbdbdb;
+  }
+  .project__item .actions__project{
+    padding: 10px 0;
+    max-width: 330px;
+    width: 100%;
+    border-right: none;
+        height: 220px;
+
+  }
+  .project__item .data__project .item__data.top__border{
+    padding-top: 0;
+    border-top: none;
+  }
+  .project__item .describe__project .describe__inner p.paragraph__describe{
+    width: 100%;
+  }
+  .project__item .describe__project .describe__inner .describe__title{
+    width: 100%;
+  }
+  .project__item .tariph__project .tariph__btn a{
+    width: 200px;
+    height: 40px;
+    line-height: 41px;
+    font-size: 15px;
+  }
+  .open__menu{
+    display: none;
+  }
+	.container,
+  .header-container {
+    width: 720px;
+    padding: 0 15px;
+  }
+  .choise-button {
+    margin-left: -100px;
+  }
+  .header-body {
+    display: block;
+    text-align: center;
+  }
+  .menu__item:last-child {
+    background: none;
+    width: auto;
+    height: auto;
+    margin-left: 10px;
+  }
+  .menu__item:last-child p {
+    display: none;
+  }
+  .personal {
+    display: block;
+  }
+  .account,
+  .personal-name p,
+  .personal-name span {
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+  .account {
+    margin-top: 0;
+  }
+  .personal {
+    margin-top: 0;
+  }
+  .menu {
+    justify-content: center;
+    height: 40px;
+    margin-top: 25px;
+  }
+  .header-menu{
+    padding-top: 20px;
+  }
+  .header-menu {
+    padding-bottom: 20px;
+  }
+  .project-buttons {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 30px;
+  }
+  .poject-btn-second {
+    margin-top: 0;
+    margin-left: 20px;
+  }
+  .region p {
+    margin-top: 30px;
+  }
+  .card-name p {
+    width: 250px;
+  }
+  .card {
+    padding: 12px 20px 19px 30px;
+    margin-left: 0;
+  }
+  .card-user p {
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+  .widgets-body {
+    display: none;
+  }
+  .card-actions img {
+    display: inline-block;
+    margin-left: 0px;
+    width: 20px;
+    height: 20px;
+    margin-top: 30px;
+  }
+  .card-action-img{
+    width: 20px;
+  }
+  .card-actions img:first-child {
+    margin-top: 0;
+  }
+  .card-tarif,
+  .card-limit,
+  .russia {
+    margin-right: 30px;
+  }
+  .footer-body {
+    display: block !important;
+  }
+  .footer-right {
+    margin-left: 0;
+    margin-top: 50px;
+  }
+  .footer-left {
+    margin: 0 auto;
+    text-align: center;
+  }
+  .footer{
+    padding: 30px 0 25px 0;
+  }
+  .region {
+    margin-right: 30px;
+  }
+  .country {
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0;
+    top: 108px;
+  }
+  .country span {
+    margin-top: 0;
+  }
+  .projects {
+    padding-bottom: 120px;
+  } */
+}
+
+// ≥768px
+@include media-breakpoint-down(sm) {
+	/* .card-actions img:first-child{
+    margin-left: 10px;
+  }
+  .card-action-img{
+    width: auto;
+    margin-left: 0;
+  }
+  .card-actions img{
+    margin: 0 10px;
+  }
+  .container,
+  .header-container {
+    width: 540px;
+/*    padding: 0 15px;*/
+  }
+  .choise-button {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+  .choise-btn {
+    margin: 0 auto;
+  }
+  .card-action-img {
+    margin-top: 30px;
+  }
+  .card {
+    padding-bottom: 20px;
+  }
+  content {
+    opacity: 1 !important;
+  }
+  .header-menu {
+    padding-top: 10px;
+  }
+  .menu {
+    display: none;
+  }
+  .personal {
+    margin-top: 20px;
+  }
+  .region {
+    margin-right: 0;
+    margin-top: 30px;
+  }
+  .card-user p {
+    width: 80px;
+  }
+  .card {
+    display: block;
+    text-align: center;
+  }
+  .card-user {
+    justify-content: center;
+  }
+  .card-name h3 {
+    text-align: center;
+  }
+  .card-name p {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  .name-social {
+    justify-content: center;
+  }
+  .card-limit h3,
+  .card-tarif h3 {
+    margin-top: 10px;
+  }
+  .card-limit p,
+  .card-tarif p {
+    margin: 0 auto;
+  }
+  .card-limit,
+  .card-tarif {
+    width: 180px;
+    height: 80px;
+    border: 2px solid grey;
+    text-align: center;
+    padding-top: 20px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-radius: 5px;
+  }
+  .russia {
+    margin-right: 0;
+    margin-top: 10px;
+  }
+/*  .card-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }*/
+  .projects {
+    padding-bottom: 80px;
+  }
+  .region p{
+    margin-top: 0;
+  }
+  .ranks{
+    width: 100px;
+    margin-right: auto!important;
+    margin-left: auto;
+    margin-bottom: 20px;
+  } */
+
+}
+
+// ≥576px
+@include media-breakpoint-down(xs) {
+  /* .inner__topfooter{
+    flex-direction: column;
+    .choose__project{
+      margin-bottom: 15px;
+    }
+    .top__footer__icons{
+      margin-bottom: 15px;
+    }
+    .vip__topfooter{
+      margin-bottom: 15px;
+    }
+    .btn__topfooter{
+      margin-bottom: 10px;
+    }
+  }
+  .project__top{
+    flex-direction: column;
+  }
+  .project__top2{
+    flex-direction: column;
+  }
+  .project__top3{
+    flex-direction: column;
+  }
+  .control__input{
+    margin-right: 0;
+    .name__project{
+      input{
+        width: 100%;
+        height: 40px;
+      }
+    }
+    select{
+      width: 100%;
+      height: 40px;
+    }
+  }
+	.text__hint{
+    right: 5px;
+  }
+  .region p{
+  }
+  .container,
+  .header-container {
+    width: 100%;
+  }
+  .footer-right {
+    display: block;
+  }
+  .footer-menu:last-child,
+  .footer-menu:first-child,
+  .footer-menu {
+    margin-left: 0;
+    margin-top: 30px;
+  }
+  .footer-menu h3:after {
+    display: none;
+  }
+  .footer-menu h3,
+  .footer-menu a {
+    text-align: center;
+  }
+  .logo {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 45px;
+    margin-top: 13px;
+  }
+  .project-info {
+    display: block;
+  }
+  .project-info {
+    text-align: center;
+  }
+  .ranks,
+  .statistic {
+    margin-top: 30px;
+    justify-content: center;
+    margin-right: 0;
+  }
+  .project-buttons {
+    display: block;
+    margin: 0 auto;
+  }
+  .poject-btn-second {
+    margin-left: 0;
+  }
+  .card-user:after {
+    display: none;
+  }
+  .card-name p {
+    width: 100%;
+  }
+  .card-user span {
+    margin-left: 50px;
+  }
+  .card-user p {
+    width: 120px;
+  }
+  .projects {
+    padding-bottom: 50px;
+  }
+  .poject-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .project__title{
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  .control__input .name__project span{
+    top: 5px;
+  }
+  .project__top__menu{
+    flex-direction: column;
+  }
+  .project__top__menu li{
+    margin-right: 0;
+    width: 100%;
+    text-align: center;
+
+  }
+  .project__top__menu li .btn__top-menu{
+    width: 100%;
+    height: 45px;
+  }
+  section.communication{
+    padding-top: 20px;
+    padding-bottom: 20px;
+  } */
+}
+@media only screen and (max-width: 450px) {
+  /* .chat__person{
+    flex-direction: column;
+  }
+  .user__image{
+    margin-bottom: 10px;
+  }
+  .send__block{
+    flex-direction: column;
+  }
+  .choose__file{
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  form.form__chat__id .form__chat{
+    margin-bottom: 15px;
+  }
+  form.form__chat__id .send__block .send__btn button{
+    width: 100%;
+    font-size: 18px;
+  }
+  form.form__chat__id .send__block .send__btn button img{
+    margin-right: 20px;
+  }
+  .inner__topfooter{
+    
+    .choose__project{
+     
+    }
+    .top__footer__icons{
+      
+    }
+    .vip__topfooter{
+      width: 100%;
+      height: 40px;
+      font-size: 18px;
+    }
+    .btn__topfooter{
+      width: 100%;
+      a{
+        width: 100%;
+        height: 40px;
+        line-height: 37px;
+        font-size: 18px;
+        text-transform: uppercase;
+      }
+      
+    }
+    .cansel__choose{
+      a{
+        font-size: 18px;
+      }
+    }
+  }
+  .flex__top3{
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  .flex__top3 .text__flex{
+    font-size: 16px;
+  }
+  .flex__top3 .text__cifra{
+    padding: 5px 10px;
+    font-size: 17px;
+  } */
+  
+}
+
+/*==========  Mobile First  ==========*/
+
+// ≤576px
+@include media-breakpoint-up(sm) {
+
+}
+
+// ≤768px
+@include media-breakpoint-up(md) {
+
+}
+
+// ≤992px
+@include media-breakpoint-up(lg) {
+
+}
+
+// ≤1200px
+@include media-breakpoint-up(xl) {
+	
+}
+ */

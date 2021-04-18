@@ -1,0 +1,16 @@
+
+$gilroy-font: "gilroy-regular", sans-serif;
+$exo2: "Exo 2", sans-serif;
+$opensans: "Open Sans", sans-serif;
+$default-font: "Roboto", sans-serif;
+$accent: orange;
+$text: #181717;
+$primary-color: #00005c; // Change color here. C'mon, try it! 
+$text-color: mix(#000, $primary-color, 64%);
+// Customization Bootstrap vars from "app/libs/bootstrap/scss/_variables.scss"
+$grid-gutter-width: 30px;
+$grid-columns: 12;
+$grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px);
+$container-max-widths: (sm: 540px, md: 720px, lg: 960px, xl: 1140px);
+
+$gutter: $grid-gutter-width;
