@@ -2,6 +2,7 @@
 
 namespace Modules\Settings\Providers;
 
+use App\Http\Middleware\CheckIfAdmin;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -47,9 +48,14 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
+        Route::prefix('admin')
+            ->middleware(['web', 'verified', CheckIfAdmin::class])
+            ->namespace($this->namespace)
+            ->name('admin.')
+            ->group(module_path('Settings', '/Routes/admin.php'));
+        /*Route::middleware('web')
             ->namespace($this->moduleNamespace)
-            ->group(module_path('Settings', '/Routes/web.php'));
+            ->group(module_path('Settings', '/Routes/web.php'));*/
     }
 
     /**

@@ -50,7 +50,6 @@ class ViewServiceProvider extends ServiceProvider
                 return auth()->check() && auth()->user()->activeRoleIs($value);
             });
         });
-
         View::composer('*', function (\Illuminate\Contracts\View\View $view) {
             $view->with('websiteTitle', \Cache::remember('websiteTitle', 3600, function () {
                 return Setting::firstWhere('key', 'title')->value;
