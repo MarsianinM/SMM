@@ -45,14 +45,14 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('layouts.app', function (\Illuminate\Contracts\View\View $view) {
+       /* View::composer('layouts.app', function (\Illuminate\Contracts\View\View $view) {
             Blade::if('role', function ($value) {
                 return auth()->check() && auth()->user()->activeRoleIs($value);
             });
-        });
+        });*/
         View::composer('*', function (\Illuminate\Contracts\View\View $view) {
             $view->with('websiteTitle', \Cache::remember('websiteTitle', 3600, function () {
-                return Setting::firstWhere('key', 'title')->value;
+                return /*Setting::firstWhere('key', 'title')->value*/ '';
             }));
             $view->with('array_localization', \Cache::remember('array_localization', 3600, function () {
                 return LaravelLocalization::getSupportedLocales();
