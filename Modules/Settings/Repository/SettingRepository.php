@@ -19,15 +19,9 @@ class SettingRepository
      */
     public function store(array $data): Setting
     {
-        if(!empty($data['active'])){
-            $data['active'] = $data['active'] == 'on' ? '1' : '0';
-        }else{
-            $data['active'] = '0';
-        }
-        $data['slug'] = Str::slug($data['title']);
-        $Setting = Setting::create(Arr::except($data, 'image'));
-        if (Arr::get($data, 'image') instanceof UploadedFile) {
-            $Setting->addMedia($data['image'])
+        $Setting = Setting::create(Arr::except($data, 'site_logo'));
+        if (Arr::get($data, 'site_logo') instanceof UploadedFile) {
+            $Setting->addMedia($data['site_logo'])
                 /*->sanitizingFileName(function($fileName) {
                     return strtolower(Str::slug($fileName));
                 })*/
@@ -46,21 +40,10 @@ class SettingRepository
      */
     public function update(Setting $Setting, $data): Setting
     {
-        if(!empty($data['active'])){
-            $data['active'] = $data['active'] == 'on' ? '1' : '0';
-        }else{
-            $data['active'] = '0';
-        }
-
-        $this->activeOnOff($Setting, $data['active']);
-
-        if(!empty($data['title'])){
-            $data['slug'] = Str::slug($data['title']);
-        }
-        $Setting->update(Arr::except($data, 'image'));
-        if (Arr::get($data, 'image') instanceof UploadedFile) {
+        $Setting->update(Arr::except($data, 'site_logo'));
+        if (Arr::get($data, 'site_logo') instanceof UploadedFile) {
             $Setting->clearMediaCollection('settings');
-            $Setting->addMedia($data['image'])
+            $Setting->addMedia($data['site_logo'])
                 /* ->usingFileName(function($fileName) {
                      return (string)strtolower(Str::slug($fileName));
                  })*/

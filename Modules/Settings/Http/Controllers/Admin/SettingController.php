@@ -5,25 +5,22 @@ namespace Modules\Settings\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Settings\Entities\Setting;
+use Modules\Settings\Repository\SettingRepository;
 
 class SettingController extends Controller
 {
+    protected SettingRepository $rep;
+
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index(): Renderable
     {
-        return view('settings::admin.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('settings::create');
+        return view('settings::admin.index', [
+            'settings' => Setting::first()
+        ]);
     }
 
     /**
@@ -36,25 +33,6 @@ class SettingController extends Controller
         //
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('settings::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('settings::edit');
-    }
 
     /**
      * Update the specified resource in storage.
@@ -67,13 +45,4 @@ class SettingController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

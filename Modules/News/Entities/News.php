@@ -14,14 +14,12 @@ class News extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-    use HasFactory;
 
     protected $table = 'news';
 
     protected $fillable = [
         'id', 'slug', 'sort_order', 'active'
     ];
-
 
     /**
      * @return HasMany

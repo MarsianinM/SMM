@@ -8,7 +8,7 @@
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">@lang('settings::settings.footer_setting')</a></li>
         </ul>
 
-        <form class="form-horizontal tab-content" action="" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal tab-content" action="{{ route('settings.store') }}" method="post" enctype="multipart/form-data">
             <div class="tab-pane active" id="home" role="tabpanel">
                 <div class="card">
                     <div class="card-header">@lang('settings::settings.oue_setting_title')</div>
@@ -21,7 +21,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">{{ strtoupper($localeCode) }}</span>
                                         </div>
-                                        <input class="form-control" id="text-input" type="text" name="settings[{{ $localeCode }}][site_name]" placeholder="@lang('settings::settings.enter_site_name') {{ $localeCode }}">
+                                        <input class="form-control" id="text-input" type="text" name="settings[{{ $localeCode }}][site_name]" placeholder="@lang('settings::settings.enter_site_name') {{ $localeCode }}"
+                                            value="{!! $settings[$localeCode]['site_name'] ?? old('settings.'.$localeCode.'.site_name') !!}">
                                     </div>
                                 @endforeach
                                 <div style="margin-top: -.7rem" class="help-block">@lang('settings::settings.help_site_name')</div>
@@ -36,7 +37,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">{{ strtoupper($localeCode) }}</span>
                                         </div>
-                                        <textarea class="form-control" name="settings[{{ $localeCode }}][description]" aria-label="With textarea"></textarea>
+                                        <textarea class="form-control" name="settings[{{ $localeCode }}][description]" aria-label="With textarea">{!! $settings[$localeCode]['description'] ?? old('settings.'.$localeCode.'.description') !!}</textarea>
                                     </div>
                                 @endforeach
                                 <div style="margin-top: -.7rem" class="help-block">@lang('settings::settings.help_site_description')</div>
@@ -51,7 +52,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">{{ strtoupper($localeCode) }}</span>
                                         </div>
-                                        <textarea class="form-control" name="settings[{{ $localeCode }}][keywords]" aria-label="With textarea"></textarea>
+                                        <textarea class="form-control" name="settings[{{ $localeCode }}][keywords]" aria-label="With textarea">{!! $settings[$localeCode]['keywords'] ?? old('settings.'.$localeCode.'.keywords') !!}</textarea>
                                     </div>
                                 @endforeach
                                 <div style="margin-top: -.7rem" class="help-block">@lang('settings::settings.help_site_keywords')</div>
@@ -63,12 +64,16 @@
                             <div class="col-md-9">
                                 <input id="file-input" type="file" name="site_logo">
                             </div>
+                            @if($settings AND $settings->hasMedia('settings'))
+                            <div class="col-md-3 py-2">
+                                <img src="{{ $settings->getFirstMediaUrl('settings', 'thumb') }}" alt="">
+                            </div>
+                            @endif
                         </div>
                         {{--<hr/>--}}
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-sm btn-primary" type="submit"> Submit</button>
-                        <button class="btn btn-sm btn-danger" type="reset"> Reset</button>
+                        <button class="btn btn-sm btn-primary" type="submit">@lang('settings::settings.submit_edit')</button>
                     </div>
                 </div>
             </div>

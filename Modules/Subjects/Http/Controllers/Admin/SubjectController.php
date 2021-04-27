@@ -68,7 +68,7 @@ class SubjectController extends Controller
                                data-original-title="'.trans('subjects::subject.action_edit', ['Id' => $subject->id]).'">
                                 <i class="c-icon c-icon-1xl cil-pen"></i>
                             </a>
-                            <button form="form-id_{{ $item->id }}" class="btn btn-secondary btn-danger"
+                            <button form="form-id_'. $subject->id .'" class="btn btn-secondary btn-danger"
                                     type="submit"
                                     data-toggle="tooltip" data-html="true"
                                     data-original-title="'.trans('subjects::subject.action_delete', ['Id' => $subject->id]).'">
