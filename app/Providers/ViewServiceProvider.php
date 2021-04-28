@@ -2,29 +2,11 @@
 
 namespace App\Providers;
 
-use App\Models\Advertisement;
-use App\Models\AfterPrint;
-use App\Models\Article;
-use App\Models\BusinessPrint;
-use App\Models\Deliver;
-use App\Models\Design;
-use App\Models\EasyWork;
-use App\Models\FrontPage;
-use App\Models\Material;
-use App\Models\OtherPolygraph;
-use App\Models\OtherPrint;
-use App\Models\Package;
-use App\Models\Partner;
-use App\Models\Polygraph;
-use App\Models\Printing;
-use App\Models\Representative;
-use App\Models\Setting;
-use App\Models\Souvenir;
-use App\Models\Testimonial;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Modules\Settings\Entities\Setting;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -51,8 +33,8 @@ class ViewServiceProvider extends ServiceProvider
             });
         });*/
         View::composer('*', function (\Illuminate\Contracts\View\View $view) {
-            $view->with('websiteTitle', \Cache::remember('websiteTitle', 3600, function () {
-                return /*Setting::firstWhere('key', 'title')->value*/ '';
+            $view->with('websiteSetting', \Cache::remember('websiteSetting', 3600, function () {
+                return Setting::first();
             }));
             $view->with('array_localization', \Cache::remember('array_localization', 3600, function () {
                 return LaravelLocalization::getSupportedLocales();

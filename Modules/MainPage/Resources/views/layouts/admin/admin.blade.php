@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Admin — {{ $websiteTitle }} </title>
+    <title>Admin — {{ $websiteSetting->title }} </title>
 
     <!--<![endif]-->
     <link rel="stylesheet" href="{{ asset("assets/css/free.min.css") }}">
@@ -74,7 +74,7 @@
                 </div>
             </main>
             <footer class="c-footer">
-                <div><a href="https://coreui.io">{{ $websiteTitle }}</a> &copy; {{ date('Y') }}.</div>
+                <div><a href="https://coreui.io">{{ $websiteSetting->title }}</a> &copy; {{ date('Y') }}.</div>
             </footer>
         </div>
     </div>

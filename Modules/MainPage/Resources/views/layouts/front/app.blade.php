@@ -7,7 +7,7 @@
     <!-- <base href="/"> -->
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $websiteTitle }}</title>
+    <title>{{ $websiteSetting->title }}</title>
     <meta name="description" content="">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,7 +47,11 @@
         <div class="header-container">
             <div class="header-body">
                 <a href="index.html">
-                    <img src="http://smm.loc/frontend/img/_src/logo.png" alt="Лого" class="logo">
+                    @if($websiteSetting && $websiteSetting->hasMedia('settings'))
+                        <img src="{{ $websiteSetting->getFirstMediaUrl('settings', 'logo') }}" alt="{{ $websiteSetting->title }}" class="logo">
+                    @else
+                        <img src="{{ asset('frontend/img/_src/logo.png') }}" alt="Лого" class="logo">
+                    @endif
                 </a>
                 <nav>
                     <ul class="menu">

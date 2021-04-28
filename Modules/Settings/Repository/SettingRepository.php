@@ -19,36 +19,22 @@ class SettingRepository
      */
     public function store(array $data): Setting
     {
-        $Setting = Setting::create(Arr::except($data, 'site_logo'));
+        $setting = Setting::first();
+        $data['user_id'] = auth()->user()->id;
+        if($setting){
+            $setting->update(Arr::except($data, 'site_logo'));
+        }else {
+            $setting = Setting::create(Arr::except($data, 'site_logo'));
+        }
         if (Arr::get($data, 'site_logo') instanceof UploadedFile) {
-            $Setting->addMedia($data['site_logo'])
+            $setting->clearMediaCollection('settings');
+            $setting->addMedia($data['site_logo'])
                 /*->sanitizingFileName(function($fileName) {
                     return strtolower(Str::slug($fileName));
                 })*/
                 ->toMediaCollection('settings');
         }
-        return $Setting;
+        return $setting;
     }
 
-    /**
-     * Update the resource.
-     * @param Setting $Setting
-     * @param $data
-     * @return Setting
-     * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist
-     * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig
-     */
-    public function update(Setting $Setting, $data): Setting
-    {
-        $Setting->update(Arr::except($data, 'site_logo'));
-        if (Arr::get($data, 'site_logo') instanceof UploadedFile) {
-            $Setting->clearMediaCollection('settings');
-            $Setting->addMedia($data['site_logo'])
-                /* ->usingFileName(function($fileName) {
-                     return (string)strtolower(Str::slug($fileName));
-                 })*/
-                ->toMediaCollection('settings');
-        }
-        return $Setting;
-    }
 }
