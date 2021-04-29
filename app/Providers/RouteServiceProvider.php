@@ -39,26 +39,29 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            Route::prefix('api')
-                ->middleware('api')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/api.php'));
 
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/web.php'));
+            Route::group(['prefix' => \LaravelLocalization::setLocale()], function() {
+                Route::prefix('api')
+                    ->middleware('api')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/api.php'));
 
-            Route::prefix('client')
-                ->middleware(['web', 'verified', 'role:client'])
-                ->namespace($this->namespace)
-                ->name('client.')
-                ->group(base_path('routes/client.php'));
+                Route::middleware('web')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/web.php'));
 
-            Route::prefix('author')
-                ->middleware(['web', 'verified', 'role:author'])
-                ->namespace($this->namespace)
-                ->name('author.')
-                ->group(base_path('routes/author.php'));
+                Route::prefix('client')
+                    ->middleware(['web', 'verified', 'role:client'])
+                    ->namespace($this->namespace)
+                    ->name('client.')
+                    ->group(base_path('routes/client.php'));
+
+                Route::prefix('author')
+                    ->middleware(['web', 'verified', 'role:author'])
+                    ->namespace($this->namespace)
+                    ->name('author.')
+                    ->group(base_path('routes/author.php'));
+            });
 
             Route::prefix('admin')
                 ->middleware(['web', 'verified', CheckIfAdmin::class])

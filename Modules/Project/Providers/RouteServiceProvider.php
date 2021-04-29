@@ -48,13 +48,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::prefix('admin')
-            ->middleware(['web', 'verified', CheckIfAdmin::class])
-            ->namespace($this->namespace)
-            ->name('admin.')
-            ->group(module_path('Project', '/Routes/admin.php'));
-
         Route::group(['prefix' => \LaravelLocalization::setLocale()], function() {
+            Route::prefix('admin')
+                ->middleware(['web', 'verified', CheckIfAdmin::class])
+                ->namespace($this->namespace)
+                ->name('admin.')
+                ->group(module_path('Project', '/Routes/admin.php'));
+
             Route::middleware('web')
                 ->namespace($this->moduleNamespace)
                 ->group(module_path('Project', '/Routes/web.php'));

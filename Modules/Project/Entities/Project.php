@@ -72,6 +72,7 @@ class Project extends Model implements HasMedia
         return trans('project::project.admin_ot').' '.Carbon::parse($this->date_start)->format('d-m-Y h:i').' <br> '.trans('project::project.admin_do').' '.Carbon::parse($this->date_finish)->format('d-m-Y h:i');
     }
 
+
     /**
      * @return string
      */

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('mainpage::layouts.front.app')
 
 @section('content')
     Главная страница заказчика

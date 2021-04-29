@@ -27,7 +27,7 @@ class ClientProjectController extends Controller
      */
     public function index(): Renderable
     {
-        $projects = Project::/*whereStatus('active')->*/where('client_id',auth()->user()->id)/*->with('client')*/->paginate('30');
+        $projects = Project::/*whereStatus('active')->*/where('client_id',auth()->user()->id)->with(['rate','subject'])/*->with('client')*/->paginate('30');
 
         return view('project::front.index',[
             //'projects' => Project::whereStatus('active')->where('client_id',auth()->user()->id)->with('author')->paginate('30')
