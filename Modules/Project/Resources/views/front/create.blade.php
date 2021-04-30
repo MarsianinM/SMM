@@ -2,520 +2,833 @@
 
 
 @section('content')
-    <style>
-        .information-line {
-            margin: 40px 0 45px;
-        }
-
-        .information-line.line-n-margin {
-            margin-bottom: 15px;
-        }
-
-        .pull-right {
-            float: right !important;
-        }
-
-        .extra-line-switch ul {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 25px;
-        }
-
-        .extra-line-switch ul li {
-            display: inline-block;
-        }
-
-        .extra-line-switch ul li a {
-            padding: 4px 8px;
-            margin-right: 20px;
-        }
-
-        .extra-line-switch ul li.active a, .extra-line-switch ul li a:hover {
-            background: #dadada;
-            color: #3d3d3d;
-        }
-
-        .tab_content {
-            display: none;
-        }
-
-        .edit-persona {
-            width: 49%;
-            float: left;
-            margin-top: 15px;
-            font-family: Verdana;
-        }
-
-        .notice {
-            width: 49%;
-            font-size: 12px;
-            margin-top: 15px;
-            font-family: Verdana;
-        }
-
-        .wall {
-            background: #e9e9e9;
-            font: 12px Verdana;
-            padding: 16px 24px 24px;
-            line-height: 22px;
-            width: 100%;
-            margin-bottom: 75px;
-            color: #4d4d4d;
-        }
-
-        .edit-persona + .notice .wall, .wall-no-margin {
-            margin-bottom: 25px;
-        }
-    </style>
-
-    <style>
-        .dd-select {
-            background: white !important;
-            border: 1px solid #e9e9e9 !important;
-            border-radius: 0 !important;
-        }
-
-        .dd-pointer.dd-pointer-down {
-            border: none !important;
-            border-left: 1px solid #e9e9e9 !important;
-            height: 36px !important;
-            right: 1px !important;
-            top: 3px !important;
-            width: 33px !important;
-            background: rgba(0, 0, 0, 0) url("/css/chosen-sprite.png") no-repeat scroll 11px 8px !important;
-        }
-
-        .dd-pointer.dd-pointer-down.dd-pointer-up {
-            border: none !important;
-            border-left: 1px solid #e9e9e9 !important;
-            height: 36px !important;
-            right: 1px !important;
-            top: 7px !important;
-            width: 33px !important;
-            background: rgba(0, 0, 0, 0) url("/css/chosen-sprite.png") no-repeat scroll 11px -13px !important;
-        }
-
-        .dd-select .dd-selected-text {
-            line-height: 23px !important;
-            margin-bottom: 0 !important;
-        }
-
-        .dd-select .dd-option-image, .dd-selected-image {
-            height: 21px !important;
-        }
-
-        .dd-select .dd-option-text {
-            line-height: 21px !important;
-            margin-bottom: 0 !important;
-        }
-
-        .dd-option-text {
-            line-height: 20px !important;
-            margin-bottom: 0 !important;
-        }
-
-        .dd-option-image, .dd-selected-image {
-            height: 21px !important;
-        }
-
-        .dd-select .dd-selected {
-            line-height: 23px !important;
-            margin-bottom: 0 !important;
-            padding: 6px !important;
-        }
-
-        .dd-options li {
-            margin-bottom: 0 !important;
-        }
-
-        .dd-option {
-            padding: 5px !important;
-            z-index: 1 !important;
-        }
-
-        .dd-select, .dd-container, .dd-options {
-            width: 216px !important;
-        }
-
-        .dd-options {
-            z-index: 1 !important;
-        }
-
-        a.dd-selected {
-            color: inherit;
-            font-weight: inherit;
-        }
-
-        select {
-            padding: 7px 10px;
-            max-width: 100%;
-            font-size: 13px;
-            width: 70%;
-        }
-
-        label {
-            display: block;
-            width: 100%;
-            clear: both;
-        }
-
-        .control-group input {
-            width: 70%;
-            padding: 5px 10px;
-            max-width: 100%;
-            font-size: 13px;
-        }
-
-        textarea {
-            height: 200px;
-            margin-bottom: 20px;
-        }
-    </style>
-    <main class="content">
-        <div class="container">
-
-            <div class="d-flex justify-content-between mb-3">
-                <h1 class="h4">@lang('project::client.create_project_title')</h1>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="card p-3">
-                        <form action="{{ route('client.projects.store') }}" enctype="multipart/form-data" method="POST">
-                            @csrf
-
-                            <div id="step_2" class="form" style="display:block">
-                                <div class="container">
-                                    <div class="information-line clearfix line-n-margin">
-                                        <div class="head_author_line pull-left">
-                                            Создание нового проекта
-                                        </div>
-                                    </div>
-                                    <div class="extra-line-switch clearfix">
-                                        <ul>
-                                            <li class="active"><a href="#tab_1" id="forerrors1">Основные</a></li>
-                                            <li><a href="#tab_2" id="forerrors2">Дополнительные</a></li>
-                                            <li><a href="#tab_4" id="forerrors4">Страницы</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="tabs">
-                                        <div id="tab_1" class="tab_content" style="display: block">
-                                            <article class="edit-persona">
-                                                <div class="row control-group" style="margin-bottom:23px">
-                                                    <label for="ProjectForm_Copy" style="margin-bottom:9px">Скопировать
-                                                        настройки проекта</label>
-                                                    <select id="doCopy">
-                                                        <option>Выберите проект, с которого скопировать настройки
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="row control-group" style="margin-bottom:23px">
-                                                    <label for="ProjectForm_title" class="required">Название <span
-                                                            class="required">*</span></label>
-
-                                                    <input
-                                                        placeholder="название видно авторам" name="title"
-                                                        id="ProjectForm_title" type="text" maxlength="150" value=""/>
-                                                    <div class="errorMessage" id="ProjectForm_title_em_"
-                                                         style="display:none"></div>
-                                                </div>
-                                                <div class="row control-group" style="margin-bottom:23px">
-                                                    <label for="ProjectForm_url">Ссылка на сайт или страницу</label>
+    <div class="container">
+        <div class="project__title">
+            @lang('project::project.title_add')
+        </div>
 
 
-                                                    <input
-                                                        placeholder="ссылка на сайт или отдельную страницу, с http://"
-                                                        name="link" id="ProjectForm_url" type="text"
-                                                        maxlength="1000" value=""/>
-                                                    <div class="errorMessage" id="ProjectForm_url_em_"
-                                                         style="display:none"></div>
-                                                </div>
-                                                <div class="row control-group" style="margin-bottom:23px">
-                                                    <label for="ProjectForm_subjects" class="required">Тематика <span
-                                                            class="required">*</span></label>
-                                                    <select id="ProjectForm_subjects">
-                                                        <option value="49">Азартные игры</option>
-                                                        <option value="1">Блог</option>
-                                                        <option value="2">Интернет магазин</option>
-                                                        <option value="44">Форум</option>
-                                                        <option value="0">Универсальная</option>
-                                                        <option value="3">Hi-Tech</option>
-                                                    </select>
-                                                    <div class="errorMessage" id="ProjectForm_subjects_em_"
-                                                         style="display:none"></div>
-                                                </div>
-                                                <div class="row control-group" id="rowLanguage"
-                                                     style="margin-bottom:23px">
-                                                    <label for="ProjectForm_language_id" class="required">Язык
-                                                        комментариев <span class="required">*</span></label>
-                                                    <select id="ProjectForm_language_id">
-                                                        <option value="0">Русский</option>
-                                                        <option value="1">Английский</option>
-                                                        <option value="2">Украинский</option>
-                                                    </select>
-                                                    <div class="errorMessage" id="ProjectForm_language_id_em_"
-                                                         style="display:none"></div>
-                                                </div>
-                                            </article>
-                                            <!--FINANCE BLOCK-->
-                                            <article class='notice pull-right'>
-                                                <div class="wall">
-                                                    <div class="row">
-                                                        <label class="required" for="ProjectForm_tarif_id">Валюта для
-                                                            оплаты</label>
-                                                        <div borderColor="#e9e9e9" backgroundColor="white" width="216px"
-                                                             id="yw0">
-                                                            <div class="portlet-content">
-                                                                <div class="newProject_currency_id">
-                                                                    <select id="newProject_currency_id" class="languageSelect" style="width:216px">
-                                                                        <option selected
-                                                                                data-imagesrc="/img/currency/1.png"
-                                                                                value="1">0.00 RUB
-                                                                        </option>
-                                                                        <option data-imagesrc="/img/currency/2.png"
-                                                                                value="2">0.00 $
-                                                                        </option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row control-group" style="margin-bottom:20px">
-                                                        <div style="float:right">
-                                                            <a href="/choose" style="font-size:10px" target="_blank">Как
-                                                                выбрать тариф?</a>
-                                                        </div>
-                                                        <label for="ProjectForm_tarif_id" class="required">Тариф <span
-                                                                class="required">*</span></label>
-                                                        <select id="ProjectForm_tarif_id" data-placeholder="Выберите тариф">
-                                                            <option></option>
-                                                            <optgroup
-                                                                label="Комментарии и отзывы без регистрации (Cackle, HyperComments, Disqus и другие)"
-                                                                data-globalType="0">
-                                                                <option data-freeMinutes="2"
-                                                                        data-price_minute="0.77"
-                                                                        data-average_price="0.15"
-                                                                        data-time_execute="1500"
-                                                                        data-currency_id="2"
-                                                                        data-original_id="166"
-                                                                        data-price="0"
-                                                                        data-group_id="1"
-                                                                        class='mix' value="268">Микс без регистрации
-                                                                </option>
-                                                            </optgroup>
-                                                        </select>
-                                                    </div>
-                                                    <div class="row control-group" id="video_price">
-                                                        <label for="ProjectForm_minutes">Длительность видео в
-                                                            минутах</label>
+        <nav class="create__project__navigation">
+            <ul>
+                <li class="proj_nav_item active__nav first__open">@lang('project::project.the_main')</li>
+                <li class="proj_nav_item second__open">@lang('project::project.additional')</li>
+                <li class="proj_nav_item third__open">@lang('project::project.limitations')</li>
+                <li class="proj_nav_item fourth__open">@lang('project::project.pages')</li>
+                <li class="proj_nav_item fifth__open">@lang('project::project.geo_targeting')</li>
+                <li class="proj_nav_item sixth__open">@lang('project::project.account_requirements')</li>
+            </ul>
+        </nav>
 
-                                                        <input style="width:200px"
-                                                               id="ProjectForm_minutes" type="text"
-                                                               value="2"/>
+        <div class="new__of__navigation first__navigation">
+            <form action="{{ route('client.projects.store') }}">
+                @csrf
+                <div class="inner__new__navigation">
+                    <div class="left__main__nav">
+                        <div class="main__select__item">
+                            <p>@lang('project::project.enter_title')*</p>
+                            <input type="text"  class="main__input__other" name="title" value="" required placeholder="@lang('project::project.enter_title')"/>
+                        </div>
 
-                                                    </div>
-                                                    <div class="row control-group " id="rowPremoderation"
-                                                         style="margin-bottom:20px;">
-                                                        <div style="float:left; margin-right:15px"><label
-                                                                for="ProjectForm_premoderation">Премодерация
-                                                                комментариев</label>
-                                                        </div>
-                                                        <select name="moderation_comments"
-                                                                id="ProjectForm_premoderation">
-                                                            <option value="0">Авторы публикуют сразу на Ваш сайт
-                                                            </option>
-                                                            <option value="1">Публикуют на сайт после Вашего одобрения
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="checkbox" id="rowNotlong">
-                                                        <input id="ytProjectForm_notlong" type="hidden" value="0" name="small_comments"/>
-                                                        <input name="small_comments" id="ProjectForm_notlong" value="1" type="checkbox"/>
-                                                        <label  for="ProjectForm_notlong" style="display:inline; margin-right:15px">
-                                                            Разрешить комментарии меньшего размера
-                                                        </label>
-                                                    </div>
-                                                    <div class="checkbox  " id="service_screenshot">
-                                                        <input id="ytProjectForm_screenshot" type="hidden" value="0" name="screenshot"/>
-                                                        <input name="screenshot" id="ProjectForm_screenshot" value="1" type="checkbox"/>
-                                                        <label for="ProjectForm_screenshot" style="display:inline; margin-right:15px">
-                                                            Требовать скриншот от автора (
-                                                            + <span class="currency-name screenshot_am"> RUB)</span>
-                                                            )
-                                                        </label>
-                                                    </div>
-                                                    <div class="checkbox" id="service_verification">
-                                                        <input id="ytProjectForm_user_verification" type="hidden" value="0" name="user_pro"/>
-                                                        <input name="user_pro" id="ProjectForm_user_verification" value="1" type="checkbox"/>
-                                                        <label for="ProjectForm_user_verification" style="display:inline; margin-right:15px">
-                                                            Только для верифицированных авторов (
-                                                            + <span class="currency-name verification_am"> RUB)</span>
-                                                            )
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                            <!--END FINANCE BLOCK-->
-                                            <p class="clearfix"></p>
-                                            <div class="row control-group">
-                                                <label for="ProjectForm_task" class="required">Задание авторам <span
-                                                        class="required">*</span></label>
-                                                <textarea placeholder="Опишите задание для автора. В каком настроении комментарии, какие темы охватывать, что запрещено обсуждать и т.д..
-                                                                        ВНИМАНИЕ! Готовые комментарии сюда не пишите, их сможете загрузить после создания проекта. Если необходимо, то указывайте список соц.
-                                                                        сетей и требований к аккаунтам." style="width:100%" name="description" id="ProjectForm_task"></textarea>
-                                            </div>
+                        <div class="main__select__item">
+                            <p>Тематика *</p>
+                            <select class="custom-select sources" placeholder="Азартные игры" id="subject" name="subject" required>
+                                <option value="Азартные игры1">Азартные игры1</option>
+                                <option value="Азартные игры2">Азартные игры2</option>
+                                <option value="Азартные игры3">Азартные игры3</option>
+                                <option value="Азартные игры4">Азартные игры4</option>
+                            </select>
+                        </div>
 
-                                        </div>
-                                        <div id="tab_2" class="tab_content">
-                                            <article class="edit-persona">
-                                                <div class="row control-group" style="margin-bottom:23px">
+                        <div class="main__select__item">
+                            <p>Язык комментариев *</p>
+                            <select class="custom-select sources" required placeholder="langvich" id="">
+                                <option value="Русский">Русский</option>
+                                <option value="Украинский">Украинский</option>
+                                <option value="Английский">Английский</option>
+                            </select>
+                        </div>
 
-                                                        <label for="ProjectForm_group_id">Группа</label>
-                                                    <select id="ProjectForm_group_id">
-                                                        <option value="0" selected="selected">Без группы</option>
-                                                        <option value="103174">Новая група</option>
-                                                    </select>
-                                                </div>
-                                                <div class="row control-group" style="margin-bottom:23px">
-                                                    <label for="ProjectForm_team_id">Команда авторов</label>
-                                                    <select multiple="multiple" data-placeholder="Выберите команду"  id="ProjectForm_team_id">
-                                                    </select>
-                                                    <div class="errorMessage" id="ProjectForm_team_id_em_"
-                                                         style="display:none"></div>
-                                                </div>
-                                                <div class="row control-group" style="margin-bottom:23px">
-                                                    <label for="ProjectForm_author">Логин автора</label>
-                                                    <input placeholder="Логин / Email" id="ProjectForm_author" type="text" value=""/>
-                                                </div>
-                                                <div class="row control-group" style="margin-bottom:23px">
-                                                    <label for="ProjectForm_send_email">Уведомления о новых заявках</label>
-                                                    <select id="ProjectForm_send_email">
-                                                        <option value="1">Получать уведомления</option>
-                                                        <option value="0">Не получать</option>
-                                                    </select>
-                                                </div>
-                                            </article>
-                                            <article class='notice notice-2 pull-right' id="comment_configs">
-                                                <div class="wall white-wall row">
-                                                    <div for="ProjectForm_comment_configs" style="width: 100%">Типы
-                                                            комментариев</div>
-                                                    <input id="ytProjectForm_comment_configs" type="hidden" value="" />
-                                                    <div id="ProjectForm_comment_configs">
-                                                        <div class="checkbox conficheck">
-                                                            <span class="pull-left"><label for="ProjectForm_comment_configs_0">Отзывы</label></span>
-                                                            <span class="pull-right">
-                                                                <input id="ProjectForm_comment_configs_0" value="0" checked="checked" type="checkbox" />
-                                                            </span>
-                                                        </div>
-                                                        <div class="checkbox conficheck">
-                                                            <span class="pull-left"><label for="ProjectForm_comment_configs_1">Вопросы</label></span>
-                                                            <span class="pull-right">
-                                                                <input id="ProjectForm_comment_configs_1" value="1" checked="checked" type="checkbox"/>
-                                                            </span>
-                                                        </div>
-                                                        <div class="checkbox conficheck">
-                                                            <span class="pull-left"><label for="ProjectForm_comment_configs_2">Положительные</label></span>
-                                                            <span class="pull-right">
-                                                                <input id="ProjectForm_comment_configs_2" value="2" checked="checked" type="checkbox"/>
-                                                            </span>
-                                                        </div>
-                                                        <div class="checkbox conficheck">
-                                                            <span class="pull-left"><label for="ProjectForm_comment_configs_3">Нейтральные</label></span>
-                                                            <span class="pull-right"><input id="ProjectForm_comment_configs_3" value="3" checked="checked" type="checkbox" />
-                                                            </span>
-                                                        </div>
-                                                        <div class="checkbox conficheck">
-                                                            <span class="pull-left"><label for="ProjectForm_comment_configs_4">Отрицательные</label></span>
-                                                            <span class="pull-right"><input id="ProjectForm_comment_configs_4" value="4" type="checkbox" /></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="errorMessage" id="ProjectForm_comment_configs_em_" style="display:none"></div>
-                                                    <p>
-                                                        <b>Пункт правил 5.13: Запрещено заказывать негативные отзывы и
-                                                            оценки с целью ухудшения репутации 3-х лиц. </b>
-                                                    </p>
-                                                </div>
-                                            </article>
-                                            <p class="clearfix"></p>
-                                            <div class="wall wall-half-margin clearfix">
-                                                <div class="control-group">
-                                                    <div class="clearfix"></div>
-                                                    <div class="half-int pull-left row" style="float:left">
-                                                        <label for="ProjectForm_date_start">Отложенный запуск проекта</label>
-                                                        <div style="float:left">
-                                                            <input placeholder="например: 2014-03-21 10:00:00" style="width:100%" name="date_start" id="ProjectForm_date_start" type="text" value=""/>
-                                                        </div>
-                                                    </div>
-                                                    <div class="half-int pull-right row" style="float:left">
-                                                        <label for="ProjectForm_date_end">Время, в которое проект будет приостановлен</label>
-                                                        <div style="float:left">
-                                                            <input placeholder="например: 2014-03-22 10:00:00"  style="width:100%" name="date_end" id="ProjectForm_date_end" type="text" value=""/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="tab_4" class="tab_content">
-                                            <p class="clearfix"></p>
-                                            <div class="control-group row">
-                                                <label for="ProjectForm_pages">Список страниц, с которыми можно работать</label>
-                                                <textarea placeholder="Только прямые ссылки, каждую с новой строки." style="width:100%" name="page_link" id="ProjectForm_pages"></textarea>
-                                                <div class="errorMessage" id="ProjectForm_pages_em_" style="display:none"></div>
-                                            </div>
-                                            <div class="wall" style="margin:20px 0">
-                                                <h5>Важно</h5>
-                                                <p>Список страниц, с которыми можно работать. Каждую ссылку с новой строки. Другие страницы, система не пропустит в работу.</p>
-                                                <p>Указывайте исключительно ссылки на страницы. Если хотите указать, какие категории на
-                                                    сайте необходимо комментировать, то пишите это в задании автору. В поле "Ссылка на сайт
-                                                    или страницу" укажите ссылку на главную страницу сайта.</p>
-                                                <p>Если список ссылок не указан, то авторы будут самостоятельно выбирать на сайте.</p>
-                                            </div>
-                                        </div>
-                                        <div class="pull-left btn-left" style="margin-bottom:20px">
-                                            <input type="submit" name="yt0" value="Создать проект"/>
-                                        </div>
+                        <div class="main__select__item">
+                            <p>Задание авторам *</p>
+                            <textarea name="" id="" placeholder="Опипише задание как можно подробнее"></textarea>
+                        </div>
+
+                        <div class="choose__file">
+                            <label class="filelabel">
+                                <img src="img/_src/choose__file.png" alt="choose__file">
+                                <span class="title">
+									        Add File
+									    </span>
+                                <input class="FileUpload1" id="FileInput" name="booking_attachment" type="file">
+                            </label>
+                            <span>Размер файла не более 10 Мбайт</span>
+                        </div>
+                    </div>
+
+
+                    <div class="right__main__nav">
+                        <div class="first__right">
+                            <div class="main__select__item">
+                                <p>Валюта для оплаты *</p>
+                                <select class="custom-select sources" placeholder="0.00 RUB" id="">
+                                    <option value="1753.35 RUB">1753.35 RUB</option>
+                                    <option value="3155.75 RUB">3155.75 RUB</option>
+                                    <option value="343.22 RUB">343.22 RUB</option>
+                                </select>
+                            </div>
+
+                            <div class="main__select__item">
+                                <p>Тариф *</p>
+                                <select class="custom-select sources" placeholder="Выберите тариф" id="">
+                                    <option value="Тариф1">Тариф1</option>
+                                    <option value="Тариф2">Тариф2</option>
+                                    <option value="Тариф3">Тариф3</option>
+                                    <option value="Тариф4">Тариф4</option>
+                                </select>
+                            </div>
+
+                            <div class="main__select__item">
+                                <p>Премодерация комментариев *</p>
+                                <select class="custom-select sources" placeholder="Авторы публикуют сразу на ваш сайт" id="">
+                                    <option value="Автор1">Автор1</option>
+                                    <option value="Автор2">Автор2</option>
+                                    <option value="Автор3">Автор3</option>
+                                    <option value="Автор4">Автор4</option>
+                                </select>
+                            </div>
+
+                            <div class="checkbox__main">
+                                <label for="main__check1"><input type="checkbox" id="main__check1">Разрешить комментарии меньшего размера</label>
+
+                                <label for="main__check2"><input type="checkbox" id="main__check2">Требовать скриншот от автора ( + 1 RUB )</label>
+
+                                <label for="main__check3"><input type="checkbox" id="main__check3">Только для верифицированных авторов ( + 5 RUB )</label>
+                            </div>
+                        </div>
+
+                        <div class="second__right">
+                            <ul class="second__numeration">
+                                <li><span>5.6</span>Запрещено требовать в задании репост и комментарий в одном проекте. Для этого создаются разные проекты и оплачиваются отдельно.</li>
+
+                                <li><span>5.7</span>Запрещено требовать больше символов в комментарии, чем указано в выбранном тарифе. При необходимости дополнительного количества символов, заказчик обязывается установить надбавку.</li>
+
+                                <li><span>5.8</span>Если на сайте необходима активация аккаунта, посредством СМС, то заказчик обязывается указать это в задании и установить надбавку к стоимости комментария.</li>
+
+                                <li><span>5.9</span>Запрещено создавать проекты, затрагивающие политические темы.</li>
+
+                                <li><span>5.10</span>Для требования скриншота выполненной работы, Заказчик обязуется использовать соответствующую опцию в настройках проекта.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="create__project__btn">
+                    <a href="#"><span><img src="img/_src/create__project__icon.png" alt="create__project__icon"></span>Создать проект</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="new__of__navigation second__navigation">
+            <form action="/">
+                <div class="inner__new__navigation">
+                    <div class="left__main__nav">
+                        <div class="main__select__item">
+                            <p>Группа</p>
+                            <select class="custom-select sources" placeholder="Без группы" id="">
+                                <option value="Группа1">Группа1</option>
+                                <option value="Группа2">Группа2</option>
+                                <option value="Группа3">Группа3</option>
+                                <option value="Группа4">Группа4</option>
+                            </select>
+                        </div>
+
+                        <div class="main__select__item">
+                            <p>Команда авторов</p>
+                            <select class="custom-select sources" placeholder="Выберите команду" id="">
+                                <option value="Команда1">Команда1</option>
+                                <option value="Команда3">Команда3</option>
+                                <option value="Команда2">Команда2</option>
+                            </select>
+                        </div>
+
+                        <div class="main__select__item">
+                            <p>Логин автора</p>
+                            <input class="main__input__other" type="text" placeholder="Логин / Email">
+                        </div>
+
+                        <div class="main__select__item">
+                            <p>Уведомления о новых заявках</p>
+                            <select class="custom-select sources" placeholder="Получать уведомления" id="">
+                                <option value="уведомления1">уведомления1</option>
+                                <option value="уведомления2">уведомления2</option>
+                                <option value="уведомления3">уведомления3</option>
+                            </select>
+                        </div>
+
+
+                        <div class="first__right first__for__margin">
+                            <div class="main__select__item">
+                                <p>Отложенный запуск проекта</p>
+
+                                <div class="with__hint__input">
+                                    <input class="main__input__other" type="text" placeholder="Например: 2021/02/08 10:00:00">
+
+                                    <span class="hint">?</span>
+                                    <div class="text__hint">
+                                        Подсказка
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                            <div class="main__select__item">
+                                <p>Время, в которое проект будет приостановлен</p>
+                                <div class="with__hint__input">
+
+                                    <input class="main__input__other" type="text" placeholder="Например: 2021/02/08 10:00:00">
+
+                                    <span class="hint">?</span>
+                                    <div class="text__hint">
+                                        Подсказка
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="right__main__nav">
+                        <div class="first__right">
+                            <h3>Уведомления на почту</h3>
+                            <div class="checkbox__main">
+                                <label for="review"><input type="checkbox" id="review">Отзывы</label>
+
+                                <label for="question"><input type="checkbox" id="question">Вопросы</label>
+
+                                <label for="yes"><input type="checkbox" id="yes">Положительные</label>
+
+                                <label for="dontknow"><input type="checkbox" id="dontknow">Нейтральные</label>
+
+                                <label for="dontknow2"><input type="checkbox" id="dontknow2">Отрицательные</label>
+
+                                <label for="answer"><input type="checkbox" id="answer">Ответы</label>
+                            </div>
+                        </div>
+
+                        <div class="second__right">
+                            <ul class="second__numeration">
+                                <li><span>Пункт правил 5.13:</span> Запрещено заказывать негативные отзывы и оценки с целью ухудшения репутации 3-х лиц.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                <div class="create__project__btn">
+                    <a href="#"><span><img src="img/_src/create__project__icon.png" alt="create__project__icon"></span>Создать проект</a>
+                </div>
+            </form>
         </div>
-    </main>
+
+
+
+
+        <div class="new__of__navigation third__navigation">
+            <form action="/">
+                <div class="main__third__nav">
+                    <div class="new__navigation__title">
+                        Активность проекта
+                    </div>
+
+                    <div class="active__inner">
+                        <div class="active__project">
+                            <p>Группа</p>
+                            <div class="label__week">
+                                <label for="monday">
+                                    <input type="checkbox" id="monday">
+                                    <span>Пн</span>
+                                </label>
+
+                                <label for="tuesday">
+                                    <input type="checkbox" id="tuesday">
+                                    <span>Вт</span>
+                                </label>
+
+                                <label for="wednesday">
+                                    <input type="checkbox" id="wednesday">
+                                    <span>Ср</span>
+                                </label>
+
+                                <label for="thursday">
+                                    <input type="checkbox" id="thursday">
+                                    <span>Чт</span>
+                                </label>
+
+                                <label for="friday">
+                                    <input type="checkbox" id="friday">
+                                    <span>Пт</span>
+                                </label>
+
+                                <label for="saturday">
+                                    <input type="checkbox" id="saturday">
+                                    <span>Сб</span>
+                                </label>
+
+                                <label for="sunday">
+                                    <input type="checkbox" id="sunday">
+                                    <span>Вс</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="active__project">
+                            <p>Часы активности</p>
+                            <div class="time__active">
+                                с <input type="text" placeholder="00:00:00"> до <input type="text" placeholder="00:00:00">
+                                <span class="hint">?</span>
+                                <div class="text__hint">
+                                    Подсказка
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="limit__inner">
+                        <div class="new__navigation__title">
+                            Лимиты
+                        </div>
+                        <div class="inner__kolvo">
+                            <div class="kolvo__text">
+                                <span>Максимальное ко-во</span>
+                                <span>Случайное кол-во</span>
+                            </div>
+
+                            <div class="kolvo__input">
+                                Кол-во работ <input type="text"> за <input type="text"> дней
+                            </div>
+                        </div>
+
+                        <div class="inner__kolvo">
+                            <div class="kolvo__text kolvo__text2">
+                                <span>Задержка между работами (в мин.)</span>
+                            </div>
+
+                            <div class="kolvo__input">
+                                От <input type="text"> До <input type="text">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="main__select__item">
+                        <div class="paragraph__div">
+                            Лимит в час
+                            <span class="hint">?</span>
+                            <div class="text__hint">
+                                Подсказка
+                            </div>
+                        </div>
+
+                        <input class="main__input__other" type="text" placeholder="0">
+                    </div>
+
+                    <div class="main__select__item">
+                        <div class="paragraph__div">
+                            Лимит на страницу
+                            <span class="hint">?</span>
+                            <div class="text__hint">
+                                Подсказка
+                            </div>
+                        </div>
+
+                        <input class="main__input__other" type="text" placeholder="0">
+                    </div>
+
+                    <div class="main__select__item">
+                        <div class="paragraph__div">
+                            Лимит на страницу в сутки
+                            <span class="hint">?</span>
+                            <div class="text__hint">
+                                Подсказка
+                            </div>
+                        </div>
+
+                        <input class="main__input__other" type="text" placeholder="0">
+                    </div>
+
+                    <div class="limit__inner">
+                        <div class="new__navigation__title">
+                            Лимиты по авторам
+                        </div>
+
+                        <div class="main__select__item">
+                            <div class="paragraph__div">
+                                Лимит от автора
+                                <span class="hint">?</span>
+                                <div class="text__hint">
+                                    Подсказка
+                                </div>
+                            </div>
+
+                            <input class="main__input__other" type="text" placeholder="3">
+                        </div>
+
+                        <div class="main__select__item">
+                            <div class="paragraph__div">
+                                Лимит в сутки от автора
+                                <span class="hint">?</span>
+                                <div class="text__hint">
+                                    Подсказка
+                                </div>
+                            </div>
+
+                            <input class="main__input__other" type="text" placeholder="3">
+                        </div>
+
+                        <div class="main__select__item">
+                            <div class="paragraph__div">
+                                Лимит на аккаунт
+                                <span class="hint">?</span>
+                                <div class="text__hint">
+                                    Подсказка
+                                </div>
+                            </div>
+
+                            <input class="main__input__other" type="text" placeholder="3">
+                        </div>
+
+                        <div class="main__select__item">
+                            <div class="paragraph__div">
+                                Лимит от автора на группу проектов
+                                <span class="hint">?</span>
+                                <div class="text__hint">
+                                    Подсказка
+                                </div>
+                            </div>
+
+                            <input class="main__input__other" type="text" placeholder="3">
+
+                            <label class="all__project__checkbox" for="all__project1">
+                                <input type="checkbox" id="all__project1">
+                                Установить для всех проектов группы
+                            </label>
+                        </div>
+
+                        <div class="main__select__item">
+                            <div class="paragraph__div">
+                                Лимит в сутки от автора, на группу проектов
+
+                                <span class="hint">?</span>
+                                <div class="text__hint">
+                                    Подсказка
+                                </div>
+                            </div>
+
+                            <input class="main__input__other" type="text" placeholder="3">
+
+                            <label class="all__project__checkbox" for="all__project2">
+                                <input type="checkbox" id="all__project2">
+                                Установить для всех проектов группы
+                            </label>
+                        </div>
+
+                        <div class="main__select__item">
+                            <div class="paragraph__div">
+                                Лимит на 1 IP
+                                <span class="hint">?</span>
+                                <div class="text__hint">
+                                    Подсказка
+                                </div>
+                            </div>
+
+                            <input class="main__input__other" type="text" placeholder="7">
+                        </div>
+
+                        <div class="main__select__item">
+                            <div class="paragraph__div">
+                                Максимум приступивших авторов
+                                <span class="hint">?</span>
+                                <div class="text__hint">
+                                    Подсказка
+                                </div>
+                            </div>
+
+                            <input class="main__input__other" type="text" placeholder="3">
+                        </div>
+
+                        <div class="main__select__item">
+                            <div class="paragraph__div">
+                                Задержка перед повторным выполнением (в мин.)
+                                <span class="hint">?</span>
+                                <div class="text__hint">
+                                    Подсказка
+                                </div>
+                            </div>
+
+                            <input class="main__input__other" type="text" placeholder="3">
+                        </div>
+                    </div>
+
+                    <div class="limit__inner">
+                        <div class="new__navigation__title">
+                            Устройства
+                        </div>
+
+                        <label class="all__project__checkbox other__all__project__checkbox" for="all__project3">
+                            <input type="checkbox" id="all__project3">
+                            Только для мобильных устройств
+                            <span class="hint">?</span>
+                            <div class="text__hint">
+                                Подсказка
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="stop__words__block">
+                        <div class="main__select__item">
+                            <p>Стоп слова</p>
+                            <textarea name="" id="" placeholder="Запрещённые слова (через запятую)"></textarea>
+
+                            <div class="for__example">
+                                Например: "спасибо, пожалуйста". Комментарии, в которых будут содержаться указанные слова не будут допущены на проверку.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="create__project__btn">
+                    <a href="#"><span><img src="img/_src/create__project__icon.png" alt="create__project__icon"></span>Создать проект</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="new__of__navigation fourth__navigation">
+            <form action="/">
+                <div class="inner__new__navigation">
+
+                    <div class="left__main__nav">
+                        <div class="main__select__item">
+                            <p>Список страниц, с которыми можно работать</p>
+                            <textarea name="" id="" placeholder="Только прямые ссылки, каждую с новой строки"></textarea>
+                        </div>
+                    </div>
+                    <div class="right__main__nav">
+                        <div class="first__right">
+                            <span class="main__information">Важная информация</span>
+                            <ul class="second__numeration">
+
+                                <li>Список страниц, с которыми можно работать. Каждую ссылку с новой строки. Другие страницы, система не пропустит в работу.</li>
+
+                                <li>Указывайте исключительно ссылки на страницы. Если хотите указать,какие категории на сайте необходимо комментировать, то пишите это в задании автору. В поле "Ссылка на сайт или страницу" укажите ссылку на главную страницу сайта.</li>
+
+                                <li>Если список ссылок не указан, то авторы будут самостоятельно выбирать на сайте.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="create__project__btn">
+                    <a href="#"><span><img src="img/_src/create__project__icon.png" alt="create__project__icon"></span>Создать проект</a>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="new__of__navigation fifth__navigation">
+            <form action="/">
+                <div class="inner__new__navigation">
+
+                    <div class="left__main__nav" style="width: 488px;">
+                        <div class="main__select__item">
+                            <p>Название *</p>
+                            <select class="custom-select sources" placeholder="Project 1" id="">
+                                <option value="Команда1">Команда1</option>
+                                <option value="Команда3">Команда3</option>
+                                <option value="Команда2">Команда2</option>
+                            </select>
+                        </div>
+
+                        <div class="country__list">
+                            <p>Список стран и городов</p>
+
+                            <ul class="list__ul">
+                                <li>
+                                    <div class="list__russian">
+                                        <span><img src="img/_src/flag__russian.png" alt="flag__author.png"></span>
+                                        Российская федерация / Москва
+                                    </div>
+
+                                    <span><img src="img/_src/close__list.png" alt="close__list"></span>
+                                </li>
+
+                                <li>
+                                    <div class="list__russian">
+                                        <span><img src="img/_src/flag__russian.png" alt="flag__author.png"></span>
+                                        Российская федерация / Москва
+                                    </div>
+
+                                    <span><img src="img/_src/close__list.png" alt="close__list"></span>
+                                </li>
+
+                                <li>
+                                    <div class="list__russian">
+                                        <span><img src="img/_src/flag__russian.png" alt="flag__author.png"></span>
+                                        Российская федерация / Москва
+                                    </div>
+
+                                    <span><img src="img/_src/close__list.png" alt="close__list"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="right__main__nav" style="margin-top: 0; width: 488px;">
+                        <div class="main__select__item">
+                            <p>Название *</p>
+                            <select class="custom-select sources" placeholder="Project 1" id="">
+                                <option value="Команда1">Команда1</option>
+                                <option value="Команда3">Команда3</option>
+                                <option value="Команда2">Команда2</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="create__project__btn">
+                    <a href="#"><span><img src="img/_src/create__project__icon.png" alt="create__project__icon"></span>Создать проект</a>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="new__of__navigation sixth__navigation">
+            <form action="/">
+                <div class="sixth__navigation__new">
+                    <div class="item__sixth">
+                        <div class="top__sixth">
+                            <div class="title__sixth">
+                                Вконтакте
+                            </div>
+                            <label for="checkbox__vk">
+                                <input type="checkbox" id="checkbox__vk">
+                            </label>
+                        </div>
+
+                        <div class="main__select__item">
+                            <p>Количество друзей</p>
+                            <input class="main__input__other" type="text" placeholder="50">
+                        </div>
+
+                        <div class="main__select__item">
+                            <p>Пол</p>
+                            <select class="custom-select sources" placeholder="Не важно" id="">
+                                <option value="Мужской">Мужской</option>
+                                <option value="Женский">Женский</option>
+                            </select>
+                        </div>
+
+
+                        <div class="main__select__item">
+                            <p>Возраст</p>
+                            <div id="slider-range" class="slider__all__range"></div>
+
+                            <ul class="slider__summa">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <ul class="numeration__slider">
+                                <li>10</li>
+                                <li>33</li>
+                                <li>55</li>
+                                <li>78</li>
+                                <li>100</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="item__sixth">
+                        <div class="top__sixth">
+                            <div class="title__sixth">
+                                Одноклассники
+                            </div>
+                            <label for="checkbox__odn">
+                                <input type="checkbox" id="checkbox__odn">
+                            </label>
+                        </div>
+
+                        <div class="main__select__item">
+                            <p>Количество друзей</p>
+                            <input class="main__input__other" type="text" placeholder="70">
+                        </div>
+
+                        <div class="main__select__item">
+                            <p>Пол</p>
+                            <select class="custom-select sources" placeholder="Не важно" id="">
+                                <option value="Мужской">Мужской</option>
+                                <option value="Женский">Женский</option>
+                            </select>
+                        </div>
+
+                        <div class="main__select__item">
+                            <p>Возраст</p>
+                            <div id="slider-range1" class="slider__all__range"></div>
+
+                            <ul class="slider__summa">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <ul class="numeration__slider">
+                                <li>10</li>
+                                <li>33</li>
+                                <li>55</li>
+                                <li>78</li>
+                                <li>100</li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="item__sixth">
+                        <div class="top__sixth">
+                            <div class="title__sixth">
+                                Facebook
+                            </div>
+                            <label for="checkbox__fb">
+                                <input type="checkbox" id="checkbox__fb">
+                            </label>
+                        </div>
+
+                        <div class="main__select__item">
+                            <p>Пол</p>
+                            <select class="custom-select sources" placeholder="Не важно" id="">
+                                <option value="Мужской">Мужской</option>
+                                <option value="Женский">Женский</option>
+                            </select>
+                        </div>
+
+                        <div class="main__select__item">
+                            <p>Возраст</p>
+                            <div id="slider-range2" class="slider__all__range"></div>
+
+                            <ul class="slider__summa">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <ul class="numeration__slider">
+                                <li>10</li>
+                                <li>33</li>
+                                <li>55</li>
+                                <li>78</li>
+                                <li>100</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="item__sixth">
+                        <div class="top__sixth">
+                            <div class="title__sixth">
+                                Instagram
+                            </div>
+                            <label for="checkbox__inst">
+                                <input type="checkbox" id="checkbox__inst">
+                            </label>
+                        </div>
+
+                        <div class="main__select__item">
+                            <p>Количество подписчиков</p>
+                            <input class="main__input__other" type="text" placeholder="50">
+                        </div>
+                    </div>
+
+                    <div class="item__sixth">
+                        <div class="top__sixth">
+                            <div class="title__sixth">
+                                Twitter
+                            </div>
+                            <label for="checkbox__twitter">
+                                <input type="checkbox" id="checkbox__twitter">
+                            </label>
+                        </div>
+
+                        <div class="main__select__item">
+                            <p>Количество фолловеров</p>
+                            <input class="main__input__other" type="text" placeholder="50">
+                        </div>
+                    </div>
+                </div>
+
+                <label for="disable check" class="disable_check">
+                    <input type="checkbox" id="disable check">
+                    Отключить проверку
+                </label>
+
+                <div class="create__project__btn">
+                    <a href="#"><span><img src="img/_src/create__project__icon.png" alt="create__project__icon"></span>Создать проект</a>
+                </div>
+            </form>
+        </div>
+    </div>
 
 @endsection
 
 
 @section('javascript')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        function tabOrganizer() {
-            $(".extra-line-switch li").click(function () {
-                $(".extra-line-switch li").removeClass('active');
-                $(this).addClass("active");
-                $(".tab_content").hide();
-                var selected_tab = $(this).find("a").attr("href");
-                $(selected_tab).fadeIn();
-                return false
-            })
-        }
 
-        tabOrganizer();
-    </script>
-
-    <script>
-        /*$(document).ready(function () {
-            setTimeout(function () {
-                $('#newProject_currency_id').ddslick({
-                    imagePosition: "left",
-                    selectText: "",
-                    onSelected: function (data) {
-                        $('div.newProject_currency_id .dd-selected-value').attr('name', 'newProject_currency_id[currency_id]');
-                        changeCurrency(data);
-                    }
-                });
-            })
-        })*/
-    </script>
 @endsection

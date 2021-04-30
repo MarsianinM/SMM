@@ -11,7 +11,7 @@
             <li><a href="#">Черный список авторов</a></li>
             <li><a href="#">Команды авторов</a></li>
             <li><a href="#" class="btn__top-menu green__btntop">Ваш менеджер</a></li>
-            <li><a href="{{ route('client.projects.index') }}" class="btn__top-menu red__btntop">Создать проект</a></li>
+            <li><a href="{{ route('client.projects.create') }}" class="btn__top-menu red__btntop">Создать проект</a></li>
         </ul>
         @endrole
     </div>
