@@ -1,4 +1,5 @@
 {
+    "/frontend/js/jquery.min.js": "/frontend/js/jquery.min.js",
     "/frontend/js/scripts.min.js": "/frontend/js/scripts.min.js",
     "/frontend/css/main.min.css": "/frontend/css/main.min.css"
 }

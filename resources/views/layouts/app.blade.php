@@ -1,21 +1,76 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <base href="/"> -->
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @if(!empty($websiteSetting))
     <title>{{ $websiteSetting->title }}</title>
+        <meta name="description" content="{{ $websiteSetting->description }}">
+        <meta name="keywords" content="{{ $websiteSetting->keywords }}">
+    @endif
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Template Basic Images Start -->
+    <link rel="icon" href="{{ asset('img/src_/favicon/favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/src_/favicon/apple-touch-icon-180x180.png') }}">
+
+    <link type="image/x-icon" rel="shortcut icon" href="{{ asset('img/favicon/favicon.ico') }}">
+    <link type="image/png" sizes="16x16" rel="icon" href="{{ asset('img/favicon/favicon.ico') }}">
+    <link type="image/png" sizes="32x32" rel="icon" href="{{ asset('img/favicon/favicon.ico') }}">
+    <link type="image/png" sizes="96x96" rel="icon" href="{{ asset('img/favicon/favicon.ico') }}">
+    <link type="image/png" sizes="120x120" rel="icon" href="{{ asset('img/favicon/favicon.ico') }}">
+    <link type="image/png" sizes="192x192" rel="icon" href="{{ asset('img/favicon/favicon.ico') }}">
+
+    <link sizes="57x57" rel="apple-touch-icon" href="{{ asset('img/favicon/favicon.ico') }}">
+    <link sizes="60x60" rel="apple-touch-icon" href="{{ asset('img/favicon/favicon.ico') }}">
+    <link sizes="72x72" rel="apple-touch-icon" href="{{ asset('img/favicon/favicon.ico') }}">
+    <link sizes="76x76" rel="apple-touch-icon" href="{{ asset('img/favicon/favicon.ico') }}">
+    <link sizes="114x114" rel="apple-touch-icon" href="{{ asset('img/favicon/favicon.ico') }}">
+    <link sizes="120x120" rel="apple-touch-icon" href="{{ asset('img/favicon/favicon.ico') }}">
+    <link sizes="144x144" rel="apple-touch-icon" href="{{ asset('img/favicon/favicon.ico') }}">
+    <link sizes="152x152" rel="apple-touch-icon" href="{{ asset('img/favicon/favicon.ico') }}">
+    <link sizes="180x180" rel="apple-touch-icon" href="{{ asset('img/favicon/favicon.ico') }}">
+
+    <link color="#e52037" rel="mask-icon" href="{{ asset('img/favicon/favicon.ico') }}">
+
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="{{ asset('img/favicon/favicon.ico') }}">
+    <meta name="msapplication-square70x70logo" content="{{ asset('img/favicon/favicon.ico') }}">
+    <meta name="msapplication-square150x150logo" content="{{ asset('img/favicon/favicon.ico') }}">
+    <meta name="msapplication-wide310x150logo" content="{{ asset('img/favicon/favicon.ico') }}">
+    <meta name="msapplication-square310x310logo" content="{{ asset('img/favicon/favicon.ico') }}">
+
+
+    @if(!empty($websiteSetting))
+        <meta name="application-name" content="{{ $websiteSetting->title }}">
+    @endif
+    <meta name="theme-color" content="#ffffff">
+    <!-- Template Basic Images End -->
+
+    <!-- Custom Browsers Color Start -->
+    <meta name="theme-color" content="#000">
+    <!-- Custom Browsers Color End -->
+
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ $websiteSetting->title }}
+                    @if(!empty($websiteSetting))
+                        {{ $websiteSetting->title }}
+                    @else
+                        SMM
+                    @endif
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

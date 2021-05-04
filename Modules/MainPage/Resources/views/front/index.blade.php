@@ -1,234 +1,117 @@
-@extends('mainpage::layouts.front.app')
+@extends('mainpage::layouts.front.main')
 
 @section('content')
-    <div class="project__top">
-        <div class="project__title">
-            Проекты
-        </div>
-        @role('client')
-        <ul class="project__top__menu">
-            <li><a href="#">Группы проектов</a></li>
-            <li><a href="#">Черный список авторов</a></li>
-            <li><a href="#">Команды авторов</a></li>
-            <li><a href="#" class="btn__top-menu green__btntop">Ваш менеджер</a></li>
-            <li><a href="{{ route('client.projects.create') }}" class="btn__top-menu red__btntop">Создать проект</a></li>
-        </ul>
-        @endrole
-    </div>
-    <div class="project__top2">
-        <div class="control__input">
-            <select class="custom-select sources" placeholder="Все группы" id="">
-                <option value="Группа1">Группа1</option>
-                <option value="Группа2">Группа2</option>
-                <option value="Группа3">Группа3</option>
-                <option value="Группа4">Группа4</option>
-            </select>
-        </div>
-        <div class="control__input">
-            <select class="custom-select sources" placeholder="По дате создания" id="">
-                <option value="Дата1">Дата1</option>
-                <option value="Дата2">Дата2</option>
-                <option value="Дата3">Дата3</option>
-                <option value="Дата4">Дата4</option>
-            </select>
-        </div>
-        <div class="control__input">
-            <div class="name__project">
-                <input type="text" placeholder="ID, название проекта или тариф"><span><img src="http://smm.loc/frontend/img/_src/search__project.png" alt="search__project"></span>
+    <section class="services">
+        <div class="container">
+            <div class="header-services">
+                <div class="services__item">
+                    <img src="{{ asset('img/service1.svg') }}" alt="">
+                    <h2 class="run1">29 659</h2>
+                    <p>
+                        Работ выполняется ежедневно
+                    </p>
+                </div>
+                <div class="services__item">
+                    <img src="https://smm.ua/img/landing-page/services2.svg" alt="">
+                    <h2 class="run2">2 562 443</h2>
+                    <p>
+                        Зарегистрированных пользователей                </p>
+                </div>
+                <div class="services__item">
+                    <img src="https://smm.ua/img/landing-page/services3.svg" alt="">
+                    <h2 class="run3">48 803 437</h2>
+                    <p>
+                        Выполнено работ через нашу биржу                </p>
+                </div>
             </div>
         </div>
+    </section>
+    <section class="customer">
+        <div class="container__mainpage">
+            <div class="customer-body">
+                <div class="customer-img">
+                    <img src="img/_src/zakazchik.svg" alt="Заказчик">
+                </div>
+                <div class="customer-info">
+                    <h2>Заказчику</h2>
+                    <p>Лучший инструмент по крауд-маркетингу</p>
+                    <p>Продвигайте Ваш бренд или товары в интернете</p>
+                    <p>Спровоцируйте пользовательскую активность</p>
+                    <p>Комментарии, отзывы, наполнение форумов</p>
+                    <p>Репосты, лайки, ретвиты и подписчики</p>
+                    <p>Просмотры видео</p>
+                    <p>Фиксированные тарифы от 1 рубля</p>
+                    <p>Переходы с нашей биржи не фиксируют счетчики</p>
+                    <p>Проверка результата перед оплатой</p>
 
-        <div class="control__input">
-            <label for="all__project__check"><span class="for__label">Выбрать все проекты</span><input type="checkbox" id="all__project__check"></label>
+
+
+                    <div class="customer-button"><a href="" class="customer-btn">
+                            Найти подрядчиков
+                        </a> </div>
+                </div>
+            </div>
         </div>
+    </section>
+    <section class="autor">
+        <div class="container__mainpage">
+            <div class="autor-body">
+                <div class="autor-info">
+                    <h2>Автору</h2>
+                    <p>Становитесь специалистом по крауд-маркетингу</p>
+                    <p>Зарабатывайте, комментируя материалы на сайтах</p>
+                    <p>Зарабатывайте, общаясь на форумах</p>
+                    <p>Зарабатывайте, оставляя лайки и делая репосты</p>
+                    <p>Зарабатывайте, просматривая видео</p>
+                    <p>Работайте в удобное для вас время</p>
+                    <p>Получайте до 46 рублей за выполненную работу</p>
+                    <p>Заказы различной тематики</p>
+                    <p>Минимальная выплата 100 рублей</p>
 
-    </div>
 
-    <div class="project__top3">
-        <div class="flex__top3">
-            <div class="text__flex">Всего завершено:</div>
-            <div class="text__cifra green__data">4519</div>
+
+                    <div class="author-button"><a href="" class="autor-btn">
+                            Хочу стать автором
+                        </a> </div>
+                </div>
+                <div class="autor-img">
+                    <img src="img/_src/author.svg" alt="Автор">
+                </div>
+            </div>
         </div>
-
-        <div class="flex__top3">
-            <div class="text__flex">Оплаченные:</div>
-            <div class="text__cifra green__data">150</div>
-        </div>
-
-        <div class="flex__top3">
-            <div class="text__flex">На проверке:</div>
-            <div class="text__cifra red__data">150</div>
-        </div>
-
-        <div class="flex__top3">
-            <div class="text__flex">На доработке:</div>
-            <div class="text__cifra black__data">150</div>
-        </div>
-
-        <div class="flex__top3">
-            <div class="text__flex"><span><img src="http://smm.loc/frontend/img/_src/man__icon.png" alt="man__icon"></span>Приступившие авторы:</div>
-            <div class="text__cifra blue__data">150</div>
-        </div>
-    </div>
-
-    <div class="desc__project__item">
-        <ul class="desc__ul">
-            <li><span><img src="http://smm.loc/frontend/img/_src/desc__icon1.png"></span>Описание</li>
-            <li><span><img src="http://smm.loc/frontend/img/_src/desc__icon2.png"></span>Данные по проекту</li>
-            <li><span><img src="http://smm.loc/frontend/img/_src/desc__icon3.png"></span>Тариф</li>
-            <li><span><img src="http://smm.loc/frontend/img/_src/desc__icon3.png"></span>Действия</li>
-        </ul>
-    </div>
-
-    @if(count($projects))
-        <div class="all__project">
-            @foreach($projects as $project)
-                <div class="project__item green__project">
-                    <div class="describe__project">
-                        <div class="describe__id">
-                            <p>ID - {{ $project->id }}</p>
-                            <span class="status__project active__status">Активный</span>
+    </section>
+    <section class="service">
+        <div class="container__mainpage">
+            <div class="service-wrapper">
+                <h2>КАК РАБОТАТЬ С НАШИМ СЕРВИСОМ?</h2>
+                <div class="service-body">
+                    <div class="service-info">
+                        <div class="manual">
+                            <h3>01</h3>
+                            <p>Зарегистрироваться на бирже</p>
+                        </div>
+                        <div class="manual">
+                            <h3>02</h3>
+                            <p>
+                                Создать проект и оплатить необходимое количество работ                        </p>
+                        </div>
+                        <div class="manual">
+                            <h3>03</h3>
+                            <p>Проверить результат</p>
                         </div>
 
-                        <div class="describe__inner">
-                            <a href="{{ route('client.projects.show', $project->id) }}" class="describe__title">{{ $project->title }}</a>
-                            <p class="paragraph__describe">
-                                {{ $project->small_description }}
-                            </p>
 
-                            <div class="zametka__title">
-                                Заметка
-                            </div>
-                            <p class="paragraph__describe">
-                                Группа: Нет группы
-                            </p>
 
-                            <div class="name-social name-social-1">
-                                <a href="index.html#" class="back-1">
-                                    <img src="http://smm.loc/frontend/img/_src/gmail.svg" alt="Гмаил" class="color-normal-1">
-                                </a>
-                                <a href="index.html#" class="back-2">
-                                    <img src="http://smm.loc/frontend/img/_src/instagram.svg" alt="Инстаграм" class="color-normal-2">
-                                </a>
-                                <a href="index.html#" class="back-3">
-                                    <img src="http://smm.loc/frontend/img/_src/twitter.svg" alt="Твиттер" class="color-normal-3">
-                                </a>
-                                <a href="index.html#" class="back-4">
-                                    <img src="http://smm.loc/frontend/img/_src/vk.svg" alt="Вк" class="color-normal-4">
-                                </a>
-                                <a href="index.html#" class="back-5">
-                                    <img src="http://smm.loc/frontend/img/_src/youtube.svg" alt="Ютуб" class="color-normal-5">
-                                </a>
-                                <a href="index.html#" class="back-6">
-                                    <img src="http://smm.loc/frontend/img/_src/telegram.svg" alt="Телеграм" class="color-normal-6">
-                                </a>
-                                <a href="index.html#" class="back-7">
-                                    <img src="http://smm.loc/frontend/img/_src/facebook.svg" alt="Фэйсбук" class="color-normal-7">
-                                </a>
-                            </div>
-                        </div>
+                        <div data-v-c7ad3358="" id="service-btn" class="service-btn"><a data-v-c7ad3358="" href="#service-btn" target="_blank" class="service-btn">
+                                Зарегистрироваться
+                            </a> <!----></div>
                     </div>
+                    <div class="notebook__png">
 
-
-                    <div class="data__project">
-                        <div class="item__data">
-                            <div class="data__text">
-                                Оплаченные
-                            </div>
-                            <span class="data_shifr green__data">50</span>
-                        </div>
-
-                        <div class="item__data">
-                            <div class="data__text">
-                                На проверке
-                            </div>
-                            <span class="data_shifr red__data">50</span>
-                        </div>
-
-                        <div class="item__data">
-                            <div class="data__text">
-                                На доработке
-                            </div>
-                            <span class="data_shifr black__data">50</span>
-                        </div>
-
-                        <div class="item__data">
-                            <div class="data__text">
-                                Приступившие авторы
-                            </div>
-                            <span class="data_shifr blue__data">50</span>
-                        </div>
-
-                        <div class="item__data top__border">
-                            <div class="data__text">
-                                Завершено
-                            </div>
-                            <span class="data_shifr green__data">50</span>
-                        </div>
-
-                        <div class="last__work">
-                            <div class="work__text">
-                                Последняя работа:
-                            </div>
-
-                            <div class="work__under">
-                                10 сентября 2020г <br>09:27:13
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tariph__project">
-                        <div class="tariph__title">
-                            от 500 символов
-                        </div>
-
-                        <div class="tariph__usd">
-                            0.16 USD
-                        </div>
-
-                        <div class="tariph__btn">
-                            <a href="#">Оплатить</a>
-                        </div>
-
-                        <div class="tariph__icon">
-                            <div class="icon__tariph"><img src="http://smm.loc/frontend/img/_src/icon__tariph1.png" alt="icon__tariph"><span>2</span></div>
-                            <div class="icon__tariph"><img src="http://smm.loc/frontend/img/_src/icon__tariph1.png" alt="icon__tariph"><span>5</span></div>
-                        </div>
-                        <div class="tariph__flag">
-                            <span><img src="http://smm.loc/frontend/img/_src/flag__tariph.png" alt="flag__tariph"></span>
-                        </div>
-                    </div>
-
-                    <div class="actions__project">
-                        <ul class="actions__icons">
-                            <li><img src="http://smm.loc/frontend/img/_src/action1.png" alt="action"></li>
-                            <li><img src="http://smm.loc/frontend/img/_src/action2.png" alt="action"></li>
-                            <li><img src="http://smm.loc/frontend/img/_src/action3.png" alt="action"></li>
-                            <li><img src="http://smm.loc/frontend/img/_src/action4.png" alt="action"></li>
-                            <li><img src="http://smm.loc/frontend/img/_src/action5.png" alt="action"></li>
-                            <li><img src="http://smm.loc/frontend/img/_src/action6.png" alt="action"></li>
-                            <li><img src="http://smm.loc/frontend/img/_src/action7.png" alt="action"></li>
-                        </ul>
-
-                        <span class="vip__span">vip</span>
-
-                        <div class="action__describe">
-                            до 10 сентября 2021 года
-                        </div>
-
-                        <div class="enter__btn">
-                            <a href="#"><span><img src="http://smm.loc/frontend/img/_src/zapusk__img.png" alt="zapusk__img"></span>Запустить</a>
-                        </div>
-
-                        <div class="absolute__checkbox">
-                            <label for="choose__check1">Выбрать<input type="checkbox" id="choose__check1"></label>
-                        </div>
+                        <iframe  src="https://www.youtube.com/embed/rKJg5HEdXWA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="video"></iframe>
                     </div>
                 </div>
-            @endforeach
-                <div class="pagination-wrapper mb-5">
-                    {{ $projects->links('pagination::simple-default') }}
-                </div>
+            </div>
         </div>
-    @endif
+    </section>
 @endsection

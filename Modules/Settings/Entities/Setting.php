@@ -34,17 +34,17 @@ class Setting extends Model implements HasMedia
 
     public function getTitleAttribute()
     {
-        return $this->data[\LaravelLocalization::getCurrentLocale()]['site_name'];
+        return $this->data[\LaravelLocalization::getCurrentLocale()]['site_name'] ?? '';
     }
 
     public function getDescriptionAttribute()
     {
-        return $this->data[\LaravelLocalization::getCurrentLocale()]['description'];
+        return $this->data[\LaravelLocalization::getCurrentLocale()]['description'] ?? '';
     }
 
     public function getKeywordsAttribute()
     {
-        return $this->data[\LaravelLocalization::getCurrentLocale()]['keywords'];
+        return $this->data[\LaravelLocalization::getCurrentLocale()]['keywords'] ?? '';
     }
 
 
