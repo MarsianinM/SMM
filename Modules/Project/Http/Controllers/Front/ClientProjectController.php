@@ -31,7 +31,8 @@ class ClientProjectController extends Controller
     {
         $projects = $projectClientRepository->getProjects($request->all());
         return view('project::front.index',[
-            'projects' => $projects
+            'projects'          => $projects,
+            'request_sort'      => $request->get('sort') ?? 'default',
         ]);
     }
 
@@ -74,7 +75,7 @@ class ClientProjectController extends Controller
      */
     public function edit(Project $project): Renderable
     {
-        return view('project::edit');
+        return view('project::front.edit');
     }
 
     /**

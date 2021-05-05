@@ -58,7 +58,7 @@ class ProjectClientRepository
         if(!empty($request['sort'])){
             $sql = $sql->orderBy($request['sort']);
         }
-        return $sql->with(['rate','subject'])->paginate('3');
+        return $sql->with(['rate','subject'])->paginate('8');
     }
 
 }

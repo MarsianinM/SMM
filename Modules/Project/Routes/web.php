@@ -20,8 +20,8 @@ Route::prefix('client')
     ->group(function() {
     Route::prefix('mi-projects')->group(function() {
         Route::get('/', [ClientProjectController::class,'index'])->name('projects.index');
-        Route::get('/show/{project}', [ClientProjectController::class,'index'])->name('projects.show');
-        Route::get('/edit/{project}', [ClientProjectController::class,'index'])->name('projects.edit');
+        Route::get('/{project}/show', [ClientProjectController::class,'show'])->name('projects.show');
+        Route::get('/{project}/edit', [ClientProjectController::class,'edit'])->name('projects.edit');
         Route::get('/create', [ClientProjectController::class,'create'])->name('projects.create');
         Route::post('/storage', [ClientProjectController::class,'store'])->name('projects.store');
         Route::patch('/update/{project}', [ClientProjectController::class,'create'])->name('projects.update');
