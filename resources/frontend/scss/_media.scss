@@ -254,21 +254,6 @@
 
 // ≥768px
 @include media-breakpoint-down(sm) {
-	/* .card-actions img:first-child{
-    margin-left: 10px;
-  }
-  .card-action-img{
-    width: auto;
-    margin-left: 0;
-  }
-  .card-actions img{
-    margin: 0 10px;
-  }
-  .container,
-  .header-container {
-    width: 540px;
-/*    padding: 0 15px;*/
-  }
   .choise-button {
     margin-left: 0;
     margin-top: 20px;
@@ -342,12 +327,6 @@
     margin-right: 0;
     margin-top: 10px;
   }
-/*  .card-actions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-  }*/
   .projects {
     padding-bottom: 80px;
   }
@@ -359,7 +338,7 @@
     margin-right: auto!important;
     margin-left: auto;
     margin-bottom: 20px;
-  } */
+  }
 
 }
 
@@ -522,12 +501,12 @@
     margin-right: 20px;
   }
   .inner__topfooter{
-    
+
     .choose__project{
-     
+
     }
     .top__footer__icons{
-      
+
     }
     .vip__topfooter{
       width: 100%;
@@ -543,7 +522,7 @@
         font-size: 18px;
         text-transform: uppercase;
       }
-      
+
     }
     .cansel__choose{
       a{
@@ -562,7 +541,7 @@
     padding: 5px 10px;
     font-size: 17px;
   } */
-  
+
 }
 
 /*==========  Mobile First  ==========*/
@@ -584,6 +563,6 @@
 
 // ≤1200px
 @include media-breakpoint-up(xl) {
-	
+
 }
  */

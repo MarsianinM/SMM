@@ -72,7 +72,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     {
 
         if ($this->activeRoleIs('client')) {
-            return 'client.home';
+            return 'client.projects.index';
         } elseif ($this->activeRoleIs('author')) {
             return 'author.home';
         } elseif ($this->activeRoleIs('admin')) {

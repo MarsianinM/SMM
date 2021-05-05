@@ -6210,6 +6210,13 @@ a.menu__link-2 {
 .active__menu{
   display: block;
 }
+
+.control__input .name__project button{
+    background: none;
+    border: none;
+    padding: 0;
+}
+
 @media only screen and (max-width: 1000px){
 
 }

@@ -13,5 +13,4 @@
 
 use Modules\MainPage\Http\Controllers\MainPageController;
 
-Route::get('/', [MainPageController::class,'index'])->name('mainpage.index');
-
+Route::get('/', [MainPageController::class,'index'])->middleware('guest')->name('mainpage.index');

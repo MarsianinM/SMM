@@ -54,9 +54,25 @@ class RouteServiceProvider extends ServiceProvider
             ->name('admin.')
             ->group(module_path('Users', '/Routes/admin.php'));
 
-        Route::middleware('web')
-            ->namespace($this->moduleNamespace)
-            ->group(module_path('Users', '/Routes/web.php'));
+
+        Route::group(['prefix' => \LaravelLocalization::setLocale()], function() {
+
+            Route::middleware('web')
+                ->namespace($this->moduleNamespace)
+                ->group(module_path('Users', '/Routes/web.php'));
+
+            Route::prefix('client')
+                ->middleware(['web', 'verified', 'role:client'])
+                ->namespace($this->namespace)
+                ->name('client.')
+                ->group(module_path('Users', '/Routes/client.php'));
+
+            Route::prefix('author')
+                ->middleware(['web', 'verified', 'role:author'])
+                ->namespace($this->namespace)
+                ->name('author.')
+                ->group(module_path('Users', '/Routes/author.php'));
+        });
     }
 
     /**

@@ -23,14 +23,14 @@ class ClientProjectController extends Controller
 
     /**
      * Display a listing of the resource.
+     * @param ProjectClientRepository $projectClientRepository
+     * @param Request $request
      * @return Renderable
      */
-    public function index(): Renderable
+    public function index(ProjectClientRepository $projectClientRepository, Request $request): Renderable
     {
-        $projects = Project::/*whereStatus('active')->*/where('client_id',auth()->user()->id)->with(['rate','subject'])/*->with('client')*/->paginate('30');
-
+        $projects = $projectClientRepository->getProjects($request->all());
         return view('project::front.index',[
-            //'projects' => Project::whereStatus('active')->where('client_id',auth()->user()->id)->with('author')->paginate('30')
             'projects' => $projects
         ]);
     }

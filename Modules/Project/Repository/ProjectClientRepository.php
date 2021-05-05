@@ -51,4 +51,14 @@ class ProjectClientRepository
         }
         return $page;
     }
+
+    public function getProjects($request = false): mixed
+    {
+        $sql = Project::where('client_id',auth()->user()->id);
+        if(!empty($request['sort'])){
+            $sql = $sql->orderBy($request['sort']);
+        }
+        return $sql->with(['rate','subject'])->paginate('3');
+    }
+
 }

@@ -18,7 +18,7 @@ Route::prefix('client')
     ->name('client.')
     ->middleware(['web', 'verified', 'role:client'])
     ->group(function() {
-    Route::prefix('projects')->group(function() {
+    Route::prefix('mi-projects')->group(function() {
         Route::get('/', [ClientProjectController::class,'index'])->name('projects.index');
         Route::get('/show/{project}', [ClientProjectController::class,'index'])->name('projects.show');
         Route::get('/edit/{project}', [ClientProjectController::class,'index'])->name('projects.edit');

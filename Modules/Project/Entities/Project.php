@@ -96,4 +96,7 @@ class Project extends Model implements HasMedia
             ->sharpen(10)
             ->nonOptimized();
     }
+
+
+
 }

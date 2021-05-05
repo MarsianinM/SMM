@@ -81,7 +81,7 @@
                                                                  document.getElementById('set-author-form').submit();">
                                     <p>Автор</p>
                                 </div>
-                                <div class="custom-button active__btn" onclick="event.preventDefault();
+                                <div class="custom-button active__btn2" onclick="event.preventDefault();
                                                                  document.getElementById('set-client-form').submit();">
                                     <p>Заказчик</p>
                                 </div>

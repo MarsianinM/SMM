@@ -3,96 +3,22 @@
 @section('content')
     <div class="project__top">
         <div class="project__title">
-            @lang('project::all_users.projects')
+            Мои проекты
         </div>
         @role('client')
         <ul class="project__top__menu">
-            <li><a href="#">@lang('project::all_users.project_groups')</a></li>
-            <li><a href="#">@lang('project::all_users.authors_blacklist')</a></li>
-            <li><a href="#">@lang('project::all_users.author_teams')</a></li>
-            <li><a href="#" class="btn__top-menu green__btntop">@lang('project::all_users.your_manager')</a></li>
-            <li><a href="{{ route('client.projects.create') }}" class="btn__top-menu red__btntop">@lang('project::all_users.add_projects')</a></li>
+            <li><a href="#">Группы проектов</a></li>
+            <li><a href="#">Черный список авторов</a></li>
+            <li><a href="#">Команды авторов</a></li>
+            <li><a href="#" class="btn__top-menu green__btntop">Ваш менеджер</a></li>
+            <li><a href="{{ route('client.projects.create') }}" class="btn__top-menu red__btntop">Создать проект</a></li>
         </ul>
         @endrole
     </div>
 
     @if(!empty($projects) && count($projects))
-        <div class="project__top2">
-            @if(!empty($projects->group))
-                <div class="control__input">
-
-                    <select class="custom-select sources" placeholder="Все группы" id="">
-                        <option value="Группа1">Группа1</option>
-                        <option value="Группа2">Группа2</option>
-                        <option value="Группа3">Группа3</option>
-                        <option value="Группа4">Группа4</option>
-                    </select>
-                </div>
-            @endif
-            <div class="control__input">
-                <select class="custom-select sources" placeholder="По дате создания" id="">
-                    <option value="Дата1">Дата1</option>
-                    <option value="Дата2">Дата2</option>
-                    <option value="Дата3">Дата3</option>
-                    <option value="Дата4">Дата4</option>
-                </select>
-            </div>
-            <div class="control__input">
-                <div class="name__project">
-                    <input type="text" placeholder="ID, название проекта или тариф">
-                    <span>
-                        <button type="submit">
-                            <img src="{{ asset('img/_src/magnifying-glass.svg') }}" width="16" alt="search__project">
-                        </button>
-                    </span>
-                </div>
-            </div>
-
-            <div class="control__input">
-                <input style="width: 12px;" type="checkbox" class="allcheckbox" id="all__project__check">
-                <label for="all__project__check" class="all__label__input"><span class="for__label">Выбрать все проекты</span>
-                </label>
-            </div>
-
-        </div>
-
-        <div class="project__top3">
-            <div class="flex__top3">
-                <div class="text__flex">Всего завершено:</div>
-                <div class="text__cifra green__data">4519</div>
-            </div>
-
-            <div class="flex__top3">
-                <div class="text__flex">Оплаченные:</div>
-                <div class="text__cifra green__data">150</div>
-            </div>
-
-            <div class="flex__top3">
-                <div class="text__flex">На проверке:</div>
-                <div class="text__cifra red__data">150</div>
-            </div>
-
-            <div class="flex__top3">
-                <div class="text__flex">На доработке:</div>
-                <div class="text__cifra black__data">150</div>
-            </div>
-
-            <div class="flex__top3">
-                <div class="text__flex"><span><img src="img/_src/standing-up-man-.svg" width="22" alt="man__icon"></span>Приступившие авторы:</div>
-                <div class="text__cifra blue__data">150</div>
-            </div>
-        </div>
-
-        <div class="desc__project__item">
-            <ul class="desc__ul">
-                <li><span><img src="img/_src/desc__icon1.svg" width="15"></span>Описание</li>
-                <li><span><img src="img/_src/flag.svg"></span>Данные по проекту</li>
-                <li><span><img src="img/_src/tag.svg"></span>Тариф</li>
-                <li><span><img src="img/_src/equalizer.svg"></span>Действия</li>
-            </ul>
-        </div>
         <div class="all__project">
-        @foreach($projects as $project)
+            @foreach($projects as $project)
                 <div class="project__item green__project">
                     <div class="describe__project">
                         <div class="describe__id">
@@ -237,20 +163,54 @@
                     </div>
                 </div>
 
-            <tr>
-                <td><a href="{{ route('client.projects.show', $project->id) }}">{{ $project->title }}</a></td>
-                <td>7.00</td>
-                <td>30 минут</td>
-                <td>0/5</td>
-                <td class="d-none d-md-table-cell">
-                    {{ $project->date_start }}
-                </td>
-            </tr>
-        @endforeach
-            <div class="pagination-wrapper mb-5">
-                {{ $projects->appends(Request::except('page'))->links('mainpage::vendor.pagination.bootstrap-4') }}
-            </div>
+                <tr>
+                    <td><a href="{{ route('client.projects.show', $project->id) }}">{{ $project->title }}</a></td>
+                    <td>7.00</td>
+                    <td>30 минут</td>
+                    <td>0/5</td>
+                    <td class="d-none d-md-table-cell">
+                        {{ $project->date_start }}
+                    </td>
+                </tr>
+            @endforeach
         </div>
     @endif
 
+@endsection
+
+@section('top-footer')
+    @if(!empty($projects) && count($projects))
+        <section class="top__footer">
+            <div class="container">
+                <div class="inner__topfooter">
+                    <div class="choose__project">
+                        Выбрано проектов: 4519
+                    </div>
+                    <ul class="top__footer__icons">
+                        <li><img src="http://smm.loc/frontend/img/_src/footer__icon1.png" alt="footer__icon"></li>
+                        <li><img src="http://smm.loc/frontend/img/_src/footer__icon2.png" alt="footer__icon"></li>
+                        <li><img src="http://smm.loc/frontend/img/_src/footer__icon3.png" alt="footer__icon"></li>
+                        <li><img src="http://smm.loc/frontend/img/_src/footer__icon4.png" alt="footer__icon"></li>
+                        <li><img src="http://smm.loc/frontend/img/_src/footer__icon5.png" alt="footer__icon"></li>
+                        <li><img src="http://smm.loc/frontend/img/_src/footer__icon6.png" alt="footer__icon"></li>
+                        <li><img src="http://smm.loc/frontend/img/_src/footer__icon7.png" alt="footer__icon"></li>
+                        <li><img src="http://smm.loc/frontend/img/_src/footer__icon8.png" alt="footer__icon"></li>
+                    </ul>
+
+                    <div class="vip__topfooter">
+                        VIP
+                    </div>
+
+                    <div class="btn__topfooter">
+                        <a href="#">Оплатить</a>
+                    </div>
+
+                    <div class="cansel__choose">
+                        <a href="#">Отменить выбранные</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    @endif
 @endsection
