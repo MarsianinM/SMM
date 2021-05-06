@@ -9,6 +9,8 @@ use Illuminate\Routing\Controller;
 use Modules\Project\Entities\Project;
 use Modules\Project\Http\Requests\ClientProjectRequest;
 use Modules\Project\Repository\ProjectClientRepository;
+use Modules\Subjects\Entities\Subject;
+use Modules\Subjects\Repository\SubjectRepository;
 
 class ClientProjectController extends Controller
 {
@@ -42,7 +44,10 @@ class ClientProjectController extends Controller
      */
     public function create(): Renderable
     {
-        return view('project::front.create');
+        dd(__FILE__,__LINE__,Subject::all());
+        return view('project::front.create',[
+            'subjects' => Subject::all(),
+        ]);
     }
 
     /**
@@ -64,18 +69,21 @@ class ClientProjectController extends Controller
      */
     public function show(Project $project): Renderable
     {
-        dd('LINE: '. __LINE__, 'FILE: ' .__FILE__, $project);
         return view('project::show');
     }
 
     /**
      * Show the form for editing the specified resource.
      * @param Project $project
+     * @param SubjectRepository $subjects
      * @return Renderable
      */
-    public function edit(Project $project): Renderable
+    public function edit(Project $project, SubjectRepository $subjects): Renderable
     {
-        return view('project::front.edit');
+        return view('project::front.edit',[
+            'subjects' => $subjects->getList(),
+            'project' => $project,
+        ]);
     }
 
     /**

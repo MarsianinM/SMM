@@ -9,12 +9,12 @@
 
     <nav class="create__project__navigation">
         <ul>
-            <li class="proj_nav_item active__nav first__open">Основные</li>
-            <li class="proj_nav_item second__open">Дополнительные</li>
-            <li class="proj_nav_item third__open">Ограничения</li>
-            <li class="proj_nav_item fourth__open">Страницы</li>
-            <li class="proj_nav_item fifth__open">Геотаргетинг</li>
-            <li class="proj_nav_item sixth__open">Требования к аккаунтам</li>
+            <li class="proj_nav_item active__nav first__open">@lang('project::all_users.project_the_main')</li>
+            <li class="proj_nav_item second__open">@lang('project::all_users.project_additional')</li>
+            <li class="proj_nav_item third__open">@lang('project::all_users.project_limitations')</li>
+            <li class="proj_nav_item fourth__open">@lang('project::all_users.project_pages')</li>
+            <li class="proj_nav_item fifth__open">@lang('project::all_users.project_geo_targeting')</li>
+            <li class="proj_nav_item sixth__open">@lang('project::all_users.project_account_requirements')</li>
         </ul>
     </nav>
 
@@ -23,31 +23,35 @@
             <div class="inner__new__navigation">
                 <div class="left__main__nav" style="width: 411px;">
                     <div class="main__select__item">
-                        <p>Название *</p>
-                        <select class="custom-select sources" placeholder="project 1" id="">
-                            <option value="Группа1">Группа1</option>
-                            <option value="Группа2">Группа2</option>
-                            <option value="Группа3">Группа3</option>
-                            <option value="Группа4">Группа4</option>
+                        <p>@lang('project::all_users.enter_title')</p>
+                        <input class="main__input__other" type="text" name="title" placeholder="@lang('project::all_users.enter_title')">
+                    </div>
+                    <div class="main__select__item">
+                        <p>@lang('project::all_users.enter_link_in_page')</p>
+                        <input class="main__input__other" type="link" name="title" placeholder="@lang('project::all_users.enter_link_in_page')">
+                    </div>
+                    @if($subjects)
+                    <div class="main__select__item">
+                        <p>@lang('project::all_users.enter_subject')
+                            {{--<span class="red__validate"><span>Внимание!</span> Вы не выбрали тематику проекта</span>--}}
+                        </p>
+                        <select class="custom-select1 sources validate__input js-example-basic-single" name="subject_id">
+                            <option value="0">--</option>
+                            @foreach($subjects as $subject)
+                            <option value="{{ $subject->id }}">{{ $subject->subject_title_currentLang }}</option>
+                            @endforeach
                         </select>
                     </div>
+                    @endif
 
                     <div class="main__select__item">
-                        <p>Тематика * <span class="red__validate"><span>Внимание!</span> Вы не выбрали тематику проекта</span></p>
-                        <select class="custom-select sources validate__input" placeholder="Азартные игры" id="">
-                            <option value="Азартные игры1">Азартные игры1</option>
-                            <option value="Азартные игры2">Азартные игры2</option>
-                            <option value="Азартные игры3">Азартные игры3</option>
-                            <option value="Азартные игры4">Азартные игры4</option>
-                        </select>
-                    </div>
-
-                    <div class="main__select__item">
-                        <p>Язык комментариев * <span class="red__validate"><span>Внимание!</span> Вы не выбрали язык</span></p>
-                        <select class="custom-select sources validate__input" placeholder="Язык" id="">
-                            <option value="Русский">Русский</option>
-                            <option value="Украинский">Украинский</option>
-                            <option value="Английский">Английский</option>
+                        <p>@lang('project::all_users.enter_language')
+                            {{--<span class="red__validate"><span>Внимание!</span> Вы не выбрали язык</span>--}}
+                        </p>
+                        <select class="custom-select sources {{--validate__input--}}" name="language" placeholder="Язык" id="">
+                            @foreach($project->getLanguagesComments() as $lan)
+                            <option value="{{$lan}}">@lang('project::all_users.enter_'.$lan) </option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -903,6 +907,10 @@
 @section('script')
     <link rel="stylesheet" href="{{ asset('frontend/css/jquery-ui.css') }}">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script>
         // 숫자 3자리마다 콤마 찍기
         function numberWithCommas(x) {
@@ -1008,6 +1016,9 @@
                 $(this).children(".amount").fadeOut(300);
             });
         });
-
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
     </script>
 @endsection

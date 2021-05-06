@@ -101,7 +101,7 @@ class SubjectController extends Controller
     public function store(CreateSubjectRequest $request): RedirectResponse
     {
         $subject = $this->rep->store($request->all());
-        return redirect()->route('admin.subject.edit',$subject->id);
+        return redirect()->route('admin.subject.index'/*,$subject->id*/);
     }
 
     /**

@@ -7,9 +7,21 @@ namespace Modules\Project\Repository;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Modules\Project\Entities\Project;
+use Modules\Subjects\Entities\Subject;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class ProjectClientRepository
 {
+    /**
+     * @var Project
+     */
+    protected Project $model;
+
+    public function __construct(Project $project)
+    {
+        $this->model = $project;
+    }
 
     /**
      * Store the resource.
@@ -19,7 +31,7 @@ class ProjectClientRepository
     public function store(array $data): Project
     {
         $data['client_id'] = auth()->user()->id;
-        $page = Project::create(Arr::except($data, 'image'));
+        $page = $this->model->create(Arr::except($data, 'image'));
         if (Arr::get($data, 'image') instanceof UploadedFile) {
             $page->addMedia($data['image'])
                 /*->sanitizingFileName(function($fileName) {
@@ -35,8 +47,8 @@ class ProjectClientRepository
      * @param Project $page
      * @param $data
      * @return Project
-     * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist
-     * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
      */
     public function update(Project $page, $data): Project
     {
@@ -54,7 +66,7 @@ class ProjectClientRepository
 
     public function getProjects($request = false): mixed
     {
-        $sql = Project::where('client_id',auth()->user()->id);
+        $sql = $this->model->where('client_id',auth()->user()->id);
         if(!empty($request['sort'])){
             $sql = $sql->orderBy($request['sort']);
         }

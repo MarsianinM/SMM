@@ -8,6 +8,15 @@ use Modules\Subjects\Entities\Subject;
 
 class SubjectRepository
 {
+    /**
+     * @var Subject
+     */
+    protected Subject $model;
+
+    public function __construct(Subject $subject)
+    {
+        $this->model = $subject;
+    }
 
     /**
      * Store the resource.
@@ -16,7 +25,7 @@ class SubjectRepository
      */
     public function store(array $data): mixed
     {
-        return Subject::create($data);
+        return $this->model->create($data);
     }
 
     /**
@@ -27,5 +36,10 @@ class SubjectRepository
     public function update(Subject $subject, $data): bool
     {
         return $subject->update($data);
+    }
+
+    public function getList()
+    {
+        return $this->model->whereActive('1')->get();
     }
 }

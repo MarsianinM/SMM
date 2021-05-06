@@ -664,7 +664,6 @@
                     <div class="describe__project">
                         <div class="describe__id">
                             <p>ID - {{ $project->id }}</p>
-
                             <span class="status__project active__status">{{ $project->status }}</span>
                         </div>
 
@@ -706,7 +705,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div class="data__project">
                         <div class="item__data">
@@ -843,7 +841,7 @@
                         </div>
 
                         <div class="enter__btn">
-                            <a href="{{ route('client.projects.show', $project->id) }}"><span><img src="{{ asset('img/_src/play.svg') }}" alt="zapusk__img"></span>Запустить</a>
+                            <a href="{{ route('client.projects.show', $project->id) }}"><span><img src="{{ asset('img/_src/play.svg') }}" alt="zapusk__img"></span>@lang('project::all_users.project_run')</a>
 
                         </div>
                         <div class="absolute__checkbox">

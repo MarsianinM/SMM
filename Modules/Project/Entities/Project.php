@@ -26,6 +26,17 @@ class Project extends Model implements HasMedia
         'rate_id',
     ];
 
+    /**
+     * This is language from column enum from table Projects
+     * @var string[]
+     */
+    protected array $languages = ['ukrainian','russian','english'];
+
+    public function getLanguagesComments(): array
+    {
+        return $this->languages;
+    }
+
     protected static function newFactory()
     {
         return \Modules\Project\Database\factories\ProjectFactory::new();
