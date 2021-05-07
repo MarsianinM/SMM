@@ -5040,6 +5040,34 @@ ul.second__numeration li span {
   width: 20px;
 }
 
+.create__project__btn button {
+  text-transform: uppercase;
+  width: 200px;
+  cursor: pointer;
+  height: 57px;
+  border-radius: 5px;
+  background: #4b8632;
+  background: linear-gradient(180deg, #009910 0, #007c0d 100%);
+  display: -webkit-flex;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.create__project__btn button:hover {
+  background: linear-gradient(180deg, #007c0d 0, #009910 100%);
+}
+.create__project__btn button span {
+  margin-right: 13px;
+}
+.create__project__btn button span img {
+  width: 20px;
+}
+
 .first__for__margin {
   margin-top: 50px;
 }

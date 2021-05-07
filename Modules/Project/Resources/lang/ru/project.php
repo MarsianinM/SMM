@@ -35,10 +35,18 @@ return [
     'enter_assignment_to_authors'   => 'Задание авторам',
     'enter_currency_to_bay'         => 'Валюта для оплаты *',
     'enter_rates'                   => 'Тариф *',
+    'enter_comments_moderation'     => 'Премодерация комментариев *',
+    'enter_small_comments'          => 'Разрешить комментарии меньшего размера',
+    'enter_screenshot'              => 'Требовать скриншот от автора ( + 1 RUB )',
+    'enter_user_pro'                => 'Только для верифицированных авторов ( + 5 RUB )',
 
     //PROJECT Helper
     'enter_assignment_help'         => 'Опипише задание как можно подробнее',
     'enter_size_file_help'          => 'Размер файла не более 10 Мбайт',
+
+    //PROJECT MODERATION
+    'select_immediately'            => 'Авторы публикуют сразу на Ваш сайт',
+    'select_after_approval'         => 'Публикуют на сайт после Вашего одобрения',
 
     //Lang help
     'admin_ot'                      => 'От',

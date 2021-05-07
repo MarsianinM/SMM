@@ -5,8 +5,9 @@
     <div class="project__title">
         Создание нового проекта
     </div>
-
-
+    <form action="{{ route('client.projects.update', $project->id) }}" method="POST">
+        @method('PATCH')
+        @csrf
     <nav class="create__project__navigation">
         <ul>
             <li class="proj_nav_item active__nav first__open">@lang('project::all_users.project_the_main')</li>
@@ -19,7 +20,7 @@
     </nav>
 
     <div class="new__of__navigation first__navigation">
-        <form action="/">
+        <div>
             <div class="inner__new__navigation">
                 <div class="left__main__nav" style="width: 411px;">
                     <div class="main__select__item">
@@ -38,7 +39,7 @@
                         <select class="custom-select1 sources validate__input js-example-basic-single" name="subject_id">
                             <option value="0">--</option>
                             @foreach($subjects as $subject)
-                            <option value="{{ $subject->id }}">{{ $subject->subject_title_currentLang }}</option>
+                            <option @if($subject->id === $project->subject_id) selected @endif value="{{ $subject->id }}">{{ $subject->subject_title_currentLang }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -50,7 +51,7 @@
                         </p>
                         <select class="custom-select sources {{--validate__input--}}" name="language" placeholder="Язык" id="">
                             @foreach($project->getLanguagesComments() as $lan)
-                            <option value="{{$lan}}">@lang('project::all_users.enter_'.$lan) </option>
+                            <option @if($lan === $project->language) selected @endif value="{{$lan}}">@lang('project::all_users.enter_'.$lan) </option>
                             @endforeach
                         </select>
                     </div>
@@ -79,7 +80,7 @@
                             <p>@lang('project::project.enter_currency_to_bay')</p>
                             <select class="custom-select sources" name="currency_id" placeholder="{{ $currency[0]->code }}" id="">
                                @foreach($currency as $cur)
-                                    <option value="{{ $cur->id }}">{{$cur->code}}</option>
+                                    <option  @if($cur->id === $project->currency_id) selected @endif value="{{ $cur->id }}">{{$cur->code}}</option>
                                @endforeach
                             </select>
                         </div>
@@ -99,30 +100,31 @@
                         @endif
 
                         <div class="main__select__item">
-                            <p>Премодерация комментариев *</p>
-                            <select class="custom-select sources" placeholder="Авторы публикуют сразу на ваш сайт" id="">
-                                <option value="Автор1">Автор1</option>
-                                <option value="Автор2">Автор2</option>
-                                <option value="Автор3">Автор3</option>
-                                <option value="Автор4">Автор4</option>
+                            <p>@lang('project::project.enter_comments_moderation')</p>
+                            <select class="custom-select sources" name="moderation_comments" id="moderation_comments" placeholder="@if($project->moderation_comments == 1)
+                                @lang('project::project.select_immediately')
+                                @else
+                                @lang('project::project.select_after_approval')
+                                @endif">
+                                <option @if($project->moderation_comments == 1) selected @endif value="1">@lang('project::project.select_immediately')</option>
+                                <option @if($project->moderation_comments != 1) selected @endif value="1">@lang('project::project.select_after_approval')</option>
                             </select>
                         </div>
 
                         <div class="checkbox__main">
-
                             <div class="big__main__nav">
-                                <input type="checkbox" id="main__check1">
-                                <label for="main__check1">Разрешить комментарии меньшего размера</label>
+                                <input type="checkbox" @if($project->small_comments == 1) checked @endif name="small_comments" id="main__check1" value="1">
+                                <label for="main__check1">@lang('project::project.enter_small_comments')</label>
                             </div>
 
                             <div class="big__main__nav">
-                                <input type="checkbox" id="main__check2">
-                                <label for="main__check2">Требовать скриншот от автора ( + 1 RUB )</label>
+                                <input type="checkbox" id="main__check2" @if($project->screenshot == 1) checked @endif name="screenshot" value="1">
+                                <label for="main__check2">@lang('project::project.enter_small_comments')</label>
                             </div>
 
                             <div class="big__main__nav">
-                                <input type="checkbox" id="main__check3">
-                                <label for="main__check3">Только для верифицированных авторов ( + 5 RUB )</label>
+                                <input type="checkbox" id="main__check3" @if($project->user_pro == 1) checked @endif name="user_pro" value="1">
+                                <label for="main__check3">@lang('project::project.enter_user_pro')</label>
                             </div>
                         </div>
                     </div>
@@ -144,13 +146,18 @@
             </div>
 
             <div class="create__project__btn" >
-                <a href="#"><span><img src="img/_src/create__project__icon.svg" alt="create__project__icon"></span>Создать проект</a>
+                <button type="submit">
+                    <span>
+                        <img src="{{ asset('img/_src/create__project__icon.svg') }}" alt="create__project__icon">
+                    </span>
+                    @lang('project::project.submit_edit')
+                </button>
             </div>
-        </form>
+        </div>
     </div>
 
     <div class="new__of__navigation second__navigation">
-        <form action="/">
+        <div>
             <div class="inner__new__navigation">
                 <div class="left__main__nav" style="width: 400px;">
                     <div class="main__select__item">
@@ -262,13 +269,13 @@
             </div>
 
             <div class="create__project__btn" style="margin-top: 60px;">
-                <a href="#"><span><img src="img/_src/create__project__icon.svg" alt="create__project__icon"></span>Создать проект</a>
+                <button type="submit"><span><img src="{{ asset('img/_src/create__project__icon.svg') }}" alt="create__project__icon"></span>@lang('project::project.submit_edit')</button>
             </div>
-        </form>
+        </div>
     </div>
 
     <div class="new__of__navigation third__navigation">
-        <form action="/">
+        <div>
             <div class="main__third__nav">
                 <div class="new__navigation__title">
                     Активность проекта
@@ -559,13 +566,13 @@
             </div>
 
             <div class="create__project__btn" style="margin-top: 45px;">
-                <a href="#"><span><img src="img/_src/create__project__icon.svg" alt="create__project__icon"></span>Создать проект</a>
+                <button type="submit"><span><img src="{{ asset('img/_src/create__project__icon.svg') }}" alt="create__project__icon"></span>@lang('project::project.submit_edit')</button>
             </div>
-        </form>
+        </div>
     </div>
 
     <div class="new__of__navigation fourth__navigation">
-        <form action="/">
+        <div>
             <div class="inner__new__navigation">
 
                 <div class="left__main__nav">
@@ -579,7 +586,7 @@
     margin-top: 50px!important;
 ">
                     <div class="first__right" >
-                        <span class="main__information">Важная информация</span>
+                        <span class="main__indivation">Важная информация</span>
                         <ul class="second__numeration">
 
                             <li>Список страниц, с которыми можно работать. Каждую ссылку с новой строки. Другие страницы, система не пропустит в работу.</li>
@@ -593,13 +600,13 @@
             </div>
 
             <div class="create__project__btn">
-                <a href="#"><span><img src="img/_src/create__project__icon.svg" alt="create__project__icon"></span>Создать проект</a>
+                <button type="submit"><span><img src="{{ asset('img/_src/create__project__icon.svg') }}" alt="create__project__icon"></span>@lang('project::project.submit_edit')</button>
             </div>
-        </form>
+        </div>
     </div>
 
     <div class="new__of__navigation fifth__navigation">
-        <form action="/">
+        <div>
             <div class="inner__new__navigation" style="margin-top: 29px;">
 
                 <div class="left__main__nav">
@@ -660,12 +667,13 @@
             </div>
 
             <div class="create__project__btn" style="margin-top: 52px;">
-                <a href="#"><span><img src="img/_src/create__project__icon.svg" alt="create__project__icon"></span>Создать проект</a>
+                <button type="submit"><span><img src="{{ asset('img/_src/create__project__icon.svg') }}" alt="create__project__icon"></span>@lang('project::project.submit_edit')</button>
             </div>
-        </form>
+        </div>
     </div>
+
     <div class="new__of__navigation sixth__navigation">
-        <form action="/">
+        <div>
             <div class="sixth__navigation__new">
                 <div class="item__sixth">
                     <div class="top__sixth">
@@ -901,11 +909,11 @@
             </div>
 
             <div class="create__project__btn">
-                <a href="#"><span><img src="img/_src/create__project__icon.svg" alt="create__project__icon"></span>Создать проект</a>
+                <button type="submit"><span><img src="{{ asset('img/_src/create__project__icon.svg') }}" alt="create__project__icon"></span>@lang('project::project.submit_edit')</button>
             </div>
-        </form>
+        </div>
     </div>
-
+    </form>
 @endsection
 
 @section('script')
