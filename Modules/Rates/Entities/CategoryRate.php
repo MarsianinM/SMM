@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Modules\News\Entities\NewDescription;
 
 class CategoryRate extends Model
@@ -32,7 +33,10 @@ class CategoryRate extends Model
         return $this->hasMany(CategoryRateDecriptions::class, 'category_id', 'id');
     }
 
-    public function children()
+    /**
+     * @return HasMany
+     */
+    public function children(): HasMany
     {
         return $this->hasMany(self::class, 'parent_id', 'id');
     }
@@ -43,18 +47,29 @@ class CategoryRate extends Model
     {
         return $this->hasMany(Rate::class, 'category_id', 'id');
     }
+
+    /**
+     * @return string
+     */
     public function getCreatedDateAttribute(): string
     {
         return Carbon::parse($this->created_at)->format('d.m.Y H:i');
     }
-    public function getContentCurrentLangAttribute()
+
+    /**
+     * @return mixed
+     */
+    public function getContentCurrentLangAttribute(): mixed
     {
         $content = collect($this->categoryDescription)->keyBy('lang_key');
 
         return $content[config('app.locale')] ?? '';
     }
 
-    public function getContentAttribute(): \Illuminate\Support\Collection
+    /**
+     * @return Collection
+     */
+    public function getContentAttribute(): Collection
     {
         return collect($this->categoryDescription)->keyBy('lang_key');
     }

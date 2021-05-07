@@ -24,11 +24,11 @@
                 <div class="left__main__nav" style="width: 411px;">
                     <div class="main__select__item">
                         <p>@lang('project::all_users.enter_title')</p>
-                        <input class="main__input__other" type="text" name="title" placeholder="@lang('project::all_users.enter_title')">
+                        <input class="main__input__other" type="text" name="title" value="{{ $project->title }}" placeholder="@lang('project::all_users.enter_title')">
                     </div>
                     <div class="main__select__item">
                         <p>@lang('project::all_users.enter_link_in_page')</p>
-                        <input class="main__input__other" type="link" name="title" placeholder="@lang('project::all_users.enter_link_in_page')">
+                        <input class="main__input__other" type="link" name="link"  value="{{ $project->link }}" placeholder="@lang('project::all_users.enter_link_in_page')">
                     </div>
                     @if($subjects)
                     <div class="main__select__item">
@@ -56,19 +56,19 @@
                     </div>
 
                     <div class="main__select__item">
-                        <p>Задание авторам</p>
-                        <textarea name="" id="" placeholder="Опипише задание как можно подробнее"></textarea>
+                        <p>@lang('project::project.enter_assignment_to_authors')</p>
+                        <textarea name="" id="" placeholder="@lang('project::project.enter_assignment_help')"></textarea>
                     </div>
 
                     <div class="choose__file">
                         <label class="filelabel">
-                            <img src="img/_src/choose__file.svg" alt="choose__file">
+                            <img src="{{ asset('img/_src/choose__file.svg') }}" alt="choose__file">
                             <span class="title">
 									        Add File
 									    </span>
                             <input class="FileUpload1" id="FileInput" name="booking_attachment" type="file">
                         </label>
-                        <span>Размер файла не более 10 Мбайт</span>
+                        <span>@lang('project::project.enter_size_file_help')</span>
                     </div>
                 </div>
 
@@ -76,23 +76,27 @@
                 <div class="right__main__nav" style="width: 555px; margin-top: 55px!important;">
                     <div class="first__right">
                         <div class="main__select__item">
-                            <p>Валюта для оплаты *</p>
-                            <select class="custom-select sources" placeholder="0.00 RUB" id="">
-                                <option value="1753.35 RUB">1753.35 RUB</option>
-                                <option value="3155.75 RUB">3155.75 RUB</option>
-                                <option value="343.22 RUB">343.22 RUB</option>
+                            <p>@lang('project::project.enter_currency_to_bay')</p>
+                            <select class="custom-select sources" name="currency_id" placeholder="{{ $currency[0]->code }}" id="">
+                               @foreach($currency as $cur)
+                                    <option value="{{ $cur->id }}">{{$cur->code}}</option>
+                               @endforeach
                             </select>
                         </div>
-
+                        @if(!empty($rates))
                         <div class="main__select__item">
-                            <p>Тариф *</p>
-                            <select class="custom-select sources" placeholder="Выберите тариф" id="">
-                                <option value="Тариф1">Тариф1</option>
-                                <option value="Тариф2">Тариф2</option>
-                                <option value="Тариф3">Тариф3</option>
-                                <option value="Тариф4">Тариф4</option>
+                            <p>@lang('project::project.enter_rates')</p>
+                            <select class="custom-select1 sources validate__input js-example-basic-single" name="rate_id" placeholder="@if(empty($project->rate_title)) @lang('project::project.enter_rates') @else {{$project->rate_title}} @endif" id="">
+                                @foreach($rates as $cat_rate)
+                                    <optgroup label="{{ $cat_rate->content_current_lang->title }}">
+                                        @foreach($cat_rate->rates as $rate)
+                                        <option @if($rate->id === $project->rate->id) selected @endif value="{{ $rate->id }}">{{$rate->content_current_lang_rate->title }} {{ $rate->price }} {{ $currency[0]->symbol }}</option>
+                                        @endforeach
+                                    </optgroup>
+                                @endforeach
                             </select>
                         </div>
+                        @endif
 
                         <div class="main__select__item">
                             <p>Премодерация комментариев *</p>

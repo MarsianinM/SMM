@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Modules\Project\Entities\Project;
 use Modules\Project\Http\Requests\ClientProjectRequest;
 use Modules\Project\Repository\ProjectClientRepository;
+use Modules\Rates\Repository\CategoryRepository;
 use Modules\Subjects\Entities\Subject;
 use Modules\Subjects\Repository\SubjectRepository;
 
@@ -76,13 +77,15 @@ class ClientProjectController extends Controller
      * Show the form for editing the specified resource.
      * @param Project $project
      * @param SubjectRepository $subjects
+     * @param CategoryRepository $ratesRep
      * @return Renderable
      */
-    public function edit(Project $project, SubjectRepository $subjects): Renderable
+    public function edit(Project $project, SubjectRepository $subjects, CategoryRepository $ratesRep): Renderable
     {
         return view('project::front.edit',[
-            'subjects' => $subjects->getList(),
-            'project' => $project,
+            'subjects'  => $subjects->getList(),
+            'rates'     => $ratesRep->getListRatesAll(),
+            'project'   => $project,
         ]);
     }
 

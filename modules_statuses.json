@@ -12,5 +12,6 @@
     "Project": true,
     "Rates": true,
     "Subjects": true,
-    "Settings": true
+    "Settings": true,
+    "Currency": true
 }

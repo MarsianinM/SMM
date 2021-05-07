@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Currency\Entities\Currency;
 use Modules\Rates\Entities\Rate;
 use Modules\Subjects\Entities\Subject;
 use Modules\Users\Entities\User;
@@ -23,7 +24,7 @@ class Project extends Model implements HasMedia
     protected $fillable = [
         'title', 'link', 'moderation_comments', 'small_comments', 'screenshot', 'user_pro', 'description', 'date_start',
         'date_finish', 'page_link', 'status', 'archive', 'pro', 'client_id', 'author_id', 'created_at', 'updated_at', 'subject_id',
-        'rate_id',
+        'rate_id','currency_id',
     ];
 
     /**
@@ -64,7 +65,14 @@ class Project extends Model implements HasMedia
      */
     public function rate(): BelongsTo
     {
-        return $this->belongsTo(Rate::class, 'rate_id','id');
+        return $this->belongsTo(Rate::class, 'rate_id','id')->with('rateDescription');
+    }
+    /**
+     * Get the projects for the Rates.
+     */
+    public function currency(): BelongsTo
+    {
+        return $this->belongsTo(Currency::class, 'currency_id','id');
     }
 
     /**
@@ -97,6 +105,12 @@ class Project extends Model implements HasMedia
     public function getClientNameAttribute()
     {
         return $this->client->name;
+    }
+    public function getRateTitleAttribute()
+    {
+        $content = collect($this->rate->rateDescription)->keyBy('lang_key');
+
+        return $content[config('app.locale')]->title ?? '';
     }
 
     public function registerMediaConversions(Media $media = null): void

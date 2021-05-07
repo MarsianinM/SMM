@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Modules\Project\Entities\Project;
 
 class Rate extends Model
@@ -52,9 +53,14 @@ class Rate extends Model
         return $content[config('app.locale')];
     }
 
-    public function getContentAttribute(): \Illuminate\Support\Collection
+    public function getContentAttribute(): Collection
     {
         return collect($this->rateDescription)->keyBy('lang_key');
+    }
+
+    public function getPriceAttribute(): string
+    {
+        return $this->price_max ?? $this->price_min ?? '';
     }
 
     public function getCategoryTitleAttribute()

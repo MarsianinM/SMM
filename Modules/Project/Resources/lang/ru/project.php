@@ -32,7 +32,13 @@ return [
     'enter_seo_title'               => 'SEO Заголовок',
     'enter_seo_description'         => 'SEO Описание',
     'enter_seo_keywords'            => 'SEO Ключевые слова',
+    'enter_assignment_to_authors'   => 'Задание авторам',
+    'enter_currency_to_bay'         => 'Валюта для оплаты *',
+    'enter_rates'                   => 'Тариф *',
 
+    //PROJECT Helper
+    'enter_assignment_help'         => 'Опипише задание как можно подробнее',
+    'enter_size_file_help'          => 'Размер файла не более 10 Мбайт',
 
     //Lang help
     'admin_ot'                      => 'От',

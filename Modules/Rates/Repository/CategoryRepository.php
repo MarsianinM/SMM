@@ -9,6 +9,15 @@ class CategoryRepository
 {
 
     /**
+     * @var CategoryRate
+     */
+    protected CategoryRate $model;
+
+    public function __construct(CategoryRate $subject)
+    {
+        $this->model = $subject;
+    }
+    /**
      * Store the resource.
      * @param array $data
      * @return mixed
@@ -16,7 +25,7 @@ class CategoryRepository
     public function store(array $data)
     {
         $data['slug'] = \Str::slug($data['categoryDescription'][config('app.locale')]['title']);
-        $categoryRate = CategoryRate::create($data);
+        $categoryRate = $this->model->create($data);
         foreach ($data['categoryDescription'] as $item){
             $categoryDescription = new CategoryRateDecriptions($item);
             $categoryRate->categoryDescription()->save($categoryDescription);
@@ -52,7 +61,7 @@ class CategoryRepository
     public function getCategoriesAll($not_id = false)
     {
         $categories = false;
-        $sql = CategoryRate::where('active','1')
+        $sql = $this->model->where('active','1')
             ->where('parent_id','0');
         if($not_id){
             $sql->where('id','!=',$not_id);
@@ -63,5 +72,23 @@ class CategoryRepository
             ])
             ->get();
         return $categories;
+    }
+
+    public function getListRatesAll($not_id = false)
+    {
+        $categories = false;
+        $sql = $this->model->where('active','1')
+            ->where('parent_id','0');
+        if($not_id){
+            $sql->where('id','!=',$not_id);
+        }
+        $sql = $sql->with([
+                'categoryDescription',
+                'children.categoryDescription',
+                'rates',
+                'rates.rateDescription'
+            ])
+            ->get();
+        return $sql;
     }
 }
