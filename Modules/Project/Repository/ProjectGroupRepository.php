@@ -53,9 +53,8 @@ class ProjectGroupRepository
 
     public function getProjectGroup()
     {
-        dd(__FILE__,__METHOD__,'LINE: '.__LINE__,auth()->user()->id);
-        $sql = $this->model->where('user_id',auth()->user()->id);
-        return $sql->with(['rate','subject'])->paginate('8');
+        $sql = $this->model->where('user_id',auth()->user()->id)->get();
+        return $sql;
     }
 
 }

@@ -9,7 +9,9 @@ class ProjectGroup extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','parent_id','show','show_children_group'];
+    protected $table = 'project_group';
+
+    protected $fillable = ['name','parent_id','show','show_children_group','user_id'];
 
     protected static function newFactory()
     {
