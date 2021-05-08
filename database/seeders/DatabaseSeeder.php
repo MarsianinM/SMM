@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        /*$this->call(RoleSeeder::class);
-        $this->call(SettingSeeder::class);*/
+        $this->call(RoleSeeder::class);
+        $this->call(SettingSeeder::class);
 
         User::create([
             'name' => 'Тест',
