@@ -7,6 +7,7 @@ namespace Modules\Project\Repository;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Modules\Project\Entities\Project;
+use Modules\Project\Entities\ProjectGroup;
 use Modules\Subjects\Entities\Subject;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
@@ -70,6 +71,13 @@ class ProjectClientRepository
         if(!empty($request['sort'])){
             $sql = $sql->orderBy($request['sort']);
         }
+        return $sql->with(['rate','subject'])->paginate('8');
+    }
+
+    public function getProjectGroup(ProjectGroup $projectGroup)
+    {
+        dd(__FILE__,__METHOD__,'LINE: '.__LINE__,auth()->user()->id);
+        $sql = $projectGroup->where('client_id',auth()->user()->id);
         return $sql->with(['rate','subject'])->paginate('8');
     }
 

@@ -7,8 +7,10 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Project\Entities\Project;
+use Modules\Project\Entities\ProjectGroup;
 use Modules\Project\Http\Requests\ClientProjectRequest;
 use Modules\Project\Repository\ProjectClientRepository;
+use Modules\Project\Repository\ProjectGroupRepository;
 use Modules\Rates\Repository\CategoryRepository;
 use Modules\Subjects\Entities\Subject;
 use Modules\Subjects\Repository\SubjectRepository;
@@ -28,14 +30,17 @@ class ClientProjectController extends Controller
      * Display a listing of the resource.
      * @param ProjectClientRepository $projectClientRepository
      * @param Request $request
+     * @param ProjectGroup $projectGroup
      * @return Renderable
      */
-    public function index(ProjectClientRepository $projectClientRepository, Request $request): Renderable
+    public function index(
+        ProjectClientRepository $projectClientRepository,
+        Request $request
+    ): Renderable
     {
-        $projects = $projectClientRepository->getProjects($request->all());
         return view('project::front.index',[
-            'projects'          => $projects,
-            'request_sort'      => $request->get('sort') ?? 'default',
+            'projects'          => $projectClientRepository->getProjects($request->all()),
+            'request_sort'      => $request->get('sort') ?? 'default'
         ]);
     }
 
@@ -78,14 +83,22 @@ class ClientProjectController extends Controller
      * @param Project $project
      * @param SubjectRepository $subjects
      * @param CategoryRepository $ratesRep
+     * @param ProjectGroupRepository $projectGroup
      * @return Renderable
      */
-    public function edit(Project $project, SubjectRepository $subjects, CategoryRepository $ratesRep): Renderable
+    public function edit(
+        Project $project,
+        SubjectRepository $subjects,
+        CategoryRepository $ratesRep,
+        ProjectGroupRepository $projectGroup
+    ): Renderable
     {
+        $project_group = $projectGroup->getProjectGroup();
         return view('project::front.edit',[
-            'subjects'  => $subjects->getList(),
-            'rates'     => $ratesRep->getListRatesAll(),
-            'project'   => $project,
+            'subjects'          => $subjects->getList(),
+            'rates'             => $ratesRep->getListRatesAll(),
+            'project'           => $project,
+            'project_group'     => $project_group,
         ]);
     }
 
