@@ -20,12 +20,25 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         //$this->call(RoleSeeder::class);
         //$this->call(SettingSeeder::class);
-        DB::table('users')->insert(
-            [
-                'name' => 'Тест',
-                'email' => 'testaccount@smm.ua',
-                'password' => '$argon2id$v=19$m=1024,t=2,p=2$TEQyWjBZcGVkWWZLN2JpTA$/HVhobcctdWTwdhNNPIp0EJRWFfuY1O2j1w+g+S4vjc',//Hash::make('11111111'),
-                'email_verified_at' => now(),
+        DB::table('roleables')->insert([
+                [
+                    'role_id' => 1,
+                    'roleable_type' => 'Modules\\Users\\Entities\\User',
+                    'roleable_id' => 1,
+                    'is_active' => 1,
+                ],
+                [
+                    'role_id' => 2,
+                    'roleable_type' => 'Modules\\Users\\Entities\\User',
+                    'roleable_id' => 1,
+                    'is_active' => 0,
+                ],
+                [
+                    'role_id' => 3,
+                    'roleable_type' => 'Modules\\Users\\Entities\\User',
+                    'roleable_id' => 1,
+                    'is_active' => 0,
+                ],
             ]
             );
         /*User::create([
