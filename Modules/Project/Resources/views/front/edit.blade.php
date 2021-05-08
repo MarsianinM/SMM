@@ -76,6 +76,7 @@
 
                 <div class="right__main__nav" style="width: 555px; margin-top: 55px!important;">
                     <div class="first__right">
+                        @if(!empty($currency) && count($currency))
                         <div class="main__select__item">
                             <p>@lang('project::project.enter_currency_to_bay')</p>
                             <select class="custom-select sources" name="currency_id" placeholder="{{ $currency[0]->code }}" id="">
@@ -84,14 +85,16 @@
                                @endforeach
                             </select>
                         </div>
-                        @if(!empty($rates))
+                        @endif
+                        @if(!empty($rates) && count($rates))
+
                         <div class="main__select__item">
                             <p>@lang('project::project.enter_rates')</p>
                             <select class="custom-select1 sources validate__input js-example-basic-single" name="rate_id" placeholder="@if(empty($project->rate_title)) @lang('project::project.enter_rates') @else {{$project->rate_title}} @endif" id="">
                                 @foreach($rates as $cat_rate)
                                     <optgroup label="{{ $cat_rate->content_current_lang->title }}">
                                         @foreach($cat_rate->rates as $rate)
-                                        <option @if($rate->id === $project->rate->id) selected @endif value="{{ $rate->id }}">{{$rate->content_current_lang_rate->title }} {{ $rate->price }} {{ $currency[0]->symbol }}</option>
+                                        <option @if($rate->id === $project->rate->id) selected @endif value="{{ $rate->id }}">{{$rate->content_current_lang_rate->title }} {{ $rate->price }} @if(count($currency)) {{ $currency[0]->symbol }} @endif</option>
                                         @endforeach
                                     </optgroup>
                                 @endforeach

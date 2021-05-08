@@ -64,7 +64,7 @@ class ProjectClientRepository
         return $page;
     }
 
-    public function getProjects($request = false): mixed
+    public function getProjects($request = false)
     {
         $sql = $this->model->where('client_id',auth()->user()->id);
         if(!empty($request['sort'])){

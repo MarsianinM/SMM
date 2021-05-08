@@ -59,11 +59,11 @@ class CategoryRate extends Model
     /**
      * @return mixed
      */
-    public function getContentCurrentLangAttribute(): mixed
+    public function getContentCurrentLangAttribute()
     {
         $content = collect($this->categoryDescription)->keyBy('lang_key');
 
-        return $content[config('app.locale')] ?? '';
+        return $content[config('app.locale')] ?? false;
     }
 
     /**
