@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use DB;
 use Modules\Users\Entities\User;
 use Illuminate\Database\Seeder;
 
