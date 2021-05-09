@@ -53,8 +53,12 @@ class ProjectGroupRepository
 
     public function getProjectGroup()
     {
-        $sql = $this->model->where('user_id',auth()->user()->id)->get();
-        return $sql;
+        return $this->model
+                    ->where('user_id',auth()->user()->id)
+                    ->where('show',1)
+                    ->where('parent_id',0)
+                    ->with('child')
+                    ->get();
     }
 
 }

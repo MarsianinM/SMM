@@ -24,7 +24,7 @@ class Project extends Model implements HasMedia
     protected $fillable = [
         'title', 'link', 'moderation_comments', 'small_comments', 'screenshot', 'user_pro', 'description', 'date_start',
         'date_finish', 'page_link', 'status', 'archive', 'pro', 'client_id', 'author_id', 'created_at', 'updated_at', 'subject_id',
-        'rate_id','currency_id',
+        'rate_id','currency_id','group_id',
     ];
 
     /**
@@ -73,6 +73,13 @@ class Project extends Model implements HasMedia
     public function currency(): BelongsTo
     {
         return $this->belongsTo(Currency::class, 'currency_id','id');
+    }
+    /**
+     * Get the projects for the Rates.
+     */
+    public function group(): BelongsTo
+    {
+        return $this->belongsTo(ProjectGroup::class, 'group_id','id');
     }
 
     /**

@@ -77,29 +77,28 @@
                 <div class="right__main__nav" style="width: 555px; margin-top: 55px!important;">
                     <div class="first__right">
                         @if(!empty($currency) && count($currency))
-                        <div class="main__select__item">
-                            <p>@lang('project::project.enter_currency_to_bay')</p>
-                            <select class="custom-select sources" name="currency_id" placeholder="{{ $currency[0]->code }}" id="">
-                               @foreach($currency as $cur)
-                                    <option  @if($cur->id === $project->currency_id) selected @endif value="{{ $cur->id }}">{{$cur->code}}</option>
-                               @endforeach
-                            </select>
-                        </div>
+                            <div class="main__select__item">
+                                <p>@lang('project::project.enter_currency_to_bay')</p>
+                                <select class="custom-select sources" name="currency_id" placeholder="{{ $currency[0]->code }}" id="">
+                                   @foreach($currency as $cur)
+                                        <option  @if($cur->id === $project->currency_id) selected @endif value="{{ $cur->id }}">{{$cur->code}}</option>
+                                   @endforeach
+                                </select>
+                            </div>
                         @endif
                         @if(!empty($rates) && count($rates))
-
-                        <div class="main__select__item">
-                            <p>@lang('project::project.enter_rates')</p>
-                            <select class="custom-select1 sources validate__input js-example-basic-single" name="rate_id" placeholder="@if(empty($project->rate_title)) @lang('project::project.enter_rates') @else {{$project->rate_title}} @endif" id="">
-                                @foreach($rates as $cat_rate)
-                                    <optgroup label="{{ $cat_rate->content_current_lang->title }}">
-                                        @foreach($cat_rate->rates as $rate)
-                                        <option @if($rate->id === $project->rate->id) selected @endif value="{{ $rate->id }}">{{$rate->content_current_lang_rate->title }} {{ $rate->price }} @if(count($currency)) {{ $currency[0]->symbol }} @endif</option>
-                                        @endforeach
-                                    </optgroup>
-                                @endforeach
-                            </select>
-                        </div>
+                            <div class="main__select__item">
+                                <p>@lang('project::project.enter_rates')</p>
+                                <select class="custom-select1 sources validate__input js-example-basic-single" name="rate_id" placeholder="@if(empty($project->rate_title)) @lang('project::project.enter_rates') @else {{$project->rate_title}} @endif" id="">
+                                    @foreach($rates as $cat_rate)
+                                        <optgroup label="{{ $cat_rate->content_current_lang->title }}">
+                                            @foreach($cat_rate->rates as $rate)
+                                            <option @if($rate->id === $project->rate->id) selected @endif value="{{ $rate->id }}">{{$rate->content_current_lang_rate->title }} {{ $rate->price }} @if(count($currency)) {{ $currency[0]->symbol }} @endif</option>
+                                            @endforeach
+                                        </optgroup>
+                                    @endforeach
+                                </select>
+                            </div>
                         @endif
 
                         <div class="main__select__item">
@@ -163,16 +162,18 @@
         <div>
             <div class="inner__new__navigation">
                 <div class="left__main__nav" style="width: 400px;">
-                    <div class="main__select__item">
-                        <p>Группа</p>
-                        <select class="custom-select sources" placeholder="Без группы" id="">
-                            <option value="Группа1">Группа1</option>
-                            <option value="Группа2">Группа2</option>
-                            <option value="Группа3">Группа3</option>
-                            <option value="Группа4">Группа4</option>
-                        </select>
-                    </div>
-
+                    @if(isset($project_group) && count($project_group))
+                        <div class="main__select__item">
+                            <p>@lang('project::project.enter_project_group')</p>
+                            <select class="custom-select1 sources validate__input js-example-basic-single" name="group_id" id="group_id">
+                                @include('project::front.block.group', [
+                                    'project_group' => $project_group,
+                                    'project_id' => $project->id ?? 0,
+                                    'delimiter' => $delimiter
+                                ])
+                            </select>
+                        </div>
+                    @endif
                     <div class="main__select__item">
                         <p>Команда авторов</p>
                         <select class="custom-select sources" placeholder="Выберите команду" id="">

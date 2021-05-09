@@ -39,6 +39,7 @@ return [
     'enter_small_comments'          => 'Разрешить комментарии меньшего размера',
     'enter_screenshot'              => 'Требовать скриншот от автора ( + 1 RUB )',
     'enter_user_pro'                => 'Только для верифицированных авторов ( + 5 RUB )',
+    'enter_project_group'           => 'Группа',
 
     //PROJECT Helper
     'enter_assignment_help'         => 'Опипише задание как можно подробнее',

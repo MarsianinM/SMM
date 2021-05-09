@@ -99,6 +99,7 @@ class ClientProjectController extends Controller
             'rates'             => $ratesRep->getListRatesAll(),
             'project'           => $project,
             'project_group'     => $project_group,
+            'delimiter'         => '',
         ]);
     }
 
