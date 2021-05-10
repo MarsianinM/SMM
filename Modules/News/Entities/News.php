@@ -48,11 +48,18 @@ class News extends Model implements HasMedia
     {
         return \Modules\News\Database\factories\NewFactory::new();
     }*/
+
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('news');
+    }
+
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-            ->width(120)
-            ->height(120)
+            ->width(240)
+            ->height(240)
             ->sharpen(10)
             ->nonOptimized();
     }

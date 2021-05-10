@@ -24,6 +24,12 @@ class NewDescription extends Model
         return $this->belongsTo(News::class, 'new_id', 'id');
     }
 
+    public function getSmallDescriptionAttribute(): string
+    {
+        $description = mb_substr(strip_tags($this->description), 0, 200);
+        if(strlen($this->description) > 200) $description .= ' ...';
+        return $description;
+    }
     /*protected static function newFactory()
     {
         return \Modules\News\Database\factories\NewDescriptionFactory::new();

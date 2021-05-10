@@ -11,6 +11,9 @@
 |
 */
 
+use Modules\News\Http\Controllers\Front\NewsController;
+
 Route::prefix('news')->group(function() {
-    Route::get('/', 'NewsController@index')->name('news.index');;
+    Route::get('/', [NewsController::class, 'index'])->name('news.index');
+    Route::get('/show/{slug}', [NewsController::class, 'show'])->name('news.show');
 });

@@ -1,10 +1,11 @@
 <?php
 
-namespace Modules\News\Http\Controllers;
+namespace Modules\News\Http\Controllers\Front;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\News\Repository\NewsRepository;
 
 class NewsController extends Controller
 {
@@ -12,9 +13,10 @@ class NewsController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index(NewsRepository $newsRepository)
     {
-        return view('news::index');
+        $news = $newsRepository->getNews();
+        return view('news::front.index', compact('news'));
     }
 
     /**
@@ -41,9 +43,11 @@ class NewsController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show($id)
+    public function show($slug, NewsRepository $newsRepository)
     {
-        return view('news::show');
+        return view('news::front.show',[
+            'page' => $newsRepository->model()->where('slug', $slug)->firstOrFail()
+        ]);
     }
 
     /**

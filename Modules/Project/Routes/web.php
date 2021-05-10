@@ -24,7 +24,7 @@ Route::prefix('client')
         Route::get('/{project}/edit', [ClientProjectController::class,'edit'])->name('projects.edit');
         Route::get('/create', [ClientProjectController::class,'create'])->name('projects.create');
         Route::post('/storage', [ClientProjectController::class,'store'])->name('projects.store');
-        Route::patch('/update/{project}', [ClientProjectController::class,'create'])->name('projects.update');
+        Route::patch('/update/{project}', [ClientProjectController::class,'update'])->name('projects.update');
     });
 
 });

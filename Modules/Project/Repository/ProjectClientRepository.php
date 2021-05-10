@@ -44,25 +44,24 @@ class ProjectClientRepository
     }
 
     /**
+     *
      * Update the resource.
-     * @param Project $page
+     * @param Project $project
      * @param $data
-     * @return Project
-     * @throws FileDoesNotExist
-     * @throws FileIsTooBig
+     * @return bool
      */
-    public function update(Project $page, $data): Project
+    public function update(Project $project, $data): bool
     {
-        $page->update(Arr::except($data, 'image'));
-        if (Arr::get($data, 'image') instanceof UploadedFile) {
+        $result = $project->update($data);
+        /*if (Arr::get($data, 'image') instanceof UploadedFile) {
             $page->clearMediaCollection('projects');
             $page->addMedia($data['image'])
                 /* ->usingFileName(function($fileName) {
                      return (string)strtolower(Str::slug($fileName));
                  })*/
-                ->toMediaCollection('projects');
-        }
-        return $page;
+               /* ->toMediaCollection('projects');
+        }*/
+        return $result;
     }
 
     public function getProjects($request = false)
@@ -74,11 +73,10 @@ class ProjectClientRepository
         return $sql->with(['rate','subject'])->paginate('8');
     }
 
-    public function getProjectGroup(ProjectGroup $projectGroup)
+/*    public function getProjectGroup(ProjectGroup $projectGroup)
     {
-        dd(__FILE__,__METHOD__,'LINE: '.__LINE__,auth()->user()->id);
         $sql = $projectGroup->where('client_id',auth()->user()->id);
         return $sql->with(['rate','subject'])->paginate('8');
-    }
+    }*/
 
 }

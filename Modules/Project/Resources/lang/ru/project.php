@@ -40,6 +40,10 @@ return [
     'enter_screenshot'              => 'Требовать скриншот от автора ( + 1 RUB )',
     'enter_user_pro'                => 'Только для верифицированных авторов ( + 5 RUB )',
     'enter_project_group'           => 'Группа',
+    'enter_client_group'            => 'Команда авторов',
+    'enter_client_notifications'    => 'Уведомления о новых заявках',
+    'enter_link_page'               => 'Список страниц, с которыми можно работать',
+    'enter_link_page_place'         => 'Только прямые ссылки, каждую с новой строки',
 
     //PROJECT Helper
     'enter_assignment_help'         => 'Опипише задание как можно подробнее',
@@ -48,6 +52,10 @@ return [
     //PROJECT MODERATION
     'select_immediately'            => 'Авторы публикуют сразу на Ваш сайт',
     'select_after_approval'         => 'Публикуют на сайт после Вашего одобрения',
+
+    //PROJECT NOTIFICATION
+    'enter_client_notification1'    => 'Получать уведомления',
+    'enter_client_notification0'    => 'Не получать',
 
     //Lang help
     'admin_ot'                      => 'От',

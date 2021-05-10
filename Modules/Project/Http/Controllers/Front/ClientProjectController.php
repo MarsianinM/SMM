@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Modules\Project\Entities\Project;
 use Modules\Project\Entities\ProjectGroup;
 use Modules\Project\Http\Requests\ClientProjectRequest;
+use Modules\Project\Repository\ProjectAuthorGroupRepository;
 use Modules\Project\Repository\ProjectClientRepository;
 use Modules\Project\Repository\ProjectGroupRepository;
 use Modules\Rates\Repository\CategoryRepository;
@@ -84,21 +85,25 @@ class ClientProjectController extends Controller
      * @param SubjectRepository $subjects
      * @param CategoryRepository $ratesRep
      * @param ProjectGroupRepository $projectGroup
+     * @param ProjectAuthorGroupRepository $author_group
      * @return Renderable
      */
     public function edit(
         Project $project,
         SubjectRepository $subjects,
         CategoryRepository $ratesRep,
-        ProjectGroupRepository $projectGroup
+        ProjectGroupRepository $projectGroup,
+        ProjectAuthorGroupRepository $author_group
     ): Renderable
     {
         $project_group = $projectGroup->getProjectGroup();
+        $user_group = $author_group->getAuthorGroup();
         return view('project::front.edit',[
             'subjects'          => $subjects->getList(),
             'rates'             => $ratesRep->getListRatesAll(),
             'project'           => $project,
             'project_group'     => $project_group,
+            'user_group'        => $user_group,
             'delimiter'         => '',
         ]);
     }
@@ -106,12 +111,17 @@ class ClientProjectController extends Controller
     /**
      * Update the specified resource in storage.
      * @param ClientProjectRequest $request
-     * @param int $id
-     * @return Renderable
+     * @param Project $project
+     * @param ProjectClientRepository $projectClient
+     * @return RedirectResponse
      */
-    public function update(ClientProjectRequest $request, $id): Renderable
+    public function update(ClientProjectRequest $request, Project $project, ProjectClientRepository $projectClient)
     {
-        //
+        $result = $projectClient->update($project, $request->all());
+        if(!$result){
+            return /*redirect()->*/back()->withErrors('Ошибка')->withInput();
+        }
+        return redirect()->route('client.projects.index')->with('success', 'Проект №'.$project->id.' обновлен');
     }
 
     /**

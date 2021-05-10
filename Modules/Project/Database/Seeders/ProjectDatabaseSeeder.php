@@ -16,28 +16,20 @@ class ProjectDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        DB::table('project_group')->insert([
-            [
-                'name'                  => 'Категория 1',
-                'user_id'               => 1,
-                'parent_id'             => 0,
-                'show'                  => 1,
-                'show_children_group'   => 1,
-            ],
-            [
-                'name'                  => 'Вторая категория',
-                'user_id'               => 1,
-                'parent_id'             => 0,
-                'show'                  => 1,
-                'show_children_group'   => 1,
-            ],
-            [
-                'name'                  => 'Третья категория',
-                'user_id'               => 1,
-                'parent_id'             => 0,
-                'show'                  => 1,
-                'show_children_group'   => 1,
-            ]]);
+
+        DB::table('author_groups')->insert([
+        [
+            'name'                  => 'Аутор груп 1',
+            'client_id'             => 1,
+        ],
+        [
+            'name'                  => 'Аутор груп 2',
+            'client_id'             => 1,
+        ],
+        [
+            'name'                  => 'Аутор груп 4',
+            'client_id'             => 1,
+        ]]);
         // $this->call("OthersTableSeeder");
     }
 }
