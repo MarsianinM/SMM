@@ -39,7 +39,7 @@
 
                     @if(auth()->user())
                         <div class="account">
-                            <img src="http://smm.loc/frontend/img/_src/author__header.png" alt="Аккаунт">
+                            <img src="{{ asset('frontend/img/_src/author__header.png') }}" alt="Аккаунт">
                         </div>
                         <div class="personal-name">
                             <p>
@@ -61,7 +61,7 @@
                             </div>
                         </div>
                         <div class="open__menu">
-                            <img src="http://smm.loc/frontend/img/_src/open__menu.png" alt="open__menu">
+                            <img src="{{ asset('frontend/img/_src/open__menu.png') }}" alt="open__menu">
                         </div>
 
                         <div class="personal-dropdown">
@@ -97,27 +97,36 @@
                             </div>
                             @role('client')
                             <div class="dropdown-menu autor-menu">
-                                <a href="index.html#"><img src="http://smm.loc/frontend/img/_src/projects.svg" alt=""> <span class="text__dropdown">Мои проекты</span></a>
-                                <a href="index.html#"><img src="http://smm.loc/frontend/img/_src/personal.svg" alt=""> <span class="text__dropdown">Персональные</span></a>
-                                <a href="index.html#"><img src="http://smm.loc/frontend/img/_src/star.svg" alt=""> <span class="text__dropdown">Избранные</span></a>
-                                <a href="index.html#"><img src="http://smm.loc/frontend/img/_src/blacklist.svg" alt=""> <span class="text__dropdown">Черный список</span> </a>
-                                <a href="index.html#"><img src="http://smm.loc/frontend/img/_src/money.svg" alt=""> <span class="text__dropdown">Финансы</span> </a>
-                                <a href="index.html#"><img src="http://smm.loc/frontend/img/_src/partner.svg" alt=""> <span class="text__dropdown">Партнерская программа</span> </a>
-                                <a href="index.html#"><img src="http://smm.loc/frontend/img/_src/settings.svg" alt=""><span class="text__dropdown">Настройки</span> </a>
-                                <a href="index.html#"><img src="http://smm.loc/frontend/img/_src/exit.svg" alt=""> <span class="text__dropdown">Выход</span> </a>
+                                <a href="#"><img src="{{ asset('frontend/img/_src/projects.svg') }}" alt=""> <span class="text__dropdown">Мои проекты</span></a>
+                                <a href="#"><img src="{{ asset('frontend/img/_src/personal.svg') }}" alt=""> <span class="text__dropdown">Персональные</span></a>
+                                <a href="#"><img src="{{ asset('frontend/img/_src/star.svg') }}" alt=""> <span class="text__dropdown">Избранные</span></a>
+                                <a href="#"><img src="{{ asset('frontend/img/_src/blacklist.svg') }}" alt=""> <span class="text__dropdown">Черный список</span> </a>
+                                <a href="#"><img src="{{ asset('frontend/img/_src/money.svg') }}" alt=""> <span class="text__dropdown">Финансы</span> </a>
+                                <a href="#"><img src="{{ asset('frontend/img/_src/partner.svg') }}" alt=""> <span class="text__dropdown">Партнерская программа</span> </a>
+                                <a href="#"><img src="{{ asset('frontend/img/_src/settings.svg') }}" alt=""><span class="text__dropdown">Настройки</span> </a>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <img src="{{ asset('frontend/img/_src/exit.svg') }}" alt=""> <span class="text__dropdown">Выход</span>
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </div>
                             @endrole
                             @role('author')
                             <div class="dropdown-menu customer-menu">
-                                <a href="index.html#"><img src="http://smm.loc/frontend/img/_src/projects.svg" alt=""> <span class="text__dropdown">Все проекты</span> </a>
-                                <a href="index.html#"><img src="http://smm.loc/frontend/img/_src/personal.svg" alt=""> <span class="text__dropdown">Персональные</span></a>
-                                <a href="index.html#"><img src="http://smm.loc/frontend/img/_src/star.svg" alt=""> <span class="text__dropdown">Избранные</span></a>
-                                <a href="index.html#"><img src="http://smm.loc/frontend/img/_src/star.svg" alt=""> <span class="text__dropdown">Мои работы</span></a>
-                                <a href="index.html#"><img src="http://smm.loc/frontend/img/_src/blacklist.svg" alt=""> <span class="text__dropdown">Черный список</span> </a>
-                                <a href="index.html#"><img src="http://smm.loc/frontend/img/_src/money.svg" alt=""> <span class="text__dropdown">Финансы</span> </a>
-                                <a href="index.html#"><img src="http://smm.loc/frontend/img/_src/partner.svg" alt=""> <span class="text__dropdown">Партнерская программа</span> </a>
-                                <a href="index.html#"><img src="http://smm.loc/frontend/img/_src/settings.svg" alt=""><span class="text__dropdown">Настройки</span> </a>
-                                <a href="index.html#"><img src="http://smm.loc/frontend/img/_src/exit.svg" alt=""> <span class="text__dropdown">Выход</span> </a>
+                                <a href="#"><img src="{{ asset('frontend/img/_src/projects.svg') }}" alt=""> <span class="text__dropdown">Все проекты</span> </a>
+                                <a href="#"><img src="{{ asset('frontend/img/_src/personal.svg') }}" alt=""> <span class="text__dropdown">Персональные</span></a>
+                                <a href="#"><img src="{{ asset('frontend/img/_src/star.svg') }}" alt=""> <span class="text__dropdown">Избранные</span></a>
+                                <a href="#"><img src="{{ asset('frontend/img/_src/star.svg') }}" alt=""> <span class="text__dropdown">Мои работы</span></a>
+                                <a href="#"><img src="{{ asset('frontend/img/_src/blacklist.svg') }}" alt=""> <span class="text__dropdown">Черный список</span> </a>
+                                <a href="#"><img src="{{ asset('frontend/img/_src/money.svg') }}" alt=""> <span class="text__dropdown">Финансы</span> </a>
+                                <a href="#"><img src="{{ asset('frontend/img/_src/partner.svg') }}" alt=""> <span class="text__dropdown">Партнерская программа</span> </a>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <img src="{{ asset('frontend/img/_src/exit.svg') }}" alt=""> <span class="text__dropdown">Выход</span>
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </div>
                             @endrole
                         </div>
