@@ -5,6 +5,7 @@
     @include('mainpage::layouts.front.block.head')
 </head>
 <body>
+
     <div id="login-form" class="modal">
         <div class="modal__title">
             <h4>Вход</h4>
@@ -33,25 +34,29 @@
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
+            <input type="hidden" name="key" value="#login-form">
             <div class="main__select__item">
                 <p>Email</p>
-                <input class="main__input__other @error('email') is-invalid @enderror" id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                <input class="main__input__other @error('email') is-invalid validate__input @enderror" id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                 @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                    @if(old('key') == "#login-form")
+                        <span class="invalid-feedback red__validate" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @endif
                 @enderror
             </div>
 
             <div class="main__select__item">
                 <p>Пароль</p>
-                <input id="password" type="password" class="main__input__other @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                <input id="password" type="password" class="main__input__other @error('password') is-invalid validate__input @enderror" name="password" required autocomplete="current-password">
 
                 @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                    @if(old('key') == "#login-form")
+                        <span class="invalid-feedback red__validate" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                    @endif
                 @enderror
             </div>
 
@@ -96,36 +101,43 @@
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
+            <input type="hidden" name="key" value="#signin-form">
             <div class="main__select__item">
                 <p>Email</p>
-                <input id="email" type="email" class="main__input__other @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                <input id="email" type="email" class="main__input__other @error('email') is-invalid validate__input @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                 @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                    @if(old('key') == "#signin-form")
+                        <span class="invalid-feedback red__validate" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                    @endif
                 @enderror
             </div>
 
             <div class="main__select__item">
                 <p>Имя</p>
-                <input id="name" type="text" class="main__input__other @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                <input id="name" type="text" class="main__input__other @error('name') is-invalid validate__input @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                 @error('name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                    @if(old('key') == "#signin-form")
+                        <span class="invalid-feedback red__validate" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                    @endif
                 @enderror
             </div>
 
             <div class="main__select__item">
                 <p>Пароль</p>
-                <input id="password" type="password" class="main__input__other @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                <input id="password" type="password" class="main__input__other @error('password') is-invalid validate__input @enderror" name="password" required autocomplete="new-password">
 
                 @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                    @if(old('key') == "#signin-form")
+                        <span class="invalid-feedback red__validate" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                    @endif
                 @enderror
             </div>
 
@@ -159,14 +171,16 @@
         @endif
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
+            <input type="hidden" name="key" value="#remember-form">
             <div class="main__select__item">
                 <p>Email</p>
-                <input id="email" type="email" class="main__input__other @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
+                <input id="email" type="email" class="main__input__other @error('email') is-invalid validate__input @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                 @error('email')
-                <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                    @if(old('key') == "#remember-form")
+                        <span class="invalid-feedback red__validate" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @endif
                 @enderror
             </div>
             <div class="modal__btn" style="margin-top: 35px;">
@@ -175,7 +189,6 @@
             <div class="all__btns__modal">
                 <div><a href="#login-form" rel="modal:open">Я вспомнил пароль</a></div>
             </div>
-
         </form>
     </div>
 
@@ -185,6 +198,11 @@
         @include('mainpage::layouts.front.block.header')
     @endif
 
+    @if($errors->any())
+        <div class="thank__you__popup alert-danger">
+            {!! implode('<br>', $errors->all('<p>:message</p>')) !!}
+        </div>
+    @endif
     <section>
         <div class="offer">
             <div class="container__mainpage" style="z-index: 2;position: relative;">
@@ -194,10 +212,8 @@
                             БИРЖА КОММЕНТАРИЕВ И СОЦИАЛЬНОГО ПРОДВИЖЕНИЯ
                         </h1>
                         <p>
-                            Биржа SMM.ua предоставляет инструмент по<br> крауд-маркетингу для пиара и продвижения в интернете. Продвигайте бренды, группы в социальных сетях, видео на youtube, поднимайте репутацию в интернете с помощью комментариев и отзывов.                        </p>
-
-
-
+                            Биржа SMM.ua предоставляет инструмент по<br> крауд-маркетингу для пиара и продвижения в интернете. Продвигайте бренды, группы в социальных сетях, видео на youtube, поднимайте репутацию в интернете с помощью комментариев и отзывов.
+                        </p>
                         <div class="offer-button">
                             <a href="#" class="offer-btn">
                                 <img data-v-62cdc43b="" src="{{ asset('frontend/img/_src/play.svg') }}" width="17" alt="">
@@ -209,9 +225,6 @@
                     <img src="{{ asset('frontend/img/_src/header-right.svg') }}" alt="Оффер" class="offer-img">
                 </div>
             </div>
-
-
-
         </div>
     </section>
 
@@ -408,5 +421,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <script src="{{ asset('frontend/js/scripts.min.js') }}"></script>
+
+    @if($errors->any())
+        <script>
+            $(function() {
+                $("{{ old('key') }}").modal();
+            });
+        </script>
+    @endif
 </body>
 </html>

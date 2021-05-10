@@ -46,14 +46,25 @@ class ClientProjectController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * @param SubjectRepository $subjects
+     * @param CategoryRepository $ratesRep
+     * @param ProjectGroupRepository $projectGroup
+     * @param ProjectAuthorGroupRepository $author_group
      * @return Renderable
      */
-    public function create(): Renderable
+    public function create(
+        SubjectRepository $subjects,
+        CategoryRepository $ratesRep,
+        ProjectGroupRepository $projectGroup,
+        ProjectAuthorGroupRepository $author_group
+    ): Renderable
     {
-        dd(__FILE__,__LINE__,Subject::all());
         return view('project::front.create',[
-            'subjects' => Subject::all(),
+            'subjects'          => $subjects->getList(),
+            'rates'             => $ratesRep->getListRatesAll(),
+            'project_group'     => $projectGroup->getProjectGroup(),
+            'user_group'        => $author_group->getAuthorGroup(),
+            'delimiter'         => '',
         ]);
     }
 
@@ -64,7 +75,6 @@ class ClientProjectController extends Controller
      */
     public function store(ClientProjectRequest $request): RedirectResponse
     {
-
         $page = $this->rep->store($request->all());
         return redirect()->route('client.projects.edit',$page->id);
     }
@@ -96,14 +106,12 @@ class ClientProjectController extends Controller
         ProjectAuthorGroupRepository $author_group
     ): Renderable
     {
-        $project_group = $projectGroup->getProjectGroup();
-        $user_group = $author_group->getAuthorGroup();
         return view('project::front.edit',[
             'subjects'          => $subjects->getList(),
             'rates'             => $ratesRep->getListRatesAll(),
             'project'           => $project,
-            'project_group'     => $project_group,
-            'user_group'        => $user_group,
+            'project_group'     => $projectGroup->getProjectGroup(),
+            'user_group'        => $author_group->getAuthorGroup(),
             'delimiter'         => '',
         ]);
     }

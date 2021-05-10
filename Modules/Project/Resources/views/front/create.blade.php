@@ -1,108 +1,133 @@
 @extends('mainpage::layouts.front.app')
 
-
 @section('content')
-    <div class="container">
-        <div class="project__title">
-            @lang('project::project.title_add')
-        </div>
 
-
+    <div class="project__title">
+        Создание нового проекта
+    </div>
+    <form style="margin-bottom: 30px" action="{{ route('client.projects.store') }}" method="POST">
+        @csrf
+        <input name="client_id" type="hidden" value="{{ auth()->id() }}">
         <nav class="create__project__navigation">
             <ul>
-                <li class="proj_nav_item active__nav first__open">@lang('project::project.the_main')</li>
-                <li class="proj_nav_item second__open">@lang('project::project.additional')</li>
-                <li class="proj_nav_item third__open">@lang('project::project.limitations')</li>
-                <li class="proj_nav_item fourth__open">@lang('project::project.pages')</li>
-                <li class="proj_nav_item fifth__open">@lang('project::project.geo_targeting')</li>
-                <li class="proj_nav_item sixth__open">@lang('project::project.account_requirements')</li>
+                <li class="proj_nav_item active__nav first__open">@lang('project::all_users.project_the_main')</li>
+                <li class="proj_nav_item second__open">@lang('project::all_users.project_additional')</li>
+                {{--<li class="proj_nav_item third__open">@lang('project::all_users.project_limitations')</li>--}}
+                <li class="proj_nav_item fourth__open">@lang('project::all_users.project_pages')</li>
+                {{--<li class="proj_nav_item fifth__open">@lang('project::all_users.project_geo_targeting')</li>
+                <li class="proj_nav_item sixth__open">@lang('project::all_users.project_account_requirements')</li>--}}
             </ul>
         </nav>
 
         <div class="new__of__navigation first__navigation">
-            <form action="{{ route('client.projects.store') }}">
-                @csrf
+            <div>
                 <div class="inner__new__navigation">
-                    <div class="left__main__nav">
+                    <div class="left__main__nav" style="width: 411px;">
                         <div class="main__select__item">
-                            <p>@lang('project::project.enter_title')*</p>
-                            <input type="text"  class="main__input__other" name="title" value="" required placeholder="@lang('project::project.enter_title')"/>
+                            <p>@lang('project::all_users.enter_title')</p>
+                            <input class="main__input__other" type="text" name="title" value="{{ old('title') }}" placeholder="@lang('project::all_users.enter_title')">
                         </div>
+                        <div class="main__select__item">
+                            <p>@lang('project::all_users.enter_link_in_page')</p>
+                            <input class="main__input__other" type="link" name="link"  value="{{ old('link') }}" placeholder="@lang('project::all_users.enter_link_in_page')">
+                        </div>
+                        @if($subjects)
+                            <div class="main__select__item">
+                                <p>@lang('project::all_users.enter_subject')
+                                    {{--<span class="red__validate"><span>Внимание!</span> Вы не выбрали тематику проекта</span>--}}
+                                </p>
+                                <select class="custom-select1 sources validate__input js-example-basic-single" name="subject_id">
+                                    <option value="0">--</option>
+                                    @foreach($subjects as $subject)
+                                        <option @if($subject->id === old('subject_id')) selected @endif value="{{ $subject->id }}">{{ $subject->subject_title_currentLang }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endif
 
                         <div class="main__select__item">
-                            <p>Тематика *</p>
-                            <select class="custom-select sources" placeholder="Азартные игры" id="subject" name="subject" required>
-                                <option value="Азартные игры1">Азартные игры1</option>
-                                <option value="Азартные игры2">Азартные игры2</option>
-                                <option value="Азартные игры3">Азартные игры3</option>
-                                <option value="Азартные игры4">Азартные игры4</option>
+                            <p>@lang('project::all_users.enter_language')
+                                {{--<span class="red__validate"><span>Внимание!</span> Вы не выбрали язык</span>--}}
+                            </p>
+                            <select class="custom-select sources {{--validate__input--}}" name="language" placeholder="@lang('project::all_users.enter_'.old('language', 'russian'))" id="language">
+                                @foreach(app(\Modules\Project\Entities\Project::class)->getLanguagesComments() as $lan)
+                                    <option @if($lan === old('language')) selected @endif value="{{$lan}}">@lang('project::all_users.enter_'.$lan) </option>
+                                @endforeach
                             </select>
                         </div>
 
                         <div class="main__select__item">
-                            <p>Язык комментариев *</p>
-                            <select class="custom-select sources" required placeholder="langvich" id="">
-                                <option value="Русский">Русский</option>
-                                <option value="Украинский">Украинский</option>
-                                <option value="Английский">Английский</option>
-                            </select>
+                            <p>@lang('project::project.enter_assignment_to_authors')</p>
+                            <textarea name="description" id="description" placeholder="@lang('project::project.enter_assignment_help')">{{ old('description') }}</textarea>
                         </div>
 
-                        <div class="main__select__item">
-                            <p>Задание авторам *</p>
-                            <textarea name="" id="" placeholder="Опипише задание как можно подробнее"></textarea>
-                        </div>
-
-                        <div class="choose__file">
+                        {{--<div class="choose__file">
                             <label class="filelabel">
-                                <img src="img/_src/choose__file.png" alt="choose__file">
+                                <img src="{{ asset('img/_src/choose__file.svg') }}" alt="choose__file">
                                 <span class="title">
-									        Add File
-									    </span>
+                                                Add File
+                                            </span>
                                 <input class="FileUpload1" id="FileInput" name="booking_attachment" type="file">
                             </label>
-                            <span>Размер файла не более 10 Мбайт</span>
-                        </div>
+                            <span>@lang('project::project.enter_size_file_help')</span>
+                        </div>--}}
                     </div>
 
 
-                    <div class="right__main__nav">
+                    <div class="right__main__nav" style="width: 555px; margin-top: 55px!important;">
                         <div class="first__right">
-                            <div class="main__select__item">
-                                <p>Валюта для оплаты *</p>
-                                <select class="custom-select sources" placeholder="0.00 RUB" id="">
-                                    <option value="1753.35 RUB">1753.35 RUB</option>
-                                    <option value="3155.75 RUB">3155.75 RUB</option>
-                                    <option value="343.22 RUB">343.22 RUB</option>
-                                </select>
-                            </div>
+                            @if(!empty($currency) && count($currency))
+                                <div class="main__select__item">
+                                    <p>@lang('project::project.enter_currency_to_bay')</p>
+                                    <select class="custom-select sources" name="currency_id" placeholder="{{ $currency[0]->code }}" id="">
+                                        @foreach($currency as $cur)
+                                            <option  @if($cur->id === old('currency_id')) selected @endif value="{{ $cur->id }}">{{$cur->code}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
+                            @if(!empty($rates) && count($rates))
+                                <div class="main__select__item">
+                                    <p>@lang('project::project.enter_rates')</p>
+                                    <select class="custom-select1 sources validate__input js-example-basic-single" name="rate_id" placeholder="@if(empty($project->rate_title)) @lang('project::project.enter_rates') @else {{$project->rate_title}} @endif" id="">
+                                        @foreach($rates as $cat_rate)
+                                            <optgroup label="{{ $cat_rate->content_current_lang->title }}">
+                                                @foreach($cat_rate->rates as $rate)
+                                                    <option @if($rate->id === old('rate_id')) selected @endif value="{{ $rate->id }}">{{$rate->content_current_lang_rate->title }} {{ $rate->price }} @if(count($currency)) {{ $currency[0]->symbol }} @endif</option>
+                                                @endforeach
+                                            </optgroup>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
 
                             <div class="main__select__item">
-                                <p>Тариф *</p>
-                                <select class="custom-select sources" placeholder="Выберите тариф" id="">
-                                    <option value="Тариф1">Тариф1</option>
-                                    <option value="Тариф2">Тариф2</option>
-                                    <option value="Тариф3">Тариф3</option>
-                                    <option value="Тариф4">Тариф4</option>
-                                </select>
-                            </div>
-
-                            <div class="main__select__item">
-                                <p>Премодерация комментариев *</p>
-                                <select class="custom-select sources" placeholder="Авторы публикуют сразу на ваш сайт" id="">
-                                    <option value="Автор1">Автор1</option>
-                                    <option value="Автор2">Автор2</option>
-                                    <option value="Автор3">Автор3</option>
-                                    <option value="Автор4">Автор4</option>
+                                <p>@lang('project::project.enter_comments_moderation')</p>
+                                <select class="custom-select sources" name="moderation_comments" id="moderation_comments" placeholder="@if(old('moderation_comments') == 1)
+                                @lang('project::project.select_immediately')
+                                @else
+                                @lang('project::project.select_after_approval')
+                                @endif">
+                                    <option @if(old('moderation_comments') == 1) selected @endif value="1">@lang('project::project.select_immediately')</option>
+                                    <option @if(old('moderation_comments') != 1) selected @endif value="1">@lang('project::project.select_after_approval')</option>
                                 </select>
                             </div>
 
                             <div class="checkbox__main">
-                                <label for="main__check1"><input type="checkbox" id="main__check1">Разрешить комментарии меньшего размера</label>
+                                <div class="big__main__nav">
+                                    <input type="checkbox" @if(old('small_comments') == 1) checked @endif name="small_comments" id="main__check1" value="1">
+                                    <label for="main__check1">@lang('project::project.enter_small_comments')</label>
+                                </div>
 
-                                <label for="main__check2"><input type="checkbox" id="main__check2">Требовать скриншот от автора ( + 1 RUB )</label>
+                                <div class="big__main__nav">
+                                    <input type="checkbox" id="main__check2" @if(old('screenshot') == 1) checked @endif name="screenshot" value="1">
+                                    <label for="main__check2">@lang('project::project.enter_small_comments')</label>
+                                </div>
 
-                                <label for="main__check3"><input type="checkbox" id="main__check3">Только для верифицированных авторов ( + 5 RUB )</label>
+                                <div class="big__main__nav">
+                                    <input type="checkbox" id="main__check3" @if(old('user_pro') == 1) checked @endif name="user_pro" value="1">
+                                    <label for="main__check3">@lang('project::project.enter_user_pro')</label>
+                                </div>
                             </div>
                         </div>
 
@@ -122,46 +147,56 @@
                     </div>
                 </div>
 
-                <div class="create__project__btn">
-                    <a href="#"><span><img src="img/_src/create__project__icon.png" alt="create__project__icon"></span>Создать проект</a>
+                <div class="create__project__btn" >
+                    <button type="submit">
+                        <span>
+                            <img src="{{ asset('img/_src/create__project__icon.svg') }}" alt="create__project__icon">
+                        </span>
+                        @lang('project::project.submit_edit')
+                    </button>
                 </div>
-            </form>
+            </div>
         </div>
 
         <div class="new__of__navigation second__navigation">
-            <form action="/">
+            <div>
                 <div class="inner__new__navigation">
-                    <div class="left__main__nav">
-                        <div class="main__select__item">
-                            <p>Группа</p>
-                            <select class="custom-select sources" placeholder="Без группы" id="">
-                                <option value="Группа1">Группа1</option>
-                                <option value="Группа2">Группа2</option>
-                                <option value="Группа3">Группа3</option>
-                                <option value="Группа4">Группа4</option>
-                            </select>
-                        </div>
-
-                        <div class="main__select__item">
-                            <p>Команда авторов</p>
-                            <select class="custom-select sources" placeholder="Выберите команду" id="">
-                                <option value="Команда1">Команда1</option>
-                                <option value="Команда3">Команда3</option>
-                                <option value="Команда2">Команда2</option>
-                            </select>
-                        </div>
-
-                        <div class="main__select__item">
+                    <div class="left__main__nav" style="width: 400px;">
+                        @if(isset($project_group) && count($project_group))
+                            <div class="main__select__item">
+                                <p>@lang('project::project.enter_project_group')</p>
+                                <select class="custom-select1 sources validate__input js-example-basic-single" name="group_id" id="group_id">
+                                    @include('project::front.block.group', [
+                                        'project_group' => $project_group,
+                                        'project_id' => $project->id ?? 0,
+                                        'delimiter' => $delimiter
+                                    ])
+                                </select>
+                            </div>
+                        @endif
+                        @if($user_group->count())
+                            <div class="main__select__item">
+                                <p>@lang('project::project.enter_client_group')</p>
+                                <select class="custom-select1 sources validate__input js-example-basic-single"
+                                        name="author_group_id" id="author_group_id">
+                                    {{--<select class="custom-select1 sources validate__input js-example-basic-multiple" name="author_group_id[]" multiple="multiple" id="client_id">--}}
+                                    <option value="0">-- @lang('project::project.enter_client_group')</option>
+                                    @foreach($user_group as $item)
+                                        <option @if($item->id == old('author_group_id')) selected @endif value="{{$item->id}}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endif
+                        {{--<div class="main__select__item">
                             <p>Логин автора</p>
                             <input class="main__input__other" type="text" placeholder="Логин / Email">
-                        </div>
+                        </div>--}}
 
                         <div class="main__select__item">
-                            <p>Уведомления о новых заявках</p>
-                            <select class="custom-select sources" placeholder="Получать уведомления" id="">
-                                <option value="уведомления1">уведомления1</option>
-                                <option value="уведомления2">уведомления2</option>
-                                <option value="уведомления3">уведомления3</option>
+                            <p>@lang('project::project.enter_client_notifications')</p>
+                            <select class="custom-select sources" placeholder="@lang('project::project.enter_client_notification'.old('notification', '1'))"  name="notification" id="notification">
+                                <option @if(old('notification') == 1) selected @endif value="1">@lang('project::project.enter_client_notification1')</option>
+                                <option @if(old('notification') == 0) selected @endif value="0">@lang('project::project.enter_client_notification0')</option>
                             </select>
                         </div>
 
@@ -195,21 +230,40 @@
                     </div>
 
 
-                    <div class="right__main__nav">
+                    <div class="right__main__nav" style="width: 560px; margin-top: 50px!important;">
                         <div class="first__right">
                             <h3>Уведомления на почту</h3>
-                            <div class="checkbox__main">
-                                <label for="review"><input type="checkbox" id="review">Отзывы</label>
+                            <div class="checkbox__main" style="margin-top: 21px;">
+                                <div class="big__main__nav">
+                                    <input type="checkbox" id="review">
+                                    <label for="review">Отзывы</label>
+                                </div>
 
-                                <label for="question"><input type="checkbox" id="question">Вопросы</label>
 
-                                <label for="yes"><input type="checkbox" id="yes">Положительные</label>
+                                <div class="big__main__nav">
+                                    <input type="checkbox" id="question">
+                                    <label for="question">Вопросы</label>
+                                </div>
 
-                                <label for="dontknow"><input type="checkbox" id="dontknow">Нейтральные</label>
+                                <div class="big__main__nav">
+                                    <input type="checkbox" id="yes">
+                                    <label for="yes">Положительные</label>
+                                </div>
 
-                                <label for="dontknow2"><input type="checkbox" id="dontknow2">Отрицательные</label>
+                                <div class="big__main__nav">
+                                    <input type="checkbox" id="dontknow">
+                                    <label for="dontknow">Нейтральные</label>
+                                </div>
 
-                                <label for="answer"><input type="checkbox" id="answer">Ответы</label>
+                                <div class="big__main__nav">
+                                    <input type="checkbox" id="dontknow2">
+                                    <label for="dontknow2">Отрицательные</label>
+                                </div>
+
+                                <div class="big__main__nav">
+                                    <input type="checkbox" id="answer">
+                                    <label for="answer">Ответы</label>
+                                </div>
                             </div>
                         </div>
 
@@ -221,17 +275,14 @@
                     </div>
                 </div>
 
-                <div class="create__project__btn">
-                    <a href="#"><span><img src="img/_src/create__project__icon.png" alt="create__project__icon"></span>Создать проект</a>
+                <div class="create__project__btn" style="margin-top: 60px;">
+                    <button type="submit"><span><img src="{{ asset('img/_src/create__project__icon.svg') }}" alt="create__project__icon"></span>@lang('project::project.submit_edit')</button>
                 </div>
-            </form>
+            </div>
         </div>
 
-
-
-
         <div class="new__of__navigation third__navigation">
-            <form action="/">
+            <div>
                 <div class="main__third__nav">
                     <div class="new__navigation__title">
                         Активность проекта
@@ -241,40 +292,59 @@
                         <div class="active__project">
                             <p>Группа</p>
                             <div class="label__week">
-                                <label for="monday">
+
+                                <div class="week__item">
                                     <input type="checkbox" id="monday">
-                                    <span>Пн</span>
-                                </label>
+                                    <label for="monday">
+                                        <span>Пн</span>
+                                    </label>
+                                </div>
 
-                                <label for="tuesday">
+
+                                <div class="week__item">
                                     <input type="checkbox" id="tuesday">
-                                    <span>Вт</span>
-                                </label>
+                                    <label for="tuesday">
+                                        <span>Вт</span>
+                                    </label>
+                                </div>
 
-                                <label for="wednesday">
+                                <div class="week__item">
                                     <input type="checkbox" id="wednesday">
-                                    <span>Ср</span>
-                                </label>
+                                    <label for="wednesday">
+                                        <span>Ср</span>
+                                    </label>
+                                </div>
 
-                                <label for="thursday">
+
+                                <div class="week__item">
                                     <input type="checkbox" id="thursday">
-                                    <span>Чт</span>
-                                </label>
+                                    <label for="thursday">
+                                        <span>Чт</span>
+                                    </label>
+                                </div>
 
-                                <label for="friday">
+
+                                <div class="week__item">
                                     <input type="checkbox" id="friday">
-                                    <span>Пт</span>
-                                </label>
+                                    <label for="friday">
+                                        <span>Пт</span>
+                                    </label>
+                                </div>
 
-                                <label for="saturday">
+                                <div class="week__item">
                                     <input type="checkbox" id="saturday">
-                                    <span>Сб</span>
-                                </label>
+                                    <label for="saturday">
+                                        <span>Сб</span>
+                                    </label>
+                                </div>
 
-                                <label for="sunday">
+
+                                <div class="week__item">
                                     <input type="checkbox" id="sunday">
-                                    <span>Вс</span>
-                                </label>
+                                    <label for="sunday">
+                                        <span>Нд</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
@@ -298,7 +368,7 @@
                         </div>
                         <div class="inner__kolvo">
                             <div class="kolvo__text">
-                                <span>Максимальное ко-во</span>
+                                <span>Максимальное кол-во</span>
                                 <span>Случайное кол-во</span>
                             </div>
 
@@ -355,8 +425,8 @@
                         <input class="main__input__other" type="text" placeholder="0">
                     </div>
 
-                    <div class="limit__inner">
-                        <div class="new__navigation__title">
+                    <div class="limit__inner" style="margin-top: 26px;">
+                        <div class="new__navigation__title" style="margin-bottom: 12px;">
                             Лимиты по авторам
                         </div>
 
@@ -407,10 +477,13 @@
 
                             <input class="main__input__other" type="text" placeholder="3">
 
-                            <label class="all__project__checkbox" for="all__project1">
+
+                            <div class="all__project__checkbox all__check__create">
                                 <input type="checkbox" id="all__project1">
-                                Установить для всех проектов группы
-                            </label>
+                                <label for="all__project1">
+                                    Установить для всех проектов группы
+                                </label>
+                            </div>
                         </div>
 
                         <div class="main__select__item">
@@ -425,10 +498,12 @@
 
                             <input class="main__input__other" type="text" placeholder="3">
 
-                            <label class="all__project__checkbox" for="all__project2">
+                            <div class="all__project__checkbox all__check__create">
                                 <input type="checkbox" id="all__project2">
-                                Установить для всех проектов группы
-                            </label>
+                                <label for="all__project2">
+                                    Установить для всех проектов группы
+                                </label>
+                            </div>
                         </div>
 
                         <div class="main__select__item">
@@ -469,18 +544,20 @@
                     </div>
 
                     <div class="limit__inner">
-                        <div class="new__navigation__title">
+                        <div class="new__navigation__title" style="margin-top: 27px; margin-bottom: 10px;">
                             Устройства
                         </div>
 
-                        <label class="all__project__checkbox other__all__project__checkbox" for="all__project3">
+                        <div class="all__project__checkbox all__check__create other__all__project__checkbox">
                             <input type="checkbox" id="all__project3">
-                            Только для мобильных устройств
+                            <label for="all__project3">
+                                Установить для всех проектов группы
+                            </label>
                             <span class="hint">?</span>
                             <div class="text__hint">
                                 Подсказка
                             </div>
-                        </label>
+                        </div>
                     </div>
 
                     <div class="stop__words__block">
@@ -495,25 +572,28 @@
                     </div>
                 </div>
 
-                <div class="create__project__btn">
-                    <a href="#"><span><img src="img/_src/create__project__icon.png" alt="create__project__icon"></span>Создать проект</a>
+                <div class="create__project__btn" style="margin-top: 45px;">
+                    <button type="submit"><span><img src="{{ asset('img/_src/create__project__icon.svg') }}" alt="create__project__icon"></span>@lang('project::project.submit_edit')</button>
                 </div>
-            </form>
+            </div>
         </div>
 
         <div class="new__of__navigation fourth__navigation">
-            <form action="/">
+            <div>
                 <div class="inner__new__navigation">
 
                     <div class="left__main__nav">
                         <div class="main__select__item">
-                            <p>Список страниц, с которыми можно работать</p>
-                            <textarea name="" id="" placeholder="Только прямые ссылки, каждую с новой строки"></textarea>
+                            <p>@lang('project::project.enter_link_page')</p>
+                            <textarea name="page_link" id="page_link" placeholder="@lang('project::project.enter_link_page_place')">{{ old('page_link') }}</textarea>
                         </div>
                     </div>
-                    <div class="right__main__nav">
-                        <div class="first__right">
-                            <span class="main__information">Важная информация</span>
+                    <div class="right__main__nav" style="
+        width: 567px;
+        margin-top: 50px!important;
+    ">
+                        <div class="first__right" >
+                            <span class="main__indivation">Важная информация</span>
                             <ul class="second__numeration">
 
                                 <li>Список страниц, с которыми можно работать. Каждую ссылку с новой строки. Другие страницы, система не пропустит в работу.</li>
@@ -527,19 +607,18 @@
                 </div>
 
                 <div class="create__project__btn">
-                    <a href="#"><span><img src="img/_src/create__project__icon.png" alt="create__project__icon"></span>Создать проект</a>
+                    <button type="submit"><span><img src="{{ asset('img/_src/create__project__icon.svg') }}" alt="create__project__icon"></span>@lang('project::project.submit_edit')</button>
                 </div>
-            </form>
+            </div>
         </div>
 
-
         <div class="new__of__navigation fifth__navigation">
-            <form action="/">
-                <div class="inner__new__navigation">
+            <div>
+                <div class="inner__new__navigation" style="margin-top: 29px;">
 
-                    <div class="left__main__nav" style="width: 488px;">
+                    <div class="left__main__nav">
                         <div class="main__select__item">
-                            <p>Название *</p>
+                            <p style="margin-bottom: 15px;">Название *</p>
                             <select class="custom-select sources" placeholder="Project 1" id="">
                                 <option value="Команда1">Команда1</option>
                                 <option value="Команда3">Команда3</option>
@@ -580,7 +659,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="right__main__nav" style="margin-top: 0; width: 488px;">
+                    <div class="right__main__nav">
                         <div class="main__select__item">
                             <p>Название *</p>
                             <select class="custom-select sources" placeholder="Project 1" id="">
@@ -594,24 +673,26 @@
                     </div>
                 </div>
 
-                <div class="create__project__btn">
-                    <a href="#"><span><img src="img/_src/create__project__icon.png" alt="create__project__icon"></span>Создать проект</a>
+                <div class="create__project__btn" style="margin-top: 52px;">
+                    <button type="submit"><span><img src="{{ asset('img/_src/create__project__icon.svg') }}" alt="create__project__icon"></span>@lang('project::project.submit_edit')</button>
                 </div>
-            </form>
+            </div>
         </div>
 
-
         <div class="new__of__navigation sixth__navigation">
-            <form action="/">
+            <div>
                 <div class="sixth__navigation__new">
                     <div class="item__sixth">
                         <div class="top__sixth">
                             <div class="title__sixth">
                                 Вконтакте
                             </div>
-                            <label for="checkbox__vk">
+                            <div class="item__sixth__checkbox">
+
                                 <input type="checkbox" id="checkbox__vk">
-                            </label>
+                                <label for="checkbox__vk">
+                                </label>
+                            </div>
                         </div>
 
                         <div class="main__select__item">
@@ -670,9 +751,13 @@
                             <div class="title__sixth">
                                 Одноклассники
                             </div>
-                            <label for="checkbox__odn">
+                            <div class="item__sixth__checkbox">
+
                                 <input type="checkbox" id="checkbox__odn">
-                            </label>
+                                <label for="checkbox__odn">
+                                </label>
+                            </div>
+
                         </div>
 
                         <div class="main__select__item">
@@ -731,9 +816,12 @@
                             <div class="title__sixth">
                                 Facebook
                             </div>
-                            <label for="checkbox__fb">
+                            <div class="item__sixth__checkbox">
+
                                 <input type="checkbox" id="checkbox__fb">
-                            </label>
+                                <label for="checkbox__fb">
+                                </label>
+                            </div>
                         </div>
 
                         <div class="main__select__item">
@@ -786,9 +874,12 @@
                             <div class="title__sixth">
                                 Instagram
                             </div>
-                            <label for="checkbox__inst">
+                            <div class="item__sixth__checkbox">
+
                                 <input type="checkbox" id="checkbox__inst">
-                            </label>
+                                <label for="checkbox__inst">
+                                </label>
+                            </div>
                         </div>
 
                         <div class="main__select__item">
@@ -802,9 +893,12 @@
                             <div class="title__sixth">
                                 Twitter
                             </div>
-                            <label for="checkbox__twitter">
+                            <div class="item__sixth__checkbox">
+
                                 <input type="checkbox" id="checkbox__twitter">
-                            </label>
+                                <label for="checkbox__twitter">
+                                </label>
+                            </div>
                         </div>
 
                         <div class="main__select__item">
@@ -814,21 +908,136 @@
                     </div>
                 </div>
 
-                <label for="disable check" class="disable_check">
-                    <input type="checkbox" id="disable check">
-                    Отключить проверку
-                </label>
+                <div class="all__check__create">
+                    <input type="checkbox" id="disable_check">
+                    <label for="disable_check" class="disable_check">
+                        Отключить проверку
+                    </label>
+                </div>
 
                 <div class="create__project__btn">
-                    <a href="#"><span><img src="img/_src/create__project__icon.png" alt="create__project__icon"></span>Создать проект</a>
+                    <button type="submit"><span><img src="{{ asset('img/_src/create__project__icon.svg') }}" alt="create__project__icon"></span>@lang('project::project.submit_edit')</button>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
-
+    </form>
 @endsection
 
+@section('script')
+    <link rel="stylesheet" href="{{ asset('frontend/css/jquery-ui.css') }}">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-@section('javascript')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+    <script>
+        // 숫자 3자리마다 콤마 찍기
+        function numberWithCommas(x) {
+            if (x !== null) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+        }
+
+        $(function() {
+            //slider range init set
+            $( "#slider-range" ).slider({
+                range: true,
+                min: 1,
+                max: 100,
+                values: [ 1, 100 ],
+                slide: function( event, ui ) {
+                    $( ".min" ).html(numberWithCommas(ui.values[ 0 ]) );
+                    $( ".max" ).html(numberWithCommas(ui.values[ 1 ]) );
+                }
+            });
+
+            //slider range data tooltip set
+            var $handler = $("#slider-range .ui-slider-handle");
+
+            $handler.eq(0).append("<b class='amount'><span class='min'>"+numberWithCommas($( "#slider-range" ).slider( "values", 0 )) +"</span></b>");
+            $handler.eq(1).append("<b class='amount'><span class='max'>"+numberWithCommas($( "#slider-range" ).slider( "values", 1 )) +"</span></b>");
+
+            //slider range pointer mousedown event
+            $handler.on("mousedown",function(e){
+                e.preventDefault();
+                $(this).children(".amount").fadeIn(300);
+            });
+
+            //slider range pointer mouseup event
+            $handler.on("mouseup",function(e){
+                e.preventDefault();
+                $(this).children(".amount").fadeOut(300);
+            });
+        });
+
+
+        $(function() {
+            //slider range init set
+            $( "#slider-range1" ).slider({
+                range: true,
+                min: 1,
+                max: 100,
+                values: [ 1, 100 ],
+                slide: function( event, ui ) {
+                    $( ".min" ).html(numberWithCommas(ui.values[ 0 ]) );
+                    $( ".max" ).html(numberWithCommas(ui.values[ 1 ]) );
+                }
+            });
+
+            //slider range data tooltip set
+            var $handler = $("#slider-range1 .ui-slider-handle");
+
+            $handler.eq(0).append("<b class='amount'><span class='min'>"+numberWithCommas($( "#slider-range1" ).slider( "values", 0 )) +"</span></b>");
+            $handler.eq(1).append("<b class='amount'><span class='max'>"+numberWithCommas($( "#slider-range1" ).slider( "values", 1 )) +"</span></b>");
+
+            //slider range pointer mousedown event
+            $handler.on("mousedown",function(e){
+                e.preventDefault();
+                $(this).children(".amount").fadeIn(300);
+            });
+
+            //slider range pointer mouseup event
+            $handler.on("mouseup",function(e){
+                e.preventDefault();
+                $(this).children(".amount").fadeOut(300);
+            });
+        });
+
+
+        $(function() {
+            //slider range init set
+            $( "#slider-range2" ).slider({
+                range: true,
+                min: 1,
+                max: 100,
+                values: [ 1, 100 ],
+                slide: function( event, ui ) {
+                    $( ".min" ).html(numberWithCommas(ui.values[ 0 ]) );
+                    $( ".max" ).html(numberWithCommas(ui.values[ 1 ]) );
+                }
+            });
+
+            //slider range data tooltip set
+            var $handler = $("#slider-range2 .ui-slider-handle");
+
+            $handler.eq(0).append("<b class='amount'><span class='min'>"+numberWithCommas($( "#slider-range2" ).slider( "values", 0 )) +"</span></b>");
+            $handler.eq(1).append("<b class='amount'><span class='max'>"+numberWithCommas($( "#slider-range2" ).slider( "values", 1 )) +"</span></b>");
+
+            //slider range pointer mousedown event
+            $handler.on("mousedown",function(e){
+                e.preventDefault();
+                $(this).children(".amount").fadeIn(300);
+            });
+
+            //slider range pointer mouseup event
+            $handler.on("mouseup",function(e){
+                e.preventDefault();
+                $(this).children(".amount").fadeOut(300);
+            });
+        });
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
 @endsection

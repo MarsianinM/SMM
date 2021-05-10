@@ -5419,6 +5419,7 @@ ul.numeration__slider li {
   top: 133px;
   width: 328px;
   height: 65px;
+  z-index: 1000;
   border-radius: 0 10px 10px 0;
 }
 .thank__you__popup:before {
@@ -6168,6 +6169,8 @@ section.cookies {
   background: #bd0711;
 }
 
+input.validate__input,
+textarea.validate__input,
 .main__select__item .validate__input .custom-select-trigger {
   border: 1px solid #e3010d;
   background: #ffeded;
@@ -6176,6 +6179,7 @@ section.cookies {
 .red__validate {
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
+  font-size: 11px;
   color: #e3010d;
 }
 .red__validate span {

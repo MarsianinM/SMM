@@ -8,7 +8,9 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Modules\Project\Entities\Project;
 use Modules\Project\Entities\ProjectGroup;
+use Modules\Rates\Repository\CategoryRepository;
 use Modules\Subjects\Entities\Subject;
+use Modules\Subjects\Repository\SubjectRepository;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
@@ -31,16 +33,15 @@ class ProjectClientRepository
      */
     public function store(array $data): Project
     {
-        $data['client_id'] = auth()->user()->id;
-        $page = $this->model->create(Arr::except($data, 'image'));
-        if (Arr::get($data, 'image') instanceof UploadedFile) {
+        $result = $this->model->create($data);
+        /*if (Arr::get($data, 'image') instanceof UploadedFile) {
             $page->addMedia($data['image'])
-                /*->sanitizingFileName(function($fileName) {
+                ->sanitizingFileName(function($fileName) {
                     return strtolower(Str::slug($fileName));
-                })*/
+                })
                 ->toMediaCollection('projects');
-        }
-        return $page;
+        }*/
+        return $result;
     }
 
     /**
@@ -73,10 +74,20 @@ class ProjectClientRepository
         return $sql->with(['rate','subject'])->paginate('8');
     }
 
-/*    public function getProjectGroup(ProjectGroup $projectGroup)
+/*    public function getProjectData(
+        SubjectRepository $subjects,
+        CategoryRepository $ratesRep,
+        ProjectGroupRepository $projectGroup,
+        ProjectAuthorGroupRepository $author_group
+    )
     {
-        $sql = $projectGroup->where('client_id',auth()->user()->id);
-        return $sql->with(['rate','subject'])->paginate('8');
+        return [
+            'subjects'          => $subjects->getList(),
+            'rates'             => $ratesRep->getListRatesAll(),
+            'project_group'     => $projectGroup->getProjectGroup(),
+            'user_group'        => $author_group->getAuthorGroup(),
+            'delimiter'         => '',
+        ];
     }*/
 
 }

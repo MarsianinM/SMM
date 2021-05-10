@@ -94,7 +94,7 @@
                                         @foreach($rates as $cat_rate)
                                             <optgroup label="{{ $cat_rate->content_current_lang->title }}">
                                                 @foreach($cat_rate->rates as $rate)
-                                                <option @if($rate->id === $project->rate->id) selected @endif value="{{ $rate->id }}">{{$rate->content_current_lang_rate->title }} {{ $rate->price }} @if(count($currency)) {{ $currency[0]->symbol }} @endif</option>
+                                                <option @if($rate->id === $project->rate_id) selected @endif value="{{ $rate->id }}">{{$rate->content_current_lang_rate->title }} {{ $rate->price }} @if(count($currency)) {{ $currency[0]->symbol }} @endif</option>
                                                 @endforeach
                                             </optgroup>
                                         @endforeach

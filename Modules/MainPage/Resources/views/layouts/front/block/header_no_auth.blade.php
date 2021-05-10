@@ -23,7 +23,7 @@
 
                     <a href="#signin-form" rel="modal:open">Регистрация</a>
 
-                    <a href="#login-form" rel="modal:open">Вход</a>
+                    <a href="#login-form"  rel="modal:open">Вход</a>
                 </div>
             </div>
         </div>

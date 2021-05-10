@@ -6,6 +6,11 @@
     </head>
     <body>
         @include('mainpage::layouts.front.block.header')
+        @if($errors->any())
+            <div class="thank__you__popup alert-danger">
+                {!! implode('<br>', $errors->all('<p>:message</p>')) !!}
+            </div>
+        @endif
         <section class="projects">
             <div class="container">
                 @yield('content')
