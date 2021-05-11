@@ -2498,7 +2498,7 @@ section.communication{
         display: inline-block;
         width: 190px;
         height:40px;
-        border-bottom: 1px solid #black;
+        border-bottom: 1px solid black;
       }
   }
   .custom-options{
@@ -6300,6 +6300,9 @@ select.js-example-basic-single{
 .main__select__item .select2-container--default .select2-selection--single .select2-selection__arrow{
     height: 46px;
     width: 27px;
+}
+.create_project{
+    display: none;
 }
 @media only screen and (max-width: 1000px){
 

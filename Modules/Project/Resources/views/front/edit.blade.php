@@ -9,11 +9,12 @@
         @method('PATCH')
         @csrf
         <input name="client_id" type="hidden" value="{{ auth()->id() }}">
+
         <nav class="create__project__navigation">
             <ul>
                 <li class="proj_nav_item active__nav first__open">@lang('project::all_users.project_the_main')</li>
                 <li class="proj_nav_item second__open">@lang('project::all_users.project_additional')</li>
-                {{--<li class="proj_nav_item third__open">@lang('project::all_users.project_limitations')</li>--}}
+                <li class="proj_nav_item third__open">@lang('project::all_users.project_limitations')</li>
                 <li class="proj_nav_item fourth__open">@lang('project::all_users.project_pages')</li>
                 {{--<li class="proj_nav_item fifth__open">@lang('project::all_users.project_geo_targeting')</li>
                 <li class="proj_nav_item sixth__open">@lang('project::all_users.project_account_requirements')</li>--}}
