@@ -6,11 +6,6 @@
     </head>
     <body>
         @include('mainpage::layouts.front.block.header')
-        @if($errors->any())
-            <div class="thank__you__popup alert-danger">
-                {!! implode('<br>', $errors->all('<p>:message</p>')) !!}
-            </div>
-        @endif
         <section class="projects">
             <div class="container">
                 @yield('content')
@@ -105,5 +100,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
         <script src="{{ asset('frontend/js/scripts.min.js') }}"></script>
         @yield('script')
+
+        @if($errors->any())
+            <div class="thank__you__popup alert-danger">
+                {!! implode('<br>', $errors->all('<p>:message</p>')) !!}
+            </div>
+            <script>
+                setTimeout(function(){
+                    $('.thank__you__popup').fadeOut('slow');
+                },6000);
+            </script>
+        @endif
     </body>
 </html>

@@ -26,4 +26,7 @@ return [
     //submit
     'submit_add'                => 'Создать',
     'submit_edit'               => 'Сохранить',
+
+    //ERROR VALIDATION
+    'error_subject'             => 'Такой темы не существует',
 ];

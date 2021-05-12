@@ -42,4 +42,6 @@ return [
 
     //error
     'list_error'            => 'Данные отсутствуют.',
+    //RULES
+    'error_rates'           => 'Такого тарифа нет',
 ];

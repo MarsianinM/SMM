@@ -5418,7 +5418,7 @@ ul.numeration__slider li {
   left: 0;
   top: 133px;
   width: 328px;
-  height: 65px;
+  /*height: 65px;*/
   z-index: 1000;
   border-radius: 0 10px 10px 0;
 }
@@ -5431,19 +5431,12 @@ ul.numeration__slider li {
   width: 3px;
   left: 0;
 }
-.thank__you__popup p:nth-child(1) {
+.thank__you__popup p {
   line-height: 16px;
   font-size: 13px;
   font-family: "Open Sans", sans-serif;
   color: #47505f;
   font-weight: 700;
-}
-.thank__you__popup p:nth-child(2) {
-  line-height: 16px;
-  font-size: 13px;
-  font-family: "Open Sans", sans-serif;
-  color: #a4acb9;
-  font-weight: 600;
 }
 
 section.support {

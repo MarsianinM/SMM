@@ -114,7 +114,7 @@
                                     @lang('project::project.select_after_approval')
                                     @endif">
                                         <option @if(old('moderation_comments') == 1) selected @endif value="1">@lang('project::project.select_immediately')</option>
-                                        <option @if(old('moderation_comments') != 1) selected @endif value="1">@lang('project::project.select_after_approval')</option>
+                                        <option @if(old('moderation_comments') != 1) selected @endif value="0">@lang('project::project.select_after_approval')</option>
                                     </select>
                                 </div>
 
