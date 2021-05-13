@@ -1130,7 +1130,7 @@
 
 
         /* Локализация timepicker */
-        $.timepicker.regional['ru'] = {
+       /* $.timepicker.regional['ru'] = {
             timeOnlyTitle: 'Выберите время',
             timeText: 'Время',
             hourText: 'Часы',
@@ -1145,9 +1145,10 @@
             pmNames: ['PM', 'P'],
             isRTL: false
         };
-        $.timepicker.setDefaults($.timepicker.regional['ru']);
+        $.timepicker.setDefaults($.timepicker.regional['ru']);*/
         $(function(){
-            $(".datepicker").datetimepicker();
+            $(".datepicker").datepicker();
+            //$(".datepicker").datetimepicker();
         });
         @if(old('type_project'))
             $(".item__type__project a.{{old('type_project')}}").trigger('click');
