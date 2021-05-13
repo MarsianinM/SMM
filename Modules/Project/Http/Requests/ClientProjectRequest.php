@@ -78,7 +78,7 @@ class ClientProjectRequest extends FormRequest
             'client_id.required'        => trans('project::project.error_client'),
             'client_id.integer'         => trans('project::project.error_client_integer'),
             'title.required'            => trans('project::project.error_required'),
-            'body.required'         => 'A message is required',
+            'body.required'             => 'A message is required',
         ];
     }
 }
