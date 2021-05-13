@@ -18,7 +18,7 @@
                 <ul>
                     <li class="proj_nav_item active__nav first__open">@lang('project::all_users.project_the_main')</li>
                     <li class="proj_nav_item second__open">@lang('project::all_users.project_additional')</li>
-                    {{--<li class="proj_nav_item third__open">@lang('project::all_users.project_limitations')</li>--}}
+                    <li class="proj_nav_item third__open">@lang('project::all_users.project_limitations')</li>
                     <li class="proj_nav_item fourth__open">@lang('project::all_users.project_pages')</li>
                     {{--<li class="proj_nav_item fifth__open">@lang('project::all_users.project_geo_targeting')</li>
                     <li class="proj_nav_item sixth__open">@lang('project::all_users.project_account_requirements')</li>--}}
@@ -56,7 +56,7 @@
                                             name="subject_id">
                                         <option value="0">--</option>
                                         @foreach($subjects as $subject)
-                                            <option @if($subject->id === old('subject_id')) selected @endif value="{{ $subject->id }}">{{ $subject->subject_title_currentLang }}</option>
+                                            <option @if($subject->id == old('subject_id')) selected @endif value="{{ $subject->id }}">{{ $subject->subject_title_currentLang }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -994,7 +994,9 @@
 
 @section('script')
     <link rel="stylesheet" href="{{ asset('frontend/css/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/jquery.datetimepicker.min.css') }}">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ asset('frontend/datetimepicker-master/jquery.datetimepicker.full.min.js') }}"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -1109,7 +1111,7 @@
             $('.js-example-basic-single').select2();
         });
         /* Локализация datepicker */
-        $.datepicker.regional['ru'] = {
+       /* $.datepicker.regional['ru'] = {
             closeText: 'Закрыть',
             prevText: 'Предыдущий',
             nextText: 'Следующий',
@@ -1126,9 +1128,7 @@
             showMonthAfterYear: false,
             yearSuffix: ''
         };
-        $.datepicker.setDefaults($.datepicker.regional['ru']);
-
-
+        $.datepicker.setDefaults($.datepicker.regional['ru']);*/
         /* Локализация timepicker */
        /* $.timepicker.regional['ru'] = {
             timeOnlyTitle: 'Выберите время',
@@ -1147,7 +1147,7 @@
         };
         $.timepicker.setDefaults($.timepicker.regional['ru']);*/
         $(function(){
-            $(".datepicker").datepicker();
+            $(".datepicker").datetimepicker();
             //$(".datepicker").datetimepicker();
         });
         @if(old('type_project'))

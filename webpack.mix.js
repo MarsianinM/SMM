@@ -13,7 +13,9 @@ const mix = require('laravel-mix');
 
 mix.js('resources/frontend/libs/jquery/dist/jquery.min.js', 'public/frontend/js')
     //.js('resources/frontend/js/jquery.slim.min.js', 'public/frontend/js')
+    //.js('resources/frontend/datetimepicker-master/jquery.datetimepicker.full.min.js', 'public/frontend/datetimepicker-master')
     .js('resources/frontend/js/scripts.min.js', 'public/frontend/js')
+    .css('resources/frontend/datetimepicker-master/jquery.datetimepicker.min.css', 'public/frontend/css/jquery.datetimepicker.min.css')
     .sass('resources/frontend/scss/main.scss', 'public/frontend/css/main.min.css')
     .sass('resources/frontend/scss/bootstrap.scss', 'public/frontend/css/bootstrap.min.css')
     .css('resources/frontend/css/max.css', 'public/frontend/css/main.min.css')
