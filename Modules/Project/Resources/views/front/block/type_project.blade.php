@@ -3,7 +3,7 @@
 </div>
 
 <div class="item__type__project">
-    <a href="#" class="type__item" data-show="comments">
+    <a href="#comments" class="type__item comments" data-show="comments">
         <div class="image__type">
             <img src="{{ asset('frontend/img/_src/type__item.png') }}" alt="type__item">
 
@@ -13,7 +13,7 @@
         </div>
     </a>
 
-    <a href="#" class="type__item" data-show="reposts">
+    <a href="#reposts" class="type__item reposts" data-show="reposts">
         <div class="image__type">
             <img src="{{ asset('frontend/img/_src/type__item1.png') }}" alt="type__item">
 
@@ -24,7 +24,7 @@
     </a>
 
 
-    <a href="#" class="type__item" data-show="followers">
+    <a href="#followers" class="type__item followers" data-show="followers">
         <div class="image__type">
             <img src="{{ asset('frontend/img/_src/type__item2.png') }}" alt="type__item">
 
@@ -35,7 +35,7 @@
     </a>
 
 
-    <a href="#" class="type__item" data-show="videos">
+    <a href="#videos" class="type__item videos" data-show="videos">
         <div class="image__type">
             <img src="{{ asset('frontend/img/_src/type__item3.png') }}" alt="type__item">
 

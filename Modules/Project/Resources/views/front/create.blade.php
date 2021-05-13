@@ -4,6 +4,7 @@
     <form style="margin-bottom: 30px" action="{{ route('client.projects.store') }}" method="POST">
         @csrf
         <input name="client_id" type="hidden" value="{{ auth()->id() }}">
+        <input name="type_project" id="type_project-input" type="hidden" value="{{ old('type_project') }}">
 
         <div class="wrapper-type_project">
             @include('project::front.block.type_project')
@@ -29,19 +30,30 @@
                     <div class="inner__new__navigation">
                         <div class="left__main__nav" style="width: 411px;">
                             <div class="main__select__item">
-                                <p>@lang('project::all_users.enter_title')</p>
-                                <input class="main__input__other" type="text" name="title" value="{{ old('title') }}" placeholder="@lang('project::all_users.enter_title')">
+                                <p>@lang('project::all_users.enter_title')
+                                    @error('title')
+                                        <span class="red__validate">{{ $message }}</span>
+                                    @enderror
+                                </p>
+                                <input class="main__input__other @error('link') is-invalid validate__input @enderror" type="text" name="title" value="{{ old('title') }}" placeholder="@lang('project::all_users.enter_title')">
                             </div>
                             <div class="main__select__item">
-                                <p>@lang('project::all_users.enter_link_in_page')</p>
-                                <input class="main__input__other" type="link" name="link"  value="{{ old('link') }}" placeholder="@lang('project::all_users.enter_link_in_page')">
+                                <p>@lang('project::all_users.enter_link_in_page')
+                                    @error('link')
+                                    <span class="red__validate">{{ $message }}</span>
+                                    @enderror
+                                </p>
+                                <input class="main__input__other @error('link') is-invalid validate__input @enderror" type="link" name="link"  value="{{ old('link') }}" placeholder="@lang('project::all_users.enter_link_in_page')">
                             </div>
                             @if($subjects)
                                 <div class="main__select__item">
                                     <p>@lang('project::all_users.enter_subject')
-                                        {{--<span class="red__validate"><span>Внимание!</span> Вы не выбрали тематику проекта</span>--}}
+                                        @error('subject_id')
+                                        <span class="red__validate">{{ $message }}</span>
+                                        @enderror
                                     </p>
-                                    <select class="custom-select1 sources validate__input js-example-basic-single" name="subject_id">
+                                    <select class="custom-select1 sources validate__input js-example-basic-single @error('subject_id') is-invalid validate__input @enderror"
+                                            name="subject_id">
                                         <option value="0">--</option>
                                         @foreach($subjects as $subject)
                                             <option @if($subject->id === old('subject_id')) selected @endif value="{{ $subject->id }}">{{ $subject->subject_title_currentLang }}</option>
@@ -52,9 +64,11 @@
 
                             <div class="main__select__item">
                                 <p>@lang('project::all_users.enter_language')
-                                    {{--<span class="red__validate"><span>Внимание!</span> Вы не выбрали язык</span>--}}
+                                    @error('language')
+                                    <span class="red__validate">{{ $message }}</span>
+                                    @enderror
                                 </p>
-                                <select class="custom-select sources {{--validate__input--}}" name="language" placeholder="@lang('project::all_users.enter_'.old('language', 'russian'))" id="language">
+                                <select class="custom-select sources @error('language') is-invalid validate__input @enderror" name="language" placeholder="@lang('project::all_users.enter_'.old('language', 'russian'))" id="language">
                                     @foreach(app(\Modules\Project\Entities\Project::class)->getLanguagesComments() as $lan)
                                         <option @if($lan === old('language')) selected @endif value="{{$lan}}">@lang('project::all_users.enter_'.$lan) </option>
                                     @endforeach
@@ -62,8 +76,12 @@
                             </div>
 
                             <div class="main__select__item">
-                                <p>@lang('project::project.enter_assignment_to_authors')</p>
-                                <textarea name="description" id="description" placeholder="@lang('project::project.enter_assignment_help')">{{ old('description') }}</textarea>
+                                <p>@lang('project::project.enter_assignment_to_authors')
+                                    @error('description')
+                                    <span class="red__validate">{{ $message }}</span>
+                                    @enderror
+                                </p>
+                                <textarea name="description" id="description" class="@error('description') is-invalid validate__input @enderror" placeholder="@lang('project::project.enter_assignment_help')">{{ old('description') }}</textarea>
                             </div>
 
                             {{--<div class="choose__file">
@@ -83,8 +101,12 @@
                             <div class="first__right">
                                 @if(!empty($currency) && count($currency))
                                     <div class="main__select__item">
-                                        <p>@lang('project::project.enter_currency_to_bay')</p>
-                                        <select class="custom-select sources" name="currency_id" placeholder="{{ $currency[0]->code }}" id="">
+                                        <p>@lang('project::project.enter_currency_to_bay')
+                                            @error('currency_id')
+                                            <span class="red__validate">{{ $message }}</span>
+                                            @enderror
+                                        </p>
+                                        <select class="custom-select sources @error('currency_id') is-invalid validate__input @enderror" name="currency_id" placeholder="{{ $currency[0]->code }}" id="">
                                             @foreach($currency as $cur)
                                                 <option  @if($cur->id === old('currency_id')) selected @endif value="{{ $cur->id }}">{{$cur->code}}</option>
                                             @endforeach
@@ -93,8 +115,13 @@
                                 @endif
                                 @if(!empty($rates) && count($rates))
                                     <div class="main__select__item">
-                                        <p>@lang('project::project.enter_rates')</p>
-                                        <select class="custom-select1 sources validate__input js-example-basic-single" name="rate_id" placeholder="@if(empty($project->rate_title)) @lang('project::project.enter_rates') @else {{$project->rate_title}} @endif" id="">
+                                        <p>@lang('project::project.enter_rates')
+                                            @error('rate_id')
+                                            <span class="red__validate">{{ $message }}</span>
+                                            @enderror
+                                        </p>
+                                        <select class="custom-select1 sources validate__input js-example-basic-single @error('rate_id') is-invalid validate__input @enderror"
+                                                name="rate_id" placeholder="@if(empty($project->rate_title)) @lang('project::project.enter_rates') @else {{$project->rate_title}} @endif" id="">
                                             @foreach($rates as $cat_rate)
                                                 <optgroup label="{{ $cat_rate->content_current_lang->title }}">
                                                     @foreach($cat_rate->rates as $rate)
@@ -107,8 +134,12 @@
                                 @endif
 
                                 <div class="main__select__item">
-                                    <p>@lang('project::project.enter_comments_moderation')</p>
-                                    <select class="custom-select sources" name="moderation_comments" id="moderation_comments" placeholder="@if(old('moderation_comments') == 1)
+                                    <p>@lang('project::project.enter_comments_moderation')
+                                        @error('moderation_comments')
+                                        <span class="red__validate">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                    <select class="custom-select sources @error('moderation_comments') is-invalid validate__input @enderror" name="moderation_comments" id="moderation_comments" placeholder="@if(old('moderation_comments') == 1)
                                     @lang('project::project.select_immediately')
                                     @else
                                     @lang('project::project.select_after_approval')
@@ -120,18 +151,30 @@
 
                                 <div class="checkbox__main">
                                     <div class="big__main__nav">
-                                        <input type="checkbox" @if(old('small_comments') == 1) checked @endif name="small_comments" id="main__check1" value="1">
+                                        <input class=" @error('small_comments') is-invalid validate__input @enderror" type="checkbox" @if(old('small_comments') == 1) checked @endif name="small_comments" id="main__check1" value="1">
                                         <label for="main__check1">@lang('project::project.enter_small_comments')</label>
+                                        @error('small_comments')
+                                        <span class="red__validate">{{ $message }}</span>
+                                        @enderror
+
                                     </div>
 
                                     <div class="big__main__nav">
-                                        <input type="checkbox" id="main__check2" @if(old('screenshot') == 1) checked @endif name="screenshot" value="1">
+                                        <input type="checkbox" class=" @error('screenshot') is-invalid validate__input @enderror" id="main__check2" @if(old('screenshot') == 1) checked @endif name="screenshot" value="1">
                                         <label for="main__check2">@lang('project::project.enter_small_comments')</label>
+                                        @error('screenshot')
+                                        <span class="red__validate">{{ $message }}</span>
+                                        @enderror
+
                                     </div>
 
                                     <div class="big__main__nav">
-                                        <input type="checkbox" id="main__check3" @if(old('user_pro') == 1) checked @endif name="user_pro" value="1">
+                                        <input type="checkbox" class=" @error('user_pro') is-invalid validate__input @enderror" id="main__check3" @if(old('user_pro') == 1) checked @endif name="user_pro" value="1">
                                         <label for="main__check3">@lang('project::project.enter_user_pro')</label>
+                                        @error('user_pro')
+                                        <span class="red__validate">{{ $message }}</span>
+                                        @enderror
+
                                     </div>
                                 </div>
                             </div>
@@ -169,8 +212,13 @@
                         <div class="left__main__nav" style="width: 400px;">
                             @if(isset($project_group) && count($project_group))
                                 <div class="main__select__item">
-                                    <p>@lang('project::project.enter_project_group')</p>
-                                    <select class="custom-select1 sources validate__input js-example-basic-single" name="group_id" id="group_id">
+                                    <p>@lang('project::project.enter_project_group')
+                                        @error('group_id')
+                                        <span class="red__validate">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                    <select class="custom-select1 sources validate__input js-example-basic-single  @error('group_id') is-invalid validate__input @enderror"
+                                            name="group_id" id="group_id">
                                         @include('project::front.block.group', [
                                             'project_group' => $project_group,
                                             'project_id' => $project->id ?? 0,
@@ -181,8 +229,12 @@
                             @endif
                             @if($user_group->count())
                                 <div class="main__select__item">
-                                    <p>@lang('project::project.enter_client_group')</p>
-                                    <select class="custom-select1 sources validate__input js-example-basic-single"
+                                    <p>@lang('project::project.enter_client_group')
+                                        @error('author_group_id')
+                                        <span class="red__validate">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                    <select class="custom-select1 sources validate__input js-example-basic-single  @error('author_group_id') is-invalid validate__input @enderror"
                                             name="author_group_id" id="author_group_id">
                                         {{--<select class="custom-select1 sources validate__input js-example-basic-multiple" name="author_group_id[]" multiple="multiple" id="client_id">--}}
                                         <option value="0">-- @lang('project::project.enter_client_group')</option>
@@ -198,8 +250,13 @@
                             </div>--}}
 
                             <div class="main__select__item">
-                                <p>@lang('project::project.enter_client_notifications')</p>
-                                <select class="custom-select sources" placeholder="@lang('project::project.enter_client_notification'.old('notification', '1'))"  name="notification" id="notification">
+                                <p>@lang('project::project.enter_client_notifications')
+                                    @error('notification')
+                                    <span class="red__validate">{{ $message }}</span>
+                                    @enderror
+                                </p>
+                                <select class="custom-select sources @error('notification') is-invalid validate__input @enderror"
+                                        placeholder="@lang('project::project.enter_client_notification'.old('notification', '1'))"  name="notification" id="notification">
                                     <option @if(old('notification') == 1) selected @endif value="1">@lang('project::project.enter_client_notification1')</option>
                                     <option @if(old('notification') == 0) selected @endif value="0">@lang('project::project.enter_client_notification0')</option>
                                 </select>
@@ -211,7 +268,8 @@
                                     <p>Отложенный запуск проекта</p>
 
                                     <div class="with__hint__input">
-                                        <input class="main__input__other" type="text" placeholder="Например: 2021/02/08 10:00:00">
+                                        <input class="main__input__other datepicker @error('date_start') is-invalid validate__input @enderror" name="date_start" type="text"
+                                               placeholder="Например: 2021/02/08 10:00:00">
 
                                         <span class="hint">?</span>
                                         <div class="text__hint">
@@ -223,7 +281,8 @@
                                     <p>Время, в которое проект будет приостановлен</p>
                                     <div class="with__hint__input">
 
-                                        <input class="main__input__other" type="text" placeholder="Например: 2021/02/08 10:00:00">
+                                        <input class="main__input__other datepicker @error('date_finish') is-invalid validate__input @enderror"
+                                               type="text" name="date_finish" placeholder="Например: 2021/02/08 10:00:00">
 
                                         <span class="hint">?</span>
                                         <div class="text__hint">
@@ -589,8 +648,12 @@
 
                         <div class="left__main__nav">
                             <div class="main__select__item">
-                                <p>@lang('project::project.enter_link_page')</p>
-                                <textarea name="page_link" id="page_link" placeholder="@lang('project::project.enter_link_page_place')">{{ old('page_link') }}</textarea>
+                                <p>@lang('project::project.enter_link_page')
+                                    @error('page_link')
+                                    <span class="red__validate">{{ $message }}</span>
+                                    @enderror
+                                </p>
+                                <textarea name="page_link" class=" @error('page_link') is-invalid validate__input @enderror" id="page_link" placeholder="@lang('project::project.enter_link_page_place')">{{ old('page_link') }}</textarea>
                             </div>
                         </div>
                         <div class="right__main__nav" style="
@@ -1045,5 +1108,50 @@
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });
+        /* Локализация datepicker */
+        $.datepicker.regional['ru'] = {
+            closeText: 'Закрыть',
+            prevText: 'Предыдущий',
+            nextText: 'Следующий',
+            currentText: 'Сегодня',
+            monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+            monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'],
+            dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
+            dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
+            dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+            weekHeader: 'Не',
+            dateFormat: 'dd.mm.yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional['ru']);
+
+
+        /* Локализация timepicker */
+        $.timepicker.regional['ru'] = {
+            timeOnlyTitle: 'Выберите время',
+            timeText: 'Время',
+            hourText: 'Часы',
+            minuteText: 'Минуты',
+            secondText: 'Секунды',
+            millisecText: 'Миллисекунды',
+            timezoneText: 'Часовой пояс',
+            currentText: 'Сейчас',
+            closeText: 'Закрыть',
+            timeFormat: 'HH:mm',
+            amNames: ['AM', 'A'],
+            pmNames: ['PM', 'P'],
+            isRTL: false
+        };
+        $.timepicker.setDefaults($.timepicker.regional['ru']);
+        $(function(){
+            $(".datepicker").datetimepicker();
+        });
+        @if(old('type_project'))
+            $(".item__type__project a.{{old('type_project')}}").trigger('click');
+        @endif
+        //$(".item__type__project a")
     </script>
 @endsection

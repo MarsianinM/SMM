@@ -4793,7 +4793,27 @@ ul.numeration__slider{
     font-weight: 700;
   }
 }
-
+body{
+    .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active{
+        padding: 4px;
+        color: #fff;
+        text-align: center;
+    }
+    .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight{
+        border: 1px solid #11ba22;
+        background: #f8fafb;
+        color: #777620;
+        height: 30px;
+        width: 30px;
+        margin-left: 3px;
+    }
+    .ui-datepicker td{
+        width: 36px;
+    }
+}
+input.is-invalid{
+    border: 1px solid #e3010d!important;
+}
 section.support{
   padding: 52px 0 313px;
 }
