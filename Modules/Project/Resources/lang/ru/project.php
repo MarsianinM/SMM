@@ -16,6 +16,7 @@ return [
     'action_off_on'                 => 'Отключить проект № :Id',
     'action_off_on_add'             => 'Активировать проект',
     'add_user'                      => 'Создать проект',
+    'email_notifications'           => 'Уведомления на почту',
 
     //TITLE
     'title_edit'                    => 'Редактирование проект - <b>№ :Id</b>',
@@ -45,6 +46,19 @@ return [
     'enter_client_notifications'    => 'Уведомления о новых заявках',
     'enter_link_page'               => 'Список страниц, с которыми можно работать',
     'enter_link_page_place'         => 'Только прямые ссылки, каждую с новой строки',
+    'enter_date_start'              => 'Отложенный запуск проекта',
+    'enter_date_finish'             => 'Время, в которое проект будет приостановлен',
+    'enter_review'                  => 'Отзывы',
+    'enter_question'                => 'Вопросы',
+    'enter_positive'                => 'Положительные',
+    'enter_negative'                => 'Отрицательные',
+    'enter_answer'                  => 'Ответы',
+    'enter_neutral'                 => 'Нейтральные',
+
+    //LIMITS
+    'active_project'                => 'Активность проекта',
+    'enter_active_day'              => 'Дни активности',
+    'enter_pn'                      => 'Пн',
 
     //PROJECT Helper
     'enter_assignment_help'         => 'Опипише задание как можно подробнее',

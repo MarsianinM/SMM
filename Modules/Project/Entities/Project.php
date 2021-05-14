@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Currency\Entities\Currency;
+use Modules\ProjectLimits\Entities\ProjectLimit;
 use Modules\Rates\Entities\Rate;
 use Modules\Subjects\Entities\Subject;
 use Modules\Users\Entities\User;
@@ -18,20 +19,33 @@ class Project extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
+
     /**
-     * @var array
+     * @var array|string[]
      */
     protected $fillable = [
         'title', 'link', 'moderation_comments', 'small_comments', 'screenshot', 'user_pro', 'description', 'date_start',
         'date_finish', 'page_link', 'status', 'archive', 'pro', 'client_id', 'author_id', 'created_at', 'updated_at', 'subject_id',
-        'rate_id','currency_id','group_id','author_group_id','notification',
+        'rate_id','currency_id','group_id','author_group_id','notification','type_project','email_notifications',
     ];
 
     /**
-     * This is language from column enum from table Projects
-     * @var string[]
+     * @var array|string[]
+     */
+    protected $casts = [
+        'email_notifications' => 'array',
+    ];
+    /**
+     * This is language column enum from table Projects
+     * @var array|string[]
      */
     protected array $languages = ['ukrainian','russian','english'];
+
+    /**
+     * This is project type column enum from table Projects
+     * @var array|string[]
+     */
+    protected array $type_projects = ['comments','reposts','followers','videos'];
 
     public function getLanguagesComments(): array
     {
@@ -88,6 +102,30 @@ class Project extends Model implements HasMedia
     public function subject(): BelongsTo
     {
         return $this->belongsTo(Subject::class, 'subject_id','id');
+    }
+
+    public function projectLimits()
+    {
+        return $this->hasOne(ProjectLimit::class);
+    }
+
+    public function getTypeProjects(): array
+    {
+        return $this->type_projects;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setTypeProjects($value)
+    {
+        if(is_array($value)){
+            foreach ($value as $item){
+                array_push($this->type_projects, $item);
+            }
+        }else{
+            array_push($this->type_projects, $value);
+        }
     }
 
     /**

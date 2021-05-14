@@ -13,5 +13,6 @@
     "Rates": true,
     "Subjects": true,
     "Settings": true,
-    "Currency": true
+    "Currency": true,
+    "ProjectLimits": true
 }

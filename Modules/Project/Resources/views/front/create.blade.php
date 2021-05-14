@@ -1,5 +1,10 @@
 @extends('mainpage::layouts.front.app')
 
+@section('stylesheet')
+    <link rel="stylesheet" href="{{ asset('frontend/css/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/jquery.datetimepicker.min.css') }}">
+@endsection
+
 @section('content')
     <form style="margin-bottom: 30px" action="{{ route('client.projects.store') }}" method="POST">
         @csrf
@@ -265,10 +270,11 @@
 
                             <div class="first__right first__for__margin">
                                 <div class="main__select__item">
-                                    <p>Отложенный запуск проекта</p>
+                                    <p>@lang('project::project.enter_date_start')</p>
 
                                     <div class="with__hint__input">
-                                        <input class="main__input__other datepicker @error('date_start') is-invalid validate__input @enderror" name="date_start" type="text"
+                                        <input class="main__input__other datepicker @error('date_start') is-invalid validate__input @enderror"
+                                               name="date_start" type="text"
                                                placeholder="Например: 2021/02/08 10:00:00">
 
                                         <span class="hint">?</span>
@@ -278,7 +284,7 @@
                                     </div>
                                 </div>
                                 <div class="main__select__item">
-                                    <p>Время, в которое проект будет приостановлен</p>
+                                    <p>@lang('project::project.enter_date_finish')</p>
                                     <div class="with__hint__input">
 
                                         <input class="main__input__other datepicker @error('date_finish') is-invalid validate__input @enderror"
@@ -294,43 +300,41 @@
                         </div>
 
 
-                        <div class="right__main__nav" style="width: 560px; margin-top: 50px!important;">
+                        <div id="block_notifications" class="right__main__nav" style="width: 560px; margin-top: 50px!important;">
                             <div class="first__right">
-                                <h3>Уведомления на почту</h3>
+                                <h3>@lang('project::project.email_notifications')</h3>
                                 <div class="checkbox__main" style="margin-top: 21px;">
                                     <div class="big__main__nav">
-                                        <input type="checkbox" id="review">
-                                        <label for="review">Отзывы</label>
-                                    </div>
-
-
-                                    <div class="big__main__nav">
-                                        <input type="checkbox" id="question">
-                                        <label for="question">Вопросы</label>
+                                        <input type="checkbox" name="email_notifications[review]" @if(old('email_notifications.review') == 1) checked @endif id="review" value="1">
+                                        <label for="review">@lang('project::project.enter_review')</label>
                                     </div>
 
                                     <div class="big__main__nav">
-                                        <input type="checkbox" id="yes">
-                                        <label for="yes">Положительные</label>
+                                        <input type="checkbox" name="email_notifications[question]" @if(old('email_notifications.question') == 1) checked @endif id="question" value="1">
+                                        <label for="question">@lang('project::project.enter_question')</label>
                                     </div>
 
                                     <div class="big__main__nav">
-                                        <input type="checkbox" id="dontknow">
-                                        <label for="dontknow">Нейтральные</label>
+                                        <input type="checkbox" name="email_notifications[positive]" @if(old('email_notifications.positive') == 1) checked @endif id="positive" value="1">
+                                        <label for="yes">@lang('project::project.enter_positive')</label>
                                     </div>
 
                                     <div class="big__main__nav">
-                                        <input type="checkbox" id="dontknow2">
-                                        <label for="dontknow2">Отрицательные</label>
+                                        <input type="checkbox" name="email_notifications[neutral]" @if(old('email_notifications.neutral') == 1) checked @endif id="neutral" value="1">
+                                        <label for="yes">@lang('project::project.enter_neutral')</label>
                                     </div>
 
                                     <div class="big__main__nav">
-                                        <input type="checkbox" id="answer">
-                                        <label for="answer">Ответы</label>
+                                        <input type="checkbox" name="email_notifications[negative]" @if(old('email_notifications.negative') == 1) checked @endif id="negative" value="1">
+                                        <label for="yes">@lang('project::project.enter_negative')</label>
+                                    </div>
+
+                                    <div class="big__main__nav">
+                                        <input type="checkbox" name="email_notifications[answer]" @if(old('email_notifications.answer') == 1) checked @endif id="answer" value="1">
+                                        <label for="yes">@lang('project::project.enter_answer')</label>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="second__right">
                                 <ul class="second__numeration">
                                     <li><span>Пункт правил 5.13:</span> Запрещено заказывать негативные отзывы и оценки с целью ухудшения репутации 3-х лиц.</li>
@@ -349,18 +353,18 @@
                 <div>
                     <div class="main__third__nav">
                         <div class="new__navigation__title">
-                            Активность проекта
+                            @lang('project::project.active_project')
                         </div>
 
                         <div class="active__inner">
                             <div class="active__project">
-                                <p>Группа</p>
+                                <p>@lang('project::project.enter_groups')</p>
                                 <div class="label__week">
 
                                     <div class="week__item">
-                                        <input type="checkbox" id="monday">
+                                        <input type="checkbox" id="monday" name="day_active[1]">
                                         <label for="monday">
-                                            <span>Пн</span>
+                                            <span>@lang('project::project.enter_pn')</span>
                                         </label>
                                     </div>
 
@@ -432,8 +436,8 @@
                             </div>
                             <div class="inner__kolvo">
                                 <div class="kolvo__text">
-                                    <span>Максимальное кол-во</span>
-                                    <span>Случайное кол-во</span>
+                                    <span style="justify-content: left;">Максимальное кол-во</span>
+                                   {{-- <span>Случайное кол-во</span>--}}
                                 </div>
 
                                 <div class="kolvo__input">
@@ -993,8 +997,6 @@
 @endsection
 
 @section('script')
-    <link rel="stylesheet" href="{{ asset('frontend/css/jquery-ui.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/jquery.datetimepicker.min.css') }}">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="{{ asset('frontend/datetimepicker-master/jquery.datetimepicker.full.min.js') }}"></script>
 
