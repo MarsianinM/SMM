@@ -358,68 +358,68 @@
 
                         <div class="active__inner">
                             <div class="active__project">
-                                <p>@lang('project::project.enter_groups')</p>
+                                <p>@lang('project::project.enter_active_day')</p>
                                 <div class="label__week">
 
                                     <div class="week__item">
                                         <input type="checkbox" id="monday" name="day_active[1]">
                                         <label for="monday">
-                                            <span>@lang('project::project.enter_pn')</span>
+                                            <span>@lang('project::project.enter_monday')</span>
                                         </label>
                                     </div>
 
 
                                     <div class="week__item">
-                                        <input type="checkbox" id="tuesday">
+                                        <input type="checkbox" id="tuesday" name="day_active[2]">
                                         <label for="tuesday">
-                                            <span>Вт</span>
+                                            <span>@lang('project::project.enter_tuesday')</span>
                                         </label>
                                     </div>
 
                                     <div class="week__item">
-                                        <input type="checkbox" id="wednesday">
+                                        <input type="checkbox" id="wednesday" name="day_active[3]">
                                         <label for="wednesday">
-                                            <span>Ср</span>
+                                            <span>@lang('project::project.enter_wednesday')</span>
                                         </label>
                                     </div>
 
 
                                     <div class="week__item">
-                                        <input type="checkbox" id="thursday">
+                                        <input type="checkbox" id="thursday" name="day_active[4]">
                                         <label for="thursday">
-                                            <span>Чт</span>
+                                            <span>@lang('project::project.enter_thursday')</span>
                                         </label>
                                     </div>
 
 
                                     <div class="week__item">
-                                        <input type="checkbox" id="friday">
+                                        <input type="checkbox" id="friday" name="day_active[5]">
                                         <label for="friday">
-                                            <span>Пт</span>
+                                            <span>@lang('project::project.enter_friday')</span>
                                         </label>
                                     </div>
 
                                     <div class="week__item">
-                                        <input type="checkbox" id="saturday">
+                                        <input type="checkbox" id="saturday" name="day_active[6]">
                                         <label for="saturday">
-                                            <span>Сб</span>
+                                            <span>@lang('project::project.enter_saturday')</span>
                                         </label>
                                     </div>
 
 
                                     <div class="week__item">
-                                        <input type="checkbox" id="sunday">
+                                        <input type="checkbox" id="sunday" name="day_active[7]">
                                         <label for="sunday">
-                                            <span>Нд</span>
+                                            <span>@lang('project::project.enter_sunday')</span>
                                         </label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="active__project">
-                                <p>Часы активности</p>
+                                <p>@lang('project::project.enter_hours_of_activity')</p>
                                 <div class="time__active">
-                                    с <input type="text" placeholder="00:00:00"> до <input type="text" placeholder="00:00:00">
+                                    @lang('project::project.enter_hours_from') <input type="text" placeholder="00:00:00"> @lang('project::project.enter_hours_to') <input type="text" placeholder="00:00:00">
                                     <span class="hint">?</span>
                                     <div class="text__hint">
                                         Подсказка
@@ -428,30 +428,29 @@
                             </div>
                         </div>
 
-
-
                         <div class="limit__inner">
                             <div class="new__navigation__title">
-                                Лимиты
+                                @lang('project::project.enter_limit')
                             </div>
                             <div class="inner__kolvo">
                                 <div class="kolvo__text">
-                                    <span style="justify-content: left;">Максимальное кол-во</span>
+                                    <span style="justify-content: left;">@lang('project::project.enter_max_count')</span>
                                    {{-- <span>Случайное кол-во</span>--}}
                                 </div>
 
                                 <div class="kolvo__input">
-                                    Кол-во работ <input type="text"> за <input type="text"> дней
+                                    @lang('project::project.enter_number_of_works') <input type="text">
+                                    @lang('project::project.enter_number_of_works_in') <input type="text">
+                                    @lang('project::project.enter_number_of_works_day')
                                 </div>
                             </div>
 
                             <div class="inner__kolvo">
                                 <div class="kolvo__text kolvo__text2">
-                                    <span>Задержка между работами (в мин.)</span>
+                                    <span>@lang('project::project.enter_delay_jobs')</span>
                                 </div>
-
                                 <div class="kolvo__input">
-                                    От <input type="text"> До <input type="text">
+                                    @lang('project::project.enter_hours_from') <input type="text"> @lang('project::project.enter_hours_to') <input type="text">
                                 </div>
                             </div>
                         </div>
@@ -459,7 +458,7 @@
 
                         <div class="main__select__item">
                             <div class="paragraph__div">
-                                Лимит в час
+                                @lang('project::project.enter_limit_in_hour')
                                 <span class="hint">?</span>
                                 <div class="text__hint">
                                     Подсказка
@@ -471,19 +470,18 @@
 
                         <div class="main__select__item">
                             <div class="paragraph__div">
-                                Лимит на страницу
+                                @lang('project::project.enter_limit_in_page')
                                 <span class="hint">?</span>
                                 <div class="text__hint">
                                     Подсказка
                                 </div>
                             </div>
-
                             <input class="main__input__other" type="text" placeholder="0">
                         </div>
 
                         <div class="main__select__item">
                             <div class="paragraph__div">
-                                Лимит на страницу в сутки
+                                @lang('project::project.enter_limit_in_page_from_day')
                                 <span class="hint">?</span>
                                 <div class="text__hint">
                                     Подсказка
@@ -495,12 +493,12 @@
 
                         <div class="limit__inner" style="margin-top: 26px;">
                             <div class="new__navigation__title" style="margin-bottom: 12px;">
-                                Лимиты по авторам
+                                @lang('project::project.limit_in_author')
                             </div>
 
                             <div class="main__select__item">
                                 <div class="paragraph__div">
-                                    Лимит от автора
+                                    @lang('project::project.enter_limit_in_author')
                                     <span class="hint">?</span>
                                     <div class="text__hint">
                                         Подсказка
@@ -512,7 +510,7 @@
 
                             <div class="main__select__item">
                                 <div class="paragraph__div">
-                                    Лимит в сутки от автора
+                                    @lang('project::project.enter_limit_in_author_from_day')
                                     <span class="hint">?</span>
                                     <div class="text__hint">
                                         Подсказка
@@ -524,7 +522,7 @@
 
                             <div class="main__select__item">
                                 <div class="paragraph__div">
-                                    Лимит на аккаунт
+                                    @lang('project::project.enter_limit_in_akk')
                                     <span class="hint">?</span>
                                     <div class="text__hint">
                                         Подсказка
@@ -536,7 +534,7 @@
 
                             <div class="main__select__item">
                                 <div class="paragraph__div">
-                                    Лимит от автора на группу проектов
+                                    @lang('project::project.enter_limit_in_akk_from_group')
                                     <span class="hint">?</span>
                                     <div class="text__hint">
                                         Подсказка
