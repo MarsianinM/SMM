@@ -31,6 +31,7 @@ class CreateProjectLimitsTable extends Migration
             $table->integer('in_page_on_day')->nullable();
             $table->integer('author_count')->nullable();
             $table->integer('author_count_on_day')->nullable();
+            $table->integer('author_count_in_akk')->nullable();
             $table->integer('author_count_in_group_project')->nullable();
             $table->integer('author_count_in_group_project_on_day')->nullable();
             $table->integer('count_in_ip')->nullable();

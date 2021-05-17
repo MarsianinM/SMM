@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Currency\Entities\Currency;
 use Modules\ProjectLimits\Entities\ProjectLimit;
+use Modules\ProjectLimits\Entities\ProjectLimitDay;
 use Modules\Rates\Entities\Rate;
 use Modules\Subjects\Entities\Subject;
 use Modules\Users\Entities\User;
@@ -107,6 +108,10 @@ class Project extends Model implements HasMedia
     public function projectLimits()
     {
         return $this->hasOne(ProjectLimit::class);
+    }
+    public function projectLimitsDay()
+    {
+        return $this->hasOne(ProjectLimitDay::class);
     }
 
     public function getTypeProjects(): array

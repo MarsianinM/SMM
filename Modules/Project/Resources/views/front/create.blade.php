@@ -261,7 +261,8 @@
                                     @enderror
                                 </p>
                                 <select class="custom-select sources @error('notification') is-invalid validate__input @enderror"
-                                        placeholder="@lang('project::project.enter_client_notification'.old('notification', '1'))"  name="notification" id="notification">
+                                        placeholder="@lang('project::project.enter_client_notification'.old('notification', '1'))"
+                                        name="notification" id="notification">
                                     <option @if(old('notification') == 1) selected @endif value="1">@lang('project::project.enter_client_notification1')</option>
                                     <option @if(old('notification') == 0) selected @endif value="0">@lang('project::project.enter_client_notification0')</option>
                                 </select>
@@ -305,32 +306,39 @@
                                 <h3>@lang('project::project.email_notifications')</h3>
                                 <div class="checkbox__main" style="margin-top: 21px;">
                                     <div class="big__main__nav">
-                                        <input type="checkbox" name="email_notifications[review]" @if(old('email_notifications.review') == 1) checked @endif id="review" value="1">
+                                        <input type="checkbox" name="email_notifications[review]"
+                                               @if(old('email_notifications.review') == 1) checked @endif
+                                               class="@error('email_notifications.review') is-invalid validate__input @enderror" id="review" value="1">
                                         <label for="review">@lang('project::project.enter_review')</label>
                                     </div>
 
                                     <div class="big__main__nav">
-                                        <input type="checkbox" name="email_notifications[question]" @if(old('email_notifications.question') == 1) checked @endif id="question" value="1">
+                                        <input type="checkbox" name="email_notifications[question]" @if(old('email_notifications.question') == 1) checked @endif
+                                        class="@error('email_notifications.question') is-invalid validate__input @enderror" id="question" value="1">
                                         <label for="question">@lang('project::project.enter_question')</label>
                                     </div>
 
                                     <div class="big__main__nav">
-                                        <input type="checkbox" name="email_notifications[positive]" @if(old('email_notifications.positive') == 1) checked @endif id="positive" value="1">
+                                        <input type="checkbox" name="email_notifications[positive]" @if(old('email_notifications.positive') == 1) checked @endif
+                                        class="@error('email_notifications.positive') is-invalid validate__input @enderror" id="positive" value="1">
                                         <label for="yes">@lang('project::project.enter_positive')</label>
                                     </div>
 
                                     <div class="big__main__nav">
-                                        <input type="checkbox" name="email_notifications[neutral]" @if(old('email_notifications.neutral') == 1) checked @endif id="neutral" value="1">
+                                        <input type="checkbox" name="email_notifications[neutral]" @if(old('email_notifications.neutral') == 1) checked @endif
+                                        class="@error('email_notifications.neutral') is-invalid validate__input @enderror" id="neutral" value="1">
                                         <label for="yes">@lang('project::project.enter_neutral')</label>
                                     </div>
 
                                     <div class="big__main__nav">
-                                        <input type="checkbox" name="email_notifications[negative]" @if(old('email_notifications.negative') == 1) checked @endif id="negative" value="1">
+                                        <input type="checkbox" name="email_notifications[negative]" @if(old('email_notifications.negative') == 1) checked @endif
+                                        class="@error('email_notifications.negative') is-invalid validate__input @enderror" id="negative" value="1">
                                         <label for="yes">@lang('project::project.enter_negative')</label>
                                     </div>
 
                                     <div class="big__main__nav">
-                                        <input type="checkbox" name="email_notifications[answer]" @if(old('email_notifications.answer') == 1) checked @endif id="answer" value="1">
+                                        <input type="checkbox" name="email_notifications[answer]" @if(old('email_notifications.answer') == 1) checked @endif
+                                        class="@error('email_notifications.answer') is-invalid validate__input @enderror" id="answer" value="1">
                                         <label for="yes">@lang('project::project.enter_answer')</label>
                                     </div>
                                 </div>
@@ -362,7 +370,8 @@
                                 <div class="label__week">
 
                                     <div class="week__item">
-                                        <input type="checkbox" id="monday" name="day_active[1]">
+                                        <input type="checkbox" value="1" id="monday" @if(old('day_active.monday') == 1) checked @endif
+                                        class="@error('day_active.monday') is-invalid validate__input @enderror" name="day_active[monday]">
                                         <label for="monday">
                                             <span>@lang('project::project.enter_monday')</span>
                                         </label>
@@ -370,14 +379,16 @@
 
 
                                     <div class="week__item">
-                                        <input type="checkbox" id="tuesday" name="day_active[2]">
+                                        <input type="checkbox" value="1" id="tuesday" @if(old('day_active.tuesday') == 1) checked @endif
+                                        class="@error('day_active.tuesday') is-invalid validate__input @enderror" name="day_active[tuesday]">
                                         <label for="tuesday">
                                             <span>@lang('project::project.enter_tuesday')</span>
                                         </label>
                                     </div>
 
                                     <div class="week__item">
-                                        <input type="checkbox" id="wednesday" name="day_active[3]">
+                                        <input type="checkbox" value="1" id="wednesday" @if(old('day_active.wednesday') == 1) checked @endif
+                                        class="@error('day_active.wednesday') is-invalid validate__input @enderror" name="day_active[wednesday]">
                                         <label for="wednesday">
                                             <span>@lang('project::project.enter_wednesday')</span>
                                         </label>
@@ -385,7 +396,8 @@
 
 
                                     <div class="week__item">
-                                        <input type="checkbox" id="thursday" name="day_active[4]">
+                                        <input type="checkbox" value="1" id="thursday" @if(old('day_active.thursday') == 1) checked @endif
+                                        class="@error('day_active.thursday') is-invalid validate__input @enderror" name="day_active[thursday]">
                                         <label for="thursday">
                                             <span>@lang('project::project.enter_thursday')</span>
                                         </label>
@@ -393,14 +405,16 @@
 
 
                                     <div class="week__item">
-                                        <input type="checkbox" id="friday" name="day_active[5]">
+                                        <input type="checkbox" value="1" id="friday" @if(old('day_active.friday') == 1) checked @endif
+                                        class="@error('day_active.friday') is-invalid validate__input @enderror" name="day_active[friday]">
                                         <label for="friday">
                                             <span>@lang('project::project.enter_friday')</span>
                                         </label>
                                     </div>
 
                                     <div class="week__item">
-                                        <input type="checkbox" id="saturday" name="day_active[6]">
+                                        <input type="checkbox" value="1" id="saturday" @if(old('day_active.saturday') == 1) checked @endif
+                                        class="@error('day_active.saturday') is-invalid validate__input @enderror" name="day_active[saturday]">
                                         <label for="saturday">
                                             <span>@lang('project::project.enter_saturday')</span>
                                         </label>
@@ -408,7 +422,8 @@
 
 
                                     <div class="week__item">
-                                        <input type="checkbox" id="sunday" name="day_active[7]">
+                                        <input type="checkbox" id="sunday" value="1" @if(old('day_active.sunday') == 1) checked @endif
+                                        class="@error('day_active.sunday') is-invalid validate__input @enderror" name="day_active[sunday]">
                                         <label for="sunday">
                                             <span>@lang('project::project.enter_sunday')</span>
                                         </label>
@@ -419,7 +434,10 @@
                             <div class="active__project">
                                 <p>@lang('project::project.enter_hours_of_activity')</p>
                                 <div class="time__active">
-                                    @lang('project::project.enter_hours_from') <input type="text" placeholder="00:00:00"> @lang('project::project.enter_hours_to') <input type="text" placeholder="00:00:00">
+                                    @lang('project::project.enter_hours_from') <input type="text" name="limit[time_start]" value="{{ old('limit.time_start') }}"
+                                                                                      class="@error('limit.time_start') is-invalid validate__input @enderror" placeholder="00:00:00">
+                                    @lang('project::project.enter_hours_to') <input type="text" name="limit[time_finish]" value="{{ old('limit.time_finish') }}"
+                                                                                    class="@error('limit.time_start') is-invalid validate__input @enderror" placeholder="00:00:00">
                                     <span class="hint">?</span>
                                     <div class="text__hint">
                                         Подсказка
@@ -439,8 +457,10 @@
                                 </div>
 
                                 <div class="kolvo__input">
-                                    @lang('project::project.enter_number_of_works') <input type="text">
-                                    @lang('project::project.enter_number_of_works_in') <input type="text">
+                                    @lang('project::project.enter_number_of_works') <input name="limit[max_works]" type="text" value="{{ old('limit.max_works') }}"
+                                                                                           class="@error('limit.max_works') is-invalid validate__input @enderror" >
+                                    @lang('project::project.enter_number_of_works_in') <input name="limit[max_works_day]" type="text" value="{{ old('limit.max_works_day') }}"
+                                                                                              class="@error('limit.max_works_day') is-invalid validate__input @enderror" >
                                     @lang('project::project.enter_number_of_works_day')
                                 </div>
                             </div>
@@ -450,7 +470,10 @@
                                     <span>@lang('project::project.enter_delay_jobs')</span>
                                 </div>
                                 <div class="kolvo__input">
-                                    @lang('project::project.enter_hours_from') <input type="text"> @lang('project::project.enter_hours_to') <input type="text">
+                                    @lang('project::project.enter_hours_from') <input name="limit[time_off_min]" type="text" value="{{ old('limit.time_off_min') }}"
+                                                                                      class="@error('limit.time_off_min') is-invalid validate__input @enderror">
+                                    @lang('project::project.enter_hours_to') <input name="limit[time_off_max]" type="text" value="{{ old('limit.time_off_max') }}"
+                                                                                    class="@error('limit.time_off_max') is-invalid validate__input @enderror">
                                 </div>
                             </div>
                         </div>
@@ -465,7 +488,7 @@
                                 </div>
                             </div>
 
-                            <input class="main__input__other" type="text" placeholder="0">
+                            <input class="main__input__other @error('limit.in_hour') is-invalid validate__input @enderror" type="text" name="limit[in_hour]" value="{{ old('limit.in_hour') }}" placeholder="0">
                         </div>
 
                         <div class="main__select__item">
@@ -476,19 +499,19 @@
                                     Подсказка
                                 </div>
                             </div>
-                            <input class="main__input__other" type="text" placeholder="0">
+                            <input class="main__input__other @error('limit.in_page') is-invalid validate__input @enderror" type="text" name="limit[in_page]" value="{{ old('limit.in_page') }}" placeholder="0">
                         </div>
 
                         <div class="main__select__item">
                             <div class="paragraph__div">
-                                @lang('project::project.enter_limit_in_page_from_day')
+                                @lang('project::project.enter_limit_in_page_on_day')
                                 <span class="hint">?</span>
                                 <div class="text__hint">
                                     Подсказка
                                 </div>
                             </div>
 
-                            <input class="main__input__other" type="text" placeholder="0">
+                            <input class="main__input__other @error('limit.in_page_on_day') is-invalid validate__input @enderror" type="text" name="limit[in_page_on_day]" value="{{ old('limit.in_page_on_day') }}" placeholder="0">
                         </div>
 
                         <div class="limit__inner" style="margin-top: 26px;">
@@ -498,126 +521,133 @@
 
                             <div class="main__select__item">
                                 <div class="paragraph__div">
-                                    @lang('project::project.enter_limit_in_author')
+                                    @lang('project::project.enter_limit_author_count')
                                     <span class="hint">?</span>
                                     <div class="text__hint">
                                         Подсказка
                                     </div>
                                 </div>
 
-                                <input class="main__input__other" type="text" placeholder="3">
+                                <input class="main__input__other @error('limit.author_count') is-invalid validate__input @enderror" type="text" name="limit[author_count]" value="{{ old('limit.author_count') }}" placeholder="3">
                             </div>
 
                             <div class="main__select__item">
                                 <div class="paragraph__div">
-                                    @lang('project::project.enter_limit_in_author_from_day')
+                                    @lang('project::project.enter_limit_author_count_on_day')
                                     <span class="hint">?</span>
                                     <div class="text__hint">
                                         Подсказка
                                     </div>
                                 </div>
 
-                                <input class="main__input__other" type="text" placeholder="3">
+                                <input class="main__input__other @error('limit.author_count_on_day') is-invalid validate__input @enderror" type="text" name="limit[author_count_on_day]"
+                                       value="{{ old('limit.author_count_on_day') }}" placeholder="3">
                             </div>
 
                             <div class="main__select__item">
                                 <div class="paragraph__div">
-                                    @lang('project::project.enter_limit_in_akk')
+                                    @lang('project::project.enter_limit_author_count_in_akk')
                                     <span class="hint">?</span>
                                     <div class="text__hint">
                                         Подсказка
                                     </div>
                                 </div>
 
-                                <input class="main__input__other" type="text" placeholder="3">
+                                <input class="main__input__other @error('limit.author_count_in_akk') is-invalid validate__input @enderror"
+                                       name="limit[author_count_in_akk]" value="{{ old('limit.author_count_in_akk') }}" type="text" placeholder="3">
                             </div>
 
                             <div class="main__select__item">
                                 <div class="paragraph__div">
-                                    @lang('project::project.enter_limit_in_akk_from_group')
+                                    @lang('project::project.enter_limit_author_count_in_group_project')
                                     <span class="hint">?</span>
                                     <div class="text__hint">
                                         Подсказка
                                     </div>
                                 </div>
 
-                                <input class="main__input__other" type="text" placeholder="3">
+                                <input class="main__input__other @error('limit.author_count_in_group_project') is-invalid validate__input @enderror" name="limit[author_count_in_group_project]"
+                                       value="{{ old('limit.author_count_in_group_project') }}" type="text" placeholder="3">
 
 
                                 <div class="all__project__checkbox all__check__create">
-                                    <input type="checkbox" id="all__project1">
+                                    <input class="@error('limit.author_count_in_group_project') is-invalid validate__input @enderror" type="checkbox" name="limit[limit_in_oll_group]"
+                                           @if(old('limit.limit_in_oll_group') == 1) checked @endif value="1" id="all__project1">
                                     <label for="all__project1">
-                                        Установить для всех проектов группы
+                                        @lang('project::project.enter_limit_in_oll_group')
                                     </label>
                                 </div>
                             </div>
 
                             <div class="main__select__item">
                                 <div class="paragraph__div">
-                                    Лимит в сутки от автора, на группу проектов
-
+                                    @lang('project::project.enter_limit_author_count_in_group_project_on_day')
                                     <span class="hint">?</span>
                                     <div class="text__hint">
                                         Подсказка
                                     </div>
                                 </div>
 
-                                <input class="main__input__other" type="text" placeholder="3">
+                                <input class="main__input__other @error('limit.author_count_in_group_project_on_day') is-invalid validate__input @enderror" name="limit[author_count_in_group_project_on_day]"
+                                       value="{{ old('limit.author_count_in_group_project_on_day') }}" type="text" placeholder="3">
 
                                 <div class="all__project__checkbox all__check__create">
-                                    <input type="checkbox" id="all__project2">
+                                    <input class="@error('limit.in_author_on_project_on_group') is-invalid validate__input @enderror" type="checkbox" name="limit[in_author_on_project_on_group]"
+                                           @if(old('limit.in_author_on_project_on_group') == 1) checked @endif value="1" id="all__project2">
                                     <label for="all__project2">
-                                        Установить для всех проектов группы
+                                        @lang('project::project.enter_limit_in_author_on_project')
                                     </label>
                                 </div>
                             </div>
 
                             <div class="main__select__item">
                                 <div class="paragraph__div">
-                                    Лимит на 1 IP
+                                    @lang('project::project.enter_limit_count_in_ip')
                                     <span class="hint">?</span>
                                     <div class="text__hint">
                                         Подсказка
                                     </div>
                                 </div>
 
-                                <input class="main__input__other" type="text" placeholder="7">
+                                <input class="main__input__other @error('limit.count_in_ip') is-invalid validate__input @enderror" name="limit[count_in_ip]" value="{{ old('limit.count_in_ip') }}" type="text" placeholder="7">
                             </div>
 
                             <div class="main__select__item">
                                 <div class="paragraph__div">
-                                    Максимум приступивших авторов
+                                    @lang('project::project.enter_limit_max_author_work')
                                     <span class="hint">?</span>
                                     <div class="text__hint">
                                         Подсказка
                                     </div>
                                 </div>
 
-                                <input class="main__input__other" type="text" placeholder="3">
+                                <input class="main__input__other @error('limit.max_author_work') is-invalid validate__input @enderror" name="limit[max_author_work]" value="{{ old('limit.max_author_work') }}" type="text" placeholder="3">
                             </div>
 
                             <div class="main__select__item">
                                 <div class="paragraph__div">
-                                    Задержка перед повторным выполнением (в мин.)
+                                    @lang('project::project.enter_limit_time_off_in_work')
                                     <span class="hint">?</span>
                                     <div class="text__hint">
                                         Подсказка
                                     </div>
                                 </div>
 
-                                <input class="main__input__other" type="text" placeholder="3">
+                                <input class="main__input__other @error('limit.time_off_in_work') is-invalid validate__input @enderror" name="limit[time_off_in_work]"
+                                       value="{{ old('limit.time_off_in_work') }}" type="text" placeholder="3">
                             </div>
                         </div>
 
                         <div class="limit__inner">
                             <div class="new__navigation__title" style="margin-top: 27px; margin-bottom: 10px;">
-                                Устройства
+                                @lang('project::project.devices')
                             </div>
 
                             <div class="all__project__checkbox all__check__create other__all__project__checkbox">
-                                <input type="checkbox" id="all__project3">
+                                <input type="checkbox" @if(old('limit.mobile') == 1) checked @endif name="limit[mobile]" value="1" id="all__project3"
+                                       class="@error('limit.mobile') is-invalid validate__input @enderror">
                                 <label for="all__project3">
-                                    Установить для всех проектов группы
+                                    @lang('project::project.enter_limit_mobile')
                                 </label>
                                 <span class="hint">?</span>
                                 <div class="text__hint">
@@ -628,11 +658,12 @@
 
                         <div class="stop__words__block">
                             <div class="main__select__item">
-                                <p>Стоп слова</p>
-                                <textarea name="" id="" placeholder="Запрещённые слова (через запятую)"></textarea>
+                                <p>@lang('project::project.enter_limit_stop_words')</p>
+                                <textarea class="@error('limit.stop_words') is-invalid validate__input @enderror" name="limit[stop_words]" id="stop_words"
+                                          placeholder="@lang('project::project.enter_limit_forbidden_words')">{{ old('limit.stop_words') }}</textarea>
 
                                 <div class="for__example">
-                                    Например: "спасибо, пожалуйста". Комментарии, в которых будут содержаться указанные слова не будут допущены на проверку.
+                                    @lang('project::project.enter_limit_forbidden_words_list')
                                 </div>
                             </div>
                         </div>
