@@ -1030,7 +1030,6 @@
                                     </label>
                                 </div>
                             </div>
-
                             <div class="main__select__item">
                                 <p>@lang('project::project.enter_ar_count_followers')</p>
                                 <input class="main__input__other" type="text" name="social[count_followers]" value="{{ old('social.count_followers') }}" placeholder="50">
