@@ -25,11 +25,12 @@
                     <li class="proj_nav_item second__open">@lang('project::all_users.project_additional')</li>
                     <li class="proj_nav_item third__open">@lang('project::all_users.project_limitations')</li>
                     <li class="proj_nav_item fourth__open">@lang('project::all_users.project_pages')</li>
-                    {{--<li class="proj_nav_item fifth__open">@lang('project::all_users.project_geo_targeting')</li>
-                    <li class="proj_nav_item sixth__open">@lang('project::all_users.project_account_requirements')</li>--}}
+                    {{--<li class="proj_nav_item fifth__open">@lang('project::all_users.project_geo_targeting')</li>--}}
+                    <li class="proj_nav_item sixth__open">@lang('project::all_users.project_account_requirements')</li>
                 </ul>
             </nav>
 
+            {{-- Основные --}}
             <div class="new__of__navigation first__navigation">
                 <div>
                     <div class="inner__new__navigation">
@@ -210,7 +211,7 @@
                     </div>
                 </div>
             </div>
-
+            {{-- Дополнительные --}}
             <div class="new__of__navigation second__navigation">
                 <div>
                     <div class="inner__new__navigation">
@@ -356,7 +357,7 @@
                     </div>
                 </div>
             </div>
-
+            {{-- Ограничения --}}
             <div class="new__of__navigation third__navigation">
                 <div>
                     <div class="main__third__nav">
@@ -674,7 +675,7 @@
                     </div>
                 </div>
             </div>
-
+            {{-- Страницы --}}
             <div class="new__of__navigation fourth__navigation">
                 <div>
                     <div class="inner__new__navigation">
@@ -712,7 +713,7 @@
                     </div>
                 </div>
             </div>
-
+            {{-- Геотаргетинг --}}
             <div class="new__of__navigation fifth__navigation">
                 <div>
                     <div class="inner__new__navigation" style="margin-top: 29px;">
@@ -779,39 +780,49 @@
                     </div>
                 </div>
             </div>
-
+            {{-- Требования к аккаунтам --}}
             <div class="new__of__navigation sixth__navigation">
                 <div>
                     <div class="sixth__navigation__new">
                         <div class="item__sixth">
                             <div class="top__sixth">
                                 <div class="title__sixth">
-                                    Вконтакте
+                                    @lang('project::project.enter_ar_vk')
                                 </div>
                                 <div class="item__sixth__checkbox">
 
-                                    <input type="checkbox" id="checkbox__vk">
+                                    <input type="checkbox" id="checkbox__vk" @if(old('social.vk_check') == 1) checked @endif name="social[vk_check]" value="1" >
                                     <label for="checkbox__vk">
                                     </label>
                                 </div>
                             </div>
-
                             <div class="main__select__item">
-                                <p>Количество друзей</p>
-                                <input class="main__input__other" type="text" placeholder="50">
+                                <p>@lang('project::project.enter_ar_friends')</p>
+                                <input class="main__input__other @error('social.vk_friends') is-invalid validate__input @enderror" type="text" name="social[vk_friends]" value="{{ old('social.vk_friends') }}"  placeholder="50">
+                                @error('social.vk_friends')
+                                <span class="red__validate">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="main__select__item">
-                                <p>Пол</p>
-                                <select class="custom-select sources" placeholder="Не важно" id="">
-                                    <option value="Мужской">Мужской</option>
-                                    <option value="Женский">Женский</option>
+                                <p>@lang('project::project.enter_ar_female')</p>
+                                <select class="custom-select sources @error('social.vk_female') is-invalid validate__input @enderror"
+                                        name="social[vk_female]"
+                                        placeholder="@if(old('social.vk_female')) @lang('project::project.enter_ar_'.old('social.vk_female')) @else @lang('project::project.enter_ar_female_not') @endif" id="">
+                                    <option @if(old('social.vk_female') != 'female_man' && old('social.vk_female') != 'female_women') selected @endif value="female_not">@lang('project::project.enter_ar_female_not')</option>
+                                    <option @if(old('social.vk_female') != 'female_man') selected @endif value="female_man">@lang('project::project.enter_ar_female_man')</option>
+                                    <option @if(old('social.vk_female') != 'female_women') selected @endif value="female_women">@lang('project::project.enter_ar_female_women')</option>
                                 </select>
+                                @error('social.vk_female')
+                                <span class="red__validate">{{ $message }}</span>
+                                @enderror
                             </div>
 
 
                             <div class="main__select__item">
-                                <p>Возраст</p>
+                                <p>@lang('project::project.enter_ar_age')</p>
+                                <input class="vk_age_min" type="hidden" name="social[vk_age_min]" value="{{ old('social.vk_age_min') }}">
+                                <input class="vk_age_max" type="hidden" name="social[vk_age_max]" value="{{ old('social.vk_age_max') }}">
                                 <div id="slider-range" class="slider__all__range"></div>
 
                                 <ul class="slider__summa">
@@ -850,11 +861,10 @@
                         <div class="item__sixth">
                             <div class="top__sixth">
                                 <div class="title__sixth">
-                                    Одноклассники
+                                    @lang('project::project.enter_ar_ok')
                                 </div>
                                 <div class="item__sixth__checkbox">
-
-                                    <input type="checkbox" id="checkbox__odn">
+                                    <input type="checkbox" id="checkbox__odn" @if(old('social.ok_check') == 1) checked @endif name="social[ok_check]" value="1" >
                                     <label for="checkbox__odn">
                                     </label>
                                 </div>
@@ -862,20 +872,30 @@
                             </div>
 
                             <div class="main__select__item">
-                                <p>Количество друзей</p>
-                                <input class="main__input__other" type="text" placeholder="70">
+                                <p>@lang('project::project.enter_ar_friends')</p>
+                                <input class="main__input__other @error('social.ok_friends') is-invalid validate__input @enderror" type="text" name="social[ok_friends]" value="{{ old('social.ok_friends') }}"  placeholder="50">
+                                @error('social.ok_friends')
+                                <span class="red__validate">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="main__select__item">
-                                <p>Пол</p>
-                                <select class="custom-select sources" placeholder="Не важно" id="">
-                                    <option value="Мужской">Мужской</option>
-                                    <option value="Женский">Женский</option>
+                                <p>@lang('project::project.enter_ar_female')</p>
+                                <select class="custom-select sources @error('social.ok_female') is-invalid validate__input @enderror"
+                                        name="social[ok_female]"
+                                        placeholder="@if(old('social.ok_female')) @lang('project::project.enter_ar_'.old('social.ok_female')) @else @lang('project::project.enter_ar_female_not') @endif" id="">
+                                    <option @if(old('social.ok_female') != 'female_man' && old('social.ok_female') != 'female_women') selected @endif value="female_not">@lang('project::project.enter_ar_female_not')</option>
+                                    <option @if(old('social.ok_female') != 'female_man') selected @endif value="female_man">@lang('project::project.enter_ar_female_man')</option>
+                                    <option @if(old('social.ok_female') != 'female_women') selected @endif value="female_women">@lang('project::project.enter_ar_female_women')</option>
                                 </select>
+                                @error('social.ok_female')
+                                <span class="red__validate">{{ $message }}</span>
+                                @enderror
                             </div>
-
                             <div class="main__select__item">
-                                <p>Возраст</p>
+                                <p>@lang('project::project.enter_ar_age')</p>
+                                <input class="ok_age_min" type="hidden" name="social[ok_age_min]" value="{{ old('social.ok_age_min') }}">
+                                <input class="ok_age_max" type="hidden" name="social[ok_age_max]" value="{{ old('social.ok_age_max') }}">
                                 <div id="slider-range1" class="slider__all__range"></div>
 
                                 <ul class="slider__summa">
@@ -914,27 +934,35 @@
 
                         <div class="item__sixth">
                             <div class="top__sixth">
+
                                 <div class="title__sixth">
-                                    Facebook
+                                    @lang('project::project.enter_ar_fb')
                                 </div>
                                 <div class="item__sixth__checkbox">
-
-                                    <input type="checkbox" id="checkbox__fb">
+                                    <input type="checkbox" id="checkbox__fb" @if(old('social.fb_check') == 1) checked @endif name="social[fb_check]" value="1" >
                                     <label for="checkbox__fb">
                                     </label>
                                 </div>
                             </div>
 
                             <div class="main__select__item">
-                                <p>Пол</p>
-                                <select class="custom-select sources" placeholder="Не важно" id="">
-                                    <option value="Мужской">Мужской</option>
-                                    <option value="Женский">Женский</option>
+                                <p>@lang('project::project.enter_ar_female')</p>
+                                <select class="custom-select sources @error('social.fb_female') is-invalid validate__input @enderror"
+                                        name="social[fb_female]"
+                                        placeholder="@if(old('social.fb_female')) @lang('project::project.enter_ar_'.old('social.fb_female')) @else @lang('project::project.enter_ar_female_not') @endif" id="">
+                                    <option @if(old('social.fb_female') != 'female_man' && old('social.fb_female') != 'female_women') selected @endif value="female_not">@lang('project::project.enter_ar_female_not')</option>
+                                    <option @if(old('social.fb_female') != 'female_man') selected @endif value="female_man">@lang('project::project.enter_ar_female_man')</option>
+                                    <option @if(old('social.fb_female') != 'female_women') selected @endif value="female_women">@lang('project::project.enter_ar_female_women')</option>
                                 </select>
+                                @error('social.fb_female')
+                                <span class="red__validate">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="main__select__item">
-                                <p>Возраст</p>
+                                <p>@lang('project::project.enter_ar_age')</p>
+                                <input class="fb_age_min" type="hidden" name="social[fb_age_min]" value="{{ old('social.fb_age_min') }}">
+                                <input class="fb_age_max" type="hidden" name="social[fb_age_max]" value="{{ old('social.fb_age_max') }}">
                                 <div id="slider-range2" class="slider__all__range"></div>
 
                                 <ul class="slider__summa">
@@ -973,46 +1001,50 @@
                         <div class="item__sixth">
                             <div class="top__sixth">
                                 <div class="title__sixth">
-                                    Instagram
+                                    @lang('project::project.enter_ar_inst')
                                 </div>
                                 <div class="item__sixth__checkbox">
-
-                                    <input type="checkbox" id="checkbox__inst">
-                                    <label for="checkbox__inst">
+                                    <input type="checkbox" id="checkbox__inst" @if(old('social.inst_check') == 1) checked @endif name="social[inst_check]" value="1" >
+                                    <label for="checkbox__fb">
                                     </label>
                                 </div>
                             </div>
 
                             <div class="main__select__item">
-                                <p>Количество подписчиков</p>
-                                <input class="main__input__other" type="text" placeholder="50">
+                                <p>@lang('project::project.enter_ar_count_subscribers')</p>
+                                <input class="main__input__other" type="text" name="social[count_subscribers]" value="{{ old('social.count_subscribers') }}" placeholder="50">
+                                @error('social.count_subscribers')
+                                <span class="red__validate">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="item__sixth">
                             <div class="top__sixth">
                                 <div class="title__sixth">
-                                    Twitter
+                                    @lang('project::project.enter_ar_tw')
                                 </div>
                                 <div class="item__sixth__checkbox">
-
-                                    <input type="checkbox" id="checkbox__twitter">
+                                    <input type="checkbox" id="checkbox__twitter" @if(old('social.tw_check') == 1) checked @endif name="social[tw_check]" value="1" >
                                     <label for="checkbox__twitter">
                                     </label>
                                 </div>
                             </div>
 
                             <div class="main__select__item">
-                                <p>Количество фолловеров</p>
-                                <input class="main__input__other" type="text" placeholder="50">
+                                <p>@lang('project::project.enter_ar_count_followers')</p>
+                                <input class="main__input__other" type="text" name="social[count_followers]" value="{{ old('social.count_followers') }}" placeholder="50">
+                                @error('social.count_followers')
+                                <span class="red__validate">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
 
                     <div class="all__check__create">
-                        <input type="checkbox" id="disable_check">
+                        <input type="checkbox" id="disable_check" name="social[disable_check]" value="{{ old('social.disable_check') }}">
                         <label for="disable_check" class="disable_check">
-                            Отключить проверку
+                            @lang('project::project.enter_ar_disable')
                         </label>
                     </div>
 
@@ -1048,11 +1080,15 @@
                 max: 100,
                 values: [ 1, 100 ],
                 slide: function( event, ui ) {
+                    $('.vk_age_min').val(numberWithCommas(ui.values[ 0 ]) );
+                    $('.vk_age_max').val(numberWithCommas(ui.values[ 1 ]) );
                     $( ".min" ).html(numberWithCommas(ui.values[ 0 ]) );
                     $( ".max" ).html(numberWithCommas(ui.values[ 1 ]) );
                 }
             });
 
+            $('.vk_age_min').val(numberWithCommas($( "#slider-range" ).slider( "values", 0 )));
+            $('.vk_age_max').val(numberWithCommas($( "#slider-range" ).slider( "values", 1 )));
             //slider range data tooltip set
             var $handler = $("#slider-range .ui-slider-handle");
 
@@ -1081,6 +1117,8 @@
                 max: 100,
                 values: [ 1, 100 ],
                 slide: function( event, ui ) {
+                    $('.ok_age_min').val(numberWithCommas(ui.values[ 0 ]) );
+                    $('.ok_age_max').val(numberWithCommas(ui.values[ 1 ]) );
                     $( ".min" ).html(numberWithCommas(ui.values[ 0 ]) );
                     $( ".max" ).html(numberWithCommas(ui.values[ 1 ]) );
                 }
@@ -1089,8 +1127,10 @@
             //slider range data tooltip set
             var $handler = $("#slider-range1 .ui-slider-handle");
 
-            $handler.eq(0).append("<b class='amount'><span class='min'>"+numberWithCommas($( "#slider-range1" ).slider( "values", 0 )) +"</span></b>");
-            $handler.eq(1).append("<b class='amount'><span class='max'>"+numberWithCommas($( "#slider-range1" ).slider( "values", 1 )) +"</span></b>");
+            $('.ok_age_min').val(numberWithCommas($( "#slider-range1" ).slider( "values", 0 )));
+            $('.ok_age_max').val(numberWithCommas($( "#slider-range1" ).slider( "values", 1 )));
+            $handler.eq(0).append("<b class='amount'><span class='min'>"+ numberWithCommas($( "#slider-range1" ).slider( "values", 0 )) +"</span></b>");
+            $handler.eq(1).append("<b class='amount'><span class='max'>"+ numberWithCommas($( "#slider-range1" ).slider( "values", 1 )) +"</span></b>");
 
             //slider range pointer mousedown event
             $handler.on("mousedown",function(e){
@@ -1114,6 +1154,8 @@
                 max: 100,
                 values: [ 1, 100 ],
                 slide: function( event, ui ) {
+                    $('.fb_age_min').val(numberWithCommas(ui.values[ 0 ]) );
+                    $('.fb_age_max').val(numberWithCommas(ui.values[ 1 ]) );
                     $( ".min" ).html(numberWithCommas(ui.values[ 0 ]) );
                     $( ".max" ).html(numberWithCommas(ui.values[ 1 ]) );
                 }
@@ -1121,6 +1163,8 @@
 
             //slider range data tooltip set
             var $handler = $("#slider-range2 .ui-slider-handle");
+            $('.fb_age_min').val(numberWithCommas($( "#slider-range1" ).slider( "values", 0 )));
+            $('.fb_age_max').val(numberWithCommas($( "#slider-range1" ).slider( "values", 1 )));
 
             $handler.eq(0).append("<b class='amount'><span class='min'>"+numberWithCommas($( "#slider-range2" ).slider( "values", 0 )) +"</span></b>");
             $handler.eq(1).append("<b class='amount'><span class='max'>"+numberWithCommas($( "#slider-range2" ).slider( "values", 1 )) +"</span></b>");

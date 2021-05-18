@@ -93,7 +93,24 @@ return [
     'enter_limit_forbidden_words'           => 'Запрещённые слова (через запятую)',
     'enter_limit_forbidden_words_list'      => 'Например: "спасибо, пожалуйста". Комментарии, в которых будут содержаться указанные слова не будут допущены на проверку.',
     'devices'                               => 'Устройства',
-    'mobile'                                => 'только с телефона',
+    'enter_limit_mobile'                    => 'только с телефона',
+
+    //Account requirements
+    'enter_ar_vk'                           => 'Вконтакте',
+    'enter_ar_ok'                           => 'Одноклассники',
+    'enter_ar_fb'                           => 'Facebook',
+    'enter_ar_inst'                         => 'Instagram',
+    'enter_ar_tw'                           => 'Twitter',
+    'enter_ar_friends'                      => 'Количество друзей',
+    'enter_ar_female'                       => 'Пол',
+    'enter_ar_female_not'                   => 'Не важно',
+    'enter_ar_female_man'                   => 'Мужской',
+    'enter_ar_female_women'                 => 'Женский',
+    'enter_ar_age'                          => 'Возраст',
+    'enter_ar_count_subscribers'            => 'Количество подписчиков',
+    'enter_ar_count_followers'              => 'Количество фолловеров',
+    'enter_ar_disable'                      => 'Отключить проверку',
+
 
     //PROJECT Helper
     'enter_assignment_help'                 => 'Опипише задание как можно подробнее',
