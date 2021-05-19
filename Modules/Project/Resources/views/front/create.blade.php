@@ -277,8 +277,7 @@
                                     <div class="with__hint__input">
                                         <input class="main__input__other datepicker @error('date_start') is-invalid validate__input @enderror"
                                                name="date_start" type="text"
-                                               placeholder="Например: 2021/02/08 10:00:00">
-
+                                               placeholder="Например: 2021/02/08 10:00:00" value="{{ old('date_start') }}">
                                         <span class="hint">?</span>
                                         <div class="text__hint">
                                             Подсказка
@@ -290,7 +289,7 @@
                                     <div class="with__hint__input">
 
                                         <input class="main__input__other datepicker @error('date_finish') is-invalid validate__input @enderror"
-                                               type="text" name="date_finish" placeholder="Например: 2021/02/08 10:00:00">
+                                               type="text" name="date_finish" placeholder="Например: 2021/02/08 10:00:00" value="{{ old('date_finish') }}">
 
                                         <span class="hint">?</span>
                                         <div class="text__hint">

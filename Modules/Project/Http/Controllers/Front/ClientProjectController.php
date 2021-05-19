@@ -109,7 +109,7 @@ class ClientProjectController extends Controller
         return view('project::front.edit',[
             'subjects'          => $subjects->getList(),
             'rates'             => $ratesRep->getListRatesAll(),
-            'project'           => $project,
+            'project'           => $project->current(),
             'project_group'     => $projectGroup->getProjectGroup(),
             'user_group'        => $author_group->getAuthorGroup(),
             'delimiter'         => '',

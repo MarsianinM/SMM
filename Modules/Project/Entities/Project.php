@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Currency\Entities\Currency;
 use Modules\ProjectLimits\Entities\ProjectLimit;
 use Modules\ProjectLimits\Entities\ProjectLimitDay;
+use Modules\ProjectLimits\Entities\ProjectSocialLimit;
 use Modules\Rates\Entities\Rate;
 use Modules\Subjects\Entities\Subject;
 use Modules\Users\Entities\User;
@@ -82,6 +83,7 @@ class Project extends Model implements HasMedia
     {
         return $this->belongsTo(Rate::class, 'rate_id','id')->with('rateDescription');
     }
+
     /**
      * Get the projects for the Rates.
      */
@@ -89,6 +91,7 @@ class Project extends Model implements HasMedia
     {
         return $this->belongsTo(Currency::class, 'currency_id','id');
     }
+
     /**
      * Get the projects for the Rates.
      */
@@ -109,9 +112,15 @@ class Project extends Model implements HasMedia
     {
         return $this->hasOne(ProjectLimit::class);
     }
+
     public function projectLimitsDay()
     {
         return $this->hasOne(ProjectLimitDay::class);
+    }
+
+    public function projectSocialLimits()
+    {
+        return $this->hasOne(ProjectSocialLimit::class);
     }
 
     public function getTypeProjects(): array
@@ -156,12 +165,23 @@ class Project extends Model implements HasMedia
     {
         return $this->client->name;
     }
+
     public function getRateTitleAttribute()
     {
         $content = collect($this->rate->rateDescription)->keyBy('lang_key');
 
         return $content[config('app.locale')]->title ?? '';
     }
+
+/*    public function getLimitsAttribute()
+    {
+        $limits = array();
+
+        $limits = \Arr::add($limits, 'limits', [$this->projectLimits ?? null, $this->projectSocialLimits ?? null, $this->projectLimitsDay ?? null]);
+
+         return collect($limits);
+    }*/
+
 
     public function registerMediaConversions(Media $media = null): void
     {
@@ -172,6 +192,14 @@ class Project extends Model implements HasMedia
             ->nonOptimized();
     }
 
-
+    public function current()
+    {
+        return $this->load([
+            /*'currency',*/
+            'projectLimits',
+            'projectLimitsDay',
+            'projectSocialLimits',
+        ]);
+    }
 
 }

@@ -10,6 +10,7 @@ use Modules\Project\Entities\Project;
 use Modules\Project\Entities\ProjectGroup;
 use Modules\ProjectLimits\Entities\ProjectLimit;
 use Modules\ProjectLimits\Entities\ProjectLimitDay;
+use Modules\ProjectLimits\Entities\ProjectSocialLimit;
 use Modules\Rates\Repository\CategoryRepository;
 use Modules\Subjects\Entities\Subject;
 use Modules\Subjects\Repository\SubjectRepository;
@@ -31,11 +32,13 @@ class ProjectClientRepository
     /**
      * Store the resource.
      * @param array $data
-     * @return Project
+     * @return mixed
      */
-    public function store(array $data): Project
+    public function store(array $data)
     {
         $result = $this->model->create(Arr::except($data, ['day_active','limit', '_token']));
+
+        if(!$result) return false;
 
         if(Arr::has($data, 'limit')){
             $limit = Arr::add($data['limit'], 'project_id', $result->id);
@@ -44,6 +47,11 @@ class ProjectClientRepository
         if(Arr::has($data, 'day_active')){
             $day_active = Arr::add($data['day_active'], 'project_id', $result->id);
             ProjectLimitDay::create($day_active);
+        }
+
+        if(Arr::has($data, 'social')){
+            $social_limit = Arr::add($data['social'], 'project_id', $result->id);
+            ProjectSocialLimit::create($social_limit);
         }
 
         return $result;
