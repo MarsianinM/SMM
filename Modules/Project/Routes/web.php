@@ -11,6 +11,7 @@
 |
 */
 
+use Modules\Project\Http\Controllers\Front\AuthorProjectController;
 use Modules\Project\Http\Controllers\Front\ClientProjectController;
 /*use \App\Http\Controllers\Client\ShowHomePage;*/
 
@@ -25,6 +26,15 @@ Route::prefix('client')
         Route::get('/create', [ClientProjectController::class,'create'])->name('projects.create');
         Route::post('/storage', [ClientProjectController::class,'store'])->name('projects.store');
         Route::patch('/update/{project}', [ClientProjectController::class,'update'])->name('projects.update');
+    });
+
+});
+Route::prefix('author')
+    ->name('author.')
+    ->middleware(['web', 'verified', 'role:author'])
+    ->group(callback: function() {
+    Route::prefix('projects')->group(function() {
+        Route::get('/', [AuthorProjectController::class,'index'])->name('projects.index');
     });
 
 });

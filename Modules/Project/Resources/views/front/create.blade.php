@@ -370,7 +370,7 @@
                                 <div class="label__week">
 
                                     <div class="week__item">
-                                        <input type="checkbox" value="1" id="monday" @if(old('day_active.monday') == 1) checked @endif
+                                        <input type="checkbox" value="1" id="monday" @if(old('day_active.monday') !== 0) checked @endif
                                         class="@error('day_active.monday') is-invalid validate__input @enderror" name="day_active[monday]">
                                         <label for="monday">
                                             <span>@lang('project::project.enter_monday')</span>
@@ -379,7 +379,7 @@
 
 
                                     <div class="week__item">
-                                        <input type="checkbox" value="1" id="tuesday" @if(old('day_active.tuesday') == 1) checked @endif
+                                        <input type="checkbox" value="1" id="tuesday" @if(old('day_active.tuesday') !== 0) checked @endif
                                         class="@error('day_active.tuesday') is-invalid validate__input @enderror" name="day_active[tuesday]">
                                         <label for="tuesday">
                                             <span>@lang('project::project.enter_tuesday')</span>
@@ -387,7 +387,7 @@
                                     </div>
 
                                     <div class="week__item">
-                                        <input type="checkbox" value="1" id="wednesday" @if(old('day_active.wednesday') == 1) checked @endif
+                                        <input type="checkbox" value="1" id="wednesday" @if(old('day_active.wednesday') !== 0) checked @endif
                                         class="@error('day_active.wednesday') is-invalid validate__input @enderror" name="day_active[wednesday]">
                                         <label for="wednesday">
                                             <span>@lang('project::project.enter_wednesday')</span>
@@ -396,7 +396,7 @@
 
 
                                     <div class="week__item">
-                                        <input type="checkbox" value="1" id="thursday" @if(old('day_active.thursday') == 1) checked @endif
+                                        <input type="checkbox" value="1" id="thursday" @if(old('day_active.thursday') !== 0) checked @endif
                                         class="@error('day_active.thursday') is-invalid validate__input @enderror" name="day_active[thursday]">
                                         <label for="thursday">
                                             <span>@lang('project::project.enter_thursday')</span>
@@ -405,7 +405,7 @@
 
 
                                     <div class="week__item">
-                                        <input type="checkbox" value="1" id="friday" @if(old('day_active.friday') == 1) checked @endif
+                                        <input type="checkbox" value="1" id="friday" @if(old('day_active.friday') !== 0) checked @endif
                                         class="@error('day_active.friday') is-invalid validate__input @enderror" name="day_active[friday]">
                                         <label for="friday">
                                             <span>@lang('project::project.enter_friday')</span>
@@ -413,16 +413,15 @@
                                     </div>
 
                                     <div class="week__item">
-                                        <input type="checkbox" value="1" id="saturday" @if(old('day_active.saturday') == 1) checked @endif
+                                        <input type="checkbox" value="1" id="saturday" @if(old('day_active.saturday') !== 0) checked @endif
                                         class="@error('day_active.saturday') is-invalid validate__input @enderror" name="day_active[saturday]">
                                         <label for="saturday">
                                             <span>@lang('project::project.enter_saturday')</span>
                                         </label>
                                     </div>
 
-
                                     <div class="week__item">
-                                        <input type="checkbox" id="sunday" value="1" @if(old('day_active.sunday') == 1) checked @endif
+                                        <input type="checkbox" id="sunday" value="1" @if(old('day_active.sunday') !== 0) checked @endif
                                         class="@error('day_active.sunday') is-invalid validate__input @enderror" name="day_active[sunday]">
                                         <label for="sunday">
                                             <span>@lang('project::project.enter_sunday')</span>
@@ -434,10 +433,10 @@
                             <div class="active__project">
                                 <p>@lang('project::project.enter_hours_of_activity')</p>
                                 <div class="time__active">
-                                    @lang('project::project.enter_hours_from') <input type="text" name="limit[time_start]" value="{{ old('limit.time_start') }}"
+                                    @lang('project::project.enter_hours_from') <input type="text" name="limit[time_start]" value="{{ old('limit.time_start') ?? '00:00:00' }}"
                                                                                       class="@error('limit.time_start') is-invalid validate__input @enderror" placeholder="00:00:00">
-                                    @lang('project::project.enter_hours_to') <input type="text" name="limit[time_finish]" value="{{ old('limit.time_finish') }}"
-                                                                                    class="@error('limit.time_start') is-invalid validate__input @enderror" placeholder="00:00:00">
+                                    @lang('project::project.enter_hours_to') <input type="text" name="limit[time_finish]" value="{{ old('limit.time_finish') ?? '23:59:59' }}"
+                                                                                    class="@error('limit.time_start') is-invalid validate__input @enderror" placeholder="23:59:59">
                                     <span class="hint">?</span>
                                     <div class="text__hint">
                                         Подсказка
