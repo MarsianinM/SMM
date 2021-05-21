@@ -5,55 +5,47 @@ namespace Modules\Project\Http\Controllers\Front;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Project\Entities\Project;
 use Modules\Project\Repository\ProjectAuthorRepository;
 
 class AuthorProjectController extends Controller
 {
+
+
+    private ProjectAuthorRepository $rep;
+
+    public function __construct(ProjectAuthorRepository $rep)
+    {
+        $this->rep = $rep;
+    }
+
     /**
      * Display a listing of the resource.
-     * @param ProjectAuthorRepository $projectAuthorRepository
      * @param Request $request
      * @return Renderable
      */
     public function index(
-        ProjectAuthorRepository $projectAuthorRepository,
         Request $request
     ): Renderable
     {
-       // dd(__FILE__,__LINE__,$projectAuthorRepository->getProject());
-        return view('project::front.index',[
-            'projects'          => $projectAuthorRepository->getProject(),
+      //  dd(__FILE__,__LINE__,$projectAuthorRepository->getProject());
+        return view('project::front.author.index',[
+            'projects'          => $this->rep->getProjects(),
             'request_sort'      => $request->get('sort') ?? 'default'
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
-    {
-        return view('project::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Show the specified resource.
-     * @param int $id
+     * @param $project_id
      * @return Renderable
      */
-    public function show($id)
+    public function show($project_id): Renderable
     {
-        return view('project::show');
+        return view('project::front.author.show',[
+            'project' => $this->rep->getProject($project_id),
+        ]);
     }
 
     /**

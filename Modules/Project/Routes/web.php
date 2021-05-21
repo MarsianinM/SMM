@@ -35,6 +35,7 @@ Route::prefix('author')
     ->group(callback: function() {
     Route::prefix('projects')->group(function() {
         Route::get('/', [AuthorProjectController::class,'index'])->name('projects.index');
+        Route::get('/show/{project_id}', [AuthorProjectController::class,'show'])->name('projects.show');
     });
 
 });

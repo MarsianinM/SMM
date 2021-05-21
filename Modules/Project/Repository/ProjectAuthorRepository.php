@@ -6,6 +6,9 @@ namespace Modules\Project\Repository;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Modules\Project\Entities\Project;
 use Str;
 
@@ -21,7 +24,7 @@ class ProjectAuthorRepository
         $this->model = $project;
     }
 //'bay_off','active','on_moderation','off','off_admins'
-    public function getProject(): LengthAwarePaginator
+    public function getProjects(): LengthAwarePaginator
     {
         $sql = $this->model->with([
             'client',
@@ -45,8 +48,41 @@ class ProjectAuthorRepository
             return $result;
         });*/
 
+        $sql = $sql->orderBy('pro', 'desc');
         $sql = $sql->orderBy('id', 'desc');
         return $sql->paginate(10);
+    }
+
+    /**
+     * @param $project_id
+     * @return Project
+     */
+
+    public function getProject($project_id): Project
+    {
+
+        $sql = $this->model->with([
+            'client',
+            'rate',
+            'currency',
+            'group',
+            'subject',
+            'projectLimits',
+            'projectLimitsDay',
+            'projectSocialLimits',
+        ]);
+        $sql = $sql->where('status', 'active');
+        $sql = $sql->where('id', $project_id);
+
+        $sql = $sql->whereHas('projectLimitsDay', function ($query) {
+            return $query->where(strtolower(Carbon::now()->format('l')), '!=', 0);
+        });
+
+        $result = $sql->first();
+
+        if(!$result) abort(404);
+
+        return $result;
     }
 
 }

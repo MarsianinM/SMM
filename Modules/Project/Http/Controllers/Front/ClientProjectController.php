@@ -39,7 +39,7 @@ class ClientProjectController extends Controller
         Request $request
     ): Renderable
     {
-        return view('project::front.index',[
+        return view('project::front.client.index',[
             'projects'          => $projectClientRepository->getProjects($request->all()),
             'request_sort'      => $request->get('sort') ?? 'default'
         ]);
@@ -59,7 +59,7 @@ class ClientProjectController extends Controller
         ProjectAuthorGroupRepository $author_group
     ): Renderable
     {
-        return view('project::front.create',[
+        return view('project::front.client.create',[
             'subjects'          => $subjects->getList(),
             'rates'             => $ratesRep->getListRatesAll(),
             'project_group'     => $projectGroup->getProjectGroup(),
@@ -106,7 +106,7 @@ class ClientProjectController extends Controller
         ProjectAuthorGroupRepository $author_group
     ): Renderable
     {
-        return view('project::front.edit',[
+        return view('project::front.client.edit',[
             'subjects'          => $subjects->getList(),
             'rates'             => $ratesRep->getListRatesAll(),
             'project'           => $project->current(),

@@ -156,8 +156,8 @@ class Project extends Model implements HasMedia
      */
     public function getSmallDescriptionAttribute(): string
     {
-        $description = mb_substr($this->description, 0, 200);
-        if(strlen($this->description) > 200) $description .= ' ...';
+        $description = mb_substr($this->description, 0, 100);
+        if(strlen($this->description) > 100) $description .= ' ...';
         return $description;
     }
 

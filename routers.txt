@@ -1,3 +1,9 @@
+
+Deprecated: PHP Startup: Use of mbstring.http_input is deprecated in Unknown on line 0
+
+Deprecated: PHP Startup: Use of mbstring.http_output is deprecated in Unknown on line 0
+
+Deprecated: PHP Startup: Use of mbstring.internal_encoding is deprecated in Unknown on line 0
 +--------+-----------+-------------------------------------+-------------------------+------------------------------------------------------------------------+----------------------------------------------------+
 | Domain | Method    | URI                                 | Name                    | Action                                                                 | Middleware                                         |
 +--------+-----------+-------------------------------------+-------------------------+------------------------------------------------------------------------+----------------------------------------------------+
@@ -209,6 +215,12 @@
 |        | GET|HEAD  | author/home                         | author.home             | App\Http\Controllers\Author\ShowHomePage                               | web                                                |
 |        |           |                                     |                         |                                                                        | Illuminate\Auth\Middleware\EnsureEmailIsVerified   |
 |        |           |                                     |                         |                                                                        | App\Http\Middleware\CheckRole:author               |
+|        | GET|HEAD  | author/projects                     | author.projects.index   | Modules\Project\Http\Controllers\Front\AuthorProjectController@index   | web                                                |
+|        |           |                                     |                         |                                                                        | Illuminate\Auth\Middleware\EnsureEmailIsVerified   |
+|        |           |                                     |                         |                                                                        | App\Http\Middleware\CheckRole:author               |
+|        | GET|HEAD  | author/projects/show/{project_id}   | author.projects.show    | Modules\Project\Http\Controllers\Front\AuthorProjectController@show    | web                                                |
+|        |           |                                     |                         |                                                                        | Illuminate\Auth\Middleware\EnsureEmailIsVerified   |
+|        |           |                                     |                         |                                                                        | App\Http\Middleware\CheckRole:author               |
 |        | GET|HEAD  | author/wishlist                     | author.wishlist.index   | App\Http\Controllers\Author\WishlistController@index                   | web                                                |
 |        |           |                                     |                         |                                                                        | Illuminate\Auth\Middleware\EnsureEmailIsVerified   |
 |        |           |                                     |                         |                                                                        | App\Http\Middleware\CheckRole:author               |
@@ -309,7 +321,8 @@
 |        |           |                                     |                         |                                                                        | Illuminate\Auth\Middleware\EnsureEmailIsVerified   |
 |        | GET|HEAD  | messages/{message}/edit             | messages.edit           | App\Http\Controllers\MessageController@edit                            | web                                                |
 |        |           |                                     |                         |                                                                        | Illuminate\Auth\Middleware\EnsureEmailIsVerified   |
-|        | GET|HEAD  | news                                | news.index              | Modules\News\Http\Controllers\NewsController@index                     | web                                                |
+|        | GET|HEAD  | news                                | news.index              | Modules\News\Http\Controllers\Front\NewsController@index               | web                                                |
+|        | GET|HEAD  | news/show/{slug}                    | news.show               | Modules\News\Http\Controllers\Front\NewsController@show                | web                                                |
 |        | GET|HEAD  | pages                               |                         | Modules\Pages\Http\Controllers\PagesController@index                   | web                                                |
 |        | GET|HEAD  | password/confirm                    | password.confirm        | App\Http\Controllers\Auth\ConfirmPasswordController@showConfirmForm    | web                                                |
 |        |           |                                     |                         |                                                                        | App\Http\Middleware\Authenticate                   |
