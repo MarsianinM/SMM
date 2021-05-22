@@ -58,35 +58,82 @@
                     <div class="minimum__title">
                         Минимальные требования к аккаунтам:
                     </div>
-
                     <div class="flex__minimum">
+
+                        @if($project->projectSocialLimits->vk_check)
                         <div class="minimum__item">
                             <div class="subtitle__soc">
-                                <img src="img/_src/vk_icon.png" alt="vk_icon"><span>Вконтакте</span>
+                                <img src="{{ asset('img/_src/vk_icon.png') }}" alt="vk_icon"><span>Вконтакте</span>
                             </div>
 
                             <nav class="minimum__block">
                                 <ul>
-                                    <li><span class="text__min__left">Количество друзей:</span><span class="text__min__right">50</span></li>
-                                    <li><span class="text__min__left">Пол:</span><span class="text__min__right">Женский</span></li>
-                                    <li><span class="text__min__left">Возраст:</span><span class="text__min__right">от 18 до 35 лет</span></li>
+                                    <li><span class="text__min__left">Количество друзей:</span><span class="text__min__right">{{ $project->projectSocialLimits->vk_friends }}</span></li>
+                                    <li><span class="text__min__left">Пол:</span><span class="text__min__right">{{ $project->projectSocialLimits->vk_female }}</span></li>
+                                    <li><span class="text__min__left">Возраст:</span><span class="text__min__right">от {{ $project->projectSocialLimits->vk_age_min }} до {{ $project->projectSocialLimits->vk_age_max }} лет</span></li>
                                 </ul>
                             </nav>
                         </div>
+                        @endif
 
-                        <div class="minimum__item">
-                            <div class="subtitle__soc">
-                                <img src="img/_src/odn__icon.png" alt="odn__icon"><span>Одноклассники</span>
+                        @if($project->projectSocialLimits->ok_check)
+                            <div class="minimum__item">
+                                <div class="subtitle__soc">
+                                    <img src="{{ asset('img/_src/odn__icon.png') }}" alt="vk_icon"><span>Одноклассники</span>
+                                </div>
+
+                                <nav class="minimum__block">
+                                    <ul>
+                                        <li><span class="text__min__left">Количество друзей:</span><span class="text__min__right">{{ $project->projectSocialLimits->ok_friends }}</span></li>
+                                        <li><span class="text__min__left">Пол:</span><span class="text__min__right">{{ $project->projectSocialLimits->ok_female }}</span></li>
+                                        <li><span class="text__min__left">Возраст:</span><span class="text__min__right">от {{ $project->projectSocialLimits->ok_age_min }} до {{ $project->projectSocialLimits->ok_age_max }} лет</span></li>
+                                    </ul>
+                                </nav>
                             </div>
+                        @endif
 
-                            <nav class="minimum__block">
-                                <ul>
-                                    <li><span class="text__min__left">Количество друзей:</span><span class="text__min__right">50</span></li>
-                                    <li><span class="text__min__left">Пол:</span><span class="text__min__right">Женский</span></li>
-                                    <li><span class="text__min__left">Возраст:</span><span class="text__min__right">от 18 до 35 лет</span></li>
-                                </ul>
-                            </nav>
-                        </div>
+                        @if($project->projectSocialLimits->fb_check)
+                            <div class="minimum__item">
+                                <div class="subtitle__soc">
+                                    <img src="{{ asset('img/_src/odn__icon.png') }}" alt="vk_icon"><span>Одноклассники</span>
+                                </div>
+
+                                <nav class="minimum__block">
+                                    <ul>
+                                        <li><span class="text__min__left">Количество друзей:</span><span class="text__min__right">{{ $project->projectSocialLimits->ok_friends }}</span></li>
+                                        <li><span class="text__min__left">Пол:</span><span class="text__min__right">{{ $project->projectSocialLimits->ok_female }}</span></li>
+                                        <li><span class="text__min__left">Возраст:</span><span class="text__min__right">от {{ $project->projectSocialLimits->ok_age_min }} до {{ $project->projectSocialLimits->ok_age_max }} лет</span></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        @endif
+
+                        @if($project->projectSocialLimits->inst_check)
+                            <div class="minimum__item">
+                                <div class="subtitle__soc">
+                                    <img src="{{ asset('img/_src/odn__icon.png') }}" alt="vk_icon"><span>Одноклассники</span>
+                                </div>
+
+                                <nav class="minimum__block">
+                                    <ul>
+                                        <li><span class="text__min__left">Количество друзей:</span><span class="text__min__right">{{ $project->projectSocialLimits->count_subscribers }}</span></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        @endif
+                        @if($project->projectSocialLimits->tw_check)
+                            <div class="minimum__item">
+                                <div class="subtitle__soc">
+                                    <img src="{{ asset('img/_src/odn__icon.png') }}" alt="vk_icon"><span>Одноклассники</span>
+                                </div>
+
+                                <nav class="minimum__block">
+                                    <ul>
+                                        <li><span class="text__min__left">Количество друзей:</span><span class="text__min__right">{{ $project->projectSocialLimits->count_followers }}</span></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        @endif
                     </div>
                 </div>
 
@@ -99,51 +146,54 @@
                         <ul>
                             <li>
                                 <span class="left__li-rest">В сутки:</span>
-                                <span class="right__li-rest">не установлены</span>
+                                <span class="right__li-rest">{!! $project->projectLimits->in_page_on_day ?? 'не установлены' !!} </span>
                             </li>
 
                             <li>
                                 <span class="left__li-rest">В час:</span>
-                                <span class="right__li-rest">не установлены</span>
+                                <span class="right__li-rest">{!! $project->projectLimits->in_hour ?? 'не установлены' !!}</span>
                             </li>
 
 
                             <li>
                                 <span class="left__li-rest">От автора:</span>
-                                <span class="right__li-rest">не установлены</span>
+                                <span class="right__li-rest">{!! $project->projectLimits->author_count ?? 'не установлены' !!}</span>
                             </li>
 
                             <li>
                                 <span class="left__li-rest">В сутки от автора</span>
-                                <span class="right__li-rest">0 из 1</span>
+                                <span class="right__li-rest">{!! $project->projectLimits->author_count_on_day ?? 'не установлены' !!}</span>
                             </li>
 
                             <li>
                                 <span class="left__li-rest">От автора по группе проектов:</span>
-                                <span class="right__li-rest">не установлены</span>
+                                <span class="right__li-rest">{!! $project->projectLimits->author_count_in_group_project ?? 'не установлены' !!}</span>
                             </li>
 
                             <li>
                                 <span class="left__li-rest">От автора в сутки по группе проектов:</span>
-                                <span class="right__li-rest">не установлены</span>
+                                <span class="right__li-rest">{!! $project->projectLimits->author_count_in_group_project_on_day ?? 'не установлены' !!}</span>
                             </li>
                         </ul>
                     </nav>
 
                     <div class="start__to__play">
-                        <a href="#"><span><img src="img/_src/play__btn.png" alt="play__btn"></span>Приступить к выполнению проекта</a>
+                        <a href="#"><span><img src="{{ asset('img/_src/play__btn.png') }}" alt="play__btn"></span>Приступить к выполнению проекта</a>
                     </div>
                 </div>
             </div>
 
             <div class="minimum__inner">
+                @if($project->page_link)
                 <div class="minimum__bottom__block">
                     <div class="bottom__minimum__title">
                         СПИСОК СТРАНИЦ, НАД КОТОРЫМИ МОЖНО РАБОТАТЬ
                     </div>
-                    <p><a href="https://******/wall15648712_1627">https://******/wall15648712_1627</a></p>
+                    {{--<p><a href="https://******/wall15648712_1627">https://******/wall15648712_1627</a></p>--}}
+                    <p>{{$project->page_link}}</p>
                     <p>Другие страницы сайта не будут приняты.</p>
                 </div>
+                @endif
                 <div class="minimum__bottom__block">
                     <div class="bottom__minimum__title">
                         Общие правила

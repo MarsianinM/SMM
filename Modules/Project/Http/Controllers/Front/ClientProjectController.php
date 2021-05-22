@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Currency\Entities\Currency;
 use Modules\Project\Entities\Project;
 use Modules\Project\Entities\ProjectGroup;
 use Modules\Project\Http\Requests\ClientProjectRequest;
@@ -31,16 +32,14 @@ class ClientProjectController extends Controller
      * Display a listing of the resource.
      * @param ProjectClientRepository $projectClientRepository
      * @param Request $request
-     * @param ProjectGroup $projectGroup
      * @return Renderable
      */
     public function index(
-        ProjectClientRepository $projectClientRepository,
         Request $request
     ): Renderable
     {
         return view('project::front.client.index',[
-            'projects'          => $projectClientRepository->getProjects($request->all()),
+            'projects'          => $this->rep->getProjects($request->all()),
             'request_sort'      => $request->get('sort') ?? 'default'
         ]);
     }
@@ -56,13 +55,15 @@ class ClientProjectController extends Controller
         SubjectRepository $subjects,
         CategoryRepository $ratesRep,
         ProjectGroupRepository $projectGroup,
-        ProjectAuthorGroupRepository $author_group
+        ProjectAuthorGroupRepository $author_group/*,
+        Currency $currency*/
     ): Renderable
     {
         return view('project::front.client.create',[
             'subjects'          => $subjects->getList(),
             'rates'             => $ratesRep->getListRatesAll(),
             'project_group'     => $projectGroup->getProjectGroup(),
+            'currency'          => $author_group->getAuthorGroup(),
             'user_group'        => $author_group->getAuthorGroup(),
             'delimiter'         => '',
         ]);

@@ -32,7 +32,7 @@ Route::prefix('client')
 Route::prefix('author')
     ->name('author.')
     ->middleware(['web', 'verified', 'role:author'])
-    ->group(callback: function() {
+    ->group(function() {
     Route::prefix('projects')->group(function() {
         Route::get('/', [AuthorProjectController::class,'index'])->name('projects.index');
         Route::get('/show/{project_id}', [AuthorProjectController::class,'show'])->name('projects.show');
