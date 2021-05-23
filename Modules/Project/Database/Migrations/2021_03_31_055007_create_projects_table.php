@@ -33,10 +33,10 @@ class CreateProjectsTable extends Migration
             $table->foreignId('client_id')
                 ->constrained('users')
                 ->cascadeOnDelete();
-            $table->foreignId('author_id')
+            /*$table->foreignId('author_id')
                 ->nullable()
                 ->constrained('users')
-                ->nullOnDelete();
+                ->nullOnDelete();*/
 
             $table->timestamps();
         });

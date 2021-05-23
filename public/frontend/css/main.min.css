@@ -3779,8 +3779,11 @@ form.form__chat__id .send__block .send__btn button:hover {
   width: 100%;
   text-align: center;
 }
-.start__to__play a {
+.start__to__play a, .start__to__play button {
+  border: none;
   width: 383px;
+  cursor: pointer;
+  padding: 0;
   height: 55px;
   border-radius: 5px;
   color: #fff;
@@ -3792,13 +3795,13 @@ form.form__chat__id .send__block .send__btn button:hover {
   text-transform: uppercase;
   text-align: left;
 }
-.start__to__play a:hover span {
+.start__to__play a:hover span, .start__to__play button:hover span {
   background: #007f0d;
 }
-.start__to__play a:hover {
+.start__to__play a:hover, .start__to__play button:hover {
   background: #00950f;
 }
-.start__to__play a span {
+.start__to__play a span, .start__to__play button span {
   display: inline-block;
   line-height: 54px;
   padding-left: 23px;

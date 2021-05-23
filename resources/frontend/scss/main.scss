@@ -3150,8 +3150,11 @@ form.form__chat__id{
   margin-top: 30px;
   width: 100%;
   text-align: center;
-  a{
+  a, button{
+    border: none;
     width: 383px;
+    cursor: pointer;
+    padding: 0;
     height: 55px;
     border-radius: 5px;
     color: #fff;
@@ -3164,7 +3167,6 @@ form.form__chat__id{
     text-align: left;
     &:hover span{
       background: #007f0d;
-
     }
     &:hover{
       background: #00950f;

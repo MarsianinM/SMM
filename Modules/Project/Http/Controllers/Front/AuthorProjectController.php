@@ -3,10 +3,12 @@
 namespace Modules\Project\Http\Controllers\Front;
 
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Project\Entities\Project;
 use Modules\Project\Repository\ProjectAuthorRepository;
+use Modules\Project\Repository\ProjectInWorkRepository;
 
 class AuthorProjectController extends Controller
 {
@@ -49,13 +51,17 @@ class AuthorProjectController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
+     * @param Request $request
+     * @param ProjectInWorkRepository $projectInWorkRepository
+     * @return RedirectResponse
      */
-    public function edit($id)
+    public function projectInWork(
+        Request $request,
+        ProjectInWorkRepository $projectInWorkRepository
+    ): RedirectResponse
     {
-        return view('project::edit');
+        $projectInWorkRepository->add($request);
+        return redirect()->back();
     }
 
     /**

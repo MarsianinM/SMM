@@ -14,7 +14,6 @@ class AddAuthorGroupIdColumn extends Migration
     public function up()
     {
         Schema::table('projects', function (Blueprint $table) {
-
             $table->foreignId('author_group_id')
                 ->nullable()
                 ->constrained('author_groups')

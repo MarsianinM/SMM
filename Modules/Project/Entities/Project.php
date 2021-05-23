@@ -85,6 +85,21 @@ class Project extends Model implements HasMedia
     }
 
     /**
+     * Get the projects for the status in author.
+     */
+    public function projectAuthor(): BelongsTo
+    {
+        return $this->belongsTo(ProjectInWork::class, 'id','project_id');
+    }
+    /**
+     * Get the projects for the status in author.
+     */
+    public function projectAuthorInWork(): BelongsTo
+    {
+        return $this->belongsTo(ProjectInWork::class, 'id','project_id')->where('author_id',auth()->id());
+    }
+
+    /**
      * Get the projects for the Rates.
      */
     public function currency(): BelongsTo
@@ -171,6 +186,14 @@ class Project extends Model implements HasMedia
         $content = collect($this->rate->rateDescription)->keyBy('lang_key');
 
         return $content[config('app.locale')]->title ?? '';
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsWorkAuthorAttribute(): bool
+    {
+        return (is_null($this->projectAuthorInWork) ? false : true);
     }
 
 /*    public function getLimitsAttribute()

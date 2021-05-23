@@ -19,7 +19,7 @@ class CreateProjectGroup extends Migration
             $table->foreignId('user_id')
                 ->nullable()
                 ->constrained('users')
-                ->nullOnDelete();
+                ->cascadeOnDelete();
             $table->unsignedBigInteger('parent_id')->default('0');
             $table->enum('show',[0,1])->default(1);
             $table->enum('show_children_group',[0,1])->default(1);

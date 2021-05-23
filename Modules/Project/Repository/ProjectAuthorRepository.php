@@ -35,6 +35,7 @@ class ProjectAuthorRepository
             'projectLimits',
             'projectLimitsDay',
             'projectSocialLimits',
+            'projectAuthorInWork',
         ]);
         $sql = $sql->where('status', 'active');
 
@@ -70,6 +71,7 @@ class ProjectAuthorRepository
             'projectLimits',
             'projectLimitsDay',
             'projectSocialLimits',
+            'projectAuthorInWork',
         ]);
         $sql = $sql->where('status', 'active');
         $sql = $sql->where('id', $project_id);

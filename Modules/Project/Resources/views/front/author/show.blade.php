@@ -176,10 +176,23 @@
                             </li>
                         </ul>
                     </nav>
-
-                    <div class="start__to__play">
-                        <a href="#"><span><img src="{{ asset('img/_src/play__btn.png') }}" alt="play__btn"></span>Приступить к выполнению проекта</a>
-                    </div>
+                    @if(!$project->IsWorkAuthor)
+                        <div class="start__to__play">
+                            <button form="create_in_work"><span><img src="{{ asset('img/_src/play__btn.png') }}" alt="play__btn"></span>Приступить к выполнению проекта</button>
+                        </div>
+                        <form id="create_in_work" method="POST" action="{{route('author.projects.projectInWork')}}" class="hide">
+                            @csrf
+                            <input type="hidden" name="project_id" value="{{ $project->id }}">
+                            <input type="hidden" name="client_id"  value="{{ $project->client->id }}">
+                            <input type="hidden" name="author_id"  value="{{ auth()->id() }}">
+                        </form>
+                    @else
+                        <div class="start__to__play">
+                            <div class="just__clock">
+                                7:10 из 25 мин
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -193,6 +206,37 @@
                     <p>{{$project->page_link}}</p>
                     <p>Другие страницы сайта не будут приняты.</p>
                 </div>
+                @endif
+                @if($project->IsWorkAuthor)
+                    <div class="next__page__project" style="margin-bottom: 30px">
+                        <div class="next__title">
+                            Публикуйте отзывы от разных людей.
+                        </div>
+
+                        <div class="next__subtitle">
+                            Ссылка на запись, которой сделали репост
+                        </div>
+
+                        <form action="/" class="next__form">
+                            <div class="analog__input">
+                                <span>https://prnt.sc/10itg3u</span>
+                                <a href="#">Выбрать аккаунт</a>
+                            </div>
+
+                            <div class="text__analog__input">Работа разрешена только над страницами из списка выше.</div>
+
+                            <div class="under__analog">
+                                <a href="#">Необходимо указать дополнительную информацию заказчику?</a>
+                                <span>Черновик сохранен в 16:12</span>
+                            </div>
+
+
+                            <div class="btns__next">
+                                <button><img src="{{ asset('img/_src/okey__btn__next.png') }}" alt="okey__btn__next">ОТПРАВИТЬ ›</button>
+                                <a href="#">Отказаться от проекта</a>
+                            </div>
+                        </form>
+                    </div>
                 @endif
                 <div class="minimum__bottom__block">
                     <div class="bottom__minimum__title">
