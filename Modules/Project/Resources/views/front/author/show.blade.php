@@ -187,9 +187,9 @@
                             <input type="hidden" name="author_id"  value="{{ auth()->id() }}">
                         </form>
                     @else
-                        <div class="start__to__play">
+                        <div id="wrapper_class" class="start__to__play">
                             <div class="just__clock">
-                                7:10 из 25 мин
+                                <span id="clock"></span>  из 25 мин
                             </div>
                         </div>
                     @endif
@@ -198,6 +198,7 @@
 
             <div class="minimum__inner">
                 @if($project->page_link)
+
                 <div class="minimum__bottom__block">
                     <div class="bottom__minimum__title">
                         СПИСОК СТРАНИЦ, НАД КОТОРЫМИ МОЖНО РАБОТАТЬ
@@ -254,5 +255,35 @@
                     </ul>
                 </div>
             </div>
+@endsection
 
+@section('script')
+    <script>
+        @if($project->IsWorkAuthor)
+
+            var upgradeTime = {{ (int)$project->timer_work }};
+            var seconds = upgradeTime;
+            function timer() {
+                var days        = Math.floor(seconds/24/60/60);
+                var hoursLeft   = Math.floor((seconds) - (days*86400));
+                var hours       = Math.floor(hoursLeft/3600);
+                var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
+                var minutes     = Math.floor(minutesLeft/60);
+                var remainingSeconds = seconds % 60;
+                function pad(n) {
+                    return (n < 10 ? "0" + n : n);
+                }
+                document.getElementById('clock').innerHTML = /*pad(days) + ":" + pad(hours) + ":" + */pad(minutes) + ":" + pad(remainingSeconds);
+                if (seconds == 0) {
+                    clearInterval(countdownTimer);
+                    document.getElementById('clock').innerHTML = "00:00";
+
+                    alert('ремя на выполнение проекта закончилось!!!');
+                } else {
+                    seconds--;
+                }
+            }
+            var countdownTimer = setInterval('timer()', 1000);
+        @endif
+    </script>
 @endsection

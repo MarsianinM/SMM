@@ -196,6 +196,24 @@ class Project extends Model implements HasMedia
         return (is_null($this->projectAuthorInWork) ? false : true);
     }
 
+    /**
+     * @return bool
+     */
+    public function getTimerWorkAttribute(): bool|int
+    {
+        if(is_null($this->projectAuthorInWork)){
+            return false;
+        }
+
+        $milisecond = Carbon::parse($this->projectAuthorInWork->created_at)->addMinutes(25)->timestamp - Carbon::now()->timestamp;
+
+        if($milisecond < 0 ){
+            $milisecond = 0;
+        }
+
+        return $milisecond;
+    }
+
 /*    public function getLimitsAttribute()
     {
         $limits = array();

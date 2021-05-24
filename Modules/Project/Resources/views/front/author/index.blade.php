@@ -140,7 +140,6 @@
 @section('script')
 
     <script>
-        console.log(1);
         $(document).ready(function(){
             $('#sort').on('change',function(){
                let option = $(this).val();

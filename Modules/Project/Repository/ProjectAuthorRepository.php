@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Project\Entities\Project;
+use Modules\Project\Entities\ProjectInWork;
 use Str;
 
 class ProjectAuthorRepository
@@ -83,6 +84,12 @@ class ProjectAuthorRepository
         $result = $sql->first();
 
         if(!$result) abort(404);
+
+        if(!is_null($result->projectAuthorInWork) && $result->timer_work == 0){
+            ProjectInWork::where('id',$result->projectAuthorInWork->id)->delete();
+            $result->projectAuthorInWork = null;
+        }
+
 
         return $result;
     }
