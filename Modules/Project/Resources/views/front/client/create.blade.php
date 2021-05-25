@@ -130,11 +130,11 @@
                                         <select class="custom-select1 sources validate__input js-example-basic-single
                                                 @error('rate_id') is-invalid validate__input @enderror"
                                                 name="rate_id" placeholder="@if(empty($project->rate_title)) @lang('project::project.enter_rates') @else {{$project->rate_title}} @endif" id="">
-                                            <option value="0">@lang('project::project.enter_rates_option')</option>
+                                            <option data-price="" value="0">@lang('project::project.enter_rates_option')</option>
                                             @foreach($rates as $cat_rate)
                                                 <optgroup label="{{ $cat_rate->content_current_lang->title }}">
                                                     @foreach($cat_rate->rates as $rate)
-                                                        <option @if($rate->id === old('rate_id')) selected @endif value="{{ $rate->id }}">{{$rate->content_current_lang_rate->title }} {{ $rate->price }} @if(count($currency)) {{ $currency[0]->symbol }} @endif</option>
+                                                        <option data-price="{{ $rate->price }}" @if($rate->id === old('rate_id')) selected @endif value="{{ $rate->id }}">{{$rate->content_current_lang_rate->title }} {{ $rate->price }} @if(count($currency)) {{ $currency[0]->symbol }} @endif</option>
                                                     @endforeach
                                                 </optgroup>
                                             @endforeach
@@ -1242,10 +1242,19 @@
         };
         $.timepicker.setDefaults($.timepicker.regional['ru']);*/
         $(function(){
+
+            $(document).on('change','select[name="rate_id"]', function(){
+                let price = $(this).find(':selected').data('price');
+                $('#price_block input').val(price);
+                $('#price_block').show();
+            });
             $(".datepicker").datetimepicker({
                 format:'Y-m-d h:m:s',
             });
             $(document).ready(function(){
+
+                let price = $('select[name="rate_id"]').find(':selected').data('price');
+                $('#price_block input').val(price);
                 $('input.timepicker').timepicker({
                     timeFormat: 'HH:mm',
                     startTime: $(this).val() ,

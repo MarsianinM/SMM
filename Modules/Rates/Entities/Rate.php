@@ -60,6 +60,9 @@ class Rate extends Model
 
     public function getPriceAttribute(): string
     {
+        if(!empty($this->price_max) && !empty($this->price_min)){
+            return round(($this->price_max+$this->price_min)/2,2);
+        }
         return $this->price_max ?? $this->price_min ?? '';
     }
 

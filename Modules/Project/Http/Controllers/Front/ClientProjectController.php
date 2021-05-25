@@ -134,6 +134,25 @@ class ClientProjectController extends Controller
     }
 
     /**
+     * @param Project $project
+     * @return RedirectResponse
+     */
+    public function activate(Project $project): RedirectResponse
+    {
+        $project->update(['status' => 'active']);
+        return back();
+    }
+
+    /**
+     * @param Project $project
+     * @return RedirectResponse
+     */
+    public function off(Project $project): RedirectResponse
+    {
+        $project->update(['status' => 'off']);
+        return back();
+    }
+    /**
      * Remove the specified resource from storage.
      * @param $id
      */

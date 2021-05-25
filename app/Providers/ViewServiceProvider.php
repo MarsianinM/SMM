@@ -44,5 +44,10 @@ class ViewServiceProvider extends ServiceProvider
                 return Setting::first();
             }));
         });
+        View::composer('mainpage::layouts.front.main', function (\Illuminate\Contracts\View\View $view) {
+            $view->with('websiteSetting', \Cache::remember('websiteSetting', 3600, function () {
+                return Setting::first();
+            }));
+        });
     }
 }

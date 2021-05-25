@@ -28,7 +28,7 @@ class Project extends Model implements HasMedia
     protected $fillable = [
         'title', 'link', 'moderation_comments', 'small_comments', 'screenshot', 'user_pro', 'description', 'date_start',
         'date_finish', 'page_link', 'status', 'archive', 'pro', 'client_id', 'author_id', 'created_at', 'updated_at', 'subject_id',
-        'rate_id','currency_id','group_id','author_group_id','notification','type_project','email_notifications','price',
+        'rate_id','currency_id','group_id','author_group_id','notification','type_project','email_notifications','price','language',
     ];
 
     /**
@@ -214,6 +214,27 @@ class Project extends Model implements HasMedia
         return $milisecond;
     }
 
+    public function getClassCssAttribute(): string
+    {
+        $class = 'green__project';
+        switch ($this->status) {
+            case 'on_moderation':
+            case 'bay_off':
+                $class = 'yellow__project';
+                break;
+            case 'completed':
+                $class =  "blue__project";
+                break;
+            case 'active':
+                $class =  "green__project";
+                break;
+            case 'off':
+            case 'off_admins':
+                $class =  "red__project";
+                break;
+        }
+        return $class;
+    }
 /*    public function getLimitsAttribute()
     {
         $limits = array();
@@ -236,7 +257,7 @@ class Project extends Model implements HasMedia
     public function current()
     {
         return $this->load([
-            /*'currency',*/
+            'currency',
             'projectLimits',
             'projectLimitsDay',
             'projectSocialLimits',

@@ -20,14 +20,14 @@ class ClientProjectRequest extends FormRequest
     {
         return [
             'client_id'             => ['required','integer', new ClientRule],
-            'title'                 => 'required|min:20',
+            'title'                 => 'required|min:10',
             'subject_id'            => ['required','integer', new SubjectRule],
             'language'              => 'required|string',
-            'description'           => 'string|min:100',
+            'description'           => 'string|min:10',
             'currency_id'           => ['required','integer', new CurrencyRule],
             'rate_id'               => ['required','integer', new RatesRule],
             'moderation_comments'   => 'required|integer',
-            'author_group_id'       => ['integer', new AuthorGroupRule],
+          //  'author_group_id'       => ['integer', new AuthorGroupRule],
             'notification'          => 'required|integer',
         ];
     }

@@ -36,6 +36,10 @@ class ProjectClientRepository
      */
     public function store(array $data)
     {
+        if($data['author_group_id'] == 0){
+            $data['author_group_id'] = null;
+        }
+
         $result = $this->model->create(Arr::except($data, ['day_active','limit', '_token']));
 
         if(!$result) return false;
@@ -66,6 +70,9 @@ class ProjectClientRepository
      */
     public function update(Project $project, $data): bool
     {
+        if($data['author_group_id'] == 0){
+            $data['author_group_id'] = null;
+        }
         $result = $project->update($data);
         /*if (Arr::get($data, 'image') instanceof UploadedFile) {
             $page->clearMediaCollection('projects');

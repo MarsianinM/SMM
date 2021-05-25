@@ -88,7 +88,7 @@
                             @if(!empty($currency) && count($currency))
                                 <div class="main__select__item">
                                     <p>@lang('project::project.enter_currency_to_bay')</p>
-                                    <select class="custom-select sources" name="currency_id" placeholder="{{ $currency[0]->code }}" id="">
+                                    <select class="custom-select sources" name="currency_id" placeholder="{{ $project->currency->code }}" id="">
                                        @foreach($currency as $cur)
                                             <option  @if($cur->id === $project->currency_id) selected @endif value="{{ $cur->id }}">{{$cur->code}}</option>
                                        @endforeach
@@ -107,6 +107,25 @@
                                             </optgroup>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="main__select__item" id="price_block">
+                                    <p>@lang('project::project.enter_price')
+                                        @error('price')
+                                        <span class="red__validate">{{ $message }}</span>
+                                        @enderror
+                                    </p>
+                                    <input class="main__input__other @error('price') is-invalid validate__input @enderror"
+                                           type="text" name="price" value="{{ old('price') ?? $project->price ?? '' }}"
+                                           placeholder="@lang('project::project.enter_price')">
+                                    <div id="price_show_middle">
+                                        <span id="average_price">@lang('project::project.enter_average_price')</span>
+                                        <span id="min_price" style="display: none;">
+                                            @lang('project::project.enter_average_min_price')
+                                        </span>
+                                        <span id="max_price" style="display: none;">
+                                            @lang('project::project.enter_average_max_price')
+                                        </span>
+                                    </div>
                                 </div>
                             @endif
 
@@ -1094,6 +1113,11 @@
 
 
         $(function() {
+            $('#price_block').show();
+            $(document).on('change','select[name="rate_id"]', function(){
+                let price = $(this).find(':selected').data('price');
+                $('#price_block input').val(price);
+            });
             //slider range init set
             $( "#slider-range1" ).slider({
                 range: true,

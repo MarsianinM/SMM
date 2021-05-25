@@ -2229,15 +2229,15 @@ a.yellow__a:hover{
           color: #fff;
           font-weight: 500;
 }
-.pause__status{
+.yellow__project .status__project{
   background: rgb(212,204,11);
   background: linear-gradient(180deg, rgba(212,204,11,1) 0%, rgba(221,226,16,1) 100%);
 }
-.complete__status{
+.blue__project .status__project{
   background: rgb(0,79,157);
   background: linear-gradient(180deg, rgba(0,79,157,1) 0%, rgba(65,143,220,1) 100%);
 }
-.block__status{
+.red__project .status__project{
   background: rgb(149,2,11);
   background: linear-gradient(180deg, rgba(149,2,11,1) 0%, rgba(227,1,13,1) 100%);
 }
@@ -6321,6 +6321,34 @@ select.js-example-basic-single{
 }
 .create_project{
     display: none;
+}
+#price_block{
+    display: none;
+}
+#average_price{
+    font-size: 13px;
+    color: #091628;
+    font-weight: 600;
+    font-family: "Open Sans", sans-serif;
+    margin-bottom: 15px;
+}
+.select2-container--default .select2-results__group{
+    font-size: 14px;
+}
+.project__item .actions__project .enter__btn a.off{
+    background: #424443;
+    background: -o-linear-gradient(top, #8c8c8c 0, #424443 100%);
+    background: linear-gradient(180deg, #8c8c8c 0%, #424443 100%);
+    &:hover{
+        background: #8c8c8c;
+        background: linear-gradient(180deg, #424443 0%, #8c8c8c 100%);
+    }
+    span{
+        width: 17px;
+        height: 17px;
+        background: #FFFFFF;
+        border-radius: 2px;
+    }
 }
 @media only screen and (max-width: 1000px){
 

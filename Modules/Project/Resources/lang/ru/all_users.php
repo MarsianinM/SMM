@@ -27,6 +27,7 @@ return [
     'project_rate'                                          => 'Тариф',
     'project_action'                                        => 'Действия',
     'project_run'                                           => 'Запустить',
+    'project_off'                                           => 'Остановить',
 
     //PROJECT CREATE END EDIT
     'project_the_main'                                      => 'Основные',

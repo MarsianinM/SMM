@@ -2133,23 +2133,23 @@ body {
 }
 
 .widgets-body p:first-child:before {
-  content: url(/images/widget1.svg?ca36210a0643ad087c8bccb7fa8403f1);
+  content: url(/images/widget1.svg?5221c247899e00b46c878c8719c58d99);
 }
 
 .widgets-body p:nth-child(3):before {
-  content: url(/images/widget2.svg?955f50bffa2b77502f3bd030907513eb);
+  content: url(/images/widget2.svg?03369b27e92336b8b6e5c1280ac7c2f9);
 }
 
 .widgets-body p:nth-child(2):before {
-  content: url(/images/widget3.svg?81778273a0452742ddcf46220d2c5ae4);
+  content: url(/images/widget3.svg?090aae711b2089a0f9c5348b016c82c9);
 }
 
 .widgets-body p:nth-child(4):before {
-  content: url(/images/widget4.svg?4a8480934874ffdd6ef5d514cc9d3434);
+  content: url(/images/widget4.svg?08aaf7f11a6d4c9ef416a4d9d9c59ddc);
 }
 
 .widgets-body p:last-child:before {
-  content: url(/images/widget5.svg?e4c1902dfd1aed967d1fba4b347da1e4);
+  content: url(/images/widget5.svg?aad67a6b09fa834d389a8e6522e3df84);
 }
 
 .widgets-body {
@@ -2867,17 +2867,17 @@ a.yellow__a:hover {
   font-weight: 500;
 }
 
-.pause__status {
+.yellow__project .status__project {
   background: #d4cc0b;
   background: linear-gradient(180deg, #d4cc0b 0%, #dde210 100%);
 }
 
-.complete__status {
+.blue__project .status__project {
   background: #004f9d;
   background: linear-gradient(180deg, #004f9d 0%, #418fdc 100%);
 }
 
-.block__status {
+.red__project .status__project {
   background: #95020b;
   background: linear-gradient(180deg, #95020b 0%, #e3010d 100%);
 }
@@ -6621,7 +6621,7 @@ a.service-btn:hover {
   position: relative;
   margin-top: 20px;
   z-index: 1;
-  background-image: url(/images/smmnout.svg?008d2037e14b87d9eb7b0f5e22916c80);
+  background-image: url(/images/smmnout.svg?47631390a96ac97b2454a36a0afedb7b);
   width: 65%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -6966,5 +6966,36 @@ select.js-example-basic-single {
 
 .create_project {
   display: none;
+}
+
+#price_block {
+  display: none;
+}
+
+#average_price {
+  font-size: 13px;
+  color: #091628;
+  font-weight: 600;
+  font-family: "Open Sans", sans-serif;
+  margin-bottom: 15px;
+}
+
+.select2-container--default .select2-results__group {
+  font-size: 14px;
+}
+
+.project__item .actions__project .enter__btn a.off {
+  background: #424443;
+  background: linear-gradient(180deg, #8c8c8c 0%, #424443 100%);
+}
+.project__item .actions__project .enter__btn a.off:hover {
+  background: #8c8c8c;
+  background: linear-gradient(180deg, #424443 0%, #8c8c8c 100%);
+}
+.project__item .actions__project .enter__btn a.off span {
+  width: 17px;
+  height: 17px;
+  background: #FFFFFF;
+  border-radius: 2px;
 }
 

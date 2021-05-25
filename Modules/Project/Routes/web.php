@@ -26,6 +26,8 @@ Route::prefix('client')
         Route::get('/create', [ClientProjectController::class,'create'])->name('projects.create');
         Route::post('/storage', [ClientProjectController::class,'store'])->name('projects.store');
         Route::patch('/update/{project}', [ClientProjectController::class,'update'])->name('projects.update');
+        Route::get('/activate/{project}', [ClientProjectController::class,'activate'])->name('projects.activate');
+        Route::get('/off/{project}', [ClientProjectController::class,'off'])->name('projects.off');
     });
 
 });
