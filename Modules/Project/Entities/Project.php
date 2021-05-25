@@ -28,7 +28,7 @@ class Project extends Model implements HasMedia
     protected $fillable = [
         'title', 'link', 'moderation_comments', 'small_comments', 'screenshot', 'user_pro', 'description', 'date_start',
         'date_finish', 'page_link', 'status', 'archive', 'pro', 'client_id', 'author_id', 'created_at', 'updated_at', 'subject_id',
-        'rate_id','currency_id','group_id','author_group_id','notification','type_project','email_notifications',
+        'rate_id','currency_id','group_id','author_group_id','notification','type_project','email_notifications','price',
     ];
 
     /**

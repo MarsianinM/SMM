@@ -1,5 +1,11 @@
 @extends('mainpage::layouts.front.app')
 
+@section('stylesheet')
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="{{ asset('frontend/css/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/jquery.datetimepicker.min.css') }}">
+@endsection
+
 @section('content')
 
     <div class="project__title">
@@ -206,7 +212,7 @@
                                     <div class="with__hint__input">
                                         <input class="main__input__other datepicker @error('date_start') is-invalid validate__input @enderror"
                                                name="date_start" type="text"
-                                               placeholder="Например: 2021/02/08 10:00:00" value="{{ old('date_start') ?? $project->date_start ?? '' }}">
+                                               placeholder="Например: 2021-02-08 10:00:00" value="{{ old('date_start') ?? $project->date_start ?? '' }}">
 
                                         <span class="hint">?</span>
                                         <div class="text__hint">
@@ -219,7 +225,7 @@
                                     <div class="with__hint__input">
 
                                         <input class="main__input__other datepicker @error('date_finish') is-invalid validate__input @enderror"
-                                               type="text" name="date_finish" placeholder="Например: 2021/02/08 10:00:00" value="{{ old('date_finish') ?? $project->date_finish ?? '' }}">
+                                               type="text" name="date_finish" placeholder="Например: 2021-02-08 10:00:00" value="{{ old('date_finish') ?? $project->date_finish ?? '' }}">
 
                                         <span class="hint">?</span>
                                         <div class="text__hint">
@@ -251,26 +257,26 @@
                                 <div class="big__main__nav">
                                     <input type="checkbox" name="email_notifications[positive]" @if(old('email_notifications.positive') == 1) checked @endif
                                     class="@error('email_notifications.positive') is-invalid validate__input @enderror" id="positive" value="1">
-                                    <label for="yes">@lang('project::project.enter_positive')</label>
+                                    <label for="positive">@lang('project::project.enter_positive')</label>
                                 </div>
 
                                 <div class="big__main__nav">
                                     <input type="checkbox" name="email_notifications[neutral]" @if(old('email_notifications.neutral') == 1) checked @endif
                                     class="@error('email_notifications.neutral') is-invalid validate__input @enderror" id="neutral" value="1">
-                                    <label for="yes">@lang('project::project.enter_neutral')</label>
+                                    <label for="neutral">@lang('project::project.enter_neutral')</label>
                                 </div>
 
                                 <div class="big__main__nav">
                                     <input type="checkbox" name="email_notifications[negative]" @if(old('email_notifications.negative') == 1) checked @endif
                                     class="@error('email_notifications.negative') is-invalid validate__input @enderror" id="negative" value="1">
-                                    <label for="yes">@lang('project::project.enter_negative')</label>
+                                    <label for="negative">@lang('project::project.enter_negative')</label>
                                 </div>
 
                                 <div class="big__main__nav">
                                     <input type="checkbox" name="email_notifications[answer]"
                                            @if(old('email_notifications.answer') == 1) checked  @endif
                                     class="@error('email_notifications.answer') is-invalid validate__input @enderror" id="answer" value="1">
-                                    <label for="yes">@lang('project::project.enter_answer')</label>
+                                    <label for="answer">@lang('project::project.enter_answer')</label>
                                 </div>
                             </div>
                         </div>
@@ -401,9 +407,9 @@
                             <p>@lang('project::project.enter_hours_of_activity')</p>
                             <div class="time__active">
                                 @lang('project::project.enter_hours_from') <input type="text" name="limit[time_start]" value="{{ old('limit.time_start') ?? $project->projectLimits->time_start ?? '' }}"
-                                                                                  class="@error('limit.time_start') is-invalid validate__input @enderror" placeholder="00:00:00">
+                                                                                  class="timepicker @error('limit.time_start') is-invalid validate__input @enderror" placeholder="00:00:00">
                                 @lang('project::project.enter_hours_to') <input type="text" name="limit[time_finish]" value="{{ old('limit.time_finish') ?? $project->projectLimits->time_finish ?? '' }}"
-                                                                                class="@error('limit.time_start') is-invalid validate__input @enderror" placeholder="00:00:00">
+                                                                                class="timepicker @error('limit.time_start') is-invalid validate__input @enderror" placeholder="00:00:00">
                                 <span class="hint">?</span>
                                 <div class="text__hint">
                                     Подсказка
@@ -1041,10 +1047,11 @@
 @section('script')
     <link rel="stylesheet" href="{{ asset('frontend/css/jquery-ui.css') }}">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ asset('frontend/datetimepicker-master/jquery.datetimepicker.full.min.js') }}"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     <script>
         // 숫자 3자리마다 콤마 찍기
         function numberWithCommas(x) {
@@ -1153,6 +1160,20 @@
         // In your Javascript (external .js resource or <script> tag)
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
+        });
+
+
+        $(function(){
+            $(".datepicker").datetimepicker({
+                format:'Y-m-d h:m:s',
+            });
+            $(document).ready(function(){
+                $('input.timepicker').timepicker({
+                    timeFormat: 'HH:mm',
+                    startTime: $(this).val() ,
+                    interval: 15 // 15 minutes
+                });
+            });
         });
     </script>
 @endsection

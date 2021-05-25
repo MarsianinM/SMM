@@ -32,15 +32,17 @@ class ViewServiceProvider extends ServiceProvider
             $view->with('currency', \Cache::remember('currency', 3600, function () {
                 return Currency::where('activate', '1')->orderBy('sort')->get();
             }));
-            $view->with('websiteSetting', \Cache::remember('websiteSetting', 3600, function () {
-                return Setting::first();
-            }));
             $view->with('array_localization', \Cache::remember('array_localization', 3600, function () {
                 return LaravelLocalization::getSupportedLocales();
             }));
             Blade::if('role', function ($value) {
                 return auth()->check() && auth()->user()->activeRoleIs($value);
             });
+        });
+        View::composer('mainpage::layouts.front.app', function (\Illuminate\Contracts\View\View $view) {
+            $view->with('websiteSetting', \Cache::remember('websiteSetting', 3600, function () {
+                return Setting::first();
+            }));
         });
     }
 }

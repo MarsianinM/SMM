@@ -73,9 +73,9 @@ class RateController extends Controller
      * @param Rate $rate
      * @return Renderable
      */
-    public function edit(Rate $rate)
+    public function edit(Rate $rate, CategoryRepository $categoryRepository)
     {
-        $categories     = (new CategoryRepository())->getCategoriesAll();
+        $categories     = $categoryRepository->getCategoriesAll();
         $delimetr       = '';
         return view('rates::admin.rate.edit', compact('rate','categories','delimetr'));
     }

@@ -1,6 +1,7 @@
 @extends('mainpage::layouts.front.app')
 
 @section('stylesheet')
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <link rel="stylesheet" href="{{ asset('frontend/css/jquery-ui.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/jquery.datetimepicker.min.css') }}">
 @endsection
@@ -126,8 +127,10 @@
                                             <span class="red__validate">{{ $message }}</span>
                                             @enderror
                                         </p>
-                                        <select class="custom-select1 sources validate__input js-example-basic-single @error('rate_id') is-invalid validate__input @enderror"
+                                        <select class="custom-select1 sources validate__input js-example-basic-single
+                                                @error('rate_id') is-invalid validate__input @enderror"
                                                 name="rate_id" placeholder="@if(empty($project->rate_title)) @lang('project::project.enter_rates') @else {{$project->rate_title}} @endif" id="">
+                                            <option value="0">@lang('project::project.enter_rates_option')</option>
                                             @foreach($rates as $cat_rate)
                                                 <optgroup label="{{ $cat_rate->content_current_lang->title }}">
                                                     @foreach($cat_rate->rates as $rate)
@@ -136,6 +139,25 @@
                                                 </optgroup>
                                             @endforeach
                                         </select>
+                                    </div>
+                                    <div class="main__select__item" id="price_block">
+                                        <p>@lang('project::project.enter_price')
+                                            @error('price')
+                                            <span class="red__validate">{{ $message }}</span>
+                                            @enderror
+                                        </p>
+                                        <input class="main__input__other @error('price') is-invalid validate__input @enderror"
+                                               type="text" name="price" value="{{ old('price') }}"
+                                               placeholder="@lang('project::project.enter_price')">
+                                        <div id="price_show_middle">
+                                            <span id="average_price">@lang('project::project.enter_average_price')</span>
+                                            <span id="min_price" style="display: none;">
+                                                @lang('project::project.enter_average_min_price')
+                                            </span>
+                                            <span id="max_price" style="display: none;">
+                                                @lang('project::project.enter_average_max_price')
+                                            </span>
+                                        </div>
                                     </div>
                                 @endif
 
@@ -321,25 +343,25 @@
                                     <div class="big__main__nav">
                                         <input type="checkbox" name="email_notifications[positive]" @if(old('email_notifications.positive') == 1) checked @endif
                                         class="@error('email_notifications.positive') is-invalid validate__input @enderror" id="positive" value="1">
-                                        <label for="yes">@lang('project::project.enter_positive')</label>
+                                        <label for="positive">@lang('project::project.enter_positive')</label>
                                     </div>
 
                                     <div class="big__main__nav">
                                         <input type="checkbox" name="email_notifications[neutral]" @if(old('email_notifications.neutral') == 1) checked @endif
                                         class="@error('email_notifications.neutral') is-invalid validate__input @enderror" id="neutral" value="1">
-                                        <label for="yes">@lang('project::project.enter_neutral')</label>
+                                        <label for="neutral">@lang('project::project.enter_neutral')</label>
                                     </div>
 
                                     <div class="big__main__nav">
                                         <input type="checkbox" name="email_notifications[negative]" @if(old('email_notifications.negative') == 1) checked @endif
                                         class="@error('email_notifications.negative') is-invalid validate__input @enderror" id="negative" value="1">
-                                        <label for="yes">@lang('project::project.enter_negative')</label>
+                                        <label for="negative">@lang('project::project.enter_negative')</label>
                                     </div>
 
                                     <div class="big__main__nav">
                                         <input type="checkbox" name="email_notifications[answer]" @if(old('email_notifications.answer') == 1) checked @endif
                                         class="@error('email_notifications.answer') is-invalid validate__input @enderror" id="answer" value="1">
-                                        <label for="yes">@lang('project::project.enter_answer')</label>
+                                        <label for="answer">@lang('project::project.enter_answer')</label>
                                     </div>
                                 </div>
                             </div>
@@ -434,9 +456,9 @@
                                 <p>@lang('project::project.enter_hours_of_activity')</p>
                                 <div class="time__active">
                                     @lang('project::project.enter_hours_from') <input type="text" name="limit[time_start]" value="{{ old('limit.time_start') ?? '00:00:00' }}"
-                                                                                      class="@error('limit.time_start') is-invalid validate__input @enderror" placeholder="00:00:00">
+                                                                                      class="timepicker @error('limit.time_start') is-invalid validate__input @enderror" placeholder="00:00:00">
                                     @lang('project::project.enter_hours_to') <input type="text" name="limit[time_finish]" value="{{ old('limit.time_finish') ?? '23:59:59' }}"
-                                                                                    class="@error('limit.time_start') is-invalid validate__input @enderror" placeholder="23:59:59">
+                                                                                    class="timepicker @error('limit.time_start') is-invalid validate__input @enderror" placeholder="23:59:59">
                                     <span class="hint">?</span>
                                     <div class="text__hint">
                                         Подсказка
@@ -1060,6 +1082,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
     <script>
         // 숫자 3자리마다 콤마 찍기
@@ -1219,8 +1242,16 @@
         };
         $.timepicker.setDefaults($.timepicker.regional['ru']);*/
         $(function(){
-            $(".datepicker").datetimepicker();
-            //$(".datepicker").datetimepicker();
+            $(".datepicker").datetimepicker({
+                format:'Y-m-d h:m:s',
+            });
+            $(document).ready(function(){
+                $('input.timepicker').timepicker({
+                    timeFormat: 'HH:mm',
+                    startTime: $(this).val() ,
+                    interval: 15 // 15 minutes
+                });
+            });
         });
         @if(old('type_project'))
             $(".item__type__project a.{{old('type_project')}}").trigger('click');

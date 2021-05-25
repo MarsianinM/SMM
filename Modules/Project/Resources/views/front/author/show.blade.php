@@ -54,7 +54,7 @@
 
                     <p class="restiction__parag">Вы не можете приступать к работе одновременно над несколькими проектами.</p>
 
-
+                    @if($project->projectSocialLimits)
                     <div class="minimum__title">
                         Минимальные требования к аккаунтам:
                     </div>
@@ -135,6 +135,7 @@
                             </div>
                         @endif
                     </div>
+                    @endif
                 </div>
 
                 <div class="rest__right">
