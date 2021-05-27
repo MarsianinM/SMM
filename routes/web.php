@@ -43,7 +43,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
             return redirect()->route(request()->user()->getHomePageRoute());
         })->name('home');
 
-        Route::get('balance', ShowBalance::class)->name('balance.index');
+     //   Route::get('balance', ShowBalance::class)->name('balance.index');
         Route::get('finance', ShowFinance::class)->name('finance.index');
         Route::post('set-role', SetRole::class)->name('set-role');
 

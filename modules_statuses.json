@@ -14,5 +14,6 @@
     "Subjects": true,
     "Settings": true,
     "Currency": true,
-    "ProjectLimits": true
+    "ProjectLimits": true,
+    "Balance": true
 }

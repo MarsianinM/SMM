@@ -3,12 +3,13 @@
 namespace Modules\Users\Entities;
 
 use App\Concerns\Models\HasRoles;
-use App\Models\Balance;
 use App\Models\Project;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Modules\Balance\Entities\Balance;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -91,20 +92,9 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     }
 
     /**
-     * Get user's balance by the given currency.
-     *
-     * @param $currency
-     * @return mixed
-     */
-    public function getBalanceByCurrency($currency)
-    {
-        return number_format($this->balances()->whereCurrency($currency)->sum('amount'), 2);
-    }
-
-    /**
      * Get the balances for the user.
      */
-    public function balances()
+    public function balances(): HasMany
     {
         return $this->hasMany(Balance::class);
     }
@@ -113,6 +103,17 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('user_icon');
+    }
+
+    public function getUserBalancesAttribute()
+    {
+        if(is_null($this->balances)) return [];
+        $return = [];
+        foreach ($this->balances as $balance){
+
+        }
+        dd(__FILE__,__LINE__,$this->balances);
+        return $this->balances;
     }
 
     public function registerMediaConversions(Media $media = null): void

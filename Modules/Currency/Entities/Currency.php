@@ -5,6 +5,7 @@ namespace Modules\Currency\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Balance\Entities\Balance;
 use Modules\Project\Entities\Project;
 
 class Currency extends Model
@@ -28,5 +29,12 @@ class Currency extends Model
     public function project(): HasMany
     {
         return $this->hasMany(Project::class, 'currency_id', 'id');
+    }
+    /**
+     * Get the balances for the user.
+     */
+    public function balances(): HasMany
+    {
+        return $this->hasMany(Balance::class);
     }
 }

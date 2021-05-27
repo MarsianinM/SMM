@@ -27,9 +27,10 @@
                                 <a href="{{ route('balance.index') }}" class="menu__link"><span>
                                                 <img src="{{ asset('frontend/img/_src/balance__item.png') }}" alt="balance__item"></span>БАЛАНС:</a>
                                 <p>
+                                    {{ auth()->user()->user_balances }}
                                     UAH 672.5
-                                    RUB {{ Auth::user()->getBalanceByCurrency('RUB') }}
-                                    USD {{ Auth::user()->getBalanceByCurrency('USD') }}
+                                    {{--RUB {{ Auth::user()->getBalanceByCurrency('RUB') }}
+                                    USD {{ Auth::user()->getBalanceByCurrency('USD') }}--}}
                                 </p>
                             </li>
                         @endif
