@@ -42,8 +42,3 @@ Route::prefix('author')
     });
 
 });
-/*
-Route::get('/', function () {
-    return redirect()->route('client.home');
-});
-Route::get('home', \App\Http\Controllers\Client\ShowHomePage::class)->name('home');*/

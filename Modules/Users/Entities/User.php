@@ -96,7 +96,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
      */
     public function balances(): HasMany
     {
-        return $this->hasMany(Balance::class);
+        return $this->hasMany(Balance::class)->with(['currency']);
     }
 
 
@@ -110,10 +110,10 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         if(is_null($this->balances)) return [];
         $return = [];
         foreach ($this->balances as $balance){
-
+            $return[$balance->currency->code] = $balance->amount .' '.$balance->currency->code;
         }
-        dd(__FILE__,__LINE__,$this->balances);
-        return $this->balances;
+
+        return $return;
     }
 
     public function registerMediaConversions(Media $media = null): void
