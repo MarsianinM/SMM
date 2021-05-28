@@ -7,7 +7,7 @@ return [
     'add_balance'                           => 'Пополнение счёта',
     'enter_currency'                        => 'Выберите валюту',
     'enter_sum'                             => 'Введите сумму',
-    'enter_choose_the__replenishment'       => 'Выберите способ пополнения',
+    'enter_choose_the_replenishment'        => 'Выберите способ пополнения',
     'enter_choose_withdrawal'               => 'Выберите способ вывода',
 
     //TABLE HISTORY
@@ -19,4 +19,14 @@ return [
 
     //HELP
     'min_sum_replenishment'                 => 'Минимальная сумма для пополнения <span>:SUM</span>',
+
+    //BALANCE
+    'entry_WebMoney'                        => "WebMoney",
+    'entry_visa'                            => "Visa",
+    'entry_QiwiWallet'                      => "QiwiWallet",
+    'entry_mastercard'                      => "Mastercard",
+    'entry_MonoBank'                        => "MonoBank",
+    'entry_GooglePay'                       => "Google Pay",
+    'entry_ApplePay'                        => "Apple Pay",
+    'entry_Privat24'                        => "Приват 24",
 ];

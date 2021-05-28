@@ -5,6 +5,8 @@ namespace Modules\Balance\Http\Controllers\Front;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Balance\Entities\Balance;
+use Modules\Currency\Entities\Currency;
 
 class BalanceController extends Controller
 {
@@ -14,7 +16,9 @@ class BalanceController extends Controller
      */
     public function index()
     {
-        return view('balance::front.index');
+        return view('balance::front.index',[
+            'balance_type' => Balance::getTypeBalance(),
+        ]);
     }
 
     /**

@@ -1,37 +1,34 @@
-
 @extends('mainpage::layouts.front.app')
 
 @section('content')
     <div class="project__title">
-        Финансы
+        @lang('balance::balance.title_page')
     </div>
 
     <div class="finance__flex">
         <div class="finance__item">
             <div class="finance__title">
-                @lang('balance::balance.title_page')
+                @lang('balance::balance.add_balance')
             </div>
-
-
-
             <div class="inputs__finance">
-                <div class="left__valuta">
-                    <p class="choose__text__both">
-                        Выберите валюту
-                    </p>
-                    <select class="custom-select sources" placeholder="change text" id="">
-                        <option value="Группа1">250.03 RUB</option>
-                        <option value="Группа2">451.02 RUB</option>
-                        <option value="Группа3">221.11 RUB</option>
-                        <option value="Группа4">154.42 RUB</option>
-                    </select>
-                </div>
+                @if(!empty($currency) && count($currency))
+                    <div class="left__valuta">
+                        <p class="choose__text__both">
+                            @lang('balance::balance.enter_currency')
+                        </p>
+                        <select class="custom-select sources" name="currency_id" placeholder="@lang('balance::balance.enter_currency')" id="">
+                            @foreach($currency as $cur)
+                                <option  value="{{ $cur->id }}">{{$cur->code}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
 
                 <div class="right__summa">
                     <p class="choose__text__both">
-                        Введите сумму
+                        @lang('balance::balance.enter_sum')
                     </p>
-                    <input type="text" placeholder="0.00">
+                    <input type="text" placeholder="0.00" value="" >
                 </div>
             </div>
 
@@ -40,34 +37,15 @@
             </p>
 
             <div class="subtitle__finance">
-                Выберите способ пополнения
+                @lang('balance::balance.enter_choose_the_replenishment')
             </div>
 
-            <div class="choose__sposob">
-                <a href="#" class="sposob__item">
-                    <span><img src="img/_src/sposob1.png" alt="sposob__icon"></span><p>WebMoney</p>
-                </a>
-                <a href="#" class="sposob__item">
-                    <span><img src="img/_src/sposob2.png" alt="sposob__icon"></span><p>Visa</p>
-                </a>
-                <a href="#" class="sposob__item">
-                    <span><img src="img/_src/sposob3.png" alt="sposob__icon"></span><p>Qiwi Wallet</p>
-                </a>
-                <a href="#" class="sposob__item">
-                    <span><img src="img/_src/sposob4.png" alt="sposob__icon"></span><p>Mastercard</p>
-                </a>
-                <a href="#" class="sposob__item">
-                    <span><img src="img/_src/sposob5.png" alt="sposob__icon"></span><p>MonoBank</p>
-                </a>
-                <a href="#" class="sposob__item">
-                    <span><img src="img/_src/sposob6.png" alt="sposob__icon"></span><p>Google Pay</p>
-                </a>
-                <a href="#" class="sposob__item">
-                    <span><img src="img/_src/sposob7.png" alt="sposob__icon"></span><p>Apple Pay</p>
-                </a>
-                <a href="#" class="sposob__item">
-                    <span><img src="img/_src/sposob8.png" alt="sposob__icon"></span><p>Приват 24</p>
-                </a>
+            <div class="choose__sposob" id="add_balance">
+                @foreach($balance_type as $type)
+                    <a href="#" data-type="{{ $type }}" class="sposob__item">
+                        <span><img src="{{ asset('img/_src/'.$type.'.png') }}" alt="sposob__icon"></span><p>@lang('balance::balance.entry_'.$type.'')</p>
+                    </a>
+                @endforeach
             </div>
 
             <div class="warning__finance">
@@ -132,13 +110,13 @@
 
             <div class="choose__sposob">
                 <a href="#" class="sposob__item">
-                    <span><img src="img/_src/sposob2.png" alt="sposob__icon"></span><p>Visa</p>
+                    <span><img src="{{ asset('img/_src/sposob2.png') }}" alt="sposob__icon"></span><p>Visa</p>
                 </a>
                 <a href="#" class="sposob__item">
-                    <span><img src="img/_src/sposob4.png" alt="sposob__icon"></span><p>Mastercard</p>
+                    <span><img src="{{ asset('img/_src/sposob4.png') }}" alt="sposob__icon"></span><p>Mastercard</p>
                 </a>
                 <a href="#" class="sposob__item">
-                    <span><img src="img/_src/sposob3.png" alt="sposob__icon"></span><p>Qiwi Wallet</p>
+                    <span><img src="{{ asset('img/_src/sposob3.png') }}" alt="sposob__icon"></span><p>Qiwi Wallet</p>
                 </a>
             </div>
 
