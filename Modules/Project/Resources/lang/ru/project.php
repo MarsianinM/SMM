@@ -2,6 +2,7 @@
 
 return [
     'page_title'                            => 'Создание нового проекта',
+    'title_modal_project_bay'               => 'Оплатить проект',
     'name'                                  => 'Проекты',
     'th_id'                                 => 'ID',
     'th_title'                              => 'Название проекта',
@@ -56,6 +57,7 @@ return [
     'enter_answer'                          => 'Ответы',
     'enter_neutral'                         => 'Нейтральные',
     'enter_price'                           => 'Цена',
+    'enter_count'                           => 'Количество',
     'enter_average_price'                   => 'Средняя цена на бирже!',
     'enter_average_min_price'               => 'Хуже на <i style="color:red; font-weight:bold;"></i> от среднего предложения!',
     'enter_average_max_price'               => 'Лучше на <i style="color:#4fa12c; font-weight:bold;"></i> от среднего предложения!',
@@ -136,6 +138,7 @@ return [
     //submit
     'submit_add'                            => 'Создать',
     'submit_edit'                           => 'Сохранить',
+    'submit_bay'                            => 'Оплатить',
 
     //NAV FRONT
     'the_main'                              => 'Основные',

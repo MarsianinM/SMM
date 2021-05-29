@@ -28,6 +28,7 @@ Route::prefix('client')
         Route::patch('/update/{project}', [ClientProjectController::class,'update'])->name('projects.update');
         Route::get('/activate/{project}', [ClientProjectController::class,'activate'])->name('projects.activate');
         Route::get('/off/{project}', [ClientProjectController::class,'off'])->name('projects.off');
+        Route::post('/count_bay', [ClientProjectController::class,'countBay'])->name('projects.count_bay');
     });
 
 });

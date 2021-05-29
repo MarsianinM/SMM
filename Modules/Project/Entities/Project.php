@@ -114,6 +114,13 @@ class Project extends Model implements HasMedia
     {
         return $this->belongsTo(ProjectGroup::class, 'group_id','id');
     }
+    /**
+     * Get the projects for the Rates.
+     */
+    public function projectCount(): BelongsTo
+    {
+        return $this->belongsTo(ProjectCountBay::class, 'project_id','id')->where('status', 1);
+    }
 
     /**
      * Get the projects for the user.
@@ -179,6 +186,15 @@ class Project extends Model implements HasMedia
     public function getClientNameAttribute()
     {
         return $this->client->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountBayAttribute()
+    {
+        if(is_null($this->projectCount)) return "0";
+        return $this->projectCount->count;
     }
 
     public function getRateTitleAttribute()

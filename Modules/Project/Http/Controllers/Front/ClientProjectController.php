@@ -12,6 +12,7 @@ use Modules\Project\Entities\ProjectGroup;
 use Modules\Project\Http\Requests\ClientProjectRequest;
 use Modules\Project\Repository\ProjectAuthorGroupRepository;
 use Modules\Project\Repository\ProjectClientRepository;
+use Modules\Project\Repository\ProjectCountBayRepository;
 use Modules\Project\Repository\ProjectGroupRepository;
 use Modules\Rates\Repository\CategoryRepository;
 use Modules\Subjects\Entities\Subject;
@@ -152,6 +153,20 @@ class ClientProjectController extends Controller
         $project->update(['status' => 'off']);
         return back();
     }
+
+    /**
+     * @param Request $request
+     * @param ProjectCountBayRepository $projectCountBayRepository
+     * @return RedirectResponse
+     */
+    public function countBay(Request $request, ProjectCountBayRepository $projectCountBayRepository): RedirectResponse
+    {
+        $countBay = $projectCountBayRepository->save($request->except('_token'));
+        if(!$countBay) return back()->withErrors('Ошибка напишите в службу поддержки');
+
+        return back()->with('success','Проект оплачен');
+    }
+
     /**
      * Remove the specified resource from storage.
      * @param $id

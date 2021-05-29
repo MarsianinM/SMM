@@ -147,7 +147,7 @@
                         <div class="data__text">
                             Оплаченные
                         </div>
-                        <span class="data_shifr green__data">50</span>
+                        <a class="data_shifr green__data" href="#project_bay-form" rel="modal:open">{{ $project->count_bay }}</a>
                     </div>
 
                     <div class="item__data">
@@ -305,6 +305,7 @@
                 {{ $projects->appends(Request::except('page'))->links('mainpage::vendor.pagination.bootstrap-4') }}
             </div>
         </div>
+        @include('project::front.block.modal_pay')
     @endif
 
 @endsection

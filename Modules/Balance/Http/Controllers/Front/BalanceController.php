@@ -40,9 +40,9 @@ class BalanceController extends Controller
     public function store(BalanceRequest $request, BalanceFrontRepository $balanceFrontRepository)
     {
         $balance = $balanceFrontRepository->save($request);
-        if(!$balance) return redirect()->back()->withErrors('Произошла ошибка нипишите в службу поддержки.');
+        if(!$balance) return back()->withErrors('Произошла ошибка нипишите в службу поддержки.');
 
-        return redirect()->back()->with('success','Ваш баланс пополнен.');
+        return back()->with('success','Ваш баланс пополнен.');
     }
 
     /**
