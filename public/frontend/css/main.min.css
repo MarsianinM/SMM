@@ -1556,21 +1556,20 @@ body {
 
 .menu__item:last-child {
   background: #091628;
-  width: 220px;
+  width: 245px;
   height: 98px;
   padding-left: 21px;
-  margin-left: 47px;
+  margin-left: 30px;
   line-height: 98px;
   position: relative;
 }
 
 .menu__item:last-child p {
   color: #00D300;
-  width: 94px;
   padding-right: 15px;
   font-weight: 500;
   font-family: "Exo 2", sans-serif;
-  width: 96px;
+  width: 110px;
   line-height: 1.5em;
   font-size: 14px;
   position: absolute;

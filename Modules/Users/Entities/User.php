@@ -110,7 +110,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         if(is_null($this->balances)) return [];
         $return = [];
         foreach ($this->balances as $balance){
-            $return[$balance->currency->code] = $balance->amount .' '.$balance->currency->code;
+            $return[$balance->currency->code] =  $balance->currency->code.' '.$balance->amount;
         }
 
         return $return;

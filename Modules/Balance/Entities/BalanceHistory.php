@@ -9,8 +9,10 @@ class BalanceHistory extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
-    
+    protected $fillable = [
+        'balance_id', 'amount', 'user_id', 'currency_id', 'payment_method', 'type', 'status', 'project_detail'
+    ];
+
     protected static function newFactory()
     {
         return \Modules\Balance\Database\factories\BalanceHistoryFactory::new();

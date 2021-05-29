@@ -111,5 +111,16 @@
                 },6000);
             </script>
         @endif
+
+        @if(session()->has('success'))
+            <div class="thank__you__popup alert-success">
+                {{ session()->get('success') }}
+            </div>
+            <script>
+                setTimeout(function(){
+                    $('.thank__you__popup').fadeOut('slow');
+                },6000);
+            </script>
+        @endif
     </body>
 </html>

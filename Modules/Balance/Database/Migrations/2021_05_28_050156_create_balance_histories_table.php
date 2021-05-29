@@ -15,7 +15,7 @@ class CreateBalanceHistoriesTable extends Migration
     {
         Schema::create('balance_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('balances')
+            $table->foreignId('balance_id')
                 ->constrained('users')
                 ->cascadeOnDelete();
             $table->decimal('amount','8',2)->default(0);
@@ -25,8 +25,9 @@ class CreateBalanceHistoriesTable extends Migration
             $table->foreignId('currency_id')
                 ->constrained('currency')
                 ->cascadeOnDelete();
+            $table->json('project_detail')->nullable();
             $table->enum('payment_method',['WebMoney','visa','QiwiWallet','mastercard','MonoBank','GooglePay','ApplePay','Privat24']);
-            $table->enum('type',['insert','output'])->default('insert');
+            $table->enum('type',['insert','output','project_bay'])->default('insert');
             $table->enum('status',['executed','in_processing','rejected'])->default('in_processing');
             $table->timestamps();
         });

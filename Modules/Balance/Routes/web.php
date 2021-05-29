@@ -15,4 +15,5 @@ use Modules\Balance\Http\Controllers\Front\BalanceController;
 
 Route::prefix('balance')->group(function() {
     Route::get('/', [BalanceController::class,'index'])->name('balance.index');
+    Route::post('/', [BalanceController::class,'store'])->name('balance.store');
 });

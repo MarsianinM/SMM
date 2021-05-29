@@ -6,7 +6,11 @@
     </div>
 
     <div class="finance__flex">
-        <div class="finance__item">
+        <form  class="finance__item" action="{{ route('balance.store') }}" method="POST">
+            @csrf
+            <input type="hidden" name="user_id" value="{{ auth()->id() }}" />
+            <input type="hidden" id="payment_method" name="payment_method" value="" />
+            <input type="hidden" id="type" name="type" value="insert" />
             <div class="finance__title">
                 @lang('balance::balance.add_balance')
             </div>
@@ -28,7 +32,7 @@
                     <p class="choose__text__both">
                         @lang('balance::balance.enter_sum')
                     </p>
-                    <input type="text" placeholder="0.00" value="" >
+                    <input type="number" name="amount" placeholder="0.00" value="" step="1.0" min="10">
                 </div>
             </div>
 
@@ -47,7 +51,9 @@
                     </a>
                 @endforeach
             </div>
-
+            <div class="create__project__btn" style="margin-bottom: 20px">
+            <button type="submit" class="btn__top-menu green__btntop">@lang('balance::balance.add_balance')</button>
+            </div>
             <div class="warning__finance">
                 <div class="warning__subtitle">
                     Внимание!
@@ -67,8 +73,7 @@
             <div class="more__method__a">
                 <a href="#">Подробнее о методах оплаты</a>
             </div>
-
-        </div>
+        </form>
 
 
         <div class="finance__item">
@@ -183,5 +188,14 @@
 @endsection
 
 @section('script')
+    <script type="application/javascript">
+        $(document).ready(function (){
 
+        });
+        $(document).on('click', '#add_balance a', function(){
+            let type = $(this).data('type');
+            $('#payment_method').val(type);
+            return false;
+        });
+    </script>
 @endsection

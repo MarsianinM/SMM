@@ -6,7 +6,8 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Balance\Entities\Balance;
-use Modules\Currency\Entities\Currency;
+use Modules\Balance\Http\Requests\BalanceRequest;
+use Modules\Balance\Repository\BalanceFrontRepository;
 
 class BalanceController extends Controller
 {
@@ -32,12 +33,16 @@ class BalanceController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
+     * @param BalanceRequest $request
+     * @param BalanceFrontRepository $balanceFrontRepository
      * @return Renderable
      */
-    public function store(Request $request)
+    public function store(BalanceRequest $request, BalanceFrontRepository $balanceFrontRepository)
     {
-        //
+        $balance = $balanceFrontRepository->save($request);
+        if(!$balance) return redirect()->back()->withErrors('Произошла ошибка нипишите в службу поддержки.');
+
+        return redirect()->back()->with('success','Ваш баланс пополнен.');
     }
 
     /**
