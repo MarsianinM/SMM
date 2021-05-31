@@ -48,15 +48,16 @@
                             <p>
                                 Senboards
                             </p>
-                            <span class="personal1"><img src="{{ asset('frontend/img/_src/russia.svg') }}" alt="Флаг" class="flag-russia"></span>
+                            <span class="personal1">
+                                <img src="{{ asset('img/_src/'.LaravelLocalization::getCurrentLocaleName().'.svg') }}"  class="flag-russia">
+                                {{--<img src="{{ asset('frontend/img/_src/russia.svg') }}" alt="Флаг" class="flag-russia">--}}
+                            </span>
                             <div class="country">
-                                {{-- <span><img src="{{ asset('frontend/img/_src/ukraine.svg') }}" alt="" class="flag-uk"></span>
-                                 <span class="personal3"><img src="{{ asset('frontend/img/_src/britan.svg') }}" alt="" class="flag-btitan"></span>--}}
                                 <ul>
                                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                         <li>
-                                            <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                                {{ $properties['native'] }}
+                                            <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, []) }}">
+                                                <img src="{{ asset('img/_src/'.$properties['name'].'.svg') }}" alt="{{$properties['native']}}" class="flag-btitan">
                                             </a>
                                         </li>
                                     @endforeach

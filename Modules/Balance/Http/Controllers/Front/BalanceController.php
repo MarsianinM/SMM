@@ -3,6 +3,7 @@
 namespace Modules\Balance\Http\Controllers\Front;
 
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Balance\Entities\Balance;
@@ -35,9 +36,9 @@ class BalanceController extends Controller
      * Store a newly created resource in storage.
      * @param BalanceRequest $request
      * @param BalanceFrontRepository $balanceFrontRepository
-     * @return Renderable
+     * @return RedirectResponse
      */
-    public function store(BalanceRequest $request, BalanceFrontRepository $balanceFrontRepository)
+    public function store(BalanceRequest $request, BalanceFrontRepository $balanceFrontRepository): RedirectResponse
     {
         $balance = $balanceFrontRepository->save($request);
         if(!$balance) return back()->withErrors('Произошла ошибка нипишите в службу поддержки.');
