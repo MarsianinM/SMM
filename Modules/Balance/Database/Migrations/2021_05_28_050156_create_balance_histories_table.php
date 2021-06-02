@@ -13,10 +13,11 @@ class CreateBalanceHistoriesTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('balance_histories');
         Schema::create('balance_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('balance_id')
-                ->constrained('users')
+                ->constrained('balances')
                 ->cascadeOnDelete();
             $table->decimal('amount','8',2)->default(0);
             $table->foreignId('user_id')

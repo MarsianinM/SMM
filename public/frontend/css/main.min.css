@@ -1586,6 +1586,7 @@ body {
 
 .personal-name {
   margin: 0 18px;
+  position: relative;
 }
 
 .personal1 {

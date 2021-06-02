@@ -169,10 +169,14 @@ class ClientProjectController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param $id
+     * @param Project $project
+     * @return RedirectResponse
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Project $project): RedirectResponse
     {
-        //
+        $project_title = $project->title;
+        if(!$project->delete()) return back()->withErrors('Ошибка напишите в службу поддержки');
+        return back()->with('success','Проект << '.$project_title.' >> удален!!!');
     }
 }

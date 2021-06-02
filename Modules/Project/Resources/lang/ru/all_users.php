@@ -28,6 +28,7 @@ return [
     'project_action'                                        => 'Действия',
     'project_run'                                           => 'Запустить',
     'project_off'                                           => 'Остановить',
+    'project_bay_sub'                                       => 'Оплатить',
 
     //PROJECT CREATE END EDIT
     'project_the_main'                                      => 'Основные',

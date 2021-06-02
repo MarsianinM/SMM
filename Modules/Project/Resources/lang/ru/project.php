@@ -11,9 +11,11 @@ return [
     'th_date_start_and_finish'              => 'Старт и финишь проекта',
     'th_rate'                               => 'Тариф',
     'th_action'                             => 'Управление',
+
     //ACTION
     'action_edit'                           => 'Редактирование проекта № :Id',
     'action_delete'                         => 'Удалить проект № :Id',
+    'project_deleted'                       => 'Удалить проект :title',
     'action_off_on'                         => 'Отключить проект № :Id',
     'action_off_on_add'                     => 'Активировать проект',
     'add_user'                              => 'Создать проект',

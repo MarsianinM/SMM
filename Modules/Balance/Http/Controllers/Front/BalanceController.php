@@ -2,7 +2,10 @@
 
 namespace Modules\Balance\Http\Controllers\Front;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -14,7 +17,7 @@ class BalanceController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @return Renderable
+     * @return array|false|Application|Factory|View|mixed
      */
     public function index()
     {
