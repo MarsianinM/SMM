@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Currency\Entities\Currency;
 use Modules\Users\Entities\User;
 
+/**
+ * @method where(string $string, mixed $get)
+ * @method create(array $balanceNew)
+ */
 class Balance extends Model
 {
     use HasFactory;

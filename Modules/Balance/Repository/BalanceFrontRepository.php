@@ -29,7 +29,7 @@ class BalanceFrontRepository
      * @param BalanceRequest $request
      * @return BalanceHistory|false
      */
-    public function save(BalanceRequest $request)
+    public function save(BalanceRequest $request): bool|BalanceHistory
     {
         $balance = $this->balance
                 ->where('user_id', $request->get('user_id'))
@@ -73,16 +73,20 @@ class BalanceFrontRepository
 
     /**
      * $data['price'] and $data['currency_id'] and $data['user_id']
-     * @param $data
-     * @return false
+     * @param array $data
+     * @return bool|BalanceHistory
      */
-    public function editBalance(array $data)
+    public function editBalance(array $data): bool|BalanceHistory
     {
         if(is_null($data['price']) or $data['price'] == 0){
             return false;
         }
 
-        $balance = $this->balance->where('currency_id', $data['currency_id'])->where('user_id' , $data['user_id'] ?? auth()->id())->first();
+        $balance = $this->balance
+                        ->where('currency_id', $data['currency_id'])
+                        ->where('user_id' , $data['user_id'] ?? auth()->id())
+                        ->first();
+
         if(!$balance) return false;
 
         $balance->amount -= (float)$data['price'];
@@ -103,8 +107,6 @@ class BalanceFrontRepository
 
             return $this->balance_history->create($balanceHistory);
         }
-
-
 
     }
 }

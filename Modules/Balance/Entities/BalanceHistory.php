@@ -5,6 +5,9 @@ namespace Modules\Balance\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+/**
+ * @method create(array $balanceHistory)
+ */
 class BalanceHistory extends Model
 {
     use HasFactory;
