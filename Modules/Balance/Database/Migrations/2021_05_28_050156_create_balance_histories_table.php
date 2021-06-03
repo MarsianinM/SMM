@@ -26,7 +26,10 @@ class CreateBalanceHistoriesTable extends Migration
             $table->foreignId('currency_id')
                 ->constrained('currency')
                 ->cascadeOnDelete();
-            $table->json('project_detail')->nullable();
+            $table->foreignId('project_id')
+                ->nullable()
+                ->constrained('projects')
+                ->cascadeOnDelete();
             $table->enum('payment_method',['WebMoney','visa','QiwiWallet','mastercard','MonoBank','GooglePay','ApplePay','Privat24','project_bay']);
             $table->enum('type',['insert','output','project_bay'])->default('insert');
             $table->enum('status',['executed','in_processing','rejected','project_bay'])->default('in_processing');

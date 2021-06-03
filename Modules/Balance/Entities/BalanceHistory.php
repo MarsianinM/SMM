@@ -10,7 +10,7 @@ class BalanceHistory extends Model
     use HasFactory;
 
     protected $fillable = [
-        'balance_id', 'amount', 'user_id', 'currency_id', 'payment_method', 'type', 'status', 'project_detail'
+        'balance_id', 'amount', 'user_id', 'currency_id', 'payment_method', 'type', 'status', 'project_id'
     ];
 
     protected static function newFactory()

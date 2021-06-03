@@ -35,7 +35,7 @@
                     </ul>
 
                     <div class="repost__right__work">
-                        <div class="repost__text">{{ $project->rate->content_current_lang_rate->title }}: <span>$250</span></div>
+                        <div class="repost__text">{{ $project->rate->content_current_lang_rate->title }}: <span>{{ $project->price }} <small>{{ $project->currency->code ?? '' }}</small></span></div>
                     </div>
                 </div>
             </div>

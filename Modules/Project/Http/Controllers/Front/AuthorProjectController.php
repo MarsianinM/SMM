@@ -30,7 +30,7 @@ class AuthorProjectController extends Controller
         Request $request
     ): Renderable
     {
-      //  dd(__FILE__,__LINE__,$projectAuthorRepository->getProject());
+        //dd(__FILE__,__LINE__,$this->rep->getProjects());
         return view('project::front.author.index',[
             'projects'          => $this->rep->getProjects(),
             'request_sort'      => $request->get('sort') ?? 'default'

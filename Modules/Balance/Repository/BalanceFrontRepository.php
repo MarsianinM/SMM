@@ -66,6 +66,7 @@ class BalanceFrontRepository
         $result['currency_id']      = $data['currency_id'];
         $result['payment_method']   = $data['payment_method'];
         $result['type']             = $data['type'];
+        $result['project_id']       = (int)$data['project_id'];
         $result['status']           = $data['status'] ?? 'rejected';//'in_processing';
         return $result;
     }
@@ -77,7 +78,6 @@ class BalanceFrontRepository
      */
     public function editBalance(array $data)
     {
-        /*$price, $currency_id, $user_id = false*/
         if(is_null($data['price']) or $data['price'] == 0){
             return false;
         }
@@ -92,6 +92,7 @@ class BalanceFrontRepository
                 'amount'            => $data['price'],
                 'user_id'           => $data['user_id'] ?? auth()->id(),
                 'currency_id'       => $data['currency_id'],
+                'project_id'        => (int)$data['project_id'],
                 'payment_method'    => 'project_bay',
                 'type'              => 'project_bay',
                 'status'            => 'project_bay',
