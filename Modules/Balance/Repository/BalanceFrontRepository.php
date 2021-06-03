@@ -66,7 +66,7 @@ class BalanceFrontRepository
         $result['currency_id']      = $data['currency_id'];
         $result['payment_method']   = $data['payment_method'];
         $result['type']             = $data['type'];
-        $result['project_id']       = (int)$data['project_id'];
+        $result['project_id']       = $data['project_id'] ?? null;
         $result['status']           = $data['status'] ?? 'rejected';//'in_processing';
         return $result;
     }
@@ -88,11 +88,12 @@ class BalanceFrontRepository
         $balance->amount -= (float)$data['price'];
 
         if($balance->save()){
+            $data['project_id'] = (int)$data['project_id'] ?? null;
             $balanceHistoryArray = [
                 'amount'            => $data['price'],
                 'user_id'           => $data['user_id'] ?? auth()->id(),
                 'currency_id'       => $data['currency_id'],
-                'project_id'        => (int)$data['project_id'],
+                'project_id'        => $data['project_id'],
                 'payment_method'    => 'project_bay',
                 'type'              => 'project_bay',
                 'status'            => 'project_bay',
