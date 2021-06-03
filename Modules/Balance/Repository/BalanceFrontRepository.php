@@ -43,7 +43,7 @@ class BalanceFrontRepository
         }
         if(!$balance) return false;
 
-        $balanceHistory = $this->setBalanceHistoryCreate($request,$balance);
+        $balanceHistory = $this->setBalanceHistoryCreate($request->except('_token'),$balance);
 
         return $this->balance_history->create($balanceHistory);
     }
@@ -57,16 +57,52 @@ class BalanceFrontRepository
         return $result;
     }
 
-    private function setBalanceHistoryCreate($request,$balance): array
+    private function setBalanceHistoryCreate($data,$balance): array
     {
         $result = [];
         $result['balance_id']       = $balance->id;
-        $result['amount']           = $request->get('amount');
-        $result['user_id']          = $request->get('user_id');
-        $result['currency_id']      = $request->get('currency_id');
-        $result['payment_method']   = $request->get('payment_method');
-        $result['type']             = $request->get('type');
-        $result['status']           = 'rejected';//'in_processing';
+        $result['amount']           = $data['amount'];
+        $result['user_id']          = $data['user_id'];
+        $result['currency_id']      = $data['currency_id'];
+        $result['payment_method']   = $data['payment_method'];
+        $result['type']             = $data['type'];
+        $result['status']           = $data['status'] ?? 'rejected';//'in_processing';
         return $result;
+    }
+
+    /**
+     * $data['price'] and $data['currency_id'] and $data['user_id']
+     * @param $data
+     * @return false
+     */
+    public function editBalance(array $data)
+    {
+        /*$price, $currency_id, $user_id = false*/
+        if(is_null($data['price']) or $data['price'] == 0){
+            return false;
+        }
+
+        $balance = $this->balance->where('currency_id', $data['currency_id'])->where('user_id' , $data['user_id'] ?? auth()->id())->first();
+        if(!$balance) return false;
+
+        $balance->amount -= (float)$data['price'];
+
+        if($balance->save()){
+            $balanceHistoryArray = [
+                'amount'            => $data['price'],
+                'user_id'           => $data['user_id'] ?? auth()->id(),
+                'currency_id'       => $data['currency_id'],
+                'payment_method'    => 'project_bay',
+                'type'              => 'project_bay',
+                'status'            => 'project_bay',
+            ];
+
+            $balanceHistory = $this->setBalanceHistoryCreate($balanceHistoryArray,$balance);
+
+            return $this->balance_history->create($balanceHistory);
+        }
+
+
+
     }
 }

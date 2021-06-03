@@ -95,7 +95,7 @@
             <div class="project__item {{ $project->class_css }}">
                 <div class="describe__project">
                     <div class="describe__id">
-                        <p>ID - {{ $project->id }}</p>
+                        <p>ID - <span class="project_id">{{ $project->id }}</span></p>
                         <span class="status__project active__status">{{ $project->status }}</span>
                     </div>
 
@@ -194,7 +194,7 @@
                     </div>
 
                     <div class="tariph__usd">
-                        {{ $project->price }} {{ $project->currency->code ?? '' }}
+                        <span class="price">{{ $project->price }}</span> <span class="code">{{ $project->currency->code ?? '' }}</span>
                     </div>
 
                     <div class="tariph__btn">
@@ -271,9 +271,9 @@
                             </a>
                         </li>
                     </ul>
-                    @if($project->user_pro)
-                    <span class="vip__span">vip</span>
-                    @endif
+
+                    <a  href="#project_bay_vip-form" rel="modal:open" class="vip__span @if($project->user_pro) active @endif">vip</a>
+
                     <div class="action__describe">
                         до 10 сентября 2021 года
                     </div>
@@ -309,6 +309,7 @@
             </div>
         </div>
         @include('project::front.block.modal_pay')
+        @include('project::front.block.modal_pay_vip')
     @endif
 
 @endsection
@@ -323,14 +324,17 @@
                if(option !== '0'){
                    uri += '?sort='+option;
                }
-               console.log(uri);
                 window.location.href = uri;
             });
         });
 
-    </script>
-
-    <script>
-
+        $(document).on('click','a[href="#project_bay-form"]',function (){
+            let price = $(this).parents('.project__item').find('.price').text();
+            let code = $(this).parents('.project__item').find('.code').text();
+            let project_id = $(this).parents('.project__item').find('.project_id').text();
+            $('#project_bay-form input[name="price"]').val(price);
+            $('#project_bay-form input[name="project_id"]').val(project_id);
+            $('#project_bay-form #code').html('<p>'+code+'</p>');
+        });
     </script>
 @endsection

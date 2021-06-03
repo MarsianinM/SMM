@@ -88,7 +88,7 @@
                             @if(!empty($currency) && count($currency))
                                 <div class="main__select__item">
                                     <p>@lang('project::project.enter_currency_to_bay')</p>
-                                    <select class="custom-select sources" name="currency_id" placeholder="{{ $project->currency->code }}" id="">
+                                    <select class="custom-select sources" name="currency_id" placeholder="{{ $project->currency->code ?? $currency[0]->code }}" id="">
                                        @foreach($currency as $cur)
                                             <option  @if($cur->id === $project->currency_id) selected @endif value="{{ $cur->id }}">{{$cur->code}}</option>
                                        @endforeach
@@ -1181,12 +1181,11 @@
                 $(this).children(".amount").fadeOut(300);
             });
         });
+
         // In your Javascript (external .js resource or <script> tag)
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });
-
-
         $(function(){
             $(".datepicker").datetimepicker({
                 format:'Y-m-d h:m:s',

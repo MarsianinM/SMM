@@ -27,9 +27,9 @@ class CreateBalanceHistoriesTable extends Migration
                 ->constrained('currency')
                 ->cascadeOnDelete();
             $table->json('project_detail')->nullable();
-            $table->enum('payment_method',['WebMoney','visa','QiwiWallet','mastercard','MonoBank','GooglePay','ApplePay','Privat24']);
+            $table->enum('payment_method',['WebMoney','visa','QiwiWallet','mastercard','MonoBank','GooglePay','ApplePay','Privat24','project_bay']);
             $table->enum('type',['insert','output','project_bay'])->default('insert');
-            $table->enum('status',['executed','in_processing','rejected'])->default('in_processing');
+            $table->enum('status',['executed','in_processing','rejected','project_bay'])->default('in_processing');
             $table->timestamps();
         });
     }

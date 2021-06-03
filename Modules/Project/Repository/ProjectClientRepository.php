@@ -29,6 +29,10 @@ class ProjectClientRepository
         $this->model = $project;
     }
 
+    public function model(): Project
+    {
+        return $this->model;
+    }
     /**
      * Store the resource.
      * @param array $data
@@ -90,8 +94,10 @@ class ProjectClientRepository
         $sql = $this->model->where('client_id',auth()->user()->id);
         if(!empty($request['sort'])){
             $sql = $sql->orderBy($request['sort']);
+        }else{
+            $sql = $sql->orderBy('id','desc');
         }
-        return $sql->with(['rate','subject'])->paginate('8');
+        return $sql->with(['rate','subject','projectCount'])->paginate('8');
     }
 
 /*    public function getProjectData(

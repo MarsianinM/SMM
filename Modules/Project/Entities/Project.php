@@ -114,12 +114,13 @@ class Project extends Model implements HasMedia
     {
         return $this->belongsTo(ProjectGroup::class, 'group_id','id');
     }
+
     /**
      * Get the projects for the Rates.
      */
     public function projectCount(): BelongsTo
     {
-        return $this->belongsTo(ProjectCountBay::class, 'project_id','id')->where('status', 1);
+        return $this->belongsTo(ProjectCountBay::class, 'id','project_id')->where('status', '1');
     }
 
     /**

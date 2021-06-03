@@ -113,7 +113,8 @@
                                             <span class="red__validate">{{ $message }}</span>
                                             @enderror
                                         </p>
-                                        <select class="custom-select sources @error('currency_id') is-invalid validate__input @enderror" name="currency_id" placeholder="{{ $currency[0]->code }}" id="">
+                                        <select class="custom-select sources @error('currency_id') is-invalid validate__input @enderror" name="currency_id"
+                                                placeholder="{{ $currency[0]->code }}" id="">
                                             @foreach($currency as $cur)
                                                 <option  @if($cur->id === old('currency_id')) selected @endif value="{{ $cur->id }}">{{$cur->code}}</option>
                                             @endforeach

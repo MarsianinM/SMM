@@ -1,6 +1,6 @@
-<div id="project_bay-form" class="modal">
+<div id="project_bay_vip-form" class="modal">
     <div class="modal__title">
-        <h4>@lang('project::project.title_modal_project_bay')</h4>
+        <h4>@lang('project::project.title_modal_project_bay_vip')</h4>
     </div>
     <form action="{{ route('client.projects.count_bay') }}" method="POST">
         @csrf

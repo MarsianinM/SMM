@@ -13,7 +13,7 @@ class ProjectCountBay extends Model
     protected $table = 'project_count_bay';
 
     protected $fillable = [
-        'count', 'status', 'price', 'project_id',
+        'id', 'count', 'status', 'price', 'project_id',
     ];
     /**
      * Project find
@@ -21,7 +21,7 @@ class ProjectCountBay extends Model
      */
     public function project(): BelongsTo
     {
-        return $this->belongsTo(Project::class);
+        return $this->belongsTo(Project::class, 'project_id', 'id');
     }
     /*
     protected static function newFactory()
