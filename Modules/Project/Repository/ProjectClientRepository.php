@@ -100,20 +100,18 @@ class ProjectClientRepository
         return $sql->with(['rate','subject','projectCount'])->paginate('8');
     }
 
-/*    public function getProjectData(
-        SubjectRepository $subjects,
-        CategoryRepository $ratesRep,
-        ProjectGroupRepository $projectGroup,
-        ProjectAuthorGroupRepository $author_group
-    )
+    /**
+     * @param false $vip
+     * @return int
+     */
+    public function getActiveProject($vip = false): int
     {
-        return [
-            'subjects'          => $subjects->getList(),
-            'rates'             => $ratesRep->getListRatesAll(),
-            'project_group'     => $projectGroup->getProjectGroup(),
-            'user_group'        => $author_group->getAuthorGroup(),
-            'delimiter'         => '',
-        ];
-    }*/
+        $project = $this->model->where('status', 'active');
+        if($vip){
+            $project = $project->where('pro', '1');
+        }
+        $project = $project->get();
+        return count($project);
+    }
 
 }

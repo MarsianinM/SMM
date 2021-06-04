@@ -2,6 +2,15 @@
     <div class="modal__title">
         <h4>@lang('project::project.title_modal_project_bay_vip')</h4>
     </div>
+    <div class="main__select__item">
+        <p>@lang('project::project.vip_modal_text')</p>
+        <h3>@lang('project::project.vip_modal_plus')</h3>
+        <p>@lang('project::project.vip_modal_plus_text')</p>
+        <h3>@lang('project::project.text_title_activate')</h3>
+        <p>@lang('project::project.text_project_activate',['PROJECT' => $activeProject])</p>
+        <br/>
+        <p>@lang('project::project.text_project_vip_activate',['VIP' => $activeVipProject])</p>
+    </div>
     <form action="{{ route('client.projects.count_bay') }}" method="POST">
         @csrf
         <input type="hidden" name="project_id" value="" />

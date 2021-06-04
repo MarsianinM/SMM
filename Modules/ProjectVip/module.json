@@ -1,0 +1,13 @@
+{
+    "name": "ProjectVip",
+    "alias": "projectvip",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ProjectVip\\Providers\\ProjectVipServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

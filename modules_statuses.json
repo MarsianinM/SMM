@@ -15,5 +15,6 @@
     "Settings": true,
     "Currency": true,
     "ProjectLimits": true,
-    "Balance": true
+    "Balance": true,
+    "ProjectVip": true
 }

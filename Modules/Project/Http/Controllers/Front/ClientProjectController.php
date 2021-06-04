@@ -41,6 +41,8 @@ class ClientProjectController extends Controller
     {
         return view('project::front.client.index',[
             'projects'          => $this->rep->getProjects($request->all()),
+            'activeProject'     => $this->rep->getActiveProject(),
+            'activeVipProject'  => $this->rep->getActiveProject(true),
             'request_sort'      => $request->get('sort') ?? 'default'
         ]);
     }
