@@ -7,6 +7,7 @@
         <input type="hidden" name="project_id" value="" />
         <div class="label__form__modal">
             <div class="main__select__item">
+                {{-- title --}}
                 <p>@lang('project::project.enter_count')</p>
                 <input class="main__input__other" name="count" type="text" placeholder="@lang('project::project.enter_count')" value="">
             </div>
