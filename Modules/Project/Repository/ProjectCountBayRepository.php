@@ -28,15 +28,8 @@ class ProjectCountBayRepository
      */
     public function save(array $data)
     {
-        $projectbay = $this->model->where('project_id',$data['project_id'])
-                                ->whereStatus('1')->first();
 
         $project = app(ProjectClientRepository::class)->model()->where('id',$data['project_id'])->first();
-
-        $project->update([
-            'price'     => $data['price'],
-            'status'    => 'active',
-        ]);
 
         $balance = [
             'project_id'        => $data['project_id'],
@@ -44,7 +37,30 @@ class ProjectCountBayRepository
             'currency_id'       => $project->currency_id,
             'user_id'           => auth()->id(),
         ];
-        app(BalanceFrontRepository::class)->editBalance($balance);
+
+        $balanceFrontRepository = app(BalanceFrontRepository::class);
+        $balanceFront = $balanceFrontRepository->getBalance()
+            ->where('currency_id', $balance['currency_id'])
+            ->where('user_id' , $data['user_id'] ?? auth()->id())
+            ->first();
+
+        if($balanceFront->amount < $balance['price']){
+            return  ['error' => trans('balance::balance.error_max_sum')];
+        }
+
+        $projectbay = $this->model->where('project_id',$data['project_id'])
+                                ->whereStatus('1')->first();
+
+
+        $project->update([
+            'price'     => $data['price'],
+            'status'    => 'active',
+        ]);
+
+        $balanceEdit = $balanceFrontRepository->editBalance($balance,$balanceFront);
+
+        if(!$balanceEdit) return ['error' => trans('balance::balance.error_edit_balance')];
+
         if($projectbay){
             $data['count'] += $projectbay->count;
             return $projectbay->update($data);

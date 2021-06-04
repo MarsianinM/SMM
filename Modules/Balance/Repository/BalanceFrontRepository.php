@@ -14,10 +14,28 @@ class BalanceFrontRepository
      * @var Balance
      */
     protected Balance $balance;
+
     /**
      * @var BalanceHistory
      */
     protected BalanceHistory $balance_history;
+
+
+    /**
+     * @return Balance
+     */
+    public function getBalance(): Balance
+    {
+        return $this->balance;
+    }
+
+    /**
+     * @return BalanceHistory
+     */
+    public function getBalanceHistory(): BalanceHistory
+    {
+        return $this->balance_history;
+    }
 
     public function __construct(Balance $balance,BalanceHistory $balance_history)
     {
@@ -74,18 +92,14 @@ class BalanceFrontRepository
     /**
      * $data['price'] and $data['currency_id'] and $data['user_id']
      * @param array $data
+     * @param Balance $balance
      * @return bool|BalanceHistory
      */
-    public function editBalance(array $data): bool|BalanceHistory
+    public function editBalance(array $data, Balance $balance): bool|BalanceHistory
     {
         if(is_null($data['price']) or $data['price'] == 0){
             return false;
         }
-
-        $balance = $this->balance
-                        ->where('currency_id', $data['currency_id'])
-                        ->where('user_id' , $data['user_id'] ?? auth()->id())
-                        ->first();
 
         if(!$balance) return false;
 

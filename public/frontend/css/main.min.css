@@ -5454,6 +5454,15 @@ ul.numeration__slider li {
   width: 3px;
   left: 0;
 }
+.thank__you__popup.alert-danger {
+  color: #b02513;
+}
+.thank__you__popup.alert-danger:before {
+  background-color: #b02513;
+}
+.thank__you__popup.alert-danger p {
+  color: #b02513;
+}
 .thank__you__popup p {
   line-height: 16px;
   font-size: 13px;

@@ -164,6 +164,8 @@ class ClientProjectController extends Controller
         $countBay = $projectCountBayRepository->save($request->except('_token'));
         if(!$countBay) return back()->withErrors('Ошибка напишите в службу поддержки');
 
+        if(!empty($countBay['error'])) return back()->withErrors($countBay['error']);
+
         return back()->with('success','Проект оплачен');
     }
 

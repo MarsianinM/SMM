@@ -4802,6 +4802,15 @@ ul.numeration__slider{
     width: 3px;
     left:0;
   }
+  &.alert-danger{
+      color: #b02513;
+      &:before{
+          background-color: #b02513;
+      }
+      p{
+          color: #b02513;
+      }
+  }
   p{
     line-height: 16px;
     font-size: 13px;
