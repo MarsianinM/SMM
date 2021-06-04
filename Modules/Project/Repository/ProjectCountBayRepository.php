@@ -44,7 +44,7 @@ class ProjectCountBayRepository
             ->where('user_id' , $data['user_id'] ?? auth()->id())
             ->first();
 
-        if(is_null($balanceFront->amount) or $balanceFront->amount < $balance['price']){
+        if(is_null($balanceFront) or $balanceFront->amount < $balance['price']){
             return  ['error' => trans('balance::balance.error_max_sum')];
         }
 
