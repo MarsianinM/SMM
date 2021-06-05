@@ -4,6 +4,7 @@ namespace Modules\ProjectVip\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\ProjectVip\Entities\ProjectVipTariff;
 
 class ProjectVipDatabaseSeeder extends Seeder
 {
@@ -15,7 +16,6 @@ class ProjectVipDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-
-        // $this->call("OthersTableSeeder");
+        ProjectVipTariff::factory()->times(1)->create();
     }
 }

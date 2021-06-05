@@ -46,7 +46,7 @@
                                 <span class="mr-2">
                                     <img src="{{ asset('img/rub.png') }}" alt="rub">
                                 </span>
-                                {{ Auth::user()->getBalanceByCurrency('RUB') }}
+                                {{--{{ Auth::user()->getBalanceByCurrency('RUB') }}--}}
                             </a>
 
                             <div class="dropdown-menu bg-dark dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -54,13 +54,13 @@
                                     <span style="margin-left: 2px; margin-right: 10px;">
                                         <img src="{{ asset('img/rub.png') }}" alt="rub">
                                     </span>
-                                    {{ Auth::user()->getBalanceByCurrency('RUB') }}
+                                    {{--{{ Auth::user()->getBalanceByCurrency('RUB') }}--}}
                                 </a>
                                 <a class="dropdown-item text-white-50" href="{{ route('balance.index') }}">
                                     <span style="margin-right: 7px;">
                                         <img src="{{ asset('img/usd.png') }}" alt="usd">
                                     </span>
-                                    {{ Auth::user()->getBalanceByCurrency('USD') }}
+                                    {{--{{ Auth::user()->getBalanceByCurrency('USD') }}--}}
                                 </a>
                             </div>
                         </li>

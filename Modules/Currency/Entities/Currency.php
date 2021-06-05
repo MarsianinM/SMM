@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Balance\Entities\Balance;
 use Modules\Project\Entities\Project;
+use Modules\ProjectVip\Entities\ProjectVipTariff;
 
 class Currency extends Model
 {
@@ -23,6 +24,7 @@ class Currency extends Model
     {
         return \Modules\Currency\Database\factories\CurrencyFactory::new();
     }
+
     /**
      * @return HasMany
      */
@@ -30,6 +32,15 @@ class Currency extends Model
     {
         return $this->hasMany(Project::class, 'currency_id', 'id');
     }
+
+    /**
+     * @return HasMany
+     */
+    public function projectVipTariff(): HasMany
+    {
+        return $this->hasMany(ProjectVipTariff::class, 'currency_id', 'id');
+    }
+
     /**
      * Get the balances for the user.
      */

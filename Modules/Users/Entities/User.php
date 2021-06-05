@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Modules\Balance\Entities\Balance;
+use Modules\ProjectVip\Entities\ProjectVip;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -86,7 +87,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     /**
      * Get the projects for the user.
      */
-    public function projects()
+    public function projects(): HasMany
     {
         return $this->hasMany(Project::class, $this->activeRoleIs('client') ? 'client_id' : 'author_id');
     }
@@ -98,7 +99,13 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     {
         return $this->hasMany(Balance::class)->with(['currency']);
     }
-
+    /**
+     * Get the balances for the user.
+     */
+    public function projectVip(): HasMany
+    {
+        return $this->hasMany(ProjectVip::class);
+    }
 
     public function registerMediaCollections(): void
     {

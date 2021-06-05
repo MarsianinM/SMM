@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectVipsTable extends Migration
+class CreateProjectVipTariffsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateProjectVipsTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_vips', function (Blueprint $table) {
+        Schema::create('project_vip_tariffs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
-                ->constrained('users')
-                ->cascadeOnDelete();
-            $table->foreignId('tariff_id')
+            $table->decimal('amount');
+            $table->foreignId('currency_id')
                 ->nullable()
-                ->constrained('project_vip_tariffs')
+                ->constrained('currency')
                 ->nullOnDelete();
-            $table->enum('status',[0,1])->default(1);
+            $table->integer('days')->default(1);
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ class CreateProjectVipsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_vips');
+        Schema::dropIfExists('project_vip_tariffs');
     }
 }
