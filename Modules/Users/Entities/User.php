@@ -16,7 +16,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 
-class User extends Authenticatable implements MustVerifyEmail, HasMedia
+class User extends Authenticatable implements /*MustVerifyEmail,*/ HasMedia
 {
     use HasFactory, Notifiable, HasRoles, InteractsWithMedia;
 
