@@ -36,7 +36,7 @@ Route::resource('faqs', FaqController::class);
 Route::resource('rules', RuleController::class);
 Route::resource('prices', PriceController::class);
 
-//Auth::routes(['verify' => true]);
+Auth::routes(['verify' => false]);
 Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
     Route::group(['middleware' => 'verified'], function () {
         Route::get('home', function () {
