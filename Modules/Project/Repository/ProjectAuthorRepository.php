@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Project\Entities\Project;
+use Modules\Project\Entities\ProjectCountBay;
 use Modules\Project\Entities\ProjectInWork;
 use Str;
 
@@ -24,10 +25,10 @@ class ProjectAuthorRepository
     {
         $this->model = $project;
     }
-//'bay_off','active','on_moderation','off','off_admins'
-    public function getProjects(): LengthAwarePaginator
+
+    protected function current()
     {
-        $sql = $this->model->with([
+        return $this->model->with([
             'client',
             'rate',
             'currency',
@@ -39,6 +40,11 @@ class ProjectAuthorRepository
             'projectAuthorInWork',
             'projectCount',
         ]);
+    }
+//'bay_off','active','on_moderation','off','off_admins'
+    public function getProjects(): LengthAwarePaginator
+    {
+        $sql = $this->current();
         $sql = $sql->where('status', 'active');
 
         $sql = $sql->whereHas('projectLimitsDay', function ($query) {
@@ -47,11 +53,6 @@ class ProjectAuthorRepository
         $sql = $sql->whereHas('projectCount', function ($query) {
             return $query->where('count', '>', 0);
         });
-       /* $sql = $sql->whereHas('projectLimits', function ($query) {
-            $result = $query->where('time_start', '>=', Carbon::now('Europe/Stockholm')->format('H:i:s'))
-                ->where('time_finish', '<=', Carbon::now('Europe/Stockholm')->format('H:i:s'));
-            return $result;
-        });*/
 
         $sql = $sql->orderBy('pro', 'desc');
         $sql = $sql->orderBy('id', 'desc');
@@ -65,17 +66,7 @@ class ProjectAuthorRepository
 
     public function getProject($project_id)
     {
-        $sql = $this->model->with([
-            'client',
-            'rate',
-            'currency',
-            'group',
-            'subject',
-            'projectLimits',
-            'projectLimitsDay',
-            'projectSocialLimits',
-            'projectAuthorInWork',
-        ]);
+        $sql = $this->current();
         $sql = $sql->where('status', 'active');
         $sql = $sql->where('id', $project_id);
         $sql = $sql->whereHas('projectLimitsDay', function ($query) {
@@ -86,10 +77,9 @@ class ProjectAuthorRepository
         if(!$result) abort(404);
 
         if(!is_null($result->projectAuthorInWork) && $result->timer_work == 0){
-            ProjectInWork::where('id',$result->projectAuthorInWork->id)->delete();
+            app(ProjectInWorkRepository::class)->deleted($result);
             $result->projectAuthorInWork = null;
         }
-
         return $result;
     }
 

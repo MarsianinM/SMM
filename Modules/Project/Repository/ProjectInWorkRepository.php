@@ -3,6 +3,7 @@
 
 namespace Modules\Project\Repository;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Modules\Project\Entities\Project;
 use Modules\Project\Entities\ProjectCountBay;
@@ -30,6 +31,24 @@ class ProjectInWorkRepository
         if(!$project->update()) return ['error' => trans('project::author.error_project_update')];
 
         return $this->model->create($request->all());
+    }
+
+    public function deleted(Project $project)
+    {
+        $project_in_work = ProjectInWork::where('id',$project->projectAuthorInWork->id)
+            ->where('created_at', '<=', Carbon::now()->addMinutes(-25)->toDateTimeString())
+            ->get();
+        foreach ($project_in_work as $item){
+            $item->delete();
+        }
+        /* ProjectInWork::where('id',$project->projectAuthorInWork->id)
+            ->where('created_at', '<=', Carbon::now()->addMinutes(-25)->toDateTimeString())
+            ->delete();*/
+        $projectbay = ProjectCountBay::where('project_id',$project->projectAuthorInWork->id)->whereStatus('1')->first();
+        foreach ($project_in_work as $item){
+            $projectbay->count += 1;
+        }
+        $projectbay->save();
     }
 
 }
