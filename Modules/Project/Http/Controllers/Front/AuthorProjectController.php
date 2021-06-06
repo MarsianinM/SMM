@@ -30,7 +30,6 @@ class AuthorProjectController extends Controller
         Request $request
     ): Renderable
     {
-        //dd(__FILE__,__LINE__,$this->rep->getProjects());
         return view('project::front.author.index',[
             'projects'          => $this->rep->getProjects(),
             'request_sort'      => $request->get('sort') ?? 'default'
@@ -60,7 +59,8 @@ class AuthorProjectController extends Controller
         ProjectInWorkRepository $projectInWorkRepository
     ): RedirectResponse
     {
-        $projectInWorkRepository->add($request);
+        $project_in_work = $projectInWorkRepository->add($request);
+        if(!empty($project_in_work['error'])) return redirect()->route('client.projects.index')->withErrors($project_in_work['error']);
         return redirect()->back();
     }
 

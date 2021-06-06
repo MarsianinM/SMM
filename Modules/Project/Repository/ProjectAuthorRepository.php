@@ -37,12 +37,15 @@ class ProjectAuthorRepository
             'projectLimitsDay',
             'projectSocialLimits',
             'projectAuthorInWork',
+            'projectCount',
         ]);
         $sql = $sql->where('status', 'active');
 
         $sql = $sql->whereHas('projectLimitsDay', function ($query) {
-            $result = $query->where(strtolower(Carbon::now()->format('l')), '!=', 0);
-            return $result;
+            return $query->where(strtolower(Carbon::now()->format('l')), '!=', 0);
+        });
+        $sql = $sql->whereHas('projectCount', function ($query) {
+            return $query->where('count', '>', 0);
         });
        /* $sql = $sql->whereHas('projectLimits', function ($query) {
             $result = $query->where('time_start', '>=', Carbon::now('Europe/Stockholm')->format('H:i:s'))
@@ -57,12 +60,11 @@ class ProjectAuthorRepository
 
     /**
      * @param $project_id
-     * @return Project
+     * @return Builder|Model|object|null
      */
 
-    public function getProject($project_id): Project
+    public function getProject($project_id)
     {
-
         $sql = $this->model->with([
             'client',
             'rate',
@@ -76,11 +78,9 @@ class ProjectAuthorRepository
         ]);
         $sql = $sql->where('status', 'active');
         $sql = $sql->where('id', $project_id);
-
         $sql = $sql->whereHas('projectLimitsDay', function ($query) {
             return $query->where(strtolower(Carbon::now()->format('l')), '!=', 0);
         });
-
         $result = $sql->first();
 
         if(!$result) abort(404);
@@ -89,7 +89,6 @@ class ProjectAuthorRepository
             ProjectInWork::where('id',$result->projectAuthorInWork->id)->delete();
             $result->projectAuthorInWork = null;
         }
-
 
         return $result;
     }

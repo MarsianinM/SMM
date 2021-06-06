@@ -104,16 +104,16 @@
 
                     <div class="comment__tariph">
                         <p>
-                            Мини
+                            {{ $project->rate_title }}
                         </p>
-                        <p>$78.5</p>
+                        <p>@lang('project::author.project_'.$project->currency->code, ['PRICE' => $project->price])</p>
                     </div>
 
                     <div class="comment__left">
                         <p>
-                            Осталось
+                            @lang('project::author.project_count')
                         </p>
-                        <p>25</p>
+                        <p>{{ $project->projectCount->count }}</p>
                     </div>
 
                     <div class="comment__actions">
