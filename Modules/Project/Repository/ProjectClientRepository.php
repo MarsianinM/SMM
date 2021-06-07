@@ -132,7 +132,7 @@ class ProjectClientRepository
         }else{
             $sql = $sql->orderBy('id','desc');
         }
-        return $sql->with(['rate','subject','projectCount'])->paginate('8');
+        return $sql->with(['rate','subject','projectCount','projectInCheck'])->paginate('8');
     }
 
     /**

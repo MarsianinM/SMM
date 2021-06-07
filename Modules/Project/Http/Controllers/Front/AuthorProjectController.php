@@ -72,4 +72,13 @@ class AuthorProjectController extends Controller
 
         return redirect()->back()->with(['success' => trans('project::author.project_refused')]);
     }
+
+    public function projectInCheck(Request $request, ProjectInWorkRepository $inWorkRepository)
+    {
+        $in_check = $inWorkRepository->setInCheckProject($request->except('_token'));
+
+        if(!empty($in_check['error'])) return redirect()->back()->withErrors($in_check['error']);
+
+        return redirect()->route('author.projects.index')->with(['success' => 'Проект отправлен на проверку'/*trans('project::author.project_refused')*/]);
+    }
 }

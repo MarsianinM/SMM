@@ -14,6 +14,7 @@ use Modules\Project\Repository\ProjectAuthorGroupRepository;
 use Modules\Project\Repository\ProjectClientRepository;
 use Modules\Project\Repository\ProjectCountBayRepository;
 use Modules\Project\Repository\ProjectGroupRepository;
+use Modules\Project\Repository\ProjectInWorkRepository;
 use Modules\Rates\Repository\CategoryRepository;
 use Modules\Subjects\Entities\Subject;
 use Modules\Subjects\Repository\SubjectRepository;
@@ -90,7 +91,8 @@ class ClientProjectController extends Controller
      */
     public function show(Project $project): Renderable
     {
-        return view('project::show');
+        dd(__FILE__,__METHOD__,'LINE: '.__LINE__,$project);
+        //return view('project::show');
     }
 
     /**
@@ -169,6 +171,13 @@ class ClientProjectController extends Controller
         if(!empty($countBay['error'])) return back()->withErrors($countBay['error']);
 
         return back()->with('success','Проект оплачен');
+    }
+
+    public function projectInCheck($project, ProjectInWorkRepository $inWorkRepository)
+    {
+        return view('project::front.client.in_check',[
+            'projects' => $inWorkRepository->getInCheckProject($project),
+        ]);
     }
 
     /**

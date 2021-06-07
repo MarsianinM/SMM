@@ -5,6 +5,7 @@ namespace Modules\Project\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Users\Entities\User;
 
 class ProjectInWork extends Model
@@ -39,29 +40,29 @@ class ProjectInWork extends Model
 
     /**
      * Project find
-     * @return BelongsTo
+     * @return HasOne
      */
-    public function project(): BelongsTo
+    public function project(): HasOne
     {
-        return $this->belongsTo(Project::class);
+        return $this->hasOne(Project::class, 'id', 'project_id');
     }
 
     /**
      * user client find
-     * @return BelongsTo
+     * @return HasOne
      */
-    public function client(): BelongsTo
+    public function client(): HasOne
     {
-        return $this->belongsTo(User::class, 'client_id');
+        return $this->hasOne(User::class,'id', 'client_id');
     }
 
     /**
      * user author find
-     * @return BelongsTo
+     * @return HasOne
      */
-    public function author(): BelongsTo
+    public function author(): HasOne
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->hasOne(User::class, 'id','author_id');
     }
 
     public static function getListStatus(): array

@@ -221,22 +221,52 @@
                             Ссылка на запись, которой сделали репост
                         </div>
 
-                        <form action="/" class="next__form">
-                            <div class="analog__input">
+                        <form action="{{ route('author.projects.projectInCheck') }}" class="next__form" method="POST">
+                            @csrf
+                            <input type="hidden" name="project_id" value="{{ $project->id }}" />
+                            <input type="hidden" name="user_id" value="{{ auth()->id() }}" />
+                            {{--<div class="analog__input">
                                 <span>https://prnt.sc/10itg3u</span>
                                 <a href="#">Выбрать аккаунт</a>
-                            </div>
+                            </div>--}}
 
                             <div class="text__analog__input">Работа разрешена только над страницами из списка выше.</div>
 
-                            <div class="under__analog">
-                                <a href="#">Необходимо указать дополнительную информацию заказчику?</a>
-                                <span>Черновик сохранен в 16:12</span>
+
+                            <div class="clearfix left-add-inf">
+                                <h3>Публикуйте отзывы от разных людей.</h3>
+
+                                <div class="inner__new__navigation">
+                                    <div class="left__main__nav">
+                                        <div class="main__select__item">
+                                            <p>Ссылка на youtube канал на который вы подписались</p>
+                                            <input class="main__input__other" type="text" name="data[url]" value="" required>
+                                        </div>
+                                        <div class="main__select__item">
+                                            <p>Ссылка на ваш youtube канал</p>
+                                            <input class="main__input__other" type="text" name="data[author_link]"
+                                                   value="" placeholder="ссылка на Вашу стенку/страницу" required>
+                                        </div>
+                                        <div class="under__analog">
+                                            <a id="click_textarea" href="#">Необходимо указать дополнительную информацию заказчику?</a>
+                                            {{--<span>Черновик сохранен в 16:12</span>--}}
+                                        </div>
+                                        <div class="main__select__item">
+                                            <p>Дополнительная информация заказчику</p>
+                                            <textarea name="data[description]" id="data_description"
+                                                      placeholder="Здесь Вы можете указать дополнительную информацию заказчику. Внимание! Передача контактных данных запрещена!"></textarea>
+                                        </div>
+
+                                        {{--<input value="" name="NewCommentForm[stop_words]" id="NewCommentForm_stop_words" type="hidden">
+                                        <input value="0" name="NewCommentForm[symbols]" id="NewCommentForm_symbols" type="hidden">
+                                        <input value="" name="NewCommentForm[pages]" id="NewCommentForm_pages" type="hidden">
+                                        <input value="53" name="NewCommentForm[tarif]" id="NewCommentForm_tarif" type="hidden">
+                                        <input value="0" name="NewCommentForm[notlong]" id="NewCommentForm_notlong" type="hidden">--}}
+                                    </div>
+                                </div>
                             </div>
-
-
                             <div class="btns__next">
-                                <button><img src="{{ asset('img/_src/okey__btn__next.png') }}" alt="okey__btn__next">ОТПРАВИТЬ ›</button>
+                                <button type="submit"><img src="{{ asset('img/_src/okey__btn__next.png') }}" alt="okey__btn__next">ОТПРАВИТЬ ›</button>
                                 <a href="{{ route('author.projects.refused', ['project_id' => $project->id]) }}">Отказаться от проекта</a>
                             </div>
                         </form>

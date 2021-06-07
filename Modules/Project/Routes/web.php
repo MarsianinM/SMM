@@ -30,6 +30,7 @@ Route::prefix('client')
         Route::get('/off/{project}', [ClientProjectController::class,'off'])->name('projects.off');
         Route::post('/count_bay', [ClientProjectController::class,'countBay'])->name('projects.count_bay');
         Route::get('/destroy/{project}', [ClientProjectController::class,'destroy'])->name('projects.destroy');
+        Route::get('/project_in_check/{project}', [ClientProjectController::class,'projectInCheck'])->name('projects.projectInCheck');
     });
 
 });
@@ -43,6 +44,7 @@ Route::prefix('author')
         Route::get('/show/{project_id}', [AuthorProjectController::class,'show'])->name('projects.show');
         Route::get('/refused/{project_id}', [AuthorProjectController::class,'refused'])->name('projects.refused');
         Route::post('/project_in_work', [AuthorProjectController::class,'projectInWork'])->name('projects.projectInWork');
+        Route::post('/project_in_check', [AuthorProjectController::class,'projectInCheck'])->name('projects.projectInCheck');
     });
 
 });

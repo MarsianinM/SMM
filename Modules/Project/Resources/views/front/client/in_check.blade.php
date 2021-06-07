@@ -1,219 +1,53 @@
 @extends('mainpage::layouts.front.app')
 
 @section('content')
-    <div class="project__top">
-        <div class="project__title">
-            @lang('project::all_users.projects')
-        </div>
-        @role('client')
-        <ul class="project__top__menu">
-            <li><a href="#">@lang('project::all_users.project_groups')</a></li>
-            <li><a href="#">@lang('project::all_users.authors_blacklist')</a></li>
-            <li><a href="#">@lang('project::all_users.author_teams')</a></li>
-            <li><a href="#" class="btn__top-menu green__btntop">@lang('project::all_users.your_manager')</a></li>
-            <li><a href="{{ route('client.projects.create') }}" class="btn__top-menu red__btntop">@lang('project::all_users.add_projects')</a></li>
-        </ul>
-        @endrole
-    </div>
 
     @if(!empty($projects) && count($projects))
-        <div class="project__top2">
-            @if(!empty($projects->group))
-                <div class="control__input">
-
-                    <select class="custom-select sources" placeholder="Все группы" id="">
-                        <option value="Группа1">Группа1</option>
-                        <option value="Группа2">Группа2</option>
-                        <option value="Группа3">Группа3</option>
-                        <option value="Группа4">Группа4</option>
-                    </select>
-                </div>
-            @endif
-            <div class="control__input">
-                <select class="custom-select sources" placeholder="@lang('project::all_users.sort_'.$request_sort)" id="sort">
-                    <option @if($request_sort == 'default') selected @endif value="0">@lang('project::all_users.sort_default')</option>
-                    <option @if($request_sort == 'title') selected @endif value="title">@lang('project::all_users.sort_title')</option>
-                    <option @if($request_sort == 'created_at') selected @endif value="created_at">@lang('project::all_users.sort_created_at')</option>
-                </select>
-            </div>
-            <div class="control__input">
-                <div class="name__project">
-                    <input type="text" placeholder="ID, название проекта или тариф">
-                    <span>
-                        <button type="submit">
-                            <img src="{{ asset('img/_src/magnifying-glass.svg') }}" width="16" alt="search__project">
-                        </button>
-                    </span>
-                </div>
+        <div class="project__top">
+            <div class="project__title">
+                {{ $projects[0]->project->title }}
             </div>
 
-            <div class="control__input">
-                <input style="width: 12px;" type="checkbox" class="allcheckbox" id="all__project__check">
-                <label for="all__project__check" class="all__label__input"><span class="for__label">@lang('project::all_users.checked_all_projects')</span>
-                </label>
-            </div>
-
-        </div>
-
-        <div class="project__top3">
-            <div class="flex__top3">
-                <div class="text__flex">@lang('project::all_users.total_completed')</div>
-                <div class="text__cifra green__data">4519</div>
-            </div>
-
-            <div class="flex__top3">
-                <div class="text__flex">@lang('project::all_users.paid')</div>
-                <div class="text__cifra green__data">150</div>
-            </div>
-
-            <div class="flex__top3">
-                <div class="text__flex">@lang('project::all_users.on_check')</div>
-                <div class="text__cifra red__data">150</div>
-            </div>
-
-            <div class="flex__top3">
-                <div class="text__flex">@lang('project::all_users.on_completion')</div>
-                <div class="text__cifra black__data">150</div>
-            </div>
-
-            <div class="flex__top3">
-                <div class="text__flex"><span><img src="{{ asset('img/_src/standing-up-man-.svg') }}" width="22" alt="man__icon"></span>@lang('project::all_users.contributing_authors')</div>
-                <div class="text__cifra blue__data">150</div>
-            </div>
-        </div>
-
-        <div class="desc__project__item">
-            <ul class="desc__ul">
-                <li><span><img src="{{ asset('img/_src/desc__icon1.svg') }}" width="15"></span>@lang('project::all_users.project_description')</li>
-                <li><span><img src="{{ asset('img/_src/flag.svg') }}"></span>@lang('project::all_users.project_data')</li>
-                <li><span><img src="{{ asset('img/_src/tag.svg') }}"></span>@lang('project::all_users.project_rate')</li>
-                <li><span><img src="{{ asset('img/_src/equalizer.svg') }}"></span>@lang('project::all_users.project_action')</li>
-            </ul>
         </div>
         <div class="all__project">
         @foreach($projects as $project)
-            <div class="project__item {{ $project->class_css }}">
+            <div class="project__item green__project">
                 <div class="describe__project">
                     <div class="describe__id">
-                        <p>ID - <span class="project_id">{{ $project->id }}</span></p>
-                        <span class="status__project active__status">{{ $project->status }}</span>
+                        <p>ID - <span class="project_id">{{ $project->project->id }}</span></p>
+                        <span class="status__project active__status">{{ $project->project->status }}</span>
                     </div>
 
                     <div class="describe__inner">
-                        <a href="{{ route('client.projects.show', $project->id) }}" class="describe__title">{{ $project->title }}</a>
+                        <a href="{{ route('client.projects.show', $project->project->id) }}" class="describe__title">{{ $project->project->title }}</a>
                         <p class="paragraph__describe">
-                           {{ $project->description }}
+                           {{ $project->project->description }}
                         </p>
-
-                        <div class="zametka__title">
-                            Заметка
-                        </div>
-                        <p class="paragraph__describe">
-                            @if($project->author_group_id && !empty($project->group->name))
-                                Группа: {{ $project->group->name }}
-                            @else
-                                Группа: Нет группы
-                            @endif
-                        </p>
-
-                        <div class="name-social name-social-1">
-                            <a href="index.html#" class="back-1">
-                                <img src="{{ asset('img/_src/gmail.svg') }}" alt="Гмаил" class="color-normal-1">
-                            </a>
-                            <a href="index.html#" class="back-2">
-                                <img src="{{ asset('img/_src/instagram.svg') }}" alt="Инстаграм" class="color-normal-2">
-                            </a>
-                            <a href="index.html#" class="back-3">
-                                <img src="{{ asset('img/_src/twitter.svg') }}" alt="Твиттер" class="color-normal-3">
-                            </a>
-                            <a href="index.html#" class="back-4">
-                                <img src="{{ asset('img/_src/vk.svg') }}" alt="Вк" class="color-normal-4">
-                            </a>
-                            <a href="index.html#" class="back-5">
-                                <img src="{{ asset('img/_src/youtube.svg') }}" alt="Ютуб" class="color-normal-5">
-                            </a>
-                            <a href="index.html#" class="back-6">
-                                <img src="{{ asset('img/_src/telegram.svg') }}" alt="Телеграм" class="color-normal-6">
-                            </a>
-                            <a href="index.html#" class="back-7">
-                                <img src="{{ asset('img/_src/facebook.svg') }}" alt="Фэйсбук" class="color-normal-7">
-                            </a>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="data__project">
                     <div class="item__data">
                         <div class="data__text">
-                            Оплаченные
-                        </div>
-                        <a class="data_shifr green__data" href="#project_bay-form" rel="modal:open">{{ $project->count_bay }}</a>
-                    </div>
-
-                    <div class="item__data">
-                        <div class="data__text">
-                            На проверке
-                        </div>
-                        <a href="{{ route('client.projects.projectInCheck', ['project' => $project->id]) }}" class="data_shifr red__data">{{ $project->in_check_count }}</a>
-                    </div>
-
-                    <div class="item__data">
-                        <div class="data__text">
-                            На доработке
-                        </div>
-                        <span class="data_shifr black__data">50</span>
-                    </div>
-
-                    <div class="item__data">
-                        <div class="data__text">
-                            Приступившие авторы
-                        </div>
-                        <span class="data_shifr blue__data">50</span>
-                    </div>
-
-                    <div class="item__data top__border">
-                        <div class="data__text">
-                            Завершено
-                        </div>
-                        <span class="data_shifr green__data">50</span>
-                    </div>
-
-                    <div class="last__work">
-                        <div class="work__text">
-                            Последняя работа:
+                            {{ $project->author->name }}
                         </div>
 
-                        <div class="work__under">
-                            10 сентября 2020г <br>09:27:13
-                        </div>
                     </div>
+
                 </div>
                 <div class="tariph__project">
                     <div class="tariph__title">
-                        {{ $project->rate->content_current_lang_rate->description }}
+                        {{ $project->project->rate->content_current_lang_rate->description }}
                     </div>
 
                     <div class="tariph__usd">
-                        <span class="price">{{ $project->price }}</span> <span class="code">{{ $project->currency->code ?? '' }}</span>
-                    </div>
-
-                    <div class="tariph__btn">
-                        <a  href="#project_bay-form" rel="modal:open">@lang('project::all_users.project_bay_sub')</a>
-                    </div>
-
-                    <div class="tariph__icon">
-                        <div class="icon__tariph"><img src="{{ asset('img/_src/chat.svg') }}" width="17" alt="icon__tariph"><span>2</span></div>
-                        <div class="icon__tariph"><img src="{{ asset('img/_src/sad.svg') }}" width="16" alt="icon__tariph"><span>5</span></div>
-                    </div>
-                    <div class="tariph__flag">
-                        <span><img src="{{ asset('img/_src/flag__tariph.png') }}" alt="flag__tariph"></span>
+                        <span class="price">{{ $project->project->price }}</span> <span class="code">{{ $project->project->currency->code ?? '' }}</span>
                     </div>
                 </div>
 
                 <div class="actions__project">
                     <ul class="actions__icons">
                         <li>
-                            <a href="{{ route('client.projects.edit', $project->id) }}">
+                            <a href="">
                                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M6.00186 14.8736L2.14596 11.0177L11.4721 1.69156L15.328 5.54746L6.00186 14.8736ZM1.78553 11.6969L5.32264 15.234L0.0195312 17L1.78553 11.6969ZM16.514 4.36659L15.8452 5.03539L11.9842 1.17439L12.653 0.505585C13.3267 -0.168528 14.4192 -0.168528 15.0929 0.505585L16.514 1.92667C17.1828 2.60262 17.1828 3.69084 16.514 4.36659Z" fill="#92A2BB"/>
                                 </svg>
@@ -262,7 +96,7 @@
                         </li>
                         <li data-toggle="tooltip" data-html="true"
                             data-tippy-content="@lang('project::project.project_deleted', ['title' => $project->title])">
-                            <a href="{{ route('client.projects.destroy',$project->id) }}">
+                            <a href="">
                                 <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M22 4.47217V1.2334C22 0.877445 21.7114 0.588867 21.3555 0.588867H0.644531C0.288578 0.588867 0 0.877445 0 1.2334V4.47217H22Z" fill="#92A2BB"/>
                                     <path d="M9.70557 9.6499H12.2944C12.6528 9.6499 12.9443 9.35836 12.9443 9C12.9443 8.64164 12.6528 8.3501 12.2944 8.3501H9.70557C9.34721 8.3501 9.05566 8.64164 9.05566 9C9.05566 9.35836 9.34721 9.6499 9.70557 9.6499Z" fill="#92A2BB"/>
@@ -271,30 +105,10 @@
                             </a>
                         </li>
                     </ul>
-
-                    <a  href="#project_bay_vip-form" rel="modal:open" class="vip__span @if($project->user_pro) active @endif">vip</a>
-
                     <div class="action__describe">
                         до 10 сентября 2021 года
                     </div>
 
-                    <div class="enter__btn">
-                        @if($project->status == 'off' or $project->status == 'on_moderation')
-                        <a href="{{ route('client.projects.activate', $project->id) }}">
-                            <span>
-                                <img src="{{ asset('img/_src/play.svg') }}" alt="zapusk__img">
-                            </span>
-                            @lang('project::all_users.project_run')
-                        </a>
-                        @elseif($project->status == 'active')
-                            <a class="off" href="{{ route('client.projects.off', $project->id) }}">
-                            <span>
-                                {{--<img src="{{ asset('img/_src/play.svg') }}" alt="zapusk__img">--}}
-                            </span>
-                                @lang('project::all_users.project_off')
-                            </a>
-                        @endif
-                    </div>
                     <div class="absolute__checkbox">
                         <input type="checkbox" id="choose__check1">
                         <label for="choose__check1">Выбрать</label>
@@ -308,8 +122,6 @@
                 {{ $projects->appends(Request::except('page'))->links('mainpage::vendor.pagination.bootstrap-4') }}
             </div>
         </div>
-        @include('project::front.block.modal_pay')
-        @include('project::front.block.modal_pay_vip')
     @endif
 
 @endsection

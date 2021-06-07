@@ -67,4 +67,38 @@ class ProjectInWorkRepository
 
         $projectbay->save();
     }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function setInCheckProject(array $data)
+    {
+        $project_in_work = $this->model->where('project_id',$data['project_id'])
+            ->where('status', 'in_work')
+            ->where('author_id', $data['user_id'])
+            ->where('created_at', '>=', Carbon::now()->addMinutes(-25)->toDateTimeString()) //TEST
+            ->first();
+        if(!$project_in_work) return ['error' => trans('project::author.error_project_update')];
+        $data['status'] = 'in_check';
+        return $project_in_work->update($data);
+    }
+
+    /**
+     * @param $project_id
+     * @return mixed
+     */
+    public function getInCheckProject($project_id): mixed
+    {
+        return $this->model
+            ->with([
+                'project',
+                'project.client',
+                'author'
+            ])
+            ->where('project_id',$project_id)
+            ->where('status', 'in_check')
+            ->where('client_id', auth()->id())
+            ->paginate();
+    }
 }

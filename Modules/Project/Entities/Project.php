@@ -96,9 +96,17 @@ class Project extends Model implements HasMedia
      */
     public function projectAuthorInWork(): BelongsTo
     {
-        return $this->belongsTo(ProjectInWork::class, 'id','project_id')->where('status', 'in_work')->where('author_id',auth()->id());
+        return $this->belongsTo(ProjectInWork::class, 'id','project_id')
+                    ->where('status', 'in_work')
+                    ->where('author_id',auth()->id());
     }
 
+    public function projectInCheck()
+    {
+        return $this->hasMany(ProjectInWork::class,'project_id', 'id')
+                    ->where('status', 'in_check')
+                    ->where('client_id',auth()->id());
+    }
     /**
      * Get the projects for the Rates.
      */
@@ -228,6 +236,11 @@ class Project extends Model implements HasMedia
         }
 
         return $milisecond;
+    }
+
+    public function getInCheckCountAttribute()
+    {
+        return count($this->projectInCheck);
     }
 
     public function getClassCssAttribute(): string
