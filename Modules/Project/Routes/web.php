@@ -33,6 +33,7 @@ Route::prefix('client')
     });
 
 });
+
 Route::prefix('author')
     ->name('author.')
     ->middleware(['web', 'verified', 'role:author'])
@@ -40,6 +41,7 @@ Route::prefix('author')
     Route::prefix('projects')->group(function() {
         Route::get('/', [AuthorProjectController::class,'index'])->name('projects.index');
         Route::get('/show/{project_id}', [AuthorProjectController::class,'show'])->name('projects.show');
+        Route::get('/refused/{project_id}', [AuthorProjectController::class,'refused'])->name('projects.refused');
         Route::post('/project_in_work', [AuthorProjectController::class,'projectInWork'])->name('projects.projectInWork');
     });
 

@@ -237,7 +237,7 @@
 
                             <div class="btns__next">
                                 <button><img src="{{ asset('img/_src/okey__btn__next.png') }}" alt="okey__btn__next">ОТПРАВИТЬ ›</button>
-                                <a href="#">Отказаться от проекта</a>
+                                <a href="{{ route('author.projects.refused', ['project_id' => $project->id]) }}">Отказаться от проекта</a>
                             </div>
                         </form>
                     </div>

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Project\Entities\Project;
 use Modules\Project\Repository\ProjectAuthorRepository;
+use Modules\Project\Repository\ProjectClientRepository;
 use Modules\Project\Repository\ProjectInWorkRepository;
 
 class AuthorProjectController extends Controller
@@ -64,24 +65,11 @@ class AuthorProjectController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
+    public function refused($project_id, ProjectInWorkRepository $inWorkRepository, ProjectClientRepository $projectClientRepository)
     {
-        //
-    }
+        $project = $projectClientRepository->model()->where('id',$project_id)->first();
+        $inWorkRepository->refused($project);
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect()->back()->with(['success' => trans('project::author.project_refused')]);
     }
 }

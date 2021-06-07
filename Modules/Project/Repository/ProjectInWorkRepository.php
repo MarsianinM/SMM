@@ -35,20 +35,36 @@ class ProjectInWorkRepository
 
     public function deleted(Project $project)
     {
-        $project_in_work = ProjectInWork::where('id',$project->projectAuthorInWork->id)
+        $project_in_work = ProjectInWork::where('project_id',$project->id)
+            ->where('status', 'in_work')
             ->where('created_at', '<=', Carbon::now()->addMinutes(-25)->toDateTimeString())
             ->get();
         foreach ($project_in_work as $item){
             $item->delete();
         }
-        /* ProjectInWork::where('id',$project->projectAuthorInWork->id)
-            ->where('created_at', '<=', Carbon::now()->addMinutes(-25)->toDateTimeString())
-            ->delete();*/
-        $projectbay = ProjectCountBay::where('project_id',$project->projectAuthorInWork->id)->whereStatus('1')->first();
+        $projectbay = ProjectCountBay::where('project_id',$project->id)->whereStatus('1')->first();
+
         foreach ($project_in_work as $item){
             $projectbay->count += 1;
         }
         $projectbay->save();
     }
 
+    /**
+     * canceled project in user
+     *
+     */
+    public function refused(Project $project)
+    {
+        $project_in_work = ProjectInWork::where('project_id',$project->id)
+            ->where('status', 'in_work')
+            ->where('author_id', auth()->id())
+            ->first();
+        $project_in_work->update(['status'=>'refused']);
+        $projectbay = ProjectCountBay::where('project_id',$project->id)->whereStatus('1')->first();
+
+        $projectbay->count += 1;
+
+        $projectbay->save();
+    }
 }

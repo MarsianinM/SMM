@@ -77,7 +77,43 @@ class ProjectClientRepository
         if($data['author_group_id'] == 0){
             $data['author_group_id'] = null;
         }
-        $result = $project->update($data);
+
+        $result = $project->update(Arr::except($data, ['day_active','limit', '_token']));
+
+        if(!$result) return false;
+
+        if(Arr::has($data, 'limit')){
+            $limit = Arr::add($data['limit'], 'project_id', $project->id);
+            $projectLimit = ProjectLimit::where('project_id', $project->id)->first();
+            if(!$projectLimit){
+                ProjectLimit::create($limit);
+            }else{
+                $projectLimit->update($limit);
+            }
+
+        }
+        if(Arr::has($data, 'day_active')){
+            $day_active = Arr::add($data['day_active'], 'project_id', $project->id);
+            $projectLimitDay = ProjectLimitDay::where('project_id', $project->id)->first();
+            if(!$projectLimitDay){
+                ProjectLimitDay::create($day_active);
+            }else{
+                $projectLimitDay->update($day_active);
+            }
+        }
+
+        if(Arr::has($data, 'social')){
+            $social_limit = Arr::add($data['social'], 'project_id', $project->id);
+            $projectSocialLimit = ProjectSocialLimit::where('project_id', $project->id)->first();
+            if(!$projectSocialLimit){
+                ProjectSocialLimit::create($social_limit);
+            }else{
+                $projectSocialLimit->update($social_limit);
+            }
+        }
+
+        return $result;
+
         /*if (Arr::get($data, 'image') instanceof UploadedFile) {
             $page->clearMediaCollection('projects');
             $page->addMedia($data['image'])
@@ -86,7 +122,6 @@ class ProjectClientRepository
                  })*/
                /* ->toMediaCollection('projects');
         }*/
-        return $result;
     }
 
     public function getProjects($request = false)

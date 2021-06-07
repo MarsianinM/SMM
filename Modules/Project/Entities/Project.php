@@ -96,7 +96,7 @@ class Project extends Model implements HasMedia
      */
     public function projectAuthorInWork(): BelongsTo
     {
-        return $this->belongsTo(ProjectInWork::class, 'id','project_id')->where('author_id',auth()->id());
+        return $this->belongsTo(ProjectInWork::class, 'id','project_id')->where('status', 'in_work')->where('author_id',auth()->id());
     }
 
     /**
