@@ -166,7 +166,7 @@ class ClientProjectController extends Controller
     public function countBay(Request $request, ProjectCountBayRepository $projectCountBayRepository): RedirectResponse
     {
         $countBay = $projectCountBayRepository->save($request->except('_token'));
-        if(!$countBay) return back()->withErrors('Ошибка напишите в службу поддержки');
+        if(!$countBay) return back()->withErrors('Ошибка напишите в службу поддержки');//ERROR
 
         if(!empty($countBay['error'])) return back()->withErrors($countBay['error']);
 
@@ -180,6 +180,19 @@ class ClientProjectController extends Controller
         ]);
     }
 
+    public function projectVerified($project_id, ProjectInWorkRepository $inWorkRepository)
+    {
+        $return = $inWorkRepository->verified($project_id);
+        if(!$return)  return back()->withErrors('Ошибка!!! Напишите в службу поддержки');//ERROR
+        return back()->with('success',trans('project::client.verified'));
+    }
+
+    public function projectRejected($project_id, ProjectInWorkRepository $inWorkRepository)
+    {
+        $return = $inWorkRepository->rejected($project_id);
+        if(!$return)  return back()->withErrors('Ошибка!!! Напишите в службу поддержки');//ERROR
+        return back()->with('success',trans('project::client.rejected'));
+    }
     /**
      * Remove the specified resource from storage.
      * @param Project $project
@@ -189,7 +202,7 @@ class ClientProjectController extends Controller
     public function destroy(Project $project): RedirectResponse
     {
         $project_title = $project->title;
-        if(!$project->delete()) return back()->withErrors('Ошибка напишите в службу поддержки');
+        if(!$project->delete()) return back()->withErrors('Ошибка напишите в службу поддержки');//ERROR
         return back()->with('success','Проект << '.$project_title.' >> удален!!!');
     }
 }

@@ -31,6 +31,8 @@ Route::prefix('client')
         Route::post('/count_bay', [ClientProjectController::class,'countBay'])->name('projects.count_bay');
         Route::get('/destroy/{project}', [ClientProjectController::class,'destroy'])->name('projects.destroy');
         Route::get('/project_in_check/{project}', [ClientProjectController::class,'projectInCheck'])->name('projects.projectInCheck');
+        Route::get('/project_verified/{project}', [ClientProjectController::class,'projectVerified'])->name('projects.projectVerified');
+        Route::get('/project_rejected/{project}', [ClientProjectController::class,'projectRejected'])->name('projects.projectRejected');
     });
 
 });

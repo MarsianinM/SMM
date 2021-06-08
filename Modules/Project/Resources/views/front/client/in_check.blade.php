@@ -5,17 +5,17 @@
     @if(!empty($projects) && count($projects))
         <div class="project__top">
             <div class="project__title">
-                {{ $projects[0]->project->title }}
+                Проект - {{ $projects[0]->project->title }}
             </div>
 
         </div>
         <div class="all__project">
         @foreach($projects as $project)
             <div class="project__item green__project">
-                <div class="describe__project">
+                <div class="describe__project" style="width: 215px;">
                     <div class="describe__id">
                         <p>ID - <span class="project_id">{{ $project->project->id }}</span></p>
-                        <span class="status__project active__status">{{ $project->project->status }}</span>
+                        {{--<span class="status__project active__status">{{ $project->project->status }}</span>--}}
                     </div>
 
                     <div class="describe__inner">
@@ -23,15 +23,36 @@
                         <p class="paragraph__describe">
                            {{ $project->project->description }}
                         </p>
+                    </div>
                 </div>
 
-                <div class="data__project">
+                <div class="data__project" style="width: 365px;">
                     <div class="item__data">
                         <div class="data__text">
                             {{ $project->author->name }}
                         </div>
-
                     </div>
+                    @if(!empty($project->data['url']))
+                        <div class="item__data">
+                            <div class="data__text">
+                                <a target="_blank" href="{{ $project->data['url'] }}">{{ $project->data['url'] }}</a>
+                            </div>
+                        </div>
+                    @endif
+                    @if(!empty($project->data['author_link']))
+                        <div class="item__data">
+                            <div class="data__text">
+                                <a target="_blank" href="{{ $project->data['author_link'] }}">{{ $project->data['author_link'] }}</a>
+                            </div>
+                        </div>
+                    @endif
+                    @if(!empty($project->data['description']))
+                        <div class="item__data">
+                            <div class="data__text">
+                                {{ $project->data['description'] }}
+                            </div>
+                        </div>
+                    @endif
 
                 </div>
                 <div class="tariph__project">
@@ -109,10 +130,25 @@
                         до 10 сентября 2021 года
                     </div>
 
+                    <div class="enter__btn" style="margin-bottom: 40px">
+                        <a href="{{ route('client.projects.projectVerified', $project->id) }}">
+                            <span>
+                                <img src="{{ asset('img/_src/play.svg') }}" alt="zapusk__img">
+                            </span>
+                            @lang('project::client.sub_verified')
+                        </a>
+                        <hr>
+                        <a class="off" href="{{ route('client.projects.projectRejected', $project->id) }}">
+                            <span>
+                                {{--<img src="{{ asset('img/_src/play.svg') }}" alt="zapusk__img">--}}
+                            </span>
+                            @lang('project::client.sub_rejected')
+                        </a>
+                    </div>
+
                     <div class="absolute__checkbox">
                         <input type="checkbox" id="choose__check1">
                         <label for="choose__check1">Выбрать</label>
-
                     </div>
 
                 </div>

@@ -99,6 +99,7 @@ class User extends Authenticatable implements /*MustVerifyEmail,*/ HasMedia
     {
         return $this->hasMany(Balance::class)->with(['currency']);
     }
+
     /**
      * Get the balances for the user.
      */
