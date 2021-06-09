@@ -40,7 +40,7 @@ class ProjectClientRepository
      */
     public function store(array $data)
     {
-        if($data['author_group_id'] == 0){
+        if(empty($data['author_group_id']) or $data['author_group_id'] == 0){
             $data['author_group_id'] = null;
         }
 
@@ -147,6 +147,49 @@ class ProjectClientRepository
         }
         $project = $project->get();
         return count($project);
+    }
+
+    public function getStatisticProject()
+    {
+        $data = collect();
+
+        $data->finish_project =  $this->getStatusProjectCount();
+        $data->project_count_bay_sum =  $this->getProjectBayCount();
+        $data->project_in_check =  $this->getStatusProjectCount('in_check');
+        $data->project_refused =  $this->getStatusProjectCount('for_revision');
+
+        return $data;
+    }
+
+
+    protected function getStatusProjectCount($status = 'verified'){
+        return app(ProjectInWorkRepository::class)->model()
+                    ->where('client_id', auth()->id())
+                    ->whereStatus($status)
+                    ->count();
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getProjectBayCount(){
+
+        return app(ProjectCountBayRepository::class)->model()
+            ->whereIn('id', $this->model
+                ->where('client_id', auth()->id())
+                ->get('id'))
+            ->sum('count');
+    }
+    /**
+     * @return mixed
+     */
+    protected function getProjectUserWork(){
+
+        return app(ProjectCountBayRepository::class)->model()
+            ->whereIn('id', $this->model
+                ->where('client_id', auth()->id())
+                ->get('id'))
+            ->sum('count');
     }
 
 }

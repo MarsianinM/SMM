@@ -44,6 +44,7 @@ class ClientProjectController extends Controller
             'projects'          => $this->rep->getProjects($request->all()),
             'activeProject'     => $this->rep->getActiveProject(),
             'activeVipProject'  => $this->rep->getActiveProject(true),
+            'projectStatistic'  => $this->rep->getStatisticProject(),
             'request_sort'      => $request->get('sort') ?? 'default'
         ]);
     }
@@ -175,8 +176,11 @@ class ClientProjectController extends Controller
 
     public function projectInCheck($project, ProjectInWorkRepository $inWorkRepository)
     {
+        $projects = $inWorkRepository->getInCheckProject($project);
+        if(!count($projects)) return redirect()->route('client.projects.index')->with('success',trans('project::client.project_no_verified'));
+
         return view('project::front.client.in_check',[
-            'projects' => $inWorkRepository->getInCheckProject($project),
+            'projects' => $projects,
         ]);
     }
 

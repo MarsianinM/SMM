@@ -1033,6 +1033,9 @@ body {
   top: 50%;
   transform: translateY(-50%);
   right: 5px;
+  span{
+      display: block;
+  }
 }
 .menu {
   margin-left: 16px;

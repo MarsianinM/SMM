@@ -28,7 +28,7 @@
                                                 <img src="{{ asset('frontend/img/_src/balance__item.png') }}" alt="balance__item"></span>БАЛАНС:</a>
                                 <p>
                                     @foreach(auth()->user()->user_balances as $balance)
-                                        {{ $balance }}
+                                        <span class="balance">{{ $balance }}</span>
                                     @endforeach
                                     {{--UAH 672.5--}}
                                     {{--RUB {{ Auth::user()->getBalanceByCurrency('RUB') }}
@@ -46,7 +46,7 @@
                         </div>
                         <div class="personal-name">
                             <p>
-                                Senboards
+                                {{ auth()->user()->name }}
                             </p>
                             <span class="personal1">
                                 <img src="{{ asset('img/_src/'.LaravelLocalization::getCurrentLocaleName().'.svg') }}"  class="flag-russia">

@@ -21,6 +21,13 @@ class ProjectCountBayRepository
     }
 
     /**
+     * @return ProjectCountBay
+     */
+    public function model(): ProjectCountBay
+    {
+        return $this->model;
+    }
+    /**
      * @param array $data
      * @param ProjectClientRepository $projectClientRepository
      * @param BalanceFrontRepository $balance

@@ -12,6 +12,7 @@ return [
     //
     'verified'                          => 'Проект оплачен',
     'rejected'                          => 'Проект отклонен',
+    'project_no_verified'               => 'Проектов на проверки нету',
 
     //
     'sub_verified'                      => 'Принять',

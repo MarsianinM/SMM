@@ -58,22 +58,22 @@
         <div class="project__top3">
             <div class="flex__top3">
                 <div class="text__flex">@lang('project::all_users.total_completed')</div>
-                <div class="text__cifra green__data">4519</div>
+                <div class="text__cifra green__data">{{ $projectStatistic->finish_project }}</div>
             </div>
 
             <div class="flex__top3">
                 <div class="text__flex">@lang('project::all_users.paid')</div>
-                <div class="text__cifra green__data">150</div>
+                <div class="text__cifra green__data">{{ $projectStatistic->project_count_bay_sum }}</div>
             </div>
 
             <div class="flex__top3">
                 <div class="text__flex">@lang('project::all_users.on_check')</div>
-                <div class="text__cifra red__data">150</div>
+                <div class="text__cifra red__data">{{ $projectStatistic->project_in_check }}</div>
             </div>
 
             <div class="flex__top3">
                 <div class="text__flex">@lang('project::all_users.on_completion')</div>
-                <div class="text__cifra black__data">150</div>
+                <div class="text__cifra black__data">{{ $projectStatistic->project_refused }}</div>
             </div>
 
             <div class="flex__top3">

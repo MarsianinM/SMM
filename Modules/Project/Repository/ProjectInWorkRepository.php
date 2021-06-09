@@ -23,6 +23,14 @@ class ProjectInWorkRepository
         $this->model = $project;
     }
 
+    /**
+     * @return ProjectInWork
+     */
+    public function model(): ProjectInWork
+    {
+        return $this->model;
+    }
+
     public function add(Request $request)
     {
         $project = ProjectCountBay::where('project_id',$request->get('project_id'))->first();
@@ -113,11 +121,24 @@ class ProjectInWorkRepository
               'user_id'         => $ptojectInWork->author_id,
               'currency_id'     => $ptojectInWork->project->currency_id,
         ];
-
         if(count($ptojectInWork->author->balances)){
-            $balance_result = Balance::where('user_id',$balance['user_id'])
+            $balance_results = $ptojectInWork->author->balances;/*Balance::where('user_id',$balance['user_id'])
                                         ->where('currency_id',$balance['currency_id'])
-                                        ->update($balance);
+                                        ->update($balance);*/
+            $active = false;
+            foreach ($balance_results as $item){
+                if($item->currency_id == $balance['currency_id']){
+                    $active = true;
+                    $item->amount += $balance['amount'];
+                    $item->save();
+                }
+            }
+
+            if(!$active){
+                $balance_result = Balance::create($balance);
+            }else{
+                $balance_result = $active;
+            }
         }else{
           $balance_result = Balance::create($balance);
         }

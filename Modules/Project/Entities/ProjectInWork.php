@@ -36,7 +36,7 @@ class ProjectInWork extends Model
         'project_id', 'client_id', 'author_id', 'data', 'status', 'created_at'
     ];
 
-    protected static array $status = ['in_work','in_check','verified','rejected','refused'/*Отменен*/];
+    protected static array $status = ['in_work','in_check','verified','rejected','refused'/*Отменен*/,'for_revision'];
 
     /**
      * Project find
