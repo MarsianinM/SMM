@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Currency\Entities\Currency;
 use Modules\ProjectLimits\Entities\ProjectLimit;
@@ -71,7 +72,7 @@ class Project extends Model implements HasMedia
     /**
      * Get the projects for the user.
      */
-    public function author(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function author(): HasMany
     {
         return $this->hasMany(User::class, 'author_id');
     }
@@ -101,10 +102,41 @@ class Project extends Model implements HasMedia
                     ->where('author_id',auth()->id());
     }
 
-    public function projectInCheck()
+    /**
+     * @return HasMany
+     */
+    public function projectInCheck(): HasMany
     {
         return $this->hasMany(ProjectInWork::class,'project_id', 'id')
                     ->where('status', 'in_check')
+                    ->where('client_id',auth()->id());
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function projectForRevision(): HasMany
+    {
+        return $this->hasMany(ProjectInWork::class,'project_id', 'id')
+                    ->where('status', 'for_revision')
+                    ->where('client_id',auth()->id());
+    }
+    /**
+     * @return HasMany
+     */
+    public function projectVerified(): HasMany
+    {
+        return $this->hasMany(ProjectInWork::class,'project_id', 'id')
+                    ->where('status', 'verified')
+                    ->where('client_id',auth()->id());
+    }
+    /**
+     * @return HasMany
+     */
+    public function projectInWork(): HasMany
+    {
+        return $this->hasMany(ProjectInWork::class,'project_id', 'id')
+                    ->where('status', 'in_work')
                     ->where('client_id',auth()->id());
     }
     /**
@@ -238,10 +270,6 @@ class Project extends Model implements HasMedia
         return $milisecond;
     }
 
-    public function getInCheckCountAttribute()
-    {
-        return count($this->projectInCheck);
-    }
 
     public function getClassCssAttribute(): string
     {

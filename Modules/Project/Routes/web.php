@@ -29,6 +29,7 @@ Route::prefix('client')
         Route::get('/activate/{project}', [ClientProjectController::class,'activate'])->name('projects.activate');
         Route::get('/off/{project}', [ClientProjectController::class,'off'])->name('projects.off');
         Route::post('/count_bay', [ClientProjectController::class,'countBay'])->name('projects.count_bay');
+        Route::post('/money_back', [ClientProjectController::class,'moneyBack'])->name('projects.moneyBack');
         Route::get('/destroy/{project}', [ClientProjectController::class,'destroy'])->name('projects.destroy');
         Route::get('/project_in_check/{project}', [ClientProjectController::class,'projectInCheck'])->name('projects.projectInCheck');
         Route::get('/project_verified/{project}', [ClientProjectController::class,'projectVerified'])->name('projects.projectVerified');

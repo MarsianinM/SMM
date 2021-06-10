@@ -73,12 +73,12 @@
 
             <div class="flex__top3">
                 <div class="text__flex">@lang('project::all_users.on_completion')</div>
-                <div class="text__cifra black__data">{{ $projectStatistic->project_refused }}</div>
+                <div class="text__cifra black__data">{{ $projectStatistic->project_for_revision }}</div>
             </div>
 
             <div class="flex__top3">
                 <div class="text__flex"><span><img src="{{ asset('img/_src/standing-up-man-.svg') }}" width="22" alt="man__icon"></span>@lang('project::all_users.contributing_authors')</div>
-                <div class="text__cifra blue__data">150</div>
+                <div class="text__cifra blue__data">{{ $projectStatistic->project_user_work }}</div>
             </div>
         </div>
 
@@ -106,13 +106,13 @@
                         </p>
 
                         <div class="zametka__title">
-                            Заметка
+                            @lang('project::client.project_the_note')
                         </div>
                         <p class="paragraph__describe">
                             @if($project->author_group_id && !empty($project->group->name))
-                                Группа: {{ $project->group->name }}
+                                 {{ $project->group->name }}
                             @else
-                                Группа: Нет группы
+                                @lang('project::client.project_not_group')
                             @endif
                         </p>
 
@@ -145,42 +145,44 @@
                 <div class="data__project">
                     <div class="item__data">
                         <div class="data__text">
-                            Оплаченные
+                            @lang('project::client.project_count_bay')
                         </div>
                         <a class="data_shifr green__data" href="#project_bay-form" rel="modal:open">{{ $project->count_bay }}</a>
                     </div>
 
                     <div class="item__data">
                         <div class="data__text">
-                            На проверке
+                            @lang('project::client.project_in_check')
                         </div>
-                        <a href="{{ route('client.projects.projectInCheck', ['project' => $project->id]) }}" class="data_shifr red__data">{{ $project->in_check_count }}</a>
+                        <a href="{{ route('client.projects.projectInCheck', ['project' => $project->id]) }}" class="data_shifr red__data">
+                            {{ $project->projectInCheck->count() }}
+                        </a>
                     </div>
 
                     <div class="item__data">
                         <div class="data__text">
-                            На доработке
+                            @lang('project::client.project_for_revision')
                         </div>
-                        <span class="data_shifr black__data">50</span>
+                        <span class="data_shifr black__data">{{ $project->projectForRevision->count() }}</span>
                     </div>
 
                     <div class="item__data">
                         <div class="data__text">
-                            Приступившие авторы
+                            @lang('project::client.project_author_work')
                         </div>
-                        <span class="data_shifr blue__data">50</span>
+                        <span class="data_shifr blue__data">{{ $project->projectInWork->count() }}</span>
                     </div>
 
                     <div class="item__data top__border">
                         <div class="data__text">
-                            Завершено
+                            @lang('project::client.project_verified')
                         </div>
-                        <span class="data_shifr green__data">50</span>
+                        <span class="data_shifr green__data">{{ $project->projectVerified->count() }}</span>
                     </div>
 
                     <div class="last__work">
                         <div class="work__text">
-                            Последняя работа:
+                            @lang('project::client.project_last_work')
                         </div>
 
                         <div class="work__under">
@@ -219,12 +221,15 @@
                                 </svg>
                             </a>
                         </li>
+                        @if($project->count_bay)
                         <li>
-                            <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M16.1249 4.64058H15.2809V2.06798C15.2809 0.976769 14.4398 0.0888672 13.4058 0.0888672H4.59384C3.55993 0.0888672 2.71895 0.976769 2.71895 2.06798V4.64065H1.87495C0.839724 4.64058 0 5.52676 0 6.61983V14.9322C0 16.0253 0.83941 16.9112 1.87495 16.9112H16.1249C17.1602 16.9112 18 16.0252 18 14.9322V6.61983C18 5.52676 17.1605 4.64058 16.1249 4.64058ZM12.6908 11.7188C12.6908 12.0349 12.4482 12.2906 12.1491 12.2906H10.4346V14.0993C10.4346 14.4154 10.192 14.6715 9.89294 14.6715H8.10725C7.80815 14.6715 7.56569 14.4154 7.56569 14.0993V12.2906H5.8511C5.55231 12.2906 5.30935 12.0348 5.30935 11.7188V9.83389C5.30935 9.51744 5.55193 9.26177 5.8511 9.26177H7.56556V7.45279C7.56556 7.13707 7.80802 6.88067 8.10713 6.88067H9.89281C10.1919 6.88067 10.4345 7.13707 10.4345 7.45279V9.26177H12.149C12.4481 9.26177 12.6907 9.51751 12.6907 9.83389V11.7188H12.6908ZM13.7813 4.64058H4.21861V2.06798C4.21861 1.84934 4.38696 1.67224 4.59352 1.67224H13.4058C13.6127 1.67224 13.7813 1.84967 13.7813 2.06798V4.64058Z" fill="#92A2BB"/>
-                            </svg>
-
+                            <a href="{{--{{ route('client.projects.moneyBack', $project->id) }}--}}">
+                                <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.1249 4.64058H15.2809V2.06798C15.2809 0.976769 14.4398 0.0888672 13.4058 0.0888672H4.59384C3.55993 0.0888672 2.71895 0.976769 2.71895 2.06798V4.64065H1.87495C0.839724 4.64058 0 5.52676 0 6.61983V14.9322C0 16.0253 0.83941 16.9112 1.87495 16.9112H16.1249C17.1602 16.9112 18 16.0252 18 14.9322V6.61983C18 5.52676 17.1605 4.64058 16.1249 4.64058ZM12.6908 11.7188C12.6908 12.0349 12.4482 12.2906 12.1491 12.2906H10.4346V14.0993C10.4346 14.4154 10.192 14.6715 9.89294 14.6715H8.10725C7.80815 14.6715 7.56569 14.4154 7.56569 14.0993V12.2906H5.8511C5.55231 12.2906 5.30935 12.0348 5.30935 11.7188V9.83389C5.30935 9.51744 5.55193 9.26177 5.8511 9.26177H7.56556V7.45279C7.56556 7.13707 7.80802 6.88067 8.10713 6.88067H9.89281C10.1919 6.88067 10.4345 7.13707 10.4345 7.45279V9.26177H12.149C12.4481 9.26177 12.6907 9.51751 12.6907 9.83389V11.7188H12.6908ZM13.7813 4.64058H4.21861V2.06798C4.21861 1.84934 4.38696 1.67224 4.59352 1.67224H13.4058C13.6127 1.67224 13.7813 1.84967 13.7813 2.06798V4.64058Z" fill="#92A2BB"/>
+                                </svg>
+                            </a>
                         </li>
+                        @endif
                         <li>
                             <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0)">
@@ -272,12 +277,13 @@
                         </li>
                     </ul>
 
-                    <a  href="#project_bay_vip-form" rel="modal:open" class="vip__span @if($project->user_pro) active @endif">vip</a>
+                    <a  href="#project_bay_vip-form" rel="modal:open" class="vip__span @if($project->user_pro) active__vip @endif">vip</a>
 
                     <div class="action__describe">
+                        @if($project->user_pro)
                         до 10 сентября 2021 года
+                        @endif
                     </div>
-
                     <div class="enter__btn">
                         @if($project->status == 'off' or $project->status == 'on_moderation')
                         <a href="{{ route('client.projects.activate', $project->id) }}">
@@ -297,8 +303,7 @@
                     </div>
                     <div class="absolute__checkbox">
                         <input type="checkbox" id="choose__check1">
-                        <label for="choose__check1">Выбрать</label>
-
+                        <label for="choose__check1">@lang('project::client.project_app')</label>
                     </div>
 
                 </div>

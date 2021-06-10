@@ -132,7 +132,15 @@ class ProjectClientRepository
         }else{
             $sql = $sql->orderBy('id','desc');
         }
-        return $sql->with(['rate','subject','projectCount','projectInCheck'])->paginate('8');
+        return $sql->with([
+            'rate',
+            'subject',
+            'projectCount',
+            'projectInCheck',
+            'projectForRevision',
+            'projectInWork',
+            'projectVerified'
+        ])->paginate('8');
     }
 
     /**
@@ -156,7 +164,8 @@ class ProjectClientRepository
         $data->finish_project =  $this->getStatusProjectCount();
         $data->project_count_bay_sum =  $this->getProjectBayCount();
         $data->project_in_check =  $this->getStatusProjectCount('in_check');
-        $data->project_refused =  $this->getStatusProjectCount('for_revision');
+        $data->project_for_revision =  $this->getStatusProjectCount('for_revision');
+        $data->project_user_work =  $this->getStatusProjectCount('in_work');
 
         return $data;
     }
@@ -173,17 +182,6 @@ class ProjectClientRepository
      * @return mixed
      */
     protected function getProjectBayCount(){
-
-        return app(ProjectCountBayRepository::class)->model()
-            ->whereIn('id', $this->model
-                ->where('client_id', auth()->id())
-                ->get('id'))
-            ->sum('count');
-    }
-    /**
-     * @return mixed
-     */
-    protected function getProjectUserWork(){
 
         return app(ProjectCountBayRepository::class)->model()
             ->whereIn('id', $this->model

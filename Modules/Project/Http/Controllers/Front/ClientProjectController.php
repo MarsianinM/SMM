@@ -174,6 +174,10 @@ class ClientProjectController extends Controller
         return back()->with('success','Проект оплачен');
     }
 
+    public function moneyBack(Request $request, ProjectCountBayRepository $projectCountBayRepository)
+    {
+        dd(__FILE__,__LINE__,$request->all());
+    }
     public function projectInCheck($project, ProjectInWorkRepository $inWorkRepository)
     {
         $projects = $inWorkRepository->getInCheckProject($project);
