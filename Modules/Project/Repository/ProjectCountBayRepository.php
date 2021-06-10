@@ -4,6 +4,7 @@
 namespace Modules\Project\Repository;
 
 
+use Illuminate\Http\Request;
 use Modules\Balance\Repository\BalanceFrontRepository;
 use Modules\Project\Entities\Project;
 use Modules\Project\Entities\ProjectCountBay;
@@ -73,5 +74,26 @@ class ProjectCountBayRepository
             return $projectbay->update($data);
         }
         return $this->model->create($data);
+    }
+
+    public function returnMany(Request $request)
+    {
+        $projectCountBay = $this->model
+                    ->where('project_id', $request->get('project_id'))
+                    ->with(['project'])
+                    ->first();
+        $user = auth()->user()->balances;
+        $status = false;
+        foreach (auth()->user()->balances as $balance){
+            if($balance->currency_id === $projectCountBay->project->currency_id){
+                $balance->amount += ($projectCountBay->count * $projectCountBay->price);
+                $status = $balance->save();
+            }
+        }
+        if($status){
+            $projectCountBay->project->update(['status' => 'off']);
+            $projectCountBay->delete();
+        }
+        return $status;
     }
 }
