@@ -1,19 +1,21 @@
 <?php
 
 
+use Modules\ProjectVip\Entities\ProjectVip;
+
 class ProjectVipRepository
 {
     /**
-     * @var Project
+     * @var ProjectVip
      */
-    protected Project $model;
+    protected ProjectVip $model;
 
-    public function __construct(Project $project)
+    public function __construct(ProjectVip $projectVip)
     {
-        $this->model = $project;
+        $this->model = $projectVip;
     }
 
-    public function model(): Project
+    public function model(): ProjectVip
     {
         return $this->model;
     }
