@@ -181,6 +181,7 @@ class ClientProjectController extends Controller
 
         return back()->withErrors('Ошибка напишите в службу поддержки');//ERROR
     }
+
     public function projectInCheck($project, ProjectInWorkRepository $inWorkRepository)
     {
         $projects = $inWorkRepository->getInCheckProject($project);
@@ -188,6 +189,24 @@ class ClientProjectController extends Controller
 
         return view('project::front.client.in_check',[
             'projects' => $projects,
+        ]);
+    }
+
+    public function projectClone(
+        Project $project,
+        SubjectRepository $subjects,
+        CategoryRepository $ratesRep,
+        ProjectGroupRepository $projectGroup,
+        ProjectAuthorGroupRepository $author_group
+    ): Renderable
+    {
+        return view('project::front.client.clone',[
+            'subjects'          => $subjects->getList(),
+            'rates'             => $ratesRep->getListRatesAll(),
+            'project'           => $project->current(),
+            'project_group'     => $projectGroup->getProjectGroup(),
+            'user_group'        => $author_group->getAuthorGroup(),
+            'delimiter'         => '',
         ]);
     }
 
@@ -204,6 +223,7 @@ class ClientProjectController extends Controller
         if(!$return)  return back()->withErrors('Ошибка!!! Напишите в службу поддержки');//ERROR
         return back()->with('success',trans('project::client.rejected'));
     }
+
     /**
      * Remove the specified resource from storage.
      * @param Project $project

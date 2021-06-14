@@ -34,6 +34,7 @@ Route::prefix('client')
         Route::get('/project_in_check/{project}', [ClientProjectController::class,'projectInCheck'])->name('projects.projectInCheck');
         Route::get('/project_verified/{project}', [ClientProjectController::class,'projectVerified'])->name('projects.projectVerified');
         Route::get('/project_rejected/{project}', [ClientProjectController::class,'projectRejected'])->name('projects.projectRejected');
+        Route::get('/project/clone/{project}', [ClientProjectController::class,'projectClone'])->name('projects.clone');
     });
 
 });
