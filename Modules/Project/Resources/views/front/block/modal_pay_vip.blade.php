@@ -14,27 +14,22 @@
     <form action="{{ route('client.projects.count_bay') }}" method="POST">
         @csrf
         <input type="hidden" name="project_id" value="" />
-        <div class="label__form__modal">
+        @if($project_tariffs)
             <div class="main__select__item">
-                <p>@lang('project::project.enter_count')</p>
-                <input class="main__input__other" name="count" type="text" placeholder="@lang('project::project.enter_count')" value="">
+                <p>@lang('project::all_users.enter_subject')
+                    @error('subject_id')
+                    <span class="red__validate">{{ $message }}</span>
+                    @enderror
+                </p>
+                <select class="custom-select1 sources validate__input js-example-basic-single @error('subject_id') is-invalid validate__input @enderror"
+                        name="subject_id">
+                    <option value="0">--</option>
+                    @foreach($project_tariffs as $tarif)
+                        <option @if($tarif->id == old('subject_id')) selected @endif value="{{ $tarif->id }}">{{ $tarif->days }} - Дней ({{ $tarif->amount }})</option>
+                    @endforeach
+                </select>
             </div>
-        </div>
-        <div class="label__form__modal">
-            <div class="main__select__item">
-                <div class="row">
-                    <div class="col-2">
-                        <p>@lang('project::project.enter_price')</p>
-                    </div>
-                    <div class="col-4">
-                        <input class="main__input__other" name="price" type="text" value="">
-                    </div>
-                    <div class="col-4" id="code">
-
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endif
         <div class="modal__btn" style="margin-top: 35px;">
             <button type="submit">@lang('project::project.submit_bay') ›</button>
         </div>

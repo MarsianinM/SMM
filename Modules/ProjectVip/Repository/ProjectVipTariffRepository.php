@@ -1,6 +1,7 @@
 <?php
+namespace Modules\ProjectVip\Repository;
 
-
+use Modules\Currency\Entities\Currency;
 use Modules\ProjectVip\Entities\ProjectVipTariff;
 
 class ProjectVipTariffRepository
@@ -20,9 +21,16 @@ class ProjectVipTariffRepository
         return $this->model;
     }
 
-    public function getVipTariff()
+    public function getVipTariff($currency_id = false)
     {
-        dd(__FILE__,__LINE__,auth()->user(), $currency);
-        return $this->model;
+        if(!$currency_id){
+            $currency = Currency::where('status', '1')->first('id');
+        }else{
+            $currency = Currency::where('id', $currency_id)->first('id');
+        }
+
+        if(is_null($currency)) return false;
+
+        return $this->model->where('currency_id',$currency->id)->get();
     }
 }

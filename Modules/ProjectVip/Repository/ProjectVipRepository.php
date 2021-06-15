@@ -1,12 +1,12 @@
 <?php
-
+namespace Modules\ProjectVip\Repository;
 
 use Modules\ProjectVip\Entities\ProjectVip;
 
 class ProjectVipRepository
 {
     /**
-     * @var ProjectVip
+     * @var ProjectViptVip
      */
     protected ProjectVip $model;
 

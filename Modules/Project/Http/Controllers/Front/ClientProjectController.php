@@ -13,6 +13,7 @@ use Modules\Project\Repository\ProjectClientRepository;
 use Modules\Project\Repository\ProjectCountBayRepository;
 use Modules\Project\Repository\ProjectGroupRepository;
 use Modules\Project\Repository\ProjectInWorkRepository;
+use Modules\ProjectVip\Repository\ProjectVipTariffRepository;
 use Modules\Rates\Repository\CategoryRepository;
 use Modules\Subjects\Repository\SubjectRepository;
 
@@ -30,7 +31,7 @@ class ClientProjectController extends Controller
 
     /**
      * @param Request $request
-     * @param \ProjectVipTariffRepository $vipTariffRepository
+     * @param ProjectVipTariffRepository $vipTariffRepository
      * @return Renderable
      */
     public function index(
@@ -44,7 +45,7 @@ class ClientProjectController extends Controller
             'activeVipProject'  => $this->rep->getActiveProject(true),
             'projectStatistic'  => $this->rep->getStatisticProject(),
             'request_sort'      => $request->get('sort') ?? 'default',
-            'project_tariff'    => ''
+            'project_tariffs'    => $vipTariffRepository->getVipTariff(),
         ]);
     }
 
