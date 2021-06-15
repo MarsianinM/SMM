@@ -6,9 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Currency\Entities\Currency;
 use Modules\Project\Entities\Project;
-use Modules\Project\Entities\ProjectGroup;
 use Modules\Project\Http\Requests\ClientProjectRequest;
 use Modules\Project\Repository\ProjectAuthorGroupRepository;
 use Modules\Project\Repository\ProjectClientRepository;
@@ -16,8 +14,8 @@ use Modules\Project\Repository\ProjectCountBayRepository;
 use Modules\Project\Repository\ProjectGroupRepository;
 use Modules\Project\Repository\ProjectInWorkRepository;
 use Modules\Rates\Repository\CategoryRepository;
-use Modules\Subjects\Entities\Subject;
 use Modules\Subjects\Repository\SubjectRepository;
+
 
 class ClientProjectController extends Controller
 {
@@ -31,13 +29,13 @@ class ClientProjectController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     * @param ProjectClientRepository $projectClientRepository
      * @param Request $request
+     * @param \ProjectVipTariffRepository $vipTariffRepository
      * @return Renderable
      */
     public function index(
-        Request $request
+        Request $request,
+        ProjectVipTariffRepository $vipTariffRepository
     ): Renderable
     {
         return view('project::front.client.index',[
@@ -45,7 +43,8 @@ class ClientProjectController extends Controller
             'activeProject'     => $this->rep->getActiveProject(),
             'activeVipProject'  => $this->rep->getActiveProject(true),
             'projectStatistic'  => $this->rep->getStatisticProject(),
-            'request_sort'      => $request->get('sort') ?? 'default'
+            'request_sort'      => $request->get('sort') ?? 'default',
+            'project_tariff'    => ''
         ]);
     }
 

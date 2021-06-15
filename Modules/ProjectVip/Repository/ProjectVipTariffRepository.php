@@ -19,4 +19,10 @@ class ProjectVipTariffRepository
     {
         return $this->model;
     }
+
+    public function getVipTariff()
+    {
+        dd(__FILE__,__LINE__,auth()->user(), $currency);
+        return $this->model;
+    }
 }

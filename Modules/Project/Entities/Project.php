@@ -12,6 +12,7 @@ use Modules\Currency\Entities\Currency;
 use Modules\ProjectLimits\Entities\ProjectLimit;
 use Modules\ProjectLimits\Entities\ProjectLimitDay;
 use Modules\ProjectLimits\Entities\ProjectSocialLimit;
+use Modules\ProjectVip\Entities\ProjectVip;
 use Modules\Rates\Entities\Rate;
 use Modules\Subjects\Entities\Subject;
 use Modules\Users\Entities\User;
@@ -92,6 +93,8 @@ class Project extends Model implements HasMedia
     {
         return $this->belongsTo(ProjectInWork::class, 'id','project_id');
     }
+
+
     /**
      * Get the projects for the status in author.
      */
@@ -110,6 +113,15 @@ class Project extends Model implements HasMedia
         return $this->hasMany(ProjectInWork::class,'project_id', 'id')
                     ->where('status', 'in_check')
                     ->where('client_id',auth()->id());
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function projectVip(): BelongsTo
+    {
+        return $this->belongsTo(ProjectVip::class, 'id','project_id')
+                    ->where('status', 1)
+                    ->where('created_at','>=',now());
     }
 
     /**
@@ -242,6 +254,10 @@ class Project extends Model implements HasMedia
         $content = collect($this->rate->rateDescription)->keyBy('lang_key');
 
         return $content[config('app.locale')]->title ?? '';
+    }
+    public function getVipStatusAttribute()
+    {
+         return !is_null($this->projectVip);
     }
 
     /**

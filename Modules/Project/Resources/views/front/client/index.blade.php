@@ -282,7 +282,7 @@
                         </li>
                     </ul>
 
-                    <a  href="#project_bay_vip-form" rel="modal:open" class="vip__span @if($project->user_pro) active__vip @endif">vip</a>
+                    <a  href="#project_bay_vip-form" rel="modal:open" class="vip__span @if($project->vip_status) active__vip @endif">vip</a>
 
                     <div class="action__describe">
                         @if($project->user_pro)

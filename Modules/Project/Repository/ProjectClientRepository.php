@@ -127,20 +127,25 @@ class ProjectClientRepository
     public function getProjects($request = false)
     {
         $sql = $this->model->where('client_id',auth()->user()->id);
-        if(!empty($request['sort'])){
-            $sql = $sql->orderBy($request['sort']);
-        }else{
-            $sql = $sql->orderBy('id','desc');
-        }
-        return $sql->with([
+        $sql = $sql->with([
             'rate',
             'subject',
             'projectCount',
             'projectInCheck',
             'projectForRevision',
             'projectInWork',
-            'projectVerified'
-        ])->paginate('8');
+            'projectVerified',
+            'projectVip'  => function ($query) {
+                $query->orderBy('created_at', 'desc');
+
+            },
+        ]);
+        if(!empty($request['sort'])){
+            $sql = $sql->orderBy($request['sort']);
+        }else{
+            $sql = $sql->orderBy('id','desc');
+        }
+        return $sql->paginate('8');
     }
 
     /**
@@ -151,7 +156,9 @@ class ProjectClientRepository
     {
         $project = $this->model->where('status', 'active');
         if($vip){
-            $project = $project->where('pro', '1');
+            $project = $project->whereHas('projectVip', function ($query) {
+                return $query;
+            });
         }
         $project = $project->get();
         return count($project);
