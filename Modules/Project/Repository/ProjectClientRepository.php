@@ -137,7 +137,6 @@ class ProjectClientRepository
             'projectVerified',
             'projectVip'  => function ($query) {
                 $query->orderBy('created_at', 'desc');
-
             },
         ]);
         if(!empty($request['sort'])){
@@ -145,6 +144,7 @@ class ProjectClientRepository
         }else{
             $sql = $sql->orderBy('id','desc');
         }
+
         return $sql->paginate('8');
     }
 

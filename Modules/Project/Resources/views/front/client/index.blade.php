@@ -346,5 +346,9 @@
             $('#project_bay-form input[name="project_id"]').val(project_id);
             $('#project_bay-form #code').html('<p>'+code+'</p>');
         });
+        $(document).on('click','a[href="#project_bay_vip-form"]',function (){
+            let project_id = $(this).parents('.project__item').find('.project_id').text();
+            $('#project_bay_vip-form input[name="project_id"]').val(project_id);
+        });
     </script>
 @endsection

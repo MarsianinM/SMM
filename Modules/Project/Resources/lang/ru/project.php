@@ -168,6 +168,7 @@ return [
     'text_title_activate'                   => 'Статистика:',
     'text_project_activate'                 => 'Активных проектов: :PROJECT',
     'text_project_vip_activate'             => 'VIP проектов:  :VIP',
+    'project_tariff_option'                 => ':AMOUNT :CURRENCY на :DAY день',
 
     //RULES
     'error_client'                          => 'Вы не авторизованы или произошла ошибка, обратитесть в техническую поддержку.',

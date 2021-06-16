@@ -13,6 +13,8 @@ use Modules\Project\Repository\ProjectClientRepository;
 use Modules\Project\Repository\ProjectCountBayRepository;
 use Modules\Project\Repository\ProjectGroupRepository;
 use Modules\Project\Repository\ProjectInWorkRepository;
+use Modules\ProjectVip\Http\Requests\BayVipRequests;
+use Modules\ProjectVip\Repository\ProjectVipRepository;
 use Modules\ProjectVip\Repository\ProjectVipTariffRepository;
 use Modules\Rates\Repository\CategoryRepository;
 use Modules\Subjects\Repository\SubjectRepository;
@@ -222,6 +224,21 @@ class ClientProjectController extends Controller
         $return = $inWorkRepository->rejected($project_id);
         if(!$return)  return back()->withErrors('Ошибка!!! Напишите в службу поддержки');//ERROR
         return back()->with('success',trans('project::client.rejected'));
+    }
+
+    /**
+     * Bay vip status
+     * @param BayVipRequests $request
+     * @param ProjectVipRepository $projectVipRepository
+     * @return RedirectResponse
+     */
+    public function bayVip(BayVipRequests $request, ProjectVipRepository $projectVipRepository): RedirectResponse
+    {
+        $result = $projectVipRepository->saveVip($request->all());
+
+        if(!empty($result['error'])) return back()->withErrors($result['error']);
+
+        return back()->with(['success' => $result['success']]);
     }
 
     /**

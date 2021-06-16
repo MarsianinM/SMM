@@ -29,6 +29,12 @@ class BalanceFrontRepository
         return $this->balance;
     }
 
+    public function __construct(Balance $balance,BalanceHistory $balance_history)
+    {
+        $this->balance = $balance;
+        $this->balance_history = $balance_history;
+    }
+
     /**
      * @return BalanceHistory
      */
@@ -37,10 +43,12 @@ class BalanceFrontRepository
         return $this->balance_history;
     }
 
-    public function __construct(Balance $balance,BalanceHistory $balance_history)
+    /**
+     * @return Balance
+     */
+    public function modelBalance(): Balance
     {
-        $this->balance = $balance;
-        $this->balance_history = $balance_history;
+        return $this->balance;
     }
 
     /**
@@ -122,5 +130,6 @@ class BalanceFrontRepository
             return $this->balance_history->create($balanceHistory);
         }
 
+        return false;
     }
 }

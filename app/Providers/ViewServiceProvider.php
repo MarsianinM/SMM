@@ -32,6 +32,9 @@ class ViewServiceProvider extends ServiceProvider
             $view->with('currency', \Cache::remember('currency', 3600, function () {
                 return Currency::where('activate', '1')->orderBy('sort')->get();
             }));
+            $view->with('current_currency', \Cache::remember('current_currency', 3600, function () {
+                return Currency::where('activate', '1')->where('status', '1')->first();
+            }));
             $view->with('array_localization', \Cache::remember('array_localization', 3600, function () {
                 return LaravelLocalization::getSupportedLocales();
             }));
