@@ -113,15 +113,6 @@ class ProjectClientRepository
         }
 
         return $result;
-
-        /*if (Arr::get($data, 'image') instanceof UploadedFile) {
-            $page->clearMediaCollection('projects');
-            $page->addMedia($data['image'])
-                /* ->usingFileName(function($fileName) {
-                     return (string)strtolower(Str::slug($fileName));
-                 })*/
-               /* ->toMediaCollection('projects');
-        }*/
     }
 
     public function getProjects($request = false)

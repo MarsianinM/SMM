@@ -122,6 +122,7 @@ return [
     'enter_ar_count_subscribers'            => 'Количество подписчиков',
     'enter_ar_count_followers'              => 'Количество фолловеров',
     'enter_ar_disable'                      => 'Отключить проверку',
+    'enter_file'                            => 'Скриншот',
 
 
     //PROJECT Helper

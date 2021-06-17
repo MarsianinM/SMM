@@ -221,7 +221,7 @@
                             Ссылка на запись, которой сделали репост
                         </div>
 
-                        <form action="{{ route('author.projects.projectInCheck') }}" class="next__form" method="POST">
+                        <form action="{{ route('author.projects.projectInCheck') }}" class="next__form" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="project_id" value="{{ $project->id }}" />
                             <input type="hidden" name="user_id" value="{{ auth()->id() }}" />
@@ -247,21 +247,36 @@
                                             <input class="main__input__other" type="text" name="data[author_link]"
                                                    value="" placeholder="ссылка на Вашу стенку/страницу" required>
                                         </div>
+                                        @if(!empty($project->screenshot) && $project->screenshot == 1)
+                                            <div class="choose__file" style="margin-top: 25px">
+                                                <label class="filelabel">
+                                                    <img src="{{ asset('img/_src/choose__file.svg') }}" alt="choose__file">
+                                                    <span class="title">
+                                                        @lang('project::project.enter_file')
+                                                    </span>
+                                                    <input class="FileUpload1" id="FileInput" name="booking_attachment" type="file">
+                                                </label>
+                                                <span>@lang('project::project.enter_size_file_help')</span>
+                                            </div>
+                                        @endif
+
                                         <div class="under__analog">
                                             <a id="click_textarea" href="#">Необходимо указать дополнительную информацию заказчику?</a>
                                             {{--<span>Черновик сохранен в 16:12</span>--}}
                                         </div>
+                                        {{--<input value="" name="NewCommentForm[stop_words]" id="NewCommentForm_stop_words" type="hidden">
+                                        <input value="0" name="NewCommentForm[symbols]" id="NewCommentForm_symbols" type="hidden">
+                                        <input value="" name="NewCommentForm[pages]" id="NewCommentForm_pages" type="hidden">
+                                        <input value="53" name="NewCommentForm[tarif]" id="NewCommentForm_tarif" type="hidden">
+                                        <input value="0" name="NewCommentForm[notlong]" id="NewCommentForm_notlong" type="hidden">--}}
+                                    </div>
+                                    <div class="right__main__nav">
                                         <div class="main__select__item">
                                             <p>Дополнительная информация заказчику</p>
                                             <textarea name="data[description]" id="data_description"
                                                       placeholder="Здесь Вы можете указать дополнительную информацию заказчику. Внимание! Передача контактных данных запрещена!"></textarea>
                                         </div>
 
-                                        {{--<input value="" name="NewCommentForm[stop_words]" id="NewCommentForm_stop_words" type="hidden">
-                                        <input value="0" name="NewCommentForm[symbols]" id="NewCommentForm_symbols" type="hidden">
-                                        <input value="" name="NewCommentForm[pages]" id="NewCommentForm_pages" type="hidden">
-                                        <input value="53" name="NewCommentForm[tarif]" id="NewCommentForm_tarif" type="hidden">
-                                        <input value="0" name="NewCommentForm[notlong]" id="NewCommentForm_notlong" type="hidden">--}}
                                     </div>
                                 </div>
                             </div>
@@ -276,7 +291,6 @@
                     <div class="bottom__minimum__title">
                         Общие правила
                     </div>
-
                     <ul class="minimum__ul">
                         <li>• Перед выполнением проекта ознакомьтесь с условиями, установленными заказчиком.</li>
                         <li>• Обязательно следуйте правилам, иначе заказчик вправе отказать в оплате.</li>
@@ -297,12 +311,12 @@
             var upgradeTime = {{ (int)$project->timer_work }};
             var seconds = upgradeTime;
             function timer() {
-                var days        = Math.floor(seconds/24/60/60);
-                var hoursLeft   = Math.floor((seconds) - (days*86400));
-                var hours       = Math.floor(hoursLeft/3600);
-                var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
-                var minutes     = Math.floor(minutesLeft/60);
-                var remainingSeconds = seconds % 60;
+                let days        = Math.floor(seconds/24/60/60),
+                    hoursLeft   = Math.floor((seconds) - (days*86400)),
+                    hours       = Math.floor(hoursLeft/3600),
+                    minutesLeft = Math.floor((hoursLeft) - (hours*3600)),
+                    minutes     = Math.floor(minutesLeft/60),
+                    remainingSeconds = seconds % 60;
                 function pad(n) {
                     return (n < 10 ? "0" + n : n);
                 }
@@ -316,7 +330,7 @@
                     seconds--;
                 }
             }
-            var countdownTimer = setInterval('timer()', 1000);
+            let countdownTimer = setInterval('timer()', 1000);
         @endif
     </script>
 @endsection

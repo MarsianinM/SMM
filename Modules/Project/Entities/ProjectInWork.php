@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Users\Entities\User;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class ProjectInWork extends Model
+class ProjectInWork extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
     /**
      * The table associated with the model.
      *
@@ -75,5 +78,17 @@ class ProjectInWork extends Model
     public static function getListStatus(): array
     {
         return self::$status;
+    }
+
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('project_in_work');
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')->width(280)->height(350);
+        $this->addMediaConversion('large')->width(1024)->height(1024);
     }
 }

@@ -5,6 +5,8 @@ namespace Modules\Project\Repository;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
 use Modules\Balance\Entities\Balance;
 use Modules\Balance\Repository\BalanceFrontRepository;
 use Modules\Project\Entities\Project;
@@ -91,6 +93,17 @@ class ProjectInWorkRepository
             ->first();
         if(!$project_in_work) return ['error' => trans('project::author.error_project_update')];
         $data['status'] = 'in_check';
+
+
+        if (Arr::get($data, 'booking_attachment') instanceof UploadedFile) {
+            $project_in_work->clearMediaCollection('project_in_work');
+            $project_in_work->addMedia($data['booking_attachment'])
+                /* ->usingFileName(function($fileName) {
+                     return (string)strtolower(Str::slug($fileName));
+                 })*/
+                ->toMediaCollection('project_in_work');
+        }
+
         return $project_in_work->update($data);
     }
 

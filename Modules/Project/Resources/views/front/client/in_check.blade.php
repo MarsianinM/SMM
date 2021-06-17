@@ -54,6 +54,21 @@
                         </div>
                     @endif
 
+                    @if($project->getMedia('project_in_work')->count())
+                        <div class="item__data">
+                            <div class="data__text">
+                                Скриншот
+                            </div>
+                            <div class="data__text">
+                                <picture class="how-work__image lazy">
+                                    <img class="how-work__img" src="{{ $project->getFirstMediaUrl('project_in_work', 'thumb') }}"  />
+                                </picture>
+
+                            </div>
+                        </div>
+                    @endif
+
+
                 </div>
                 <div class="tariph__project">
                     <div class="tariph__title">
