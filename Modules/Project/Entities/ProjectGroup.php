@@ -16,7 +16,7 @@ class ProjectGroup extends Model
 
     protected static function newFactory()
     {
-        return \Modules\Project\Database\factories\ProjectGroupFactory::new();
+       // return \Modules\Project\Database\factories\ProjectGroupFactory::new();
     }
 
     /**
