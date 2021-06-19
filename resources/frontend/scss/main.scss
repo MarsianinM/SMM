@@ -1067,6 +1067,26 @@ body {
     }
 }
 
+.modal {
+    .main__select__item p {
+        margin: 0 0 10px;
+    }
+    .main__input__other {
+        display: block;
+        font-size: 14px;
+        color: #6c6c6c;
+        border-radius: 5px;
+        border: none;
+        padding-left: 22px;
+        width: 100%;
+        height: 48px;
+        background: #f2f5f8;
+        line-height: 45px;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 700;
+    }
+}
+
 .personal1{
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;

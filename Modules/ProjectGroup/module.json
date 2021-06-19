@@ -1,0 +1,13 @@
+{
+    "name": "ProjectGroup",
+    "alias": "projectgroup",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ProjectGroup\\Providers\\ProjectGroupServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

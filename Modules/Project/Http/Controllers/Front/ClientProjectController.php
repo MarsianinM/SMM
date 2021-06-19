@@ -11,7 +11,7 @@ use Modules\Project\Http\Requests\ClientProjectRequest;
 use Modules\Project\Repository\ProjectAuthorGroupRepository;
 use Modules\Project\Repository\ProjectClientRepository;
 use Modules\Project\Repository\ProjectCountBayRepository;
-use Modules\Project\Repository\ProjectGroupRepository;
+use Modules\ProjectGroup\Repository\ProjectGroupRepository;
 use Modules\Project\Repository\ProjectInWorkRepository;
 use Modules\ProjectVip\Http\Requests\BayVipRequests;
 use Modules\ProjectVip\Repository\ProjectVipRepository;

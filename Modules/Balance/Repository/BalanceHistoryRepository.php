@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Modules\Project\Repository;
+namespace Modules\Balance\Repository;
 
 
 use Modules\Balance\Entities\BalanceHistory;

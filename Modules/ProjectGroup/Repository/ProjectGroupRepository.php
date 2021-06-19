@@ -1,14 +1,9 @@
 <?php
 
 
-namespace Modules\Project\Repository;
+namespace Modules\ProjectGroup\Repository;
 
-
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Arr;
-use Modules\Project\Entities\Project;
-use Modules\Project\Entities\ProjectGroup;
-use Modules\Subjects\Entities\Subject;
+use Modules\ProjectGroup\Entities\ProjectGroup;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
@@ -19,9 +14,18 @@ class ProjectGroupRepository
      */
     protected ProjectGroup $model;
 
+
     public function __construct(ProjectGroup $project)
     {
         $this->model = $project;
+    }
+
+    /**
+     * @return ProjectGroup
+     */
+    public function model(): ProjectGroup
+    {
+        return $this->model;
     }
 
     /**
@@ -42,8 +46,6 @@ class ProjectGroupRepository
      * @param ProjectGroup $page
      * @param $data
      * @return ProjectGroup
-     * @throws FileDoesNotExist
-     * @throws FileIsTooBig
      */
     public function update(ProjectGroup $page, $data): ProjectGroup
     {
@@ -51,7 +53,10 @@ class ProjectGroupRepository
         return $page;
     }
 
-    public function getProjectGroup()
+    /**
+     * @return mixed
+     */
+    public function getProjectGroup(): mixed
     {
         return $this->model
                     ->where('user_id',auth()->user()->id)
@@ -61,4 +66,19 @@ class ProjectGroupRepository
                     ->get();
     }
 
+    /**
+     * @param int $group_id
+     * @return int
+     */
+    public function getCountProject(int $group_id): int
+    {
+        /*$count = 0;
+        $categoryIds = $this->children()->get(['id'])->pluck('id')->toArray();
+
+        $projectGroup = $this->model->where('id', $group_id)->with('child')->first();
+        if(is_null($projectGroup)) return $count;
+
+        return Product::query()->whereIn('category_id', $categoryIds)->count();
+        return $count;*/
+    }
 }

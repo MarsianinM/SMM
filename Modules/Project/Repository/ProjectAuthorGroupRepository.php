@@ -8,7 +8,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Modules\Project\Entities\AuthorGroup;
 use Modules\Project\Entities\Project;
-use Modules\Project\Entities\ProjectGroup;
+use Modules\ProjectGroup\Entities\ProjectGroup;
 use Modules\Subjects\Entities\Subject;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;

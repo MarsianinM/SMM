@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Currency\Entities\Currency;
+use Modules\ProjectGroup\Entities\ProjectGroup;
 use Modules\ProjectLimits\Entities\ProjectLimit;
 use Modules\ProjectLimits\Entities\ProjectLimitDay;
 use Modules\ProjectLimits\Entities\ProjectSocialLimit;
@@ -269,9 +270,9 @@ class Project extends Model implements HasMedia
     }
 
     /**
-     * @return bool
+     * @return bool|int
      */
-    public function getTimerWorkAttribute(): bool|int
+    public function getTimerWorkAttribute()
     {
         if(is_null($this->projectAuthorInWork)){
             return false;

@@ -4,18 +4,11 @@
 namespace Modules\Project\Repository;
 
 
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Modules\Project\Entities\Project;
-use Modules\Project\Entities\ProjectGroup;
 use Modules\ProjectLimits\Entities\ProjectLimit;
 use Modules\ProjectLimits\Entities\ProjectLimitDay;
 use Modules\ProjectLimits\Entities\ProjectSocialLimit;
-use Modules\Rates\Repository\CategoryRepository;
-use Modules\Subjects\Entities\Subject;
-use Modules\Subjects\Repository\SubjectRepository;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class ProjectClientRepository
 {
