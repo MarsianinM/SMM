@@ -66,19 +66,4 @@ class ProjectGroupRepository
                     ->get();
     }
 
-    /**
-     * @param int $group_id
-     * @return int
-     */
-    public function getCountProject(int $group_id): int
-    {
-        /*$count = 0;
-        $categoryIds = $this->children()->get(['id'])->pluck('id')->toArray();
-
-        $projectGroup = $this->model->where('id', $group_id)->with('child')->first();
-        if(is_null($projectGroup)) return $count;
-
-        return Product::query()->whereIn('category_id', $categoryIds)->count();
-        return $count;*/
-    }
 }

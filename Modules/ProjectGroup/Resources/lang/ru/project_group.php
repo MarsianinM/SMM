@@ -24,9 +24,12 @@ return [
 
     //MASSAGE
     'success_create'                    => 'Группа проектов ":PROJECT" создана',
+    'success_delete'                    => 'Группа проектов ":PROJECT" удалена',
+    'success_update'                    => 'Группа проектов ":PROJECT" обновлена',
     'errors_create'                     => 'Произошла ошибкаа!!! Попробуйте еще раз.',
     'errors_not_found'                  => 'Проекта с таким :ID не существует!!!',
-    'success_update'                    => 'Группа проектов ":PROJECT" обновлена',
+    'errors_delete'                     => 'Не получилось удалить проект',
+    'errors_delete_count_project'       => 'В группе есть проекты, перенесите их в другую группу.',
 
     //submit
     'add_group'                     => 'создать группу',

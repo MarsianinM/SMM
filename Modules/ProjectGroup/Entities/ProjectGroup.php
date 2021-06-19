@@ -41,6 +41,8 @@ class ProjectGroup extends Model
      */
     public function getCountProjectAttribute(): int
     {
-        return Project::query()->whereIn('group_id', $this->child()->get(['id'])->pluck('id')->toArray())->count();
+        $ids = $this->child()->get(['id'])->pluck('id')->toArray();
+        $ids[] = $this->id;
+        return Project::query()->whereIn('group_id', $ids)->count();
     }
 }

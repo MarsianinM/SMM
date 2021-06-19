@@ -109,7 +109,8 @@
                             @lang('project::client.project_the_note')
                         </div>
                         <p class="paragraph__describe">
-                            @if($project->author_group_id && !empty($project->group->name))
+
+                            @if($project->group_id && !empty($project->group->name))
                                  {{ $project->group->name }}
                             @else
                                 @lang('project::client.project_not_group')

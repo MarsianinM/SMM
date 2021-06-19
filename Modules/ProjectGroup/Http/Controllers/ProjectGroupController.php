@@ -89,15 +89,20 @@ class ProjectGroupController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
+     * @param Request $request
+     * @param ProjectGroupRepository $projectGroupRepository
+     * @return RedirectResponse
      */
-    public function destroy(Request $request, ProjectGroupRepository $projectGroupRepository)
+    public function destroy(Request $request, ProjectGroupRepository $projectGroupRepository): RedirectResponse
     {
-        $projectGroup = $projectGroupRepository->model()->whereId($request->get('id'))->first();
+        $projectGroup = $projectGroupRepository->model()->with('child')->whereId($request->get('id'))->first();
 
+        if($projectGroup->count_project){
+            return back()->withErrors(trans('projectgroup::project_group.errors_delete_count_project'));
+        }
+        $result = $projectGroup->delete();
+        if($result) return back()->with(['success' => trans('projectgroup::project_group.success_delete', ['PROJECT' => $projectGroup->name ])]);
 
-
-        dd(__FILE__,__METHOD__,'LINE: '.__LINE__,$request->all());
+        return back()->withErrors(trans('projectgroup::project_group.errors_delete'));
     }
 }
