@@ -33,17 +33,36 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @include('projectgroup::front.client.block.group_tr',['projectGroup' => $projectGroup, 'delimiter' => ''])
+                    @include('projectgroup::front.client.block.group_tr',[
+                        'projectGroup' => $projectGroup,
+                        'delimiter' => ''
+                        ])
                 </tbody>
             </table>
         </div>
     @endif
     @include('projectgroup::front.client.block.add_projectGroup',['projectGroup' => $projectGroup, 'delimiter' => ''])
+    @include('projectgroup::front.client.block.edit_projectGroup',['projectGroup' => $projectGroup, 'delimiter' => ''])
 
 @endsection
 
 @section('script')
     <script>
-
+        $(document).on('click','a.submit_group',function (){
+            $(this).parent().find('form button').click();
+        });
+        $(document).on('click','a[href="#edit_projectGroup-form"]',function (){
+            let tr                  = $(this).parents('tr'),
+                parent_id           = tr.data('parent_id'),
+                show                = tr.data('show'),
+                show_children_group = tr.data('show_children_group'),
+                name                = tr.data('name'),
+                id                  = tr.data('id');
+            $('#edit_projectGroup-form input[name="name"]').val(name);
+            $('#edit_projectGroup-form input[name="id"]').val(id);
+            $('#edit_projectGroup-form  #parent_id option[value='+parent_id+']').prop('selected', true);
+            $('#edit_projectGroup-form  #show option[value='+show+']').prop('selected', true);
+            $('#edit_projectGroup-form  #show_children_group option[value='+show_children_group+']').prop('selected', true);
+        });
     </script>
 @endsection

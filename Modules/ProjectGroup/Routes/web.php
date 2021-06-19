@@ -21,5 +21,7 @@ Route::prefix('client')
     Route::prefix('project-group')->group(function() {
         Route::get('/', [ProjectGroupController::class,'index'])->name('project-group');
         Route::post('/add', [ProjectGroupController::class,'store'])->name('project-group-add');
+        Route::post('/update', [ProjectGroupController::class,'update'])->name('project-group-update');
+        Route::post('/destroy', [ProjectGroupController::class,'destroy'])->name('project-group-destroy');
     });
 });

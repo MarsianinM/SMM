@@ -25,6 +25,8 @@ return [
     //MASSAGE
     'success_create'                    => 'Группа проектов ":PROJECT" создана',
     'errors_create'                     => 'Произошла ошибкаа!!! Попробуйте еще раз.',
+    'errors_not_found'                  => 'Проекта с таким :ID не существует!!!',
+    'success_update'                    => 'Группа проектов ":PROJECT" обновлена',
 
     //submit
     'add_group'                     => 'создать группу',

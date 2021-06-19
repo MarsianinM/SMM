@@ -1648,6 +1648,15 @@ body {
   font-weight: 700;
 }
 
+.submit_group svg.icon__blank {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.submit_group .icon__blank path {
+  fill: #70757c;
+}
+
 .personal1 {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
