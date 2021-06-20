@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Project\Repository\ProjectClientRepository;
 use Modules\ProjectGroup\Entities\ProjectGroup;
 use Modules\ProjectGroup\Http\Requests\CreateProjectGroupRequest;
 use Modules\ProjectGroup\Http\Requests\UpdateProjectGroupRequest;
@@ -104,5 +105,20 @@ class ProjectGroupController extends Controller
         if($result) return back()->with(['success' => trans('projectgroup::project_group.success_delete', ['PROJECT' => $projectGroup->name ])]);
 
         return back()->withErrors(trans('projectgroup::project_group.errors_delete'));
+    }
+
+    /**
+     * @param Request $request
+     * @param ProjectGroupRepository $projectGroupRepository
+     * @return RedirectResponse
+     */
+    public function transfer(Request $request, ProjectGroupRepository $projectGroupRepository): RedirectResponse
+    {
+        $result = $projectGroupRepository->transferProjectInNewGroup($request->get('id'), $request->get('group_id'));
+
+        if(!empty($result['success']))
+            return back()->with(['success' => $result['success']]);
+
+        return back()->withErrors($result['error']);
     }
 }

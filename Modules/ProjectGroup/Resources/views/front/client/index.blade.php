@@ -41,8 +41,18 @@
             </table>
         </div>
     @endif
-    @include('projectgroup::front.client.block.add_projectGroup',['projectGroup' => $projectGroup, 'delimiter' => ''])
-    @include('projectgroup::front.client.block.edit_projectGroup',['projectGroup' => $projectGroup, 'delimiter' => ''])
+    @include('projectgroup::front.client.modal.add_projectGroup',[
+            'projectGroup' => $projectGroup,
+            'delimiter' => ''
+            ])
+    @include('projectgroup::front.client.modal.edit_projectGroup',[
+            'projectGroup' => $projectGroup,
+            'delimiter' => ''
+            ])
+    @include('projectgroup::front.client.modal.transfer_project',[
+            'projectGroup' => $projectGroup,
+            'delimiter' => ''
+            ])
 
 @endsection
 
@@ -60,9 +70,17 @@
                 id                  = tr.data('id');
             $('#edit_projectGroup-form input[name="name"]').val(name);
             $('#edit_projectGroup-form input[name="id"]').val(id);
+            $('#edit_projectGroup-form  select option').prop('selected', false);
             $('#edit_projectGroup-form  #parent_id option[value='+parent_id+']').prop('selected', true);
             $('#edit_projectGroup-form  #show option[value='+show+']').prop('selected', true);
             $('#edit_projectGroup-form  #show_children_group option[value='+show_children_group+']').prop('selected', true);
+        });
+        $(document).on('click','a[href="#transfer_project-form"]',function (){
+            let tr                  = $(this).parents('tr'),
+                id                  = tr.data('id');
+            $('#transfer_project-form #group_id option').prop('disabled', false);
+            $('#transfer_project-form #group_id option[value='+id+']').prop('disabled', true);
+            $('#transfer_project-form input[name="id"]').val(id);
         });
     </script>
 @endsection

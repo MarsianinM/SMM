@@ -1,6 +1,6 @@
 <div id="edit_projectGroup-form" class="modal">
     <div class="modal__title">
-        <h4>@lang('projectgroup::project_group.title_modal_project_group_add')</h4>
+        <h4>@lang('projectgroup::project_group.title_modal_project_group_edit')</h4>
     </div>
     <form action="{{ route('client.project-group-update') }}" method="POST">
         @csrf
