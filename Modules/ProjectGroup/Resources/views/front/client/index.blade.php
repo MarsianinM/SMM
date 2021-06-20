@@ -60,6 +60,7 @@
     <script>
         $(document).on('click','a.submit_group',function (){
             $(this).parent().find('form button').click();
+            return false;
         });
         $(document).on('click','a[href="#edit_projectGroup-form"]',function (){
             let tr                  = $(this).parents('tr'),
