@@ -2,8 +2,8 @@
 <!-- <base href="/"> -->
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>{{ $websiteSetting->title ?? '' }}</title>
-<meta name="description" content="">
+<title>{{ $websiteSetting->title ?? $title ?? '' }}</title>
+<meta name="description" content="{{ $websiteSetting->description ?? $description ?? '' }}">
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 

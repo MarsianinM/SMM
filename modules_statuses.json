@@ -17,5 +17,6 @@
     "ProjectLimits": true,
     "Balance": true,
     "ProjectVip": true,
-    "ProjectGroup": true
+    "ProjectGroup": true,
+    "UserBlackList": true
 }

@@ -1,4 +1,7 @@
-@extends('mainpage::layouts.front.app')
+@extends('mainpage::layouts.front.app',[
+    'title' => trans('project::all_users.projects'),
+    'description' => trans('project::all_users.projects'),
+    ])
 
 @section('content')
     <div class="project__top">
@@ -8,7 +11,7 @@
         @role('client')
         <ul class="project__top__menu">
             <li><a href="{{ route('client.project-group') }}">@lang('project::all_users.project_groups')</a></li>
-            <li><a href="#">@lang('project::all_users.authors_blacklist')</a></li>
+            <li><a href="{{ route('client.blacklist') }}">@lang('project::all_users.authors_blacklist')</a></li>
             <li><a href="#">@lang('project::all_users.author_teams')</a></li>
             <li><a href="#" class="btn__top-menu green__btntop">@lang('project::all_users.your_manager')</a></li>
             <li><a href="{{ route('client.projects.create') }}" class="btn__top-menu red__btntop">@lang('project::all_users.add_projects')</a></li>

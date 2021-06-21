@@ -54,6 +54,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
         Route::resource('messages', MessageController::class);
         Route::resource('users', UserController::class);
 
-        Route::resource('blacklist', BlackListController::class);
+        //Route::resource('blacklist', BlackListController::class);
     });
 });

@@ -1,0 +1,13 @@
+{
+    "name": "UserBlackList",
+    "alias": "userblacklist",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\UserBlackList\\Providers\\UserBlackListServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
