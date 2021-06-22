@@ -18,5 +18,6 @@
     "Balance": true,
     "ProjectVip": true,
     "ProjectGroup": true,
-    "UserBlackList": true
+    "UserBlackList": true,
+    "AuthorGroup": true
 }

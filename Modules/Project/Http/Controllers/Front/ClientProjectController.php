@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Project\Entities\Project;
 use Modules\Project\Http\Requests\ClientProjectRequest;
-use Modules\Project\Repository\ProjectAuthorGroupRepository;
+use Modules\AuthorGroup\Repository\AuthorGroupRepository as ProjectAuthorGroupRepository;
 use Modules\Project\Repository\ProjectClientRepository;
 use Modules\Project\Repository\ProjectCountBayRepository;
 use Modules\ProjectGroup\Repository\ProjectGroupRepository;

@@ -20,6 +20,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|News whereId($value)
  * @method static Builder|News whereUpdatedAt($value)
  * @mixin IdeHelperNews
+ * @property string $slug
+ * @property int $sort_order
+ * @property string $active
+ * @method static Builder|News whereActive($value)
+ * @method static Builder|News whereSlug($value)
+ * @method static Builder|News whereSortOrder($value)
  */
 class News extends Model
 {

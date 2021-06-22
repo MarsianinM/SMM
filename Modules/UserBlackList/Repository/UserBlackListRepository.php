@@ -3,7 +3,6 @@
 
 namespace Modules\UserBlackList\Repository;
 
-use Modules\Project\Repository\ProjectClientRepository;
 use Modules\UserBlackList\Entities\UserBlackList;
 use Modules\Users\Entities\User;
 

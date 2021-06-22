@@ -1,0 +1,13 @@
+{
+    "name": "AuthorGroup",
+    "alias": "authorgroup",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\AuthorGroup\\Providers\\AuthorGroupServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
