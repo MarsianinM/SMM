@@ -23,5 +23,6 @@ Route::prefix('client')
             Route::get('/', [AuthorGroupController::class,'index'])->name('author-group');
             Route::get('/destroy/{authorGroup}', [AuthorGroupController::class,'destroy'])->name('author-group.destroy');
             Route::post('/store', [AuthorGroupController::class,'store'])->name('author-group.store');
+            Route::post('/update', [AuthorGroupController::class,'update'])->name('author-group.update');
         });
     });

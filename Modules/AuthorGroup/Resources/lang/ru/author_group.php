@@ -4,6 +4,8 @@ return [
     //TITLE PAGE
     'title_page'                        => 'Команды авторов',
     'title_modal_add'                   => 'Создать команду авторов',
+    'title_modal_update'                => 'Обновить команду авторов',
+    'title_modal_description'           => 'Описание комады авторов',
 
     //TABLE
     'th_id'                             => 'ID',
@@ -25,10 +27,13 @@ return [
 
     //SUCCESS
     'success_create'                    => 'Команда ":NAME" создана!',
+    'success_update'                    => 'Команда ":NAME" обновлена!',
     'success_delete'                    => 'Команда ID(:ID) Удалена!',
 
     //ERRORS
     'error_not_found'                   => 'Команты авторов не созданы. Создайте свою первую команду.',
     'errors_not_create'                 => 'Не получилось создать команду - :NAME',
     'error_not_delete'                  => 'Не получилось удалить команду с ID(:ID)',
+    'errors_not_group'                  => 'Команды с ID(:ID) не существует! Выберите существующую команду и отредактируйте её',
+    'errors_not_update'                 => 'Не получилось обновить команду - :NAME',
 ];

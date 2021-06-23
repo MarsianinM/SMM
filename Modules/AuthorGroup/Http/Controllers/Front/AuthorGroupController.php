@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\AuthorGroup\Entities\AuthorGroup;
 use Modules\AuthorGroup\Http\Requests\CreateAuthorGroupRequest;
+use Modules\AuthorGroup\Http\Requests\EditAuthorGroupRequest;
 use Modules\AuthorGroup\Repository\AuthorGroupRepository;
+use Modules\Project\Repository\ProjectClientRepository;
 
 class AuthorGroupController extends Controller
 {
@@ -50,24 +52,19 @@ class AuthorGroupController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('authorgroup::edit');
-    }
-
-    /**
      * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
+     * @param EditAuthorGroupRequest $request
+     * @param AuthorGroupRepository $authorGroupRepository
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(EditAuthorGroupRequest $request, AuthorGroupRepository $authorGroupRepository)
     {
-        //
+        $result = $authorGroupRepository->update($request->except('_token'));
+
+        if(!empty($result['success']))
+            return back()->with(['success' => $result['success']]);
+
+        return back()->withErrors($result['error']);
     }
 
     /**
@@ -75,11 +72,12 @@ class AuthorGroupController extends Controller
      * @param AuthorGroup $authorGroup
      * @return RedirectResponse
      */
-    public function destroy(AuthorGroup $authorGroup)
+    public function destroy(AuthorGroup $authorGroup, ProjectClientRepository $projectClientRepository)
     {
-        if($authorGroup->delete())
+        if($authorGroup->delete()){
+            $projectClientRepository->model()->where('author_group_id', $authorGroup->id)->where('client_id', auth()->id())->update(['author_group_id' => NULL]);
             return back()->with(['success' => trans('authorgroup::author_group.success_delete', ['ID' => $authorGroup->id])]);
-
+        }
         return back()->withErrors(trans('authorgroup::author_group.error_not_delete', ['ID' => $authorGroup->id]));
     }
 }

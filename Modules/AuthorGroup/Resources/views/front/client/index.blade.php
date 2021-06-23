@@ -30,7 +30,7 @@
                 </thead>
                 <tbody>
                 @foreach($authorGroups as $item)
-                <tr>
+                <tr data-id="{{ $item->id }}" data-name="{{ $item->name }}">
                     <td data-label="@lang('authorgroup::author_group.th_id')">{{ $item->id }}</td>
                     <td data-label="@lang('authorgroup::author_group.th_name')">
                         <p class="danger__green">{{ $item->name }}</p>
@@ -51,14 +51,14 @@
                     </td>
                     <td style="text-align: right;">
                         @if($item->description)
-                        <a href="#description" rel="modal:open">
-                            <div class="description hidden">
-                                {{ $item->description }}
-                            </div>
-                            <img class="icon__blank" src="{{ asset('img/_src/comment__icon.png') }}" alt="comment__icon">
-                        </a>
+                            <a href="#description" rel="modal:open">
+                                <div class="description hidden">
+                                    {{ $item->description }}
+                                </div>
+                                <img class="icon__blank" src="{{ asset('img/_src/comment__icon.png') }}" alt="comment__icon">
+                            </a>
                         @endif
-                        <a href="#add_authorGroup-form" rel="modal:open">
+                        <a href="#edit_authorGroup-form" rel="modal:open">
                         <img class="icon__blank" src="{{ asset('img/_src/pancel__icon.png') }}" alt="korzina__icon">
                         </a>
                         <a href="{{ route('client.author-group.destroy',['authorGroup' => $item->id]) }}">
@@ -77,6 +77,8 @@
     @endif
 
     @include('authorgroup::front.client.modal.add_authorGroup-form')
+    @include('authorgroup::front.client.modal.edit_authorGroup-form')
+    @include('authorgroup::front.client.modal.desription')
 
 @endsection
 
@@ -86,19 +88,21 @@
             $(this).parent().find('form button').click();
             return false;
         });
-        $(document).on('click','a[href="#edit_projectGroup-form"]',function (){
+        $(document).on('click','a[href="#description"]',function (){
             let tr                  = $(this).parents('tr'),
-                parent_id           = tr.data('parent_id'),
-                show                = tr.data('show'),
-                show_children_group = tr.data('show_children_group'),
-                name                = tr.data('name'),
-                id                  = tr.data('id');
-            $('#edit_projectGroup-form input[name="name"]').val(name);
-            $('#edit_projectGroup-form input[name="id"]').val(id);
-            $('#edit_projectGroup-form  select option').prop('selected', false);
-            $('#edit_projectGroup-form  #parent_id option[value='+parent_id+']').prop('selected', true);
-            $('#edit_projectGroup-form  #show option[value='+show+']').prop('selected', true);
-            $('#edit_projectGroup-form  #show_children_group option[value='+show_children_group+']').prop('selected', true);
+                description         = tr.find('.description').text(),
+                name                = tr.data('name');
+            $('#description #text_description').text(description);
+            $('#description #title_description').text(name);
+        });
+        $(document).on('click','a[href="#edit_authorGroup-form"]',function (){
+            let tr                  = $(this).parents('tr'),
+                id                  = tr.data('id'),
+                description         = tr.find('.description').text(),
+                name                = tr.data('name');
+            $('#edit_authorGroup-form input[name="name"]').val(name);
+            $('#edit_authorGroup-form input[name="id"]').val(id);
+            $('#edit_authorGroup-form textarea[name="description"]').val(description);
         });
 
     </script>
