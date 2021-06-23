@@ -30,14 +30,17 @@ class AuthorGroupRepository
     /**
      * Store the resource.
      * @param array $data
-     * @return AuthorGroup
+     * @return array
      */
-    public function store(array $data): AuthorGroup
+    public function store(array $data): array
     {
-        $data['client_id'] = auth()->user()->id;
-        $page = $this->model->create($data);
+        $data['client_id'] = auth()->id();
 
-        return $page;
+        if($this->model->create($data))
+            return ['success' => trans('authorgroup::author_group.success_create', ['NAME' => $data['name']])];
+
+        return ['error' => trans('authorgroup::author_group.errors_not_create', ['NAME' => $data['name']])];
+
     }
 
     /**
@@ -55,6 +58,7 @@ class AuthorGroupRepository
     public function getAuthorGroup()
     {
         return $this->model
+            ->with('projects')
             ->where('client_id',auth()->user()->id)
             ->get();
     }

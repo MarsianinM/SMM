@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\AuthorGroup\Entities\AuthorGroup;
 use Modules\Currency\Entities\Currency;
 use Modules\ProjectGroup\Entities\ProjectGroup;
 use Modules\ProjectLimits\Entities\ProjectLimit;
@@ -93,6 +94,15 @@ class Project extends Model implements HasMedia
     public function projectAuthor(): BelongsTo
     {
         return $this->belongsTo(ProjectInWork::class, 'id','project_id');
+    }
+
+
+    /**
+     * Get the projects for the status in author.
+     */
+    public function authorGroup(): BelongsTo
+    {
+        return $this->belongsTo(AuthorGroup::class,'id', 'author_group_id');
     }
 
 

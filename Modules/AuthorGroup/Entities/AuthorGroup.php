@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Modules\Project\Entities\Project;
 use Modules\Users\Entities\User;
 
 class AuthorGroup extends Model
@@ -32,6 +33,16 @@ class AuthorGroup extends Model
     public function userGroup(): HasMany
     {
         return $this->hasMany(UserAuthorGroup::class, 'group_id','id')->with('user');
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'author_group_id', 'id');
+    }
+
+    public function getCountProjectAttribute()
+    {
+        return $this->projects->count();
     }
 
     /*protected static function newFactory()
