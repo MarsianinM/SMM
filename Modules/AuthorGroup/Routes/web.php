@@ -12,7 +12,7 @@
 */
 
 use Modules\AuthorGroup\Http\Controllers\Front\AuthorGroupController;
-
+use Modules\AuthorGroup\Http\Controllers\Front\UserAuthorGroupController;
 
 
 Route::prefix('client')
@@ -24,5 +24,10 @@ Route::prefix('client')
             Route::get('/destroy/{authorGroup}', [AuthorGroupController::class,'destroy'])->name('author-group.destroy');
             Route::post('/store', [AuthorGroupController::class,'store'])->name('author-group.store');
             Route::post('/update', [AuthorGroupController::class,'update'])->name('author-group.update');
+
+            Route::prefix('users')->group(function() {
+                Route::get('/{id}', [UserAuthorGroupController::class,'index'])->name('author-group.users');
+                Route::post('/getUserSearch', [UserAuthorGroupController::class,'getUserSearch'])->name('author-group.user_search');
+            });
         });
     });

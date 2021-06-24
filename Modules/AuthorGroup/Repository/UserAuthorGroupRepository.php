@@ -68,9 +68,9 @@ class UserAuthorGroupRepository
     }
 
 
-    public function getBlackList()
+    public function getUser($id)
     {
-        /*return $this->model->with(['author','client'])->where('client_id', auth()->id())->paginate(30);*/
+        return $this->model->where('group_id', $id)->with(['user', 'group'])->paginate(15);
     }
 
 }
