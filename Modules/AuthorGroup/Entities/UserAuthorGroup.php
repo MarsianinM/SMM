@@ -21,7 +21,7 @@ class UserAuthorGroup extends Model
      */
     public function user(): HasOne
     {
-        return $this->hasOne(User::class, 'user_id', 'id');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     /**
@@ -29,7 +29,7 @@ class UserAuthorGroup extends Model
      */
     public function group(): HasOne
     {
-        return $this->hasOne(AuthorGroup::class, 'group_id', 'id')->with('client');
+        return $this->hasOne(AuthorGroup::class, 'id', 'group_id')->with('client');
     }
 
     /*protected static function newFactory()

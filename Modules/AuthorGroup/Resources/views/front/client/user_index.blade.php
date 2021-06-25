@@ -1,23 +1,23 @@
 @extends('mainpage::layouts.front.app',[
-    'title' => trans('authorgroup::author_group.title_page'),
-    'description' => trans('authorgroup::author_group.title_page'),
+    'title' => trans('authorgroup::user_author_group.title_page',['NAME' => $group->name]),
+    'description' => trans('authorgroup::user_author_group.title_page',['NAME' => $group->name]),
     ])
 
 @section('content')
     <div class="project__title cabinet__flex">
-        <p>@lang('authorgroup::author_group.title_page')</p>
+        <p>@lang('authorgroup::user_author_group.title_page',['NAME' => $group->name])</p>
         <div class="cabinet__all__right">
 
             <div class="cabinet__right">
                 <a href="#add_user_authorGroup-form" rel="modal:open">
                     <span>
                         <img src="{{ asset('img/_src/plus__icon.png') }}" alt="plus__icon">
-                    </span>@lang('authorgroup::author_group.add_group')
+                    </span>@lang('authorgroup::user_author_group.add_user')
                 </a>
             </div>
         </div>
     </div>
-    @if($authorGroups->count())
+    @if($usersAuthors->count())
         <div class="table-wrap comand__author__table">
             <table>
                 <thead>
@@ -29,41 +29,24 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($authorGroups as $item)
-                    <tr data-id="{{ $item->id }}" data-name="{{ $item->name }}">
+                @foreach($usersAuthors as $item)
+                    <tr data-id="{{ $item->id }}" data-name="{{ $item->user->name }}">
                         <td data-label="@lang('authorgroup::author_group.th_id')">{{ $item->id }}</td>
                         <td data-label="@lang('authorgroup::author_group.th_name')">
-                            <p class="danger__green">{{ $item->name }}</p>
-                            <span>@lang('authorgroup::author_group.td_count_author'){{ $item->count_project }}</span>
+                            <p class="danger__green">{{ $item->user->name }}</p>
                         </td>
                         <td data-label="@lang('authorgroup::author_group.th_project')">
-                            @if($item->projects->count())
-                                @foreach($item->projects as $project)
-                                    <p>
-                                        {{ $project->title }} - id({{ $project->id }})
-                                    </p>
-                                @endforeach
-                            @else
-                                <p>
-                                    @lang('authorgroup::author_group.td_not_projects')
-                                </p>
-                            @endif
+
                         </td>
                         <td style="text-align: right;">
-                            @if($item->description)
-                                <a href="#description" rel="modal:open">
-                                    <div class="description hidden">
-                                        {{ $item->description }}
-                                    </div>
-                                    <img class="icon__blank" src="{{ asset('img/_src/comment__icon.png') }}" alt="comment__icon">
-                                </a>
-                            @endif
-                            <a href="#edit_authorGroup-form" rel="modal:open">
-                                <img class="icon__blank" src="{{ asset('img/_src/pancel__icon.png') }}" alt="korzina__icon">
-                            </a>
-                            <a href="{{ route('client.author-group.destroy',['authorGroup' => $item->id]) }}">
-                                <img class="icon__blank" src="{{ asset('img/_src/korzina__icon.png') }}" alt="korzina__icon">
-                            </a>
+                            <form action="{{ route('client.author-group.user_destroy') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $item->id }}" />
+                                <input type="hidden" name="group_id" value="{{ $item->group_id }}" />
+                                <button type="submit">
+                                    <img class="icon__blank" src="{{ asset('img/_src/korzina__icon.png') }}" alt="korzina__icon">
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
@@ -72,13 +55,12 @@
         </div>
     @else
         <p>
-            @lang('authorgroup::author_group.error_not_found')
+            @lang('authorgroup::user_author_group.error_not_found')
         </p>
     @endif
 
-    @include('authorgroup::front.client.modal.add_authorGroup-form')
+    @include('authorgroup::front.client.modal.add_user_authorGroup-form')
     @include('authorgroup::front.client.modal.edit_authorGroup-form')
-    @include('authorgroup::front.client.modal.desription')
 
 @endsection
 

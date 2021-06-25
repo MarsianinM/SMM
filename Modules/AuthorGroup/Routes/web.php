@@ -28,6 +28,8 @@ Route::prefix('client')
             Route::prefix('users')->group(function() {
                 Route::get('/{id}', [UserAuthorGroupController::class,'index'])->name('author-group.users');
                 Route::post('/getUserSearch', [UserAuthorGroupController::class,'getUserSearch'])->name('author-group.user_search');
+                Route::post('/store', [UserAuthorGroupController::class,'store'])->name('author-group.user_store');
+                Route::pos('/destroy', [UserAuthorGroupController::class,'destroy'])->name('author-group.user_destroy');
             });
         });
     });

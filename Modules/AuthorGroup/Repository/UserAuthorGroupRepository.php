@@ -5,6 +5,7 @@ namespace Modules\AuthorGroup\Repository;
 
 use Modules\AuthorGroup\Entities\AuthorGroup;
 use Modules\AuthorGroup\Entities\UserAuthorGroup;
+use Modules\Users\Repository\UserRepository;
 
 class UserAuthorGroupRepository
 {
@@ -50,21 +51,28 @@ class UserAuthorGroupRepository
      */
     public function store(array $data)
     {
-        /*$author = User::where('name',$data['name'])->first();
+        $author = app(UserRepository::class)->model()
+                    ->where('name', $data['name'])
+                    ->where('id', '!=', auth()->id())
+                    ->first();
 
         if(is_null($author))
-            return ['error' => trans('AuthorGroup::blacklist.errors_not_found_user', ['NAME' => $data['name']])];
+            return ['error' => trans('authorgroup::user_author_group.errors_not_found_user', ['NAME' => $data['name']])];
 
-        $data['user_id'] = $author->id;
-        $data['client_id'] = auth()->user()->id;
+        $userInGroup = $this->model->where('user_id', $author->id)->where('group_id',$data['group_id'])->first();
 
-        if($data['user_id'] === $data['client_id'])
-            return ['error' => trans('AuthorGroup::blacklist.errors_not_self_add')];
+        if($userInGroup->count())
+            return ['error' => trans('authorgroup::user_author_group.errors_user_in_this_group', ['NAME' => $data['name']])];
 
-        if($this->model->create($data))
-            return ['success' => trans('AuthorGroup::blacklist.success_create_blacklist', ['NAME' => $data['name']])];
+        $array = [
+            'user_id'   =>  $author->id,
+            'group_id'  =>  $data['group_id'],
+        ];
 
-        return ['error' => trans('AuthorGroup::blacklist.errors_not_create', ['NAME' => $data['name']])];*/
+        if($this->model->create($array))
+            return ['success' => trans('authorgroup::user_author_group.success_create', ['NAME' => $data['name']])];
+
+        return ['error' => trans('authorgroup::user_author_group.errors_not_create', ['NAME' => $data['name']])];
     }
 
 
