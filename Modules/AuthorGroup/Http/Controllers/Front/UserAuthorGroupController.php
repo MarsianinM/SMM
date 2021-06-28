@@ -60,12 +60,17 @@ class UserAuthorGroupController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
+     * @param Request $request
+     * @param UserAuthorGroupRepository $userAuthorGroupRepository
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Request $request, UserAuthorGroupRepository $userAuthorGroupRepository): RedirectResponse
     {
-        $user = app(UserAuthorGroupRepository::class)->model()->where('id',$id)->first();
-       dd(__FILE__,__LINE__,$id);
+        $result = $userAuthorGroupRepository->destroy($request->except('_token'));
+
+        if(!empty($result['success']))
+            return back()->with(['success' => $result['success']]);
+
+        return back()->withErrors($result['error']);
     }
 }

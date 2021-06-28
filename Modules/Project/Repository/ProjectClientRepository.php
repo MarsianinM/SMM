@@ -119,6 +119,7 @@ class ProjectClientRepository
             'projectForRevision',
             'projectInWork',
             'projectVerified',
+            'projectSocialLimits',
             'projectVip'  => function ($query) {
                 $query->orderBy('created_at', 'desc');
             },

@@ -14,6 +14,7 @@ return [
     //SUCCESS
     'success_create'                    => 'Пользователь ":NAME" добавлен в команду!',
     'success_delete'                    => 'Пользователь ID(:ID) Удален с кломанды!',
+    'success_deleted'                   => 'Пользователь ":NAME" Удален с кломанды!',
 
     //ERRORS
     'error_not_found'                   => 'В групе нет авторов. Добавте автора.',
@@ -22,4 +23,5 @@ return [
     'errors_user_in_this_group'         => 'Пользователь :NAME уже добавлен в группу',
     'errors_not_self_add'               => 'Вы не можете добавить в черный список самого себя.',
     'error_not_delete_user'             => 'Не получилось удалить пользователя с ID :ID',
+    'errors_user_not_found'             => 'Нет пользоаптеля с таким ID :ID',
 ];

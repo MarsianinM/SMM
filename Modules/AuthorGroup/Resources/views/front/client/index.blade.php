@@ -33,8 +33,8 @@
                 <tr data-id="{{ $item->id }}" data-name="{{ $item->name }}">
                     <td data-label="@lang('authorgroup::author_group.th_id')">{{ $item->id }}</td>
                     <td data-label="@lang('authorgroup::author_group.th_name')">
-                        <a class="danger__green"><a href="{{ route('client.author-group.users', ['id' => $item->id]) }}">{{ $item->name }}</a></p>
-                        <span>@lang('authorgroup::author_group.td_count_author'){{ $item->count_project }}</span>
+                        <p class="danger__green"><a href="{{ route('client.author-group.users', ['id' => $item->id]) }}">{{ $item->name }}</a></p>
+                        <span>@lang('authorgroup::author_group.td_count_author'){{ $item->user_count }}</span>
                     </td>
                     <td data-label="@lang('authorgroup::author_group.th_project')">
                         @if($item->projects->count())

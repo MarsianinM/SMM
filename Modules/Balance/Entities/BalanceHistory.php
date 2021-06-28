@@ -18,6 +18,6 @@ class BalanceHistory extends Model
 
     protected static function newFactory()
     {
-        return \Modules\Balance\Database\factories\BalanceHistoryFactory::new();
+        //return \Modules\Balance\Database\factories\BalanceHistoryFactory::new();
     }
 }

@@ -29,7 +29,7 @@ Route::prefix('client')
                 Route::get('/{id}', [UserAuthorGroupController::class,'index'])->name('author-group.users');
                 Route::post('/getUserSearch', [UserAuthorGroupController::class,'getUserSearch'])->name('author-group.user_search');
                 Route::post('/store', [UserAuthorGroupController::class,'store'])->name('author-group.user_store');
-                Route::pos('/destroy', [UserAuthorGroupController::class,'destroy'])->name('author-group.user_destroy');
+                Route::post('/destroy', [UserAuthorGroupController::class,'destroy'])->name('author-group.user_destroy');
             });
         });
     });

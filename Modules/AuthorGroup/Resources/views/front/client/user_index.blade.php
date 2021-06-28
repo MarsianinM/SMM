@@ -42,9 +42,14 @@
                             <form action="{{ route('client.author-group.user_destroy') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $item->id }}" />
+                                <input type="hidden" name="user_id" value="{{ $item->user_id }}" />
                                 <input type="hidden" name="group_id" value="{{ $item->group_id }}" />
-                                <button type="submit">
-                                    <img class="icon__blank" src="{{ asset('img/_src/korzina__icon.png') }}" alt="korzina__icon">
+                                <button type="submit" class="submit_group">
+                                    <svg class="icon__blank" width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M22 4.47217V1.2334C22 0.877445 21.7114 0.588867 21.3555 0.588867H0.644531C0.288578 0.588867 0 0.877445 0 1.2334V4.47217H22Z"></path>
+                                        <path d="M9.70557 9.6499H12.2944C12.6528 9.6499 12.9443 9.35836 12.9443 9C12.9443 8.64164 12.6528 8.3501 12.2944 8.3501H9.70557C9.34721 8.3501 9.05566 8.64164 9.05566 9C9.05566 9.35836 9.34721 9.6499 9.70557 9.6499Z"></path>
+                                        <path d="M1.29443 5.76123V16.7666C1.29443 17.1226 1.58301 17.4111 1.93896 17.4111H20.061C20.417 17.4111 20.7056 17.1226 20.7056 16.7666V5.76123H1.29443ZM9.70557 7.06104H12.2944C13.3636 7.06104 14.2334 7.93085 14.2334 9C14.2334 10.0691 13.3636 10.939 12.2944 10.939H9.70557C8.63642 10.939 7.7666 10.0691 7.7666 9C7.7666 7.93085 8.63642 7.06104 9.70557 7.06104Z"></path>
+                                    </svg>
                                 </button>
                             </form>
                         </td>

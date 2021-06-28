@@ -120,18 +120,42 @@
                             @endif
                         </p>
 
+                        @if(!is_null($project->projectSocialLimits))
                         <div class="name-social name-social-1">
+                            @if($project->projectSocialLimits->vk_check)
+                            <div class="back-1">
+                                <img src="{{ asset('img/_src/vk.svg') }}" alt="Вк" class="color-normal-4">
+                            </div>
+                            @endif
+                            @if($project->projectSocialLimits->ok_check)
+                            <div class="back-1">
+                                <img src="{{ asset('img/_src/vk.svg') }}" alt="OK" class="color-normal-4">
+                            </div>
+                            @endif
+                            @if($project->projectSocialLimits->fb_check)
+                            <div class="back-1">
+                                <img src="{{ asset('img/_src/facebook.svg') }}" alt="Фэйсбук" class="color-normal-7">
+                            </div>
+                            @endif
+                            @if($project->projectSocialLimits->inst_check)
+                            <div class="back-1">
+                                <img src="{{ asset('img/_src/instagram.svg') }}" alt="Инстаграм" class="color-normal-2">
+                            </div>
+                            @endif
+                            @if($project->projectSocialLimits->tw_check)
+                            <div class="back-1">
+                                <img src="{{ asset('img/_src/twitter.svg') }}" alt="Твиттер" class="color-normal-3">
+                            </div>
+                            @endif
+                                {{--
                             <a href="index.html#" class="back-1">
-                                <img src="{{ asset('img/_src/gmail.svg') }}" alt="Гмаил" class="color-normal-1">
+                                <img src="{{ asset('img/_src/instagram.svg') }}" alt="Инстаграм" class="color-normal-2">
                             </a>
                             <a href="index.html#" class="back-2">
                                 <img src="{{ asset('img/_src/instagram.svg') }}" alt="Инстаграм" class="color-normal-2">
                             </a>
                             <a href="index.html#" class="back-3">
                                 <img src="{{ asset('img/_src/twitter.svg') }}" alt="Твиттер" class="color-normal-3">
-                            </a>
-                            <a href="index.html#" class="back-4">
-                                <img src="{{ asset('img/_src/vk.svg') }}" alt="Вк" class="color-normal-4">
                             </a>
                             <a href="index.html#" class="back-5">
                                 <img src="{{ asset('img/_src/youtube.svg') }}" alt="Ютуб" class="color-normal-5">
@@ -141,9 +165,10 @@
                             </a>
                             <a href="index.html#" class="back-7">
                                 <img src="{{ asset('img/_src/facebook.svg') }}" alt="Фэйсбук" class="color-normal-7">
-                            </a>
+                            </a>--}}
                         </div>
                     </div>
+                    @endif
                 </div>
 
                 <div class="data__project">
@@ -184,7 +209,7 @@
                         <span class="data_shifr green__data">{{ $project->projectVerified->count() }}</span>
                     </div>
 
-                    <div class="last__work">
+                    {{--<div class="last__work">
                         <div class="work__text">
                             @lang('project::client.project_last_work')
                         </div>
@@ -192,7 +217,7 @@
                         <div class="work__under">
                             10 сентября 2020г <br>09:27:13
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
                 <div class="tariph__project">
                     <div class="tariph__title">
@@ -258,7 +283,8 @@
                                 <path d="M8.50002 0C3.81317 0 0 3.81317 0 8.50002C0 13.1869 3.81317 17 8.50002 17C13.1869 17 17 13.1869 17 8.50002C17 3.81317 13.1868 0 8.50002 0ZM9.05292 13.5433C8.64909 13.6106 7.84555 13.7787 7.43751 13.8125C7.09211 13.8411 6.76618 13.6434 6.56749 13.3596C6.36828 13.0758 6.32055 12.7127 6.43881 12.3869L8.04554 7.96878H6.375C6.37357 7.04817 7.0641 6.37127 7.94728 6.11148C8.36875 5.98748 9.154 5.81778 9.56249 5.84379C9.80723 5.85935 10.2338 6.0129 10.4325 6.29671C10.6317 6.58049 10.6795 6.94366 10.5612 7.26946L8.95446 11.6875H10.6245C10.6248 12.6071 9.96003 13.3921 9.05292 13.5433ZM9.56249 5.31252C8.97567 5.31252 8.49998 4.83676 8.49998 4.25001C8.49998 3.66319 8.97567 3.1875 9.56249 3.1875C10.1493 3.1875 10.625 3.66319 10.625 4.25001C10.625 4.8368 10.1493 5.31252 9.56249 5.31252Z" fill="#92A2BB"/>
                             </svg>
                         </li>
-                        <li>
+                        @if($project->projectVerified->count())
+                        <li class="group_copy">
                             <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 6.66797C10.6892 6.66797 12.0586 5.22251 12.0586 3.43945C12.0586 1.65639 10.6892 0.210938 9 0.210938C7.31079 0.210938 5.94141 1.65639 5.94141 3.43945C5.94141 5.22251 7.31079 6.66797 9 6.66797Z" fill="#92A2BB"/>
                                 <path d="M15.1875 6.66797C16.2554 6.66797 17.1211 5.75418 17.1211 4.62696C17.1211 3.49973 16.2554 2.58594 15.1875 2.58594C14.1196 2.58594 13.2539 3.49973 13.2539 4.62696C13.2539 5.75418 14.1196 6.66797 15.1875 6.66797Z" fill="#92A2BB"/>
@@ -268,12 +294,13 @@
                                 <path d="M15.6127 7.92963C14.7279 7.92963 14.0423 7.84339 13.2822 8.50074C15.1091 10.4696 14.8006 12.4319 14.8006 15.4621C14.8006 15.6222 14.5544 15.5742 16.929 15.5742C17.5196 15.5742 17.9998 15.0691 17.9998 14.4483V10.4341C17.9998 9.0533 16.929 7.92963 15.6127 7.92963Z" fill="#92A2BB"/>
                             </svg>
                         </li>
-                        <li>
+                        @endif
+                        {{--<li>
                             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3.51953 17H13.4805C14.3044 17 14.9746 16.3298 14.9746 15.5059V4.98047H11.4883C10.6644 4.98047 9.99414 4.31023 9.99414 3.48633V0H3.51953C2.69563 0 2.02539 0.670238 2.02539 1.49414V15.5059C2.02539 16.3298 2.69563 17 3.51953 17ZM5.51172 7.00586H11.4883C11.7636 7.00586 11.9863 7.22862 11.9863 7.50391C11.9863 7.77919 11.7636 8.00195 11.4883 8.00195H5.51172C5.23643 8.00195 5.01367 7.77919 5.01367 7.50391C5.01367 7.22862 5.23643 7.00586 5.51172 7.00586ZM5.51172 8.99805H11.4883C11.7636 8.99805 11.9863 9.22081 11.9863 9.49609C11.9863 9.77138 11.7636 9.99414 11.4883 9.99414H5.51172C5.23643 9.99414 5.01367 9.77138 5.01367 9.49609C5.01367 9.22081 5.23643 8.99805 5.51172 8.99805ZM5.51172 10.9902H11.4883C11.7636 10.9902 11.9863 11.213 11.9863 11.4883C11.9863 11.7636 11.7636 11.9863 11.4883 11.9863H5.51172C5.23643 11.9863 5.01367 11.7636 5.01367 11.4883C5.01367 11.213 5.23643 10.9902 5.51172 10.9902ZM5.51172 12.9824H9.49609C9.77138 12.9824 9.99414 13.2052 9.99414 13.4805C9.99414 13.7558 9.77138 13.9785 9.49609 13.9785H5.51172C5.23643 13.9785 5.01367 13.7558 5.01367 13.4805C5.01367 13.2052 5.23643 12.9824 5.51172 12.9824Z" fill="#92A2BB"/>
                                 <path d="M11.4883 3.98442H14.6828L10.9902 0.29187V3.48638C10.9902 3.76116 11.2135 3.98442 11.4883 3.98442Z" fill="#92A2BB"/>
                             </svg>
-                        </li>
+                        </li>--}}
                         <li data-toggle="tooltip" data-html="true"
                             data-tippy-content="@lang('project::project.project_deleted', ['title' => $project->title])">
                             <a href="{{ route('client.projects.destroy',$project->id) }}">

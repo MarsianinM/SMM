@@ -44,6 +44,10 @@ class AuthorGroup extends Model
     {
         return $this->projects->count();
     }
+    public function getUserCountAttribute()
+    {
+        return $this->userGroup->count();
+    }
 
     /*protected static function newFactory()
     {

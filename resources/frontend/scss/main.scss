@@ -1089,6 +1089,11 @@ body {
         font-weight: 700;
     }
 }
+button.submit_group{
+    background: none;
+    cursor: pointer;
+    border: none;
+}
 .submit_group svg.icon__blank{
     display: inline-block;
     vertical-align: middle;

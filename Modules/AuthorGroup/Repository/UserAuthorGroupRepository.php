@@ -61,7 +61,7 @@ class UserAuthorGroupRepository
 
         $userInGroup = $this->model->where('user_id', $author->id)->where('group_id',$data['group_id'])->first();
 
-        if($userInGroup->count())
+        if(!is_null($userInGroup))
             return ['error' => trans('authorgroup::user_author_group.errors_user_in_this_group', ['NAME' => $data['name']])];
 
         $array = [
@@ -81,4 +81,16 @@ class UserAuthorGroupRepository
         return $this->model->where('group_id', $id)->with(['user', 'group'])->paginate(15);
     }
 
+    public function destroy(array $data): array
+    {
+        $user = app(UserRepository::class)->model()->where('id',$data['user_id'])->first();
+
+        if(is_null($user))
+            return ['error' => trans('authorgroup::user_author_group.errors_user_not_found', ['ID' => $data['user_id']])];
+        $name = $user->name;
+        if($this->model->where('id',$data['id'])->delete())
+            return ['success' => trans('authorgroup::user_author_group.success_deleted', ['NAME' => $name])];
+
+        return ['error' => trans('authorgroup::user_author_group.error_not_delete_user', ['ID' => $data['user_id']])];
+    }
 }
