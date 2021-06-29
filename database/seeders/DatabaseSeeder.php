@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        //$this->call(RoleSeeder::class);
-        //$this->call(SettingSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(SettingSeeder::class);
         DB::table('roleables')->insert([
                 [
                     'role_id' => 1,
@@ -41,11 +41,11 @@ class DatabaseSeeder extends Seeder
                 ],
             ]
             );
-        /*User::create([
+        User::create([
             'name' => 'Тест',
             'email' => 'testaccount@smm.ua',
             'password' => \Hash::make('11111111'),
             'email_verified_at' => now(),
-        ]);*/
+        ]);
     }
 }
