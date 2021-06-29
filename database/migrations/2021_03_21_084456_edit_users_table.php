@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnAuthorGroupsTable extends Migration
+class EditUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class AddColumnAuthorGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::table('author_groups', function (Blueprint $table) {
-            $table->text('description')->nullable();
+        Schema::table('users', function (Blueprint $table){
+            $table->enum('active', [0,1])->default(1);
         });
     }
-//'id', 'client_id', 'name', 'description',
+
     /**
      * Reverse the migrations.
      *
@@ -25,8 +25,8 @@ class AddColumnAuthorGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::table('author_groups', function (Blueprint $table) {
-            $table->dropColumn('description');
+        Schema::table('users', function (Blueprint $table){
+            $table->dropColumn('active');
         });
     }
 }
