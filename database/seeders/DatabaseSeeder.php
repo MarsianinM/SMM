@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        $this->call(RoleSeeder::class);
-        $this->call(SettingSeeder::class);
+        /*$this->call(RoleSeeder::class);*/
+
         DB::table('roleables')->insert([
                 [
                     'role_id' => 1,
