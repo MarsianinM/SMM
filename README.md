@@ -40,6 +40,8 @@ ___
 * php artisan module:migrate Currency  - Очередность
 * php artisan module:migrate  - Запустить все остальные
 * php artisan module:migrate ProjectLimits - Почемуто не отработал
+* php artisan db:seed - Прежде проверить и раскоментировать сиды
+* php artisan module:seed Currency - Запустить Валюты
 
 
 ###News - страници новостей.
