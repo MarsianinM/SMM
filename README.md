@@ -38,6 +38,8 @@ ___
 ###Миграции
 * php artisan migrate --path=/database/migrations - Сначала стандартные миграции, кторые вне модуля
 * php artisan module:migrate Currency  - Очередность
+* php artisan module:migrate  - Запустить все остальные
+* php artisan module:migrate ProjectLimits - Почемуто не отработал
 
 
 ###News - страници новостей.
